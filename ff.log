@@ -1,0 +1,878 @@
+Reading cached build data
+****WARNING: No need to export library once you have declared your library as plugin. Please cleanup src/RecoMET/METAnalyzers/BuildFile by removing the <export></export> section.
+****WARNING: No need to export library once you have declared your library as plugin. Please cleanup src/TopQuarkAnalysis/SingleTop/BuildFile by removing the <export></export> section.
+tmp/slc5_amd64_gcc462/MakeData/DirCache.mk:607: No such file exists: src/TopQuarkAnalysis/SingleTop/bin/fitsPlots1DKarlsruhe.cpp. Please fix src/TopQuarkAnalysis/SingleTop/bin/BuildFile.
+tmp/slc5_amd64_gcc462/MakeData/DirCache.mk:618: No such file exists: src/TopQuarkAnalysis/SingleTop/bin/fitsPlotsTestMC.cpp. Please fix src/TopQuarkAnalysis/SingleTop/bin/BuildFile.
+tmp/slc5_amd64_gcc462/MakeData/DirCache.mk:629: No such file exists: src/TopQuarkAnalysis/SingleTop/bin/plots1DValidation.cpp. Please fix src/TopQuarkAnalysis/SingleTop/bin/BuildFile.
+tmp/slc5_amd64_gcc462/MakeData/DirCache.mk:640: No such file exists: src/TopQuarkAnalysis/SingleTop/bin/fitsPlots1D.cpp. Please fix src/TopQuarkAnalysis/SingleTop/bin/BuildFile.
+tmp/slc5_amd64_gcc462/MakeData/DirCache.mk:651: No such file exists: src/TopQuarkAnalysis/SingleTop/bin/fitsPlotsPDFs1D.cpp. Please fix src/TopQuarkAnalysis/SingleTop/bin/BuildFile.
+tmp/slc5_amd64_gcc462/MakeData/DirCache.mk:662: No such file exists: src/TopQuarkAnalysis/SingleTop/bin/Plotter.cpp. Please fix src/TopQuarkAnalysis/SingleTop/bin/BuildFile.
+tmp/slc5_amd64_gcc462/MakeData/DirCache.mk:673: No such file exists: src/TopQuarkAnalysis/SingleTop/bin/2DLikelihoodTreeMaker.cpp. Please fix src/TopQuarkAnalysis/SingleTop/bin/BuildFile.
+tmp/slc5_amd64_gcc462/MakeData/DirCache.mk:684: No such file exists: src/TopQuarkAnalysis/SingleTop/bin/Subtractor.cpp. Please fix src/TopQuarkAnalysis/SingleTop/bin/BuildFile.
+tmp/slc5_amd64_gcc462/MakeData/DirCache.mk:695: No such file exists: src/TopQuarkAnalysis/SingleTop/bin/fitsPlots2DSFLikelihoodSummerDataDriven.cpp. Please fix src/TopQuarkAnalysis/SingleTop/bin/BuildFile.
+>> Local Products Rules ..... started
+>> Local Products Rules ..... done
+>> Building CMSSW version CMSSW_5_3_11_patch6 ----
+------- copying files from src/PhysicsTools/PatAlgos/scripts -------
+>> copied patReplaceFast.pl
+>> Creating project symlinks
+>> Entering Package RecoBTau/JetTagComputer
+>> Entering Package DPGAnalysis/SiStripTools
+>> copied patReplaceGenerator.sh
+>> copied patReplaceParser.pl
+>> Entering Package PhysicsTools/PatAlgos
+  src/DPGAnalysis/SiStripTools/python -> python/DPGAnalysis/SiStripTools
+>> Entering Package DataFormats/METReco
+>> Entering Package DataFormats/PatCandidates
+>> Entering Package PhysicsTools/PatUtils
+>> Entering Package RecoEgamma/EgammaTools
+  src/EGamma/EGammaAnalysisTools/python -> python/EGamma/EGammaAnalysisTools
+>> Entering Package JetMETCorrections/Type1MET
+  src/EgammaAnalysis/ElectronTools/python -> python/EgammaAnalysis/ElectronTools
+>> Entering Package RecoMET/METAnalyzers
+>> Entering Package RecoParticleFlow/PFProducer
+  src/PhysicsTools/PatAlgos/python -> python/PhysicsTools/PatAlgos
+  src/PhysicsTools/PatUtils/python -> python/PhysicsTools/PatUtils
+>> Entering Package TopQuarkAnalysis/SingleTop
+  src/RecoBTag/ImpactParameter/python -> python/RecoBTag/ImpactParameter
+>> Entering Package EgammaAnalysis/ElectronTools
+>> Entering Package RecoBTag/ImpactParameter
+  src/RecoBTag/SecondaryVertex/python -> python/RecoBTag/SecondaryVertex
+>> Entering Package RecoBTag/SecondaryVertex
+  src/RecoBTag/SoftLepton/python -> python/RecoBTag/SoftLepton
+  src/RecoBTag/Configuration/python -> python/RecoBTag/Configuration
+>> Entering Package RecoBTag/SoftLepton
+  src/RecoBTau/JetTagComputer/python -> python/RecoBTau/JetTagComputer
+>> Entering Package EGamma/EGammaAnalysisTools
+>> Entering Package RecoBTag/Configuration
+  src/RecoMET/METAnalyzers/python -> python/RecoMET/METAnalyzers
+  src/RecoParticleFlow/PFProducer/python -> python/RecoParticleFlow/PFProducer
+  src/TopQuarkAnalysis/SingleTop/python -> python/TopQuarkAnalysis/SingleTop
+  src/RecoEgamma/EgammaTools/python -> python/RecoEgamma/EgammaTools
+  src/JetMETCorrections/Type1MET/python -> python/JetMETCorrections/Type1MET
+>> Building Root dict from header file /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/DPGAnalysis/SiStripTools/bin/DPGAnalysisSiStripToolsMacrosLinkDef.h 
+>> Compiling  /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/DPGAnalysis/SiStripTools/src/DetIdSelector.cc 
+>> Compiling  /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/DPGAnalysis/SiStripTools/src/APVCyclePhaseCollection.cc 
+>> Compiling  /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/DPGAnalysis/SiStripTools/src/DigiCollectionProfiler.cc 
+>> Compiling  /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/DPGAnalysis/SiStripTools/src/DigiInvestigatorHistogramMaker.cc 
+>> Compiling  /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/DPGAnalysis/SiStripTools/src/EventShape.cc 
+>> Compiling  /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/DPGAnalysis/SiStripTools/src/DigiBXCorrHistogramMaker.cc 
+>> Compiling  /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/DPGAnalysis/SiStripTools/src/DigiPileupCorrHistogramMaker.cc 
+>> Compiling  /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/DPGAnalysis/SiStripTools/src/DigiVertexCorrHistogramMaker.cc 
+>> Compiling  /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/DPGAnalysis/SiStripTools/src/DigiLumiCorrHistogramMaker.cc 
+>> Building LCG reflex dict from header file src/DPGAnalysis/SiStripTools/src/classes.h
+>> Compiling  /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/DPGAnalysis/SiStripTools/src/EventWithHistory.cc 
+>> Compiling  /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/DPGAnalysis/SiStripTools/src/EventWithHistoryFilter.cc 
+>> Compiling  /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/DPGAnalysis/SiStripTools/src/Multiplicities.cc 
+>> Compiling  /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/DPGAnalysis/SiStripTools/src/MultiplicityCorrelatorHistogramMaker.cc 
+>> Compiling  /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/DPGAnalysis/SiStripTools/src/RunHistogramManager.cc 
+>> Compiling  /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/DPGAnalysis/SiStripTools/src/SiStripTKNumbers.cc 
+>> Compiling  /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/DPGAnalysis/SiStripTools/src/TinyEvent.cc 
+>> Building LCG reflex dict from header file src/DataFormats/METReco/src/classes.h
+>> Compiling  /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/DataFormats/METReco/src/BeamHaloSummary.cc 
+>> Compiling  /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/DataFormats/METReco/src/CSCHaloData.cc 
+>> Compiling  /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/DataFormats/METReco/src/CaloMET.cc 
+>> Compiling  /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/DataFormats/METReco/src/EcalHaloData.cc 
+>> Compiling  /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/DataFormats/METReco/src/GenMET.cc 
+>> Compiling  /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/DataFormats/METReco/src/GlobalHaloData.cc 
+>> Compiling  /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/DataFormats/METReco/src/HcalHaloData.cc 
+>> Compiling  /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/DataFormats/METReco/src/HcalNoiseHPD.cc 
+>> Compiling  /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/DataFormats/METReco/src/HcalNoiseRBX.cc 
+>> Compiling  /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/DataFormats/METReco/src/HcalNoiseSummary.cc 
+>> Compiling  /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/DataFormats/METReco/src/MET.cc 
+>> Compiling  /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/DataFormats/METReco/src/PFClusterMET.cc 
+>> Compiling  /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/DataFormats/METReco/src/PFMET.cc 
+>> Compiling  /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/DataFormats/METReco/src/PhiWedge.cc 
+>> Compiling  /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/DataFormats/PatCandidates/src/CandKinResolution.cc 
+>> Building LCG reflex dict from header file src/DataFormats/PatCandidates/src/classes.h
+>> Compiling  /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/DataFormats/PatCandidates/src/CompositeCandidate.cc 
+>> Compiling  /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/DataFormats/PatCandidates/src/Conversion.cc 
+>> Compiling  /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/DataFormats/PatCandidates/src/Electron.cc 
+>> Compiling  /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/DataFormats/PatCandidates/src/EventHypothesis.cc 
+>> Compiling  /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/DataFormats/PatCandidates/src/Flags.cc 
+>> Compiling  /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/DataFormats/PatCandidates/src/GenericParticle.cc 
+>> Compiling  /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/DataFormats/PatCandidates/src/HardEventHypothesis.cc 
+>> Compiling  /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/DataFormats/PatCandidates/src/Jet.cc 
+--->> genreflex: INFO: Parsing file src/DPGAnalysis/SiStripTools/src/classes.h with GCC_XML OK
+--->> genreflex: INFO: Generating Reflex Dictionary
+--->> genreflex: INFO: Using typedef SingleSiPixelClusterMultiplicity to select class SingleMultiplicity<edmNew::DetSetVector<SiPixelCluster> >
+--->> genreflex: INFO: Using typedef SingleSiStripClusterMultiplicity to select class SingleMultiplicity<edmNew::DetSetVector<SiStripCluster> >
+--->> genreflex: INFO: Using typedef SingleSiStripDigiMultiplicity to select class SingleMultiplicity<edm::DetSetVector<SiStripDigi> >
+--->> genreflex: INFO: Using typedef ClusterSummaryMultiplicityPair to select class MultiplicityPair<ClusterSummarySingleMultiplicity,ClusterSummarySingleMultiplicity>
+--->> genreflex: INFO: Using typedef SiPixelClusterSiStripClusterMultiplicityPair to select class MultiplicityPair<SingleMultiplicity<edmNew::DetSetVector<SiPixelCluster> >,SingleMultiplicity<edmNew::DetSetVector<SiStripCluster> > >
+class TinyEvent
+class APVCyclePhaseCollection
+class EventWithHistory
+class ClusterSummarySingleMultiplicity
+class std::vector<TinyEvent>
+class edm::Wrapper<APVCyclePhaseCollection>
+class edm::Wrapper<EventWithHistory>
+class edm::Wrapper<std::vector<TinyEvent> >
+class SingleMultiplicity<edmNew::DetSetVector<SiPixelCluster> >
+class SingleMultiplicity<edmNew::DetSetVector<SiStripCluster> >
+class SingleMultiplicity<edm::DetSetVector<SiStripDigi> >
+class MultiplicityPair<ClusterSummarySingleMultiplicity,ClusterSummarySingleMultiplicity>
+class MultiplicityPair<SingleMultiplicity<edmNew::DetSetVector<SiPixelCluster> >,SingleMultiplicity<edmNew::DetSetVector<SiStripCluster> > >
+>> Compiling  /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/DataFormats/PatCandidates/src/JetCorrFactors.cc 
+>> Compiling  /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/DataFormats/PatCandidates/src/MET.cc 
+>> Compiling  /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/DataFormats/PatCandidates/src/MHT.cc 
+>> Compiling  /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/DataFormats/PatCandidates/src/Muon.cc 
+>> Compiling  /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/DataFormats/PatCandidates/src/PFParticle.cc 
+>> Compiling  /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/DataFormats/PatCandidates/src/ParametrizationHelper.cc 
+>> Compiling  /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/DataFormats/PatCandidates/src/Particle.cc 
+>> Compiling  /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/DataFormats/PatCandidates/src/Photon.cc 
+>> Compiling  /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/DataFormats/PatCandidates/src/ResolutionHelper.cc 
+>> Compiling  /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/DataFormats/PatCandidates/src/StringMap.cc 
+>> Compiling  /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/DataFormats/PatCandidates/src/Tau.cc 
+>> Compiling  /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/DataFormats/PatCandidates/src/TauCaloSpecific.cc 
+>> Compiling  /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/DataFormats/PatCandidates/src/TauJetCorrFactors.cc 
+--->> genreflex: INFO: Parsing file src/DataFormats/METReco/src/classes.h with GCC_XML OK
+--->> genreflex: INFO: Generating Reflex Dictionary
+--->> genreflex: INFO: Using typedef reco::HcalNoiseRBXCollection to select class std::vector<reco::HcalNoiseRBX>
+--->> genreflex: INFO: Using typedef std::vector<reco::PhiWedge>::iterator to select class __gnu_cxx::__normal_iterator<reco::PhiWedge*,std::vector<reco::PhiWedge> >
+--->> genreflex: INFO: Using typedef std::vector<reco::HcalNoiseHPD>::const_iterator to select class __gnu_cxx::__normal_iterator<const reco::HcalNoiseHPD*,std::vector<reco::HcalNoiseHPD> >
+--->> genreflex: INFO: Replacing selection name "edm::Wrapper<reco::HcalNoiseRBXCollection>" with "edm::Wrapper<std::vector<reco::HcalNoiseRBX> >"
+--->> genreflex: INFO: Replacing selection name "edm::Wrapper<reco::HcalNoiseHPDCollection>" with "edm::Wrapper<std::vector<reco::HcalNoiseHPD> >"
+--->> genreflex: INFO: Replacing selection name "edm::reftobase::RefHolder<reco::PFClusterMETRef>" with "edm::reftobase::RefHolder<edm::Ref<std::vector<reco::PFClusterMET>,reco::PFClusterMET,edm::refhelper::FindUsingAdvance<std::vector<reco::PFClusterMET>,reco::PFClusterMET> > >"
+--->> genreflex: INFO: Replacing selection name "edm::reftobase::RefHolder<reco::PFMETRef>" with "edm::reftobase::RefHolder<edm::Ref<std::vector<reco::PFMET>,reco::PFMET,edm::refhelper::FindUsingAdvance<std::vector<reco::PFMET>,reco::PFMET> > >"
+--->> genreflex: INFO: Replacing selection name "edm::reftobase::RefHolder<reco::GenMETRef>" with "edm::reftobase::RefHolder<edm::Ref<std::vector<reco::GenMET>,reco::GenMET,edm::refhelper::FindUsingAdvance<std::vector<reco::GenMET>,reco::GenMET> > >"
+--->> genreflex: INFO: Replacing selection name "edm::reftobase::RefHolder<reco::CaloMETRef>" with "edm::reftobase::RefHolder<edm::Ref<std::vector<reco::CaloMET>,reco::CaloMET,edm::refhelper::FindUsingAdvance<std::vector<reco::CaloMET>,reco::CaloMET> > >"
+--->> genreflex: INFO: Replacing selection name "edm::reftobase::RefHolder<reco::METRef>" with "edm::reftobase::RefHolder<edm::Ref<std::vector<reco::MET>,reco::MET,edm::refhelper::FindUsingAdvance<std::vector<reco::MET>,reco::MET> > >"
+class HcalNoiseSummary
+class SpecificPFMETData
+class SpecificCaloMETData
+class AnomalousECALVariables
+class CorrMETData
+class BoundaryInformation
+class CommonMETData
+class SpecificGenMETData
+class std::vector<BoundaryInformation>
+class std::vector<CorrMETData>
+class reco::MET
+class edm::Ref<std::vector<reco::MET>,reco::MET,edm::refhelper::FindUsingAdvance<std::vector<reco::MET>,reco::MET> >
+class std::vector<edm::Ref<std::vector<reco::MET>,reco::MET,edm::refhelper::FindUsingAdvance<std::vector<reco::MET>,reco::MET> > >
+class std::vector<reco::MET>
+class reco::CaloMET
+class edm::Ref<std::vector<reco::CaloMET>,reco::CaloMET,edm::refhelper::FindUsingAdvance<std::vector<reco::CaloMET>,reco::CaloMET> >
+class std::vector<edm::Ref<std::vector<reco::CaloMET>,reco::CaloMET,edm::refhelper::FindUsingAdvance<std::vector<reco::CaloMET>,reco::CaloMET> > >
+class std::vector<reco::CaloMET>
+class std::vector<Point3DBase<float,GlobalTag> >
+class reco::PhiWedge
+class std::vector<reco::PhiWedge>
+class std::vector<SpecificPFMETData>
+class std::vector<SpecificCaloMETData>
+class std::vector<CommonMETData>
+class reco::HcalNoiseHPD
+class std::vector<reco::HcalNoiseHPD>
+class reco::PFClusterMET
+class std::vector<reco::PFClusterMET>
+class reco::PFMET
+class std::vector<reco::PFMET>
+class reco::GenMET
+class std::vector<reco::GenMET>
+class edm::PtrVector<reco::MET>
+class edm::RefVector<std::vector<reco::PFClusterMET>,reco::PFClusterMET,edm::refhelper::FindUsingAdvance<std::vector<reco::PFClusterMET>,reco::PFClusterMET> >
+class edm::RefVector<std::vector<reco::PFMET>,reco::PFMET,edm::refhelper::FindUsingAdvance<std::vector<reco::PFMET>,reco::PFMET> >
+class edm::RefVector<std::vector<reco::MET>,reco::MET,edm::refhelper::FindUsingAdvance<std::vector<reco::MET>,reco::MET> >
+class edm::RefVector<std::vector<reco::GenMET>,reco::GenMET,edm::refhelper::FindUsingAdvance<std::vector<reco::GenMET>,reco::GenMET> >
+class edm::Ref>> Compiling  /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/DataFormats/PatCandidates/src/TauPFSpecific.cc 
+>> Compiling  /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/DataFormats/PatCandidates/src/TriggerAlgorithm.cc 
+>> Compiling  /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/DataFormats/PatCandidates/src/TriggerCondition.cc 
+>> Compiling  /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/DataFormats/PatCandidates/src/TriggerEvent.cc 
+Vector<std::vector<reco::CaloMET>,reco::CaloMET,edm::refhelper::FindUsingAdvance<std::vector<reco::CaloMET>,reco::CaloMET> >
+class edm::Wrapper<std::vector<BoundaryInformation> >
+class edm::Wrapper<BoundaryInformation>
+class edm::Wrapper<AnomalousECALVariables>
+class edm::Wrapper<std::vector<CorrMETData> >
+class edm::Wrapper<CorrMETData>
+class edm::Wrapper<std::vector<Point3DBase<float,GlobalTag> > >
+class reco::BeamHaloSummary
+class edm::Wrapper<reco::BeamHaloSummary>
+class reco::GlobalHaloData
+class edm::Wrapper<reco::GlobalHaloData>
+class reco::CSCHaloData
+class edm::Wrapper<reco::CSCHaloData>
+class reco::HcalHaloData
+class edm::Wrapper<reco::HcalHaloData>
+class reco::EcalHaloData
+class edm::Wrapper<reco::EcalHaloData>
+class edm::Wrapper<reco::PhiWedge>
+class edm::Wrapper<HcalNoiseSummary>
+class edm::Wrapper<std::vector<reco::PFClusterMET> >
+class edm::Wrapper<reco::PFClusterMET>
+class edm::Wrapper<std::vector<reco::PFMET> >
+class edm::Wrapper<reco::PFMET>
+class edm::Wrapper<std::vector<reco::MET> >
+class edm::Wrapper<reco::MET>
+class edm::Wrapper<std::vector<reco::GenMET> >
+class edm::Wrapper<reco::GenMET>
+class edm::Wrapper<std::vector<reco::CaloMET> >
+class edm::Wrapper<reco::CaloMET>
+class edm::RefProd<std::vector<reco::PFClusterMET> >
+class edm::RefProd<std::vector<reco::PFMET> >
+class edm::RefProd<std::vector<reco::MET> >
+class edm::RefProd<std::vector<reco::GenMET> >
+class edm::RefProd<std::vector<reco::CaloMET> >
+class edm::Ptr<reco::MET>
+class edm::Ref<std::vector<reco::PFClusterMET>,reco::PFClusterMET,edm::refhelper::FindUsingAdvance<std::vector<reco::PFClusterMET>,reco::PFClusterMET> >
+class edm::Ref<std::vector<reco::PFMET>,reco::PFMET,edm::refhelper::FindUsingAdvance<std::vector<reco::PFMET>,reco::PFMET> >
+class edm::Ref<std::vector<reco::GenMET>,reco::GenMET,edm::refhelper::FindUsingAdvance<std::vector<reco::GenMET>,reco::GenMET> >
+class reco::HcalNoiseRBX
+class edm::reftobase::Holder<reco::Candidate,edm::Ref<std::vector<reco::PFClusterMET>,reco::PFClusterMET,edm::refhelper::FindUsingAdvance<std::vector<reco::PFClusterMET>,reco::PFClusterMET> > >
+class edm::reftobase::Holder<reco::Candidate,edm::Ref<std::vector<reco::PFMET>,reco::PFMET,edm::refhelper::FindUsingAdvance<std::vector<reco::PFMET>,reco::PFMET> > >
+class edm::reftobase::Holder<reco::Candidate,edm::Ref<std::vector<reco::MET>,reco::MET,edm::refhelper::FindUsingAdvance<std::vector<reco::MET>,reco::MET> > >
+class edm::reftobase::Holder<reco::Candidate,edm::Ref<std::vector<reco::GenMET>,reco::GenMET,edm::refhelper::FindUsingAdvance<std::vector<reco::GenMET>,reco::GenMET> > >
+class edm::reftobase::Holder<reco::Candidate,edm::Ref<std::vector<reco::CaloMET>,reco::CaloMET,edm::refhelper::FindUsingAdvance<std::vector<reco::CaloMET>,reco::CaloMET> > >
+class std::vector<reco::HcalNoiseRBX>
+class __gnu_cxx::__normal_iterator<reco::PhiWedge*,std::vector<reco::PhiWedge> >
+class __gnu_cxx::__normal_iterator<const reco::HcalNoiseHPD*,std::vector<reco::HcalNoiseHPD> >
+class edm::Wrapper<std::vector<reco::HcalNoiseRBX> >
+class edm::Wrapper<std::vector<reco::HcalNoiseHPD> >
+class edm::reftobase::RefHolder<edm::Ref<std::vector<reco::PFClusterMET>,reco::PFClusterMET,edm::refhelper::FindUsingAdvance<std::vector<reco::PFClusterMET>,reco::PFClusterMET> > >
+class edm::reftobase::RefHolder<edm::Ref<std::vector<reco::PFMET>,reco::PFMET,edm::refhelper::FindUsingAdvance<std::vector<reco::PFMET>,reco::PFMET> > >
+class edm::reftobase::RefHolder<edm::Ref<std::vector<reco::GenMET>,reco::GenMET,edm::refhelper::FindUsingAdvance<std::vector<reco::GenMET>,reco::GenMET> > >
+class edm::reftobase::RefHolder<edm::Ref<std::vector<reco::CaloMET>,reco::CaloMET,edm::refhelper::FindUsingAdvance<std::vector<reco::CaloMET>,reco::CaloMET> > >
+class edm::reftobase::RefHolder<edm::Ref<std::vector<reco::MET>,reco::MET,edm::refhelper::FindUsingAdvance<std::vector<reco::MET>,reco::MET> > >
+>> Compiling  /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/DataFormats/PatCandidates/src/TriggerFilter.cc 
+>> Compiling  /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/DataFormats/PatCandidates/src/TriggerObject.cc 
+>> Compiling  /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/DataFormats/PatCandidates/src/TriggerObjectStandAlone.cc 
+>> Compiling  /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/DataFormats/PatCandidates/src/TriggerPath.cc 
+>> Compiling  /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/DataFormats/PatCandidates/src/UserData.cc 
+>> Compiling  /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/DataFormats/PatCandidates/src/Vertexing.cc 
+>> Compiling  /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/PhysicsTools/PatUtils/src/CaloIsolationEnergy.cc 
+>> Building LCG reflex dict from header file src/PhysicsTools/PatUtils/src/classes.h
+>> Compiling  /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/PhysicsTools/PatUtils/src/CaloJetSelector.cc 
+>> Compiling  /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/PhysicsTools/PatUtils/src/CandRefHelper.cc 
+>> Compiling  /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/PhysicsTools/PatUtils/src/DuplicatedElectronRemover.cc 
+>> Compiling  /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/PhysicsTools/PatUtils/src/ElectronSelector.cc 
+>> Compiling  /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/PhysicsTools/PatUtils/src/DuplicatedPhotonRemover.cc 
+>> Compiling  /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/PhysicsTools/PatUtils/src/EventHypothesisTools.cc 
+>> Compiling  /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/PhysicsTools/PatUtils/src/LeptonJetIsolationAngle.cc 
+>> Compiling  /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/PhysicsTools/PatUtils/src/LeptonVertexSignificance.cc 
+>> Compiling  /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/PhysicsTools/PatUtils/src/MuonSelector.cc 
+>> Compiling  /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/PhysicsTools/PatUtils/src/ObjectResolutionCalc.cc 
+>> Compiling  /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/PhysicsTools/PatUtils/src/PATDiObjectProxy.cc 
+>> Compiling  /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/PhysicsTools/PatUtils/src/SimpleJetTrackAssociator.cc 
+>> Compiling  /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/PhysicsTools/PatUtils/src/StringParserTools.cc 
+>> Compiling  /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/PhysicsTools/PatUtils/src/TrackerIsolationPt.cc 
+>> Compiling  /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/PhysicsTools/PatUtils/src/TriggerHelper.cc 
+>> Compiling  /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/PhysicsTools/PatUtils/src/VertexAssociationSelector.cc 
+>> Compiling  /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/PhysicsTools/PatUtils/src/bJetSelector.cc 
+>> Leaving Package RecoBTag/Configuration
+>> Package RecoBTag/Configuration built
+>> Compiling edm plugin /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/RecoBTau/JetTagComputer/plugins/GenericMVAJetTagESProducer.cc 
+>> Compiling edm plugin /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/RecoBTau/JetTagComputer/plugins/JetTagProducer.cc 
+>> Compiling edm plugin /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/RecoBTau/JetTagComputer/plugins/CombinedMVAJetTagESProducer.cc 
+>> Compiling  /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/RecoBTau/JetTagComputer/src/CombinedMVAJetTagComputer.cc 
+--->> genreflex: INFO: Parsing file src/DataFormats/PatCandidates/src/classes.h with GCC_XML OK
+--->> genreflex: INFO: Generating Reflex Dictionary
+--->> genreflex: INFO: Using typedef pat::TriggerObjectStandAloneRefVector to select class edm::RefVector<std::vector<pat::TriggerObjectStandAlone>,pat::TriggerObjectStandAlone,edm::refhelper::FindUsingAdvance<std::vector<pat::TriggerObjectStandAlone>,pat::TriggerObjectStandAlone> >
+--->> genreflex: INFO: Using typedef pat::ParticleRefVector to select class edm::RefVector<std::vector<pat::Particle>,pat::Particle,edm::refhelper::FindUsingAdvance<std::vector<pat::Particle>,pat::Particle> >
+--->> genreflex: INFO: Using typedef pat::TriggerFilterRef to select class edm::Ref<std::vector<pat::TriggerFilter>,pat::TriggerFilter,edm::refhelper::FindUsingAdvance<std::vector<pat::TriggerFilter>,pat::TriggerFilter> >
+--->> genreflex: INFO: Using typedef pat::TriggerPathRefVectorIterator to select class edm::RefVectorIterator<std::vector<pat::TriggerPath>,pat::TriggerPath,edm::refhelper::FindUsingAdvance<std::vector<pat::TriggerPath>,pat::TriggerPath> >
+--->> genreflex: INFO: Using typedef pat::PhotonRefVector to select class edm::RefVector<std::vector<pat::Photon>,pat::Photon,edm::refhelper::FindUsingAdvance<std::vector<pat::Photon>,pat::Photon> >
+--->> genreflex: INFO: Using typedef pat::MuonRefVector to select class edm::RefVector<std::vector<pat::Muon>,pat::Muon,edm::refhelper::FindUsingAdvance<std::vector<pat::Muon>,pat::Muon> >
+--->> genreflex: INFO: Using typedef pat::TriggerFilterRefProd to select class edm::RefProd<std::vector<pat::TriggerFilter> >
+--->> genreflex: INFO: Using typedef pat::TriggerAlgorithmRefVector to select class edm::RefVector<std::vector<pat::TriggerAlgorithm>,pat::TriggerAlgorithm,edm::refhelper::FindUsingAdvance<std::vector<pat::TriggerAlgorithm>,pat::TriggerAlgorithm> >
+--->> genreflex: INFO: Using typedef pat::TriggerObjectRef to select class edm::Ref<std::vector<pat::TriggerObject>,pat::TriggerObject,edm::refhelper::FindUsingAdvance<std::vector<pat::TriggerObject>,pat::TriggerObject> >
+--->> genreflex: INFO: Using typedef pat::TriggerConditionRef to select class edm::Ref<std::vector<pat::TriggerCondition>,pat::TriggerCondition,edm::refhelper::FindUsingAdvance<std::vector<pat::TriggerCondition>,pat::TriggerCondition> >
+--->> genreflex: INFO: Using typedef pat::JetRefVector to select class edm::RefVector<std::vector<pat::Jet>,pat::Jet,edm::refhelper::FindUsingAdvance<std::vector<pat::Jet>,pat::Jet> >
+--->> genreflex: INFO: Using typedef pat::TriggerObjectStandAloneRefProd to select class edm::RefProd<std::vector<pat::TriggerObjectStandAlone> >
+--->> genreflex: INFO: Using typedef pat::TriggerPathRefProd to select class edm::RefProd<std::vector<pat::TriggerPath> >
+--->> genreflex: INFO: Using typedef pat::GenericParticleRefVector to select class edm::RefVector<std::vector<pat::GenericParticle>,pat::GenericParticle,edm::refhelper::FindUsingAdvance<std::vector<pat::GenericParticle>,pat::GenericParticle> >
+--->> genreflex: INFO: Using typedef pat::ParticleRef to select class edm::Ref<std::vector<pat::Particle>,pat::Particle,edm::refhelper::FindUsingAdvance<std::vector<pat::Particle>,pat::Particle> >
+--->> genreflex: INFO: Using typedef pat::UserDataCollection to select class edm::OwnVector<pat::UserData,edm::ClonePolicy<pat::UserData> >
+--->> genreflex: INFO: Using typedef pat::TriggerPathRef to select class edm::Ref<std::vector<pat::TriggerPath>,pat::TriggerPath,edm::refhelper::FindUsingAdvance<std::vector<pat::TriggerPath>,pat::TriggerPath> >
+--->> genreflex: INFO: Using typedef pat::TriggerAlgorithmRef to select class edm::Ref<std::vector<pat::TriggerAlgorithm>,pat::TriggerAlgorithm,edm::refhelper::FindUsingAdvance<std::vector<pat::TriggerAlgorithm>,pat::TriggerAlgorithm> >
+--->> genreflex: INFO: Using typedef pat::GenericParticleRef to select class edm::Ref<std::vector<pat::GenericParticle>,pat::GenericParticle,edm::refhelper::FindUsingAdvance<std::vector<pat::GenericParticle>,pat::GenericParticle> >
+--->> genreflex: INFO: Using typedef pat::TriggerConditionRefVectorIterator to select class edm::RefVectorIterator<std::vector<pat::TriggerCondition>,pat::TriggerCondition,edm::refhelper::FindUsingAdvance<std::vector<pat::TriggerCondition>,pat::TriggerCondition> >
+--->> genreflex: INFO: Using typedef pat::TriggerAlgorithmRefVectorIterator to select class edm::RefVectorIterator<std::vector<pat::TriggerAlgorithm>,pat::TriggerAlgorithm,edm::refhelper::FindUsingAdvance<std::vector<pat::TriggerAlgorithm>,pat::TriggerAlgorithm> >
+--->> genreflex: INFO: Using typedef pat::CompositeCandidateRefVector to select class edm::RefVector<std::vector<pat::CompositeCandidate>,pat::CompositeCandidate,edm::refhelper::FindUsingAdvance<std::vector<pat::CompositeCandidate>,pat::CompositeCandidate> >
+--->> genreflex: INFO: Using typedef pat::PFParticleRef to select class edm::Ref<std::vector<pat::PFParticle>,pat::PFParticle,edm::refhelper::FindUsingAdvance<std::vector<pat::PFParticle>,pat::PFParticle> >
+--->> genreflex: INFO: Using typedef pat::ConversionRefVector to select class edm::RefVector<std::vector<pat::Conversion>,pat::Conversion,edm::refhelper::FindUsingAdvance<std::vector<pat::Conversion>,pat::Conversion> >
+--->> genreflex: INFO: Using typedef pat::TriggerFilterRefVector to select class edm::RefVector<std::vector<pat::TriggerFilter>,pat::TriggerFilter,edm::refhelper::FindUsingAdvance<std::vector<pat::TriggerFilter>,pat::TriggerFilter> >
+--->> genreflex: INFO: Using typedef pat::L1Seed to select class std::pair<bool,std::basic_string<char> >
+--->> genreflex: INFO: Using typedef pat::TauRef to select class edm::Ref<std::vector<pat::Tau>,pat::Tau,edm::refhelper::FindUsingAdvance<std::vector<pat::Tau>,pat::Tau> >
+--->> genreflex: INFO: Using typedef pat::CompositeCandidateRef to select class edm::Ref<std::vector<pat::CompositeCandidate>,pat::CompositeCandidate,edm::refhelper::FindUsingAdvance<std::vector<pat::CompositeCandidate>,pat::CompositeCandidate> >
+--->> genreflex: INFO: Using typedef pat::TriggerObjectStandAloneRef to select class edm::Ref<std::vector<pat::TriggerObjectStandAlone>,pat::TriggerObjectStandAlone,edm::refhelper::FindUsingAdvance<std::vector<pat::TriggerObjectStandAlone>,pat::TriggerObjectStandAlone> >
+--->> genreflex: INFO: Using typedef pat::TauRefVector to select class edm::RefVector<std::vector<pat::Tau>,pat::Tau,edm::refhelper::FindUsingAdvance<std::vector<pat::Tau>,pat::Tau> >
+--->> genreflex: INFO: Using typedef pat::TriggerFilterRefVectorIterator to select class edm::RefVectorIterator<std::vector<pat::TriggerFilter>,pat::TriggerFilter,edm::refhelper::FindUsingAdvance<std::vector<pat::TriggerFilter>,pat::TriggerFilter> >
+--->> genreflex: INFO: Using typedef pat::TriggerConditionRefVector to select class edm::RefVector<std::vector<pat::TriggerCondition>,pat::TriggerCondition,edm::refhelper::FindUsingAdvance<std::vector<pat::TriggerCondition>,pat::TriggerCondition> >
+--->> genreflex: INFO: Using typedef pat::TriggerAlgorithmRefProd to select class edm::RefProd<std::vector<pat::TriggerAlgorithm> >
+--->> genreflex: INFO: Using typedef pat::TriggerObjectRefProd to select class edm::RefProd<std::vector<pat::TriggerObject> >
+--->> genreflex: INFO: Using typedef pat::TriggerConditionRefProd to select class edm::RefProd<std::vector<pat::TriggerCondition> >
+--->> genreflex: INFO: Using typedef pat::METRef to select class edm::Ref<std::vector<pat::MET>,pat::MET,edm::refhelper::FindUsingAdvance<std::vector<pat::MET>,pat::MET> >
+--->> genreflex: INFO: Using typedef pat::PhotonRef to select class edm::Ref<std::vector<pat::Photon>,pat::Photon,edm::refhelper::FindUsingAdvance<std::vector<pat::Photon>,pat::Photon> >
+--->> genreflex: INFO: Using typedef pat::ElectronRef to select class edm::Ref<std::vector<pat::Electron>,pat::Electron,edm::refhelper::FindUsingAdvance<std::vector<pat::Electron>,pat::Electron> >
+--->> genreflex: INFO: Using typedef pat::CandKinResolutionValueMap to select class edm::ValueMap<pat::CandKinResolution>
+--->> genreflex: INFO: Using typedef pat::HemisphereRefVector to select class edm::RefVector<std::vector<pat::Hemisphere>,pat::Hemisphere,edm::refhelper::Fi>> Compiling  /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/RecoBTau/JetTagComputer/src/GenericMVAComputer.cc 
+ndUsingAdvance<std::vector<pat::Hemisphere>,pat::Hemisphere> >
+--->> genreflex: INFO: Using typedef pat::PFParticleRefVector to select class edm::RefVector<std::vector<pat::PFParticle>,pat::PFParticle,edm::refhelper::FindUsingAdvance<std::vector<pat::PFParticle>,pat::PFParticle> >
+--->> genreflex: INFO: Using typedef pat::MuonRef to select class edm::Ref<std::vector<pat::Muon>,pat::Muon,edm::refhelper::FindUsingAdvance<std::vector<pat::Muon>,pat::Muon> >
+--->> genreflex: INFO: Using typedef pat::JetRef to select class edm::Ref<std::vector<pat::Jet>,pat::Jet,edm::refhelper::FindUsingAdvance<std::vector<pat::Jet>,pat::Jet> >
+--->> genreflex: INFO: Using typedef pat::TriggerObjectRefVector to select class edm::RefVector<std::vector<pat::TriggerObject>,pat::TriggerObject,edm::refhelper::FindUsingAdvance<std::vector<pat::TriggerObject>,pat::TriggerObject> >
+--->> genreflex: INFO: Using typedef pat::HemisphereRef to select class edm::Ref<std::vector<pat::Hemisphere>,pat::Hemisphere,edm::refhelper::FindUsingAdvance<std::vector<pat::Hemisphere>,pat::Hemisphere> >
+--->> genreflex: INFO: Using typedef pat::TriggerObjectStandAloneRefVectorIterator to select class edm::RefVectorIterator<std::vector<pat::TriggerObjectStandAlone>,pat::TriggerObjectStandAlone,edm::refhelper::FindUsingAdvance<std::vector<pat::TriggerObjectStandAlone>,pat::TriggerObjectStandAlone> >
+--->> genreflex: INFO: Using typedef pat::ElectronRefVector to select class edm::RefVector<std::vector<pat::Electron>,pat::Electron,edm::refhelper::FindUsingAdvance<std::vector<pat::Electron>,pat::Electron> >
+--->> genreflex: INFO: Using typedef pat::TriggerObjectRefVectorIterator to select class edm::RefVectorIterator<std::vector<pat::TriggerObject>,pat::TriggerObject,edm::refhelper::FindUsingAdvance<std::vector<pat::TriggerObject>,pat::TriggerObject> >
+--->> genreflex: INFO: Using typedef pat::TriggerPathRefVector to select class edm::RefVector<std::vector<pat::TriggerPath>,pat::TriggerPath,edm::refhelper::FindUsingAdvance<std::vector<pat::TriggerPath>,pat::TriggerPath> >
+--->> genreflex: INFO: Using typedef pat::ConversionRef to select class edm::Ref<std::vector<pat::Conversion>,pat::Conversion,edm::refhelper::FindUsingAdvance<std::vector<pat::Conversion>,pat::Conversion> >
+--->> genreflex: INFO: Using typedef pat::METRefVector to select class edm::RefVector<std::vector<pat::MET>,pat::MET,edm::refhelper::FindUsingAdvance<std::vector<pat::MET>,pat::MET> >
+--->> genreflex: INFO: Using typedef std::vector<pat::Conversion>::const_iterator to select class __gnu_cxx::__normal_iterator<const pat::Conversion*,std::vector<pat::Conversion> >
+--->> genreflex: INFO: Using typedef std::vector<pat::Hemisphere>::const_iterator to select class __gnu_cxx::__normal_iterator<const pat::Hemisphere*,std::vector<pat::Hemisphere> >
+--->> genreflex: INFO: Using typedef std::vector<pat::GenericParticle>::const_iterator to select class __gnu_cxx::__normal_iterator<const pat::GenericParticle*,std::vector<pat::GenericParticle> >
+--->> genreflex: INFO: Using typedef std::vector<pat::PFParticle>::const_iterator to select class __gnu_cxx::__normal_iterator<const pat::PFParticle*,std::vector<pat::PFParticle> >
+--->> genreflex: INFO: Using typedef std::vector<pat::CompositeCandidate>::const_iterator to select class __gnu_cxx::__normal_iterator<const pat::CompositeCandidate*,std::vector<pat::CompositeCandidate> >
+--->> genreflex: INFO: Using typedef std::vector<pat::Particle>::const_iterator to select class __gnu_cxx::__normal_iterator<const pat::Particle*,std::vector<pat::Particle> >
+--->> genreflex: INFO: Using typedef std::vector<pat::MET>::const_iterator to select class __gnu_cxx::__normal_iterator<const pat::MET*,std::vector<pat::MET> >
+--->> genreflex: INFO: Using typedef std::vector<pat::Jet>::const_iterator to select class __gnu_cxx::__normal_iterator<const pat::Jet*,std::vector<pat::Jet> >
+--->> genreflex: INFO: Using typedef std::vector<pat::Photon>::const_iterator to select class __gnu_cxx::__normal_iterator<const pat::Photon*,std::vector<pat::Photon> >
+--->> genreflex: INFO: Using typedef std::>> Compiling  /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/RecoBTau/JetTagComputer/src/GenericMVAComputerCache.cc 
+>> Compiling  /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/RecoBTau/JetTagComputer/src/GenericMVAJetTagComputer.cc 
+>> Compiling  /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/RecoBTau/JetTagComputer/src/JetTagComputer.cc 
+>> Compiling  /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/RecoBTau/JetTagComputer/src/JetTagComputerRecord.cc 
+>> Compiling  /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/RecoBTau/JetTagComputer/src/TagInfoMVACategorySelector.cc 
+>> Compiling  /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/DPGAnalysis/SiStripTools/bin/OccupancyPlotMacros.cc 
+>> Compiling root dictionary tmp/slc5_amd64_gcc462/src/DPGAnalysis/SiStripTools/bin/DPGAnalysisSiStripToolsMacros/DPGAnalysisSiStripToolsMacrosLinkDef.cc 
+>> Compiling edm plugin /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/DPGAnalysis/SiStripTools/plugins/APVCyclePhaseMonitor.cc 
+>> Compiling edm plugin /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/DPGAnalysis/SiStripTools/plugins/APVCyclePhaseProducerFromL1ABC.cc 
+>> Compiling edm plugin /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/DPGAnalysis/SiStripTools/plugins/APVCyclePhaseProducerFromL1TS.cc 
+>> Compiling edm plugin /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/DPGAnalysis/SiStripTools/plugins/APVShotsAnalyzer.cc 
+>> Compiling edm plugin /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/DPGAnalysis/SiStripTools/plugins/BigEventsDebugger.cc 
+>> Compiling edm plugin /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/DPGAnalysis/SiStripTools/plugins/ByMultiplicityEventFilter.cc 
+>> Compiling edm plugin /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/DPGAnalysis/SiStripTools/plugins/ConfigurableAPVCyclePhaseProducer.cc 
+>> Compiling edm plugin /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/DPGAnalysis/SiStripTools/plugins/DetIdSelectorTest.cc 
+vector<pat::Tau>::const_iterator to select class __gnu_cxx::__normal_iterator<const pat::Tau*,std::vector<pat::Tau> >
+--->> genreflex: INFO: Using typedef std::vector<pat::Muon>::const_iterator to select class __gnu_cxx::__normal_iterator<const pat::Muon*,std::vector<pat::Muon> >
+--->> genreflex: INFO: Using typedef std::vector<pat::Electron>::const_iterator to select class __gnu_cxx::__normal_iterator<const pat::Electron*,std::vector<pat::Electron> >
+--->> genreflex: INFO: Using typedef std::vector<pat::MHT>::const_iterator to select class __gnu_cxx::__normal_iterator<const pat::MHT*,std::vector<pat::MHT> >
+--->> genreflex: INFO: Using typedef std::vector<pat::TriggerFilter>::const_iterator to select class __gnu_cxx::__normal_iterator<const pat::TriggerFilter*,std::vector<pat::TriggerFilter> >
+--->> genreflex: INFO: Using typedef std::vector<pat::TriggerPath>::const_iterator to select class __gnu_cxx::__normal_iterator<const pat::TriggerPath*,std::vector<pat::TriggerPath> >
+--->> genreflex: INFO: Using typedef std::vector<pat::TriggerCondition>::const_iterator to select class __gnu_cxx::__normal_iterator<const pat::TriggerCondition*,std::vector<pat::TriggerCondition> >
+--->> genreflex: INFO: Using typedef std::vector<pat::TriggerAlgorithm>::const_iterator to select class __gnu_cxx::__normal_iterator<const pat::TriggerAlgorithm*,std::vector<pat::TriggerAlgorithm> >
+--->> genreflex: INFO: Using typedef std::vector<pat::TriggerObjectStandAlone>::const_iterator to select class __gnu_cxx::__normal_iterator<const pat::TriggerObjectStandAlone*,std::vector<pat::TriggerObjectStandAlone> >
+--->> genreflex: INFO: Using typedef std::vector<pat::TriggerObject>::const_iterator to select class __gnu_cxx::__normal_iterator<const pat::TriggerObject*,std::vector<pat::TriggerObject> >
+--->> genreflex: INFO: Using typedef std::map<std::basic_string<char>,edm::RefProd<edm::Association<std::vector<pat::TriggerObject> > > >::const_iterator to select class std::_Rb_tree_const_iterator<std::pair<const std::basic_string<char>,edm::RefProd<edm::Association<std::vector<pat::TriggerObject> > > > >
+--->> genreflex: INFO: Replacing selection name "std::pair<std::string, pat::TriggerObjectRef>" with "std::pair<std::basic_string<char> , edm::Ref<std::vector<pat::TriggerObject>,pat::TriggerObject,edm::refhelper::FindUsingAdvance<std::vector<pat::TriggerObject>,pat::TriggerObject> > >"
+--->> genreflex: INFO: Replacing selection name "std::vector<pat::JetCorrFactors::CorrectionFactor>" with "std::vector<std::pair<std::basic_string<char>,std::vector<float> > >"
+--->> genreflex: INFO: Replacing selection name "std::vector<pat::L1Seed>" with "std::vector<std::pair<bool,std::basic_string<char> > >"
+--->> genreflex: INFO: Replacing selection name "std::map<std::string, pat::TriggerObjectRef>" with "std::map<std::basic_string<char> , edm::Ref<std::vector<pat::TriggerObject>,pat::TriggerObject,edm::refhelper::FindUsingAdvance<std::vector<pat::TriggerObject>,pat::TriggerObject> > >"
+--->> genreflex: INFO: Replacing selection name "edm::Wrapper<pat::CandKinResolutionValueMap>" with "edm::Wrapper<edm::ValueMap<pat::CandKinResolution> >"
+--->> genreflex: INFO: Replacing selection name "edm::Wrapper<pat::UserDataCollection>" with "edm::Wrapper<edm::OwnVector<pat::UserData,edm::ClonePolicy<pat::UserData> > >"
+--->> genreflex: INFO: Replacing selection name "edm::Wrapper<pat::TriggerAlgorithmRefProd >" with "edm::Wrapper<edm::RefProd<std::vector<pat::TriggerAlgorithm> >  >"
+--->> genreflex: INFO: Replacing selection name "edm::Wrapper<pat::TriggerConditionRefProd >" with "edm::Wrapper<edm::RefProd<std::vector<pat::TriggerCondition> >  >"
+--->> genreflex: INFO: Replacing selection name "edm::Wrapper<pat::TriggerPathRefProd >" with "edm::Wrapper<edm::RefProd<std::vector<pat::TriggerPath> >  >"
+--->> genreflex: INFO: Replacing selection name "edm::Wrapper<pat::TriggerFilterRefProd >" with "edm::Wrapper<edm::RefProd<std::vector<pat::TriggerFilter> >  >"
+--->> genreflex: INFO: Replacing selection name "edm::Wrapper<pat::TriggerObjectStandAloneRefProd>" with "edm::Wrapper<ed>> Compiling edm plugin /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/DPGAnalysis/SiStripTools/plugins/EventTimeDistribution.cc 
+>> Compiling edm plugin /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/DPGAnalysis/SiStripTools/plugins/EventWithHistoryEDFilter.cc 
+>> Compiling edm plugin /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/DPGAnalysis/SiStripTools/plugins/EventWithHistoryProducer.cc 
+>> Compiling edm plugin /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/DPGAnalysis/SiStripTools/plugins/EventWithHistoryProducerFromL1ABC.cc 
+>> Compiling edm plugin /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/DPGAnalysis/SiStripTools/plugins/FEDBadModuleFilter.cc 
+>> Compiling edm plugin /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/DPGAnalysis/SiStripTools/plugins/FromClusterSummaryMultiplicityProducer.cc 
+>> Compiling edm plugin /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/DPGAnalysis/SiStripTools/plugins/L1ABCDebugger.cc 
+m::RefProd<std::vector<pat::TriggerObjectStandAlone> > >"
+--->> genreflex: INFO: Replacing selection name "edm::Wrapper<pat::TriggerObjectRefProd>" with "edm::Wrapper<edm::RefProd<std::vector<pat::TriggerObject> > >"
+--->> genreflex: INFO: Replacing selection name "edm::Wrapper<std::vector<pat::JetCorrFactors::CorrectionFactor> >" with "edm::Wrapper<std::vector<std::pair<std::basic_string<char>,std::vector<float> > > >"
+--->> genreflex: INFO: Replacing selection name "edm::Wrapper<pat::ConversionRefVector>" with "edm::Wrapper<edm::RefVector<std::vector<pat::Conversion>,pat::Conversion,edm::refhelper::FindUsingAdvance<std::vector<pat::Conversion>,pat::Conversion> > >"
+--->> genreflex: INFO: Replacing selection name "edm::Wrapper<pat::HemisphereRefVector>" with "edm::Wrapper<edm::RefVector<std::vector<pat::Hemisphere>,pat::Hemisphere,edm::refhelper::FindUsingAdvance<std::vector<pat::Hemisphere>,pat::Hemisphere> > >"
+--->> genreflex: INFO: Replacing selection name "edm::Wrapper<pat::GenericParticleRefVector>" with "edm::Wrapper<edm::RefVector<std::vector<pat::GenericParticle>,pat::GenericParticle,edm::refhelper::FindUsingAdvance<std::vector<pat::GenericParticle>,pat::GenericParticle> > >"
+--->> genreflex: INFO: Replacing selection name "edm::Wrapper<pat::PFParticleRefVector>" with "edm::Wrapper<edm::RefVector<std::vector<pat::PFParticle>,pat::PFParticle,edm::refhelper::FindUsingAdvance<std::vector<pat::PFParticle>,pat::PFParticle> > >"
+--->> genreflex: INFO: Replacing selection name "edm::Wrapper<pat::CompositeCandidateRefVector>" with "edm::Wrapper<edm::RefVector<std::vector<pat::CompositeCandidate>,pat::CompositeCandidate,edm::refhelper::FindUsingAdvance<std::vector<pat::CompositeCandidate>,pat::CompositeCandidate> > >"
+--->> genreflex: INFO: Replacing selection name "edm::Wrapper<pat::ParticleRefVector>" with "edm::Wrapper<edm::RefVector<std::vector<pat::Particle>,pat::Particle,edm::refhelper::FindUsingAdvance<std::vector<pat::Particle>,pat::Particle> > >"
+--->> genreflex: INFO: Replacing selection name "edm::Wrapper<pat::METRefVector>" with "edm::Wrapper<edm::RefVector<std::vector<pat::MET>,pat::MET,edm::refhelper::FindUsingAdvance<std::vector<pat::MET>,pat::MET> > >"
+--->> genreflex: INFO: Replacing selection name "edm::Wrapper<pat::JetRefVector>" with "edm::Wrapper<edm::RefVector<std::vector<pat::Jet>,pat::Jet,edm::refhelper::FindUsingAdvance<std::vector<pat::Jet>,pat::Jet> > >"
+--->> genreflex: INFO: Replacing selection name "edm::Wrapper<pat::PhotonRefVector>" with "edm::Wrapper<edm::RefVector<std::vector<pat::Photon>,pat::Photon,edm::refhelper::FindUsingAdvance<std::vector<pat::Photon>,pat::Photon> > >"
+--->> genreflex: INFO: Replacing selection name "edm::Wrapper<pat::TauRefVector>" with "edm::Wrapper<edm::RefVector<std::vector<pat::Tau>,pat::Tau,edm::refhelper::FindUsingAdvance<std::vector<pat::Tau>,pat::Tau> > >"
+--->> genreflex: INFO: Replacing selection name "edm::Wrapper<pat::MuonRefVector>" with "edm::Wrapper<edm::RefVector<std::vector<pat::Muon>,pat::Muon,edm::refhelper::FindUsingAdvance<std::vector<pat::Muon>,pat::Muon> > >"
+--->> genreflex: INFO: Replacing selection name "edm::Wrapper<pat::ElectronRefVector>" with "edm::Wrapper<edm::RefVector<std::vector<pat::Electron>,pat::Electron,edm::refhelper::FindUsingAdvance<std::vector<pat::Electron>,pat::Electron> > >"
+--->> genreflex: INFO: Replacing selection name "std::vector<pat::L1Seed>::const_iterator" with "__gnu_cxx::__normal_iterator<const std::pair<bool,std::basic_string<char> >*,std::vector<std::pair<bool,std::basic_string<char> > > > "
+--->> genreflex: INFO: Replacing selection name "edm::reftobase::VectorHolder<reco::Candidate, pat::CompositeCandidateRefVector>" with "edm::reftobase::VectorHolder<reco::Candidate, edm::RefVector<std::vector<pat::CompositeCandidate>,pat::CompositeCandidate,edm::refhelper::FindUsingAdvance<std::vector<pat::CompositeCandidate>,pat::CompositeCandidate> > >"
+--->> genreflex: INFO: Replacing selection name "edm::reftobase::RefVectorHolder<pat::CompositeCandidateRefVector>" with "edm::reftobase::RefVectorHolder<edm::RefVector<std::vector<pat::CompositeCandidate>,pat::CompositeCandidate,edm::refhelper::FindUsingAdvance<std::vector<pat::CompositeCandidate>,pat::CompositeCandidate> > >"
+--->> genreflex: INFO: Replacing selection name "edm::reftobase::RefHolder<pat::TriggerObjectStandAloneRef>" with "edm::reftobase::RefHolder<edm::Ref<std::vector<pat::TriggerObjectStandAlone>,pat::TriggerObjectStandAlone,edm::refhelper::FindUsingAdvance<std::vector<pat::TriggerObjectStandAlone>,pat::TriggerObjectStandAlone> > >"
+--->> genreflex: INFO: Replacing selection name "edm::reftobase::RefHolder<pat::TriggerObjectRef>" with "edm::reftobase::RefHolder<edm::Ref<std::vector<pat::TriggerObject>,pat::TriggerObject,edm::refhelper::FindUsingAdvance<std::vector<pat::TriggerObject>,pat::TriggerObject> > >"
+--->> genreflex: INFO: Replacing selection name "edm::reftobase::RefHolder<pat::GenericParticleRef>" with "edm::reftobase::RefHolder<edm::Ref<std::vector<pat::GenericParticle>,pat::GenericParticle,edm::refhelper::FindUsingAdvance<std::vector<pat::GenericParticle>,pat::GenericParticle> > >"
+--->> genreflex: INFO: Replacing selection name "edm::reftobase::RefHolder<pat::PFParticleRef>" with "edm::reftobase::RefHolder<edm::Ref<std::vector<pat::PFParticle>,pat::PFParticle,edm::refhelper::FindUsingAdvance<std::vector<pat::PFParticle>,pat::PFParticle> > >"
+--->> genreflex: INFO: Replacing selection name "edm::reftobase::RefHolder<pat::CompositeCandidateRef>" with "edm::reftobase::RefHolder<edm::Ref<std::vector<pat::CompositeCandidate>,pat::CompositeCandidate,edm::refhelper::FindUsingAdvance<std::vector<pat::CompositeCandidate>,pat::CompositeCandidate> > >"
+--->> genreflex: INFO: Replacing selection name "edm::reftobase::RefHolder<pat::ParticleRef>" with "edm::reftobase::RefHolder<edm::Ref<std::vector<pat::Particle>,pat::Particle,edm::refhelper::FindUsingAdvance<std::vector<pat::Particle>,pat::Particle> > >"
+--->> genreflex: INFO: Replacing selection name "edm::reftobase::RefHolder<pat::METRef>" with "edm::reftobase::RefHolder<edm::Ref<std::vector<pat::MET>,pat::MET,edm::refhelper::FindUsingAdvance<std::vector<pat::MET>,pat::MET> > >"
+--->> genreflex: INFO: Replacing selection name "edm::reftobase::RefHolder<pat::JetRef>" with "edm::reftobase::RefHolder<edm::Ref<std::vector<pat::Jet>,pat::Jet,edm::refhelper::FindUsingAdvance<std::vector<pat::Jet>,pat::Jet> > >"
+--->> genreflex: INFO: Replacing selection name "edm::reftobase::RefHolder<pat::PhotonRef>" with "edm::reftobase::RefHolder<edm::Ref<std::vector<pat::Photon>,pat::Photon,edm::refhelper::FindUsingAdvance<std::vector<pat::Photon>,pat::Photon> > >"
+--->> genreflex: INFO: Replacing selection name "edm::reftobase::RefHolder<pat::TauRef>" with "edm::reftobase::RefHolder<edm::Ref<std::vector<pat::Tau>,pat::Tau,edm::refhelper::FindUsingAdvance<std::vector<pat::Tau>,pat::Tau> > >"
+--->> genreflex: INFO: Replacing selection name "edm::reftobase::RefHolder<pat::MuonRef>" with "edm::reftobase::RefHolder<edm::Ref<std::vector<pat::Muon>,pat::Muon,edm::refhelper::FindUsingAdvance<std::vector<pat::Muon>,pat::Muon> > >"
+--->> genreflex: INFO: Replacing selection name "edm::reftobase::RefHolder<pat::ElectronRef>" with "edm::reftobase::RefHolder<edm::Ref<std::vector<pat::Electron>,pat::Electron,edm::refhelper::FindUsingAdvance<std::vector<pat::Electron>,pat::Electron> > >"
+--->> genreflex: INFO: Replacing selection name "edm::reftobase::Holder<reco::Candidate,pat::TriggerObjectStandAloneRef>" with "edm::reftobase::Holder<reco::Candidate,edm::Ref<std::vector<pat::TriggerObjectStandAlone>,pat::TriggerObjectStandAlone,edm::refhelper::FindUsingAdvance<std::vector<pat::TriggerObjectStandAlone>,pat::TriggerObjectStandAlone> > >"
+--->> genreflex: INFO: Replacing selection name "edm::reftobase::Holder<reco::Candidate,pat::TriggerObjectRef>" with "edm::reftobase::Holder<reco::Candidate,edm::Ref<std::vector<pat::TriggerObject>,pat::TriggerObject,edm::refhelper::FindUsingAdvance<std::vector<pat::TriggerObject>,pat::TriggerObject> > >"
+--->> genreflex: INFO: Replacing selection name "edm::reftobase::Holder<reco::Candidate, pat::GenericPartic--->> genreflex: INFO: Parsing file src/PhysicsTools/PatUtils/src/classes.h with GCC_XML OK
+--->> genreflex: INFO: Generating Reflex Dictionary
+class pat::DiObjectProxy
+>> Compiling edm plugin /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/DPGAnalysis/SiStripTools/plugins/LargeEvents.cc 
+>> Compiling edm plugin /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/DPGAnalysis/SiStripTools/plugins/MultiplicityCorrelator.cc 
+>> Compiling edm plugin /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/DPGAnalysis/SiStripTools/plugins/MultiplicityInvestigator.cc 
+>> Compiling edm plugin /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/DPGAnalysis/SiStripTools/plugins/MultiplicityProducer.cc 
+>> Compiling edm plugin /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/DPGAnalysis/SiStripTools/plugins/MultiplicityTimeCorrelations.cc 
+>> Compiling edm plugin /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/DPGAnalysis/SiStripTools/plugins/OccupancyPlots.cc 
+>> Compiling edm plugin /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/DPGAnalysis/SiStripTools/plugins/SiPixelQualityHistory.cc 
+>> Compiling edm plugin /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/DPGAnalysis/SiStripTools/plugins/SiStripDetWithSomething.cc 
+>> Compiling edm plugin /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/DPGAnalysis/SiStripTools/plugins/SiStripQualityHistory.cc 
+leRef>" with "edm::reftobase::Holder<reco::Candidate, edm::Ref<std::vector<pat::GenericParticle>,pat::GenericParticle,edm::refhelper::FindUsingAdvance<std::vector<pat::GenericParticle>,pat::GenericParticle> > >"
+--->> genreflex: INFO: Replacing selection name "edm::reftobase::Holder<reco::Candidate, pat::PFParticleRef>" with "edm::reftobase::Holder<reco::Candidate, edm::Ref<std::vector<pat::PFParticle>,pat::PFParticle,edm::refhelper::FindUsingAdvance<std::vector<pat::PFParticle>,pat::PFParticle> > >"
+--->> genreflex: INFO: Replacing selection name "edm::reftobase::Holder<reco::Candidate, pat::CompositeCandidateRef>" with "edm::reftobase::Holder<reco::Candidate, edm::Ref<std::vector<pat::CompositeCandidate>,pat::CompositeCandidate,edm::refhelper::FindUsingAdvance<std::vector<pat::CompositeCandidate>,pat::CompositeCandidate> > >"
+--->> genreflex: INFO: Replacing selection name "edm::reftobase::Holder<reco::Candidate, pat::ParticleRef>" with "edm::reftobase::Holder<reco::Candidate, edm::Ref<std::vector<pat::Particle>,pat::Particle,edm::refhelper::FindUsingAdvance<std::vector<pat::Particle>,pat::Particle> > >"
+--->> genreflex: INFO: Replacing selection name "edm::reftobase::Holder<reco::Candidate, pat::METRef>" with "edm::reftobase::Holder<reco::Candidate, edm::Ref<std::vector<pat::MET>,pat::MET,edm::refhelper::FindUsingAdvance<std::vector<pat::MET>,pat::MET> > >"
+--->> genreflex: INFO: Replacing selection name "edm::reftobase::Holder<reco::Candidate, pat::JetRef>" with "edm::reftobase::Holder<reco::Candidate, edm::Ref<std::vector<pat::Jet>,pat::Jet,edm::refhelper::FindUsingAdvance<std::vector<pat::Jet>,pat::Jet> > >"
+--->> genreflex: INFO: Replacing selection name "edm::reftobase::Holder<reco::Candidate, pat::PhotonRef>" with "edm::reftobase::Holder<reco::Candidate, edm::Ref<std::vector<pat::Photon>,pat::Photon,edm::refhelper::FindUsingAdvance<std::vector<pat::Photon>,pat::Photon> > >"
+--->> genreflex: INFO: Replacing selection name "edm::reftobase::Holder<reco::Candidate, pat::TauRef>" with "edm::reftobase::Holder<reco::Candidate, edm::Ref<std::vector<pat::Tau>,pat::Tau,edm::refhelper::FindUsingAdvance<std::vector<pat::Tau>,pat::Tau> > >"
+--->> genreflex: INFO: Replacing selection name "edm::reftobase::Holder<reco::Candidate, pat::MuonRef>" with "edm::reftobase::Holder<reco::Candidate, edm::Ref<std::vector<pat::Muon>,pat::Muon,edm::refhelper::FindUsingAdvance<std::vector<pat::Muon>,pat::Muon> > >"
+--->> genreflex: INFO: Replacing selection name "edm::reftobase::Holder<reco::Candidate, pat::ElectronRef>" with "edm::reftobase::Holder<reco::Candidate, edm::Ref<std::vector<pat::Electron>,pat::Electron,edm::refhelper::FindUsingAdvance<std::vector<pat::Electron>,pat::Electron> > >"
+pat::CandKinResolution  vs  pat::CandKinResolution
+pat::Tau  vs  pat::Tau
+class StringMap
+class std::pair<pat::IsolationKeys,reco::IsoDeposit>
+class pat::TriggerObject
+class std::vector<pat::TriggerObject>
+class edm::Association<std::vector<pat::TriggerObject> >
+class std::pair<std::basic_string<char>,edm::RefProd<edm::Association<std::vector<pat::TriggerObject> > > >
+class std::pair<std::basic_string<char>,std::vector<float> >
+class pat::CandKinResolution
+class std::vector<pat::CandKinResolution>
+class pat::LookupTableRecord
+class std::vector<pat::LookupTableRecord>
+class pat::UserData
+class edm::Ptr<pat::UserData>
+class std::vector<edm::Ptr<pat::UserData> >
+class std::vector<std::pair<pat::IsolationKeys,reco::IsoDeposit> >
+class pat::EventHypothesis
+class std::vector<pat::EventHypothesis>
+class pat::VertexAssociation
+class std::vector<pat::VertexAssociation>
+class pat::TauJetCorrFactors
+class std::vector<pat::TauJetCorrFactors>
+class pat::JetCorrFactors
+class std::vector<pat::JetCorrFactors>
+class pat::Conversion
+class std::vector<pat::Conversion>
+class pat::Hemisphere
+class std::vector<pat::Hemisphere>
+class pat::GenericParticle
+class std::vector<pat::GenericParticle>
+class pat::PFParticle
+class std::vector<pat::PFParticle>
+class pat::CompositeCandidate
+class std::vector<pat::CompositeCandidate>
+class pat::Particle
+class std::vector<pat::Particle>
+>> Compiling edm plugin /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/DPGAnalysis/SiStripTools/plugins/TrackerDpgAnalysis.cc 
+>> Compiling LCG dictionary: tmp/slc5_amd64_gcc462/src/DPGAnalysis/SiStripTools/src/DPGAnalysisSiStripTools/a/xr.cc
+>> Compiling edm plugin /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/PhysicsTools/PatAlgos/plugins/CandidateSummaryTable.cc 
+>> Compiling edm plugin /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/PhysicsTools/PatAlgos/plugins/DuplicatedElectronCleaner.cc 
+>> Compiling edm plugin /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/PhysicsTools/PatAlgos/plugins/JetCorrFactorsProducer.cc 
+class pat::MET
+class std::vector<pat::MET>
+class pat::Jet
+class std::vector<pat::Jet>
+class pat::Photon
+class std::vector<pat::Photon>
+class pat::Tau
+class std::vector<pat::Tau>
+class pat::Muon
+class std::vector<pat::Muon>
+class pat::Electron
+class std::vector<pat::Electron>
+class pat::MHT
+class std::vector<pat::MHT>
+class pat::TriggerFilter
+class std::vector<pat::TriggerFilter>
+class pat::TriggerPath
+class std::vector<pat::TriggerPath>
+class pat::TriggerCondition
+class std::vector<pat::TriggerCondition>
+class pat::TriggerAlgorithm
+class std::vector<pat::TriggerAlgorithm>
+class pat::TriggerObjectStandAlone
+class std::vector<pat::TriggerObjectStandAlone>
+class pat::tau::TauPFSpecific
+class std::vector<pat::tau::TauPFSpecific>
+class pat::tau::TauCaloSpecific
+class std::vector<pat::tau::TauCaloSpecific>
+class std::vector<pat::UserData*>
+class std::map<std::basic_string<char>,edm::RefProd<edm::Association<std::vector<pat::TriggerObject> > > >
+class edm::ValueMap<pat::LookupTableRecord>
+class edm::Wrapper<edm::ValueMap<pat::LookupTableRecord> >
+class edm::ValueMap<edm::Ptr<pat::UserData> >
+class edm::Wrapper<edm::ValueMap<edm::Ptr<pat::UserData> > >
+class pat::TriggerEvent
+class edm::Wrapper<pat::TriggerEvent>
+class edm::Wrapper<std::vector<pat::TriggerAlgorithm> >
+class edm::Wrapper<std::vector<pat::TriggerCondition> >
+class edm::Wrapper<std::vector<pat::TriggerPath> >
+class edm::Wrapper<std::vector<pat::TriggerFilter> >
+class edm::Association<std::vector<pat::TriggerObjectStandAlone> >
+class edm::Wrapper<edm::Association<std::vector<pat::TriggerObjectStandAlone> > >
+class edm::Wrapper<std::vector<pat::TriggerObjectStandAlone> >
+class edm::Wrapper<std::map<std::basic_string<char>,edm::RefProd<edm::Association<std::vector<pat::TriggerObject> > > > >
+class edm::Wrapper<edm::Association<std::vector<pat::TriggerObject> > >
+class edm::Wrapper<std::vector<pat::TriggerObject> >
+class edm::Wrapper<std::vector<pat::EventHypothesis> >
+class edm::ValueMap<pat::VertexAssociation>
+class edm::Wrapper<edm::ValueMap<pat::VertexAssociation> >
+class edm::Wrapper<StringMap>
+class edm::ValueMap<pat::TauJetCorrFactors>
+class edm::Wrapper<edm::ValueMap<pat::TauJetCorrFactors> >
+class edm::ValueMap<pat::JetCorrFactors>
+class edm::Wrapper<edm::ValueMap<pat::JetCorrFactors> >
+class edm::Wrapper<std::pair<std::basic_string<char>,std::vector<float> > >
+class edm::Wrapper<std::vector<pat::Conversion> >
+class edm::Wrapper<std::vector<pat::Hemisphere> >
+class edm::Wrapper<std::vector<pat::GenericParticle> >
+class edm::Wrapper<std::vector<pat::PFParticle> >
+class edm::Wrapper<std::vector<pat::CompositeCandidate> >
+class edm::Wrapper<std::vector<pat::Particle> >
+class edm::Wrapper<std::vector<pat::MHT> >
+class edm::Wrapper<std::vector<pat::MET> >
+class edm::Wrapper<std::vector<pat::Jet> >
+class edm::Wrapper<std::vector<pat::Photon> >
+class edm::Wrapper<std::vector<pat::Tau> >
+class edm::Wrapper<std::vector<pat::Muon> >
+class edm::Wrapper<std::vector<pat::Electron> >
+class edm::RefProd<edm::Association<std::vector<pat::TriggerObject> > >
+class edm::Ptr<pat::Tau>
+class edm::Ptr<pat::Muon>
+class edm::Ptr<pat::Conversion>
+class edm::Ptr<pat::Electron>
+class edm::Ptr<pat::MET>
+class edm::Ptr<pat::Jet>
+class pat::Lepton<reco::BaseTau>
+class pat::Lepton<reco::Muon>
+class pat::Lepton<reco::GsfElectron>
+class pat::UserHolder<reco::Vertex>
+class pat::UserHolder<reco::Track>
+class pat::UserHolder<ROOT::Math::SVector<double,5> >
+class pat::UserHolder<ROOT::Math::SVector<double,4> >
+class pat::UserHolder<ROOT::Math::SVector<double,3> >
+class pat::UserHolder<ROOT::Math::SVector<double,2> >
+class pat::UserHolder<ROOT::Math::SMatrix<double,5,5,ROOT::Math::MatRepSym<double,5> > >
+class pat::UserHolder<ROOT::Math::SMatrix<double,4,4,ROOT::Math::MatRepSym<double,4> > >
+class pat::UserHolder<ROOT::Math::SMatrix<double,3,3,ROOT::Math::MatRepSym<double,3> > >
+class pat::UserHolder<ROOT::Math::SMatrix<double,2,2,ROOT::Math::MatRepSym<double,2> > >
+class pat::UserHolder<ROOT::Math::LorentzVector<ROOT::Math::PtEtaPhiM4D<double> > >
+class pat::UserHolder<ROOT::Math::LorentzVector<R>> Compiling edm plugin /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/PhysicsTools/PatAlgos/plugins/ObjectEnergyScale.cc 
+>> Compiling edm plugin /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/PhysicsTools/PatAlgos/plugins/ObjectSpatialResolution.cc 
+>> Compiling edm plugin /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/PhysicsTools/PatAlgos/plugins/PATCleaner.cc 
+>> Compiling edm plugin /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/PhysicsTools/PatAlgos/plugins/PATCompositeCandidateProducer.cc 
+>> Compiling edm plugin /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/PhysicsTools/PatAlgos/plugins/PATConversionProducer.cc 
+>> Compiling edm plugin /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/PhysicsTools/PatAlgos/plugins/PATElectronProducer.cc 
+OOT::Math::PxPyPzE4D<double> > >
+class pat::UserHolder<ROOT::Math::PositionVector3D<ROOT::Math::Cartesian3D<double>,ROOT::Math::DefaultCoordinateSystemTag> >
+class pat::UserHolder<ROOT::Math::DisplacementVector3D<ROOT::Math::Cartesian3D<double>,ROOT::Math::DefaultCoordinateSystemTag> >
+class pat::PATObject<reco::RecoCandidate>
+class pat::PATObject<reco::PFCandidate>
+class pat::PATObject<reco::CompositeCandidate>
+class pat::PATObject<reco::LeafCandidate>
+class pat::PATObject<reco::MET>
+class pat::PATObject<reco::Jet>
+class pat::PATObject<reco::Photon>
+class pat::PATObject<reco::BaseTau>
+class pat::PATObject<reco::Muon>
+class pat::PATObject<reco::GsfElectron>
+class edm::RefVector<std::vector<pat::TriggerObjectStandAlone>,pat::TriggerObjectStandAlone,edm::refhelper::FindUsingAdvance<std::vector<pat::TriggerObjectStandAlone>,pat::TriggerObjectStandAlone> >
+class edm::RefVector<std::vector<pat::Particle>,pat::Particle,edm::refhelper::FindUsingAdvance<std::vector<pat::Particle>,pat::Particle> >
+class edm::Ref<std::vector<pat::TriggerFilter>,pat::TriggerFilter,edm::refhelper::FindUsingAdvance<std::vector<pat::TriggerFilter>,pat::TriggerFilter> >
+class edm::RefVectorIterator<std::vector<pat::TriggerPath>,pat::TriggerPath,edm::refhelper::FindUsingAdvance<std::vector<pat::TriggerPath>,pat::TriggerPath> >
+class edm::RefVector<std::vector<pat::Photon>,pat::Photon,edm::refhelper::FindUsingAdvance<std::vector<pat::Photon>,pat::Photon> >
+class edm::RefVector<std::vector<pat::Muon>,pat::Muon,edm::refhelper::FindUsingAdvance<std::vector<pat::Muon>,pat::Muon> >
+class edm::RefProd<std::vector<pat::TriggerFilter> >
+class edm::RefVector<std::vector<pat::TriggerAlgorithm>,pat::TriggerAlgorithm,edm::refhelper::FindUsingAdvance<std::vector<pat::TriggerAlgorithm>,pat::TriggerAlgorithm> >
+class edm::Ref<std::vector<pat::TriggerObject>,pat::TriggerObject,edm::refhelper::FindUsingAdvance<std::vector<pat::TriggerObject>,pat::TriggerObject> >
+class edm::Ref<std::vector<pat::TriggerCondition>,pat::TriggerCondition,edm::refhelper::FindUsingAdvance<std::vector<pat::TriggerCondition>,pat::TriggerCondition> >
+class edm::RefVector<std::vector<pat::Jet>,pat::Jet,edm::refhelper::FindUsingAdvance<std::vector<pat::Jet>,pat::Jet> >
+class edm::RefProd<std::vector<pat::TriggerObjectStandAlone> >
+class edm::RefProd<std::vector<pat::TriggerPath> >
+class edm::RefVector<std::vector<pat::GenericParticle>,pat::GenericParticle,edm::refhelper::FindUsingAdvance<std::vector<pat::GenericParticle>,pat::GenericParticle> >
+class edm::Ref<std::vector<pat::Particle>,pat::Particle,edm::refhelper::FindUsingAdvance<std::vector<pat::Particle>,pat::Particle> >
+class edm::OwnVector<pat::UserData,edm::ClonePolicy<pat::UserData> >
+class edm::Ref<std::vector<pat::TriggerPath>,pat::TriggerPath,edm::refhelper::FindUsingAdvance<std::vector<pat::TriggerPath>,pat::TriggerPath> >
+class edm::Ref<std::vector<pat::TriggerAlgorithm>,pat::TriggerAlgorithm,edm::refhelper::FindUsingAdvance<std::vector<pat::TriggerAlgorithm>,pat::TriggerAlgorithm> >
+class edm::Ref<std::vector<pat::GenericParticle>,pat::GenericParticle,edm::refhelper::FindUsingAdvance<std::vector<pat::GenericParticle>,pat::GenericParticle> >
+class edm::RefVectorIterator<std::vector<pat::TriggerCondition>,pat::TriggerCondition,edm::refhelper::FindUsingAdvance<std::vector<pat::TriggerCondition>,pat::TriggerCondition> >
+class edm::RefVectorIterator<std::vector<pat::TriggerAlgorithm>,pat::TriggerAlgorithm,edm::refhelper::FindUsingAdvance<std::vector<pat::TriggerAlgorithm>,pat::TriggerAlgorithm> >
+class edm::RefVector<std::vector<pat::CompositeCandidate>,pat::CompositeCandidate,edm::refhelper::FindUsingAdvance<std::vector<pat::CompositeCandidate>,pat::CompositeCandidate> >
+class edm::Ref<std::vector<pat::PFParticle>,pat::PFParticle,edm::refhelper::FindUsingAdvance<std::vector<pat::PFParticle>,pat::PFParticle> >
+class edm::RefVector<std::vector<pat::Conversion>,pat::Conversion,edm::refhelper::FindUsingAdvance<std::vector<pat::Conversion>,pat::Conversion> >
+class edm::RefVector<std::vector<pat::TriggerFilter>,pat::TriggerFilter,edm::refhelper>> Compiling edm plugin /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/PhysicsTools/PatAlgos/plugins/PATGenCandsFromSimTracksProducer.cc 
+>> Compiling edm plugin /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/PhysicsTools/PatAlgos/plugins/PATGenericParticleProducer.cc 
+>> Compiling edm plugin /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/PhysicsTools/PatAlgos/plugins/PATHeavyIonProducer.cc 
+>> Compiling edm plugin /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/PhysicsTools/PatAlgos/plugins/PATHemisphereProducer.cc 
+>> Compiling edm plugin /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/PhysicsTools/PatAlgos/plugins/PATJetProducer.cc 
+::FindUsingAdvance<std::vector<pat::TriggerFilter>,pat::TriggerFilter> >
+class std::pair<bool,std::basic_string<char> >
+class edm::Ref<std::vector<pat::Tau>,pat::Tau,edm::refhelper::FindUsingAdvance<std::vector<pat::Tau>,pat::Tau> >
+class edm::Ref<std::vector<pat::CompositeCandidate>,pat::CompositeCandidate,edm::refhelper::FindUsingAdvance<std::vector<pat::CompositeCandidate>,pat::CompositeCandidate> >
+class edm::Ref<std::vector<pat::TriggerObjectStandAlone>,pat::TriggerObjectStandAlone,edm::refhelper::FindUsingAdvance<std::vector<pat::TriggerObjectStandAlone>,pat::TriggerObjectStandAlone> >
+class edm::RefVector<std::vector<pat::Tau>,pat::Tau,edm::refhelper::FindUsingAdvance<std::vector<pat::Tau>,pat::Tau> >
+class edm::RefVectorIterator<std::vector<pat::TriggerFilter>,pat::TriggerFilter,edm::refhelper::FindUsingAdvance<std::vector<pat::TriggerFilter>,pat::TriggerFilter> >
+class edm::RefVector<std::vector<pat::TriggerCondition>,pat::TriggerCondition,edm::refhelper::FindUsingAdvance<std::vector<pat::TriggerCondition>,pat::TriggerCondition> >
+class edm::RefProd<std::vector<pat::TriggerAlgorithm> >
+class edm::RefProd<std::vector<pat::TriggerObject> >
+class edm::RefProd<std::vector<pat::TriggerCondition> >
+class edm::Ref<std::vector<pat::MET>,pat::MET,edm::refhelper::FindUsingAdvance<std::vector<pat::MET>,pat::MET> >
+class edm::Ref<std::vector<pat::Photon>,pat::Photon,edm::refhelper::FindUsingAdvance<std::vector<pat::Photon>,pat::Photon> >
+class edm::Ref<std::vector<pat::Electron>,pat::Electron,edm::refhelper::FindUsingAdvance<std::vector<pat::Electron>,pat::Electron> >
+class edm::ValueMap<pat::CandKinResolution>
+class edm::RefVector<std::vector<pat::Hemisphere>,pat::Hemisphere,edm::refhelper::FindUsingAdvance<std::vector<pat::Hemisphere>,pat::Hemisphere> >
+class edm::RefVector<std::vector<pat::PFParticle>,pat::PFParticle,edm::refhelper::FindUsingAdvance<std::vector<pat::PFParticle>,pat::PFParticle> >
+class edm::Ref<std::vector<pat::Muon>,pat::Muon,edm::refhelper::FindUsingAdvance<std::vector<pat::Muon>,pat::Muon> >
+class edm::Ref<std::vector<pat::Jet>,pat::Jet,edm::refhelper::FindUsingAdvance<std::vector<pat::Jet>,pat::Jet> >
+class edm::RefVector<std::vector<pat::TriggerObject>,pat::TriggerObject,edm::refhelper::FindUsingAdvance<std::vector<pat::TriggerObject>,pat::TriggerObject> >
+class edm::Ref<std::vector<pat::Hemisphere>,pat::Hemisphere,edm::refhelper::FindUsingAdvance<std::vector<pat::Hemisphere>,pat::Hemisphere> >
+class edm::RefVectorIterator<std::vector<pat::TriggerObjectStandAlone>,pat::TriggerObjectStandAlone,edm::refhelper::FindUsingAdvance<std::vector<pat::TriggerObjectStandAlone>,pat::TriggerObjectStandAlone> >
+class edm::RefVector<std::vector<pat::Electron>,pat::Electron,edm::refhelper::FindUsingAdvance<std::vector<pat::Electron>,pat::Electron> >
+class edm::RefVectorIterator<std::vector<pat::TriggerObject>,pat::TriggerObject,edm::refhelper::FindUsingAdvance<std::vector<pat::TriggerObject>,pat::TriggerObject> >
+class edm::RefVector<std::vector<pat::TriggerPath>,pat::TriggerPath,edm::refhelper::FindUsingAdvance<std::vector<pat::TriggerPath>,pat::TriggerPath> >
+class edm::Ref<std::vector<pat::Conversion>,pat::Conversion,edm::refhelper::FindUsingAdvance<std::vector<pat::Conversion>,pat::Conversion> >
+class edm::RefVector<std::vector<pat::MET>,pat::MET,edm::refhelper::FindUsingAdvance<std::vector<pat::MET>,pat::MET> >
+class __gnu_cxx::__normal_iterator<const pat::Conversion*,std::vector<pat::Conversion> >
+class __gnu_cxx::__normal_iterator<const pat::Hemisphere*,std::vector<pat::Hemisphere> >
+class __gnu_cxx::__normal_iterator<const pat::GenericParticle*,std::vector<pat::GenericParticle> >
+class __gnu_cxx::__normal_iterator<const pat::PFParticle*,std::vector<pat::PFParticle> >
+class __gnu_cxx::__normal_iterator<const pat::CompositeCandidate*,std::vector<pat::CompositeCandidate> >
+class __gnu_cxx::__normal_iterator<const pat::Particle*,std::vector<pat::Particle> >
+class __gnu_cxx::__normal_iterator<const pat::MET*,std::vector<pat::MET> >
+class __gnu_cxx::__normal_iterator<const pat::Jet*,std::vector<pat::Jet> >
+class >> Compiling edm plugin /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/PhysicsTools/PatAlgos/plugins/PATLeptonCountFilter.cc 
+>> Compiling edm plugin /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/PhysicsTools/PatAlgos/plugins/PATMETProducer.cc 
+>> Compiling edm plugin /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/PhysicsTools/PatAlgos/plugins/PATMHTProducer.cc 
+>> Compiling edm plugin /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/PhysicsTools/PatAlgos/plugins/PATMuonProducer.cc 
+__gnu_cxx::__normal_iterator<const pat::Photon*,std::vector<pat::Photon> >
+class __gnu_cxx::__normal_iterator<const pat::Tau*,std::vector<pat::Tau> >
+class __gnu_cxx::__normal_iterator<const pat::Muon*,std::vector<pat::Muon> >
+class __gnu_cxx::__normal_iterator<const pat::Electron*,std::vector<pat::Electron> >
+class __gnu_cxx::__normal_iterator<const pat::MHT*,std::vector<pat::MHT> >
+class __gnu_cxx::__normal_iterator<const pat::TriggerFilter*,std::vector<pat::TriggerFilter> >
+class __gnu_cxx::__normal_iterator<const pat::TriggerPath*,std::vector<pat::TriggerPath> >
+class __gnu_cxx::__normal_iterator<const pat::TriggerCondition*,std::vector<pat::TriggerCondition> >
+class __gnu_cxx::__normal_iterator<const pat::TriggerAlgorithm*,std::vector<pat::TriggerAlgorithm> >
+class __gnu_cxx::__normal_iterator<const pat::TriggerObjectStandAlone*,std::vector<pat::TriggerObjectStandAlone> >
+class __gnu_cxx::__normal_iterator<const pat::TriggerObject*,std::vector<pat::TriggerObject> >
+class std::_Rb_tree_const_iterator<std::pair<const std::basic_string<char>,edm::RefProd<edm::Association<std::vector<pat::TriggerObject> > > > >
+class std::pair<std::basic_string<char>,edm::Ref<std::vector<pat::TriggerObject>,pat::TriggerObject,edm::refhelper::FindUsingAdvance<std::vector<pat::TriggerObject>,pat::TriggerObject> > >
+class std::vector<std::pair<std::basic_string<char>,std::vector<float> > >
+class std::vector<std::pair<bool,std::basic_string<char> > >
+class std::map<std::basic_string<char>,edm::Ref<std::vector<pat::TriggerObject>,pat::TriggerObject,edm::refhelper::FindUsingAdvance<std::vector<pat::TriggerObject>,pat::TriggerObject> > >
+class edm::Wrapper<edm::ValueMap<pat::CandKinResolution> >
+class edm::Wrapper<edm::OwnVector<pat::UserData,edm::ClonePolicy<pat::UserData> > >
+class edm::Wrapper<edm::RefProd<std::vector<pat::TriggerAlgorithm> > >
+class edm::Wrapper<edm::RefProd<std::vector<pat::TriggerCondition> > >
+class edm::Wrapper<edm::RefProd<std::vector<pat::TriggerPath> > >
+class edm::Wrapper<edm::RefProd<std::vector<pat::TriggerFilter> > >
+class edm::Wrapper<edm::RefProd<std::vector<pat::TriggerObjectStandAlone> > >
+class edm::Wrapper<edm::RefProd<std::vector<pat::TriggerObject> > >
+class edm::Wrapper<std::vector<std::pair<std::basic_string<char>,std::vector<float> > > >
+class edm::Wrapper<edm::RefVector<std::vector<pat::Conversion>,pat::Conversion,edm::refhelper::FindUsingAdvance<std::vector<pat::Conversion>,pat::Conversion> > >
+class edm::Wrapper<edm::RefVector<std::vector<pat::Hemisphere>,pat::Hemisphere,edm::refhelper::FindUsingAdvance<std::vector<pat::Hemisphere>,pat::Hemisphere> > >
+class edm::Wrapper<edm::RefVector<std::vector<pat::GenericParticle>,pat::GenericParticle,edm::refhelper::FindUsingAdvance<std::vector<pat::GenericParticle>,pat::GenericParticle> > >
+class edm::Wrapper<edm::RefVector<std::vector<pat::PFParticle>,pat::PFParticle,edm::refhelper::FindUsingAdvance<std::vector<pat::PFParticle>,pat::PFParticle> > >
+class edm::Wrapper<edm::RefVector<std::vector<pat::CompositeCandidate>,pat::CompositeCandidate,edm::refhelper::FindUsingAdvance<std::vector<pat::CompositeCandidate>,pat::CompositeCandidate> > >
+class edm::Wrapper<edm::RefVector<std::vector<pat::Particle>,pat::Particle,edm::refhelper::FindUsingAdvance<std::vector<pat::Particle>,pat::Particle> > >
+class edm::Wrapper<edm::RefVector<std::vector<pat::MET>,pat::MET,edm::refhelper::FindUsingAdvance<std::vector<pat::MET>,pat::MET> > >
+class edm::Wrapper<edm::RefVector<std::vector<pat::Jet>,pat::Jet,edm::refhelper::FindUsingAdvance<std::vector<pat::Jet>,pat::Jet> > >
+class edm::Wrapper<edm::RefVector<std::vector<pat::Photon>,pat::Photon,edm::refhelper::FindUsingAdvance<std::vector<pat::Photon>,pat::Photon> > >
+class edm::Wrapper<edm::RefVector<std::vector<pat::Tau>,pat::Tau,edm::refhelper::FindUsingAdvance<std::vector<pat::Tau>,pat::Tau> > >
+class edm::Wrapper<edm::RefVector<std::vector<pat::Muon>,pat::Muon,edm::refhelper::FindUsingAdvance<std::vector<pat::Muon>,pat::Muon> > >
+class edm::Wrapper<edm::RefVector<std::vector<pat::Electron>,pat::Electron,edm::refhelper::FindU>> Compiling edm plugin /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/PhysicsTools/PatAlgos/plugins/PATObjectFilter.cc 
+>> Compiling edm plugin /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/PhysicsTools/PatAlgos/plugins/PATObjectSelector.cc 
+singAdvance<std::vector<pat::Electron>,pat::Electron> > >
+class __gnu_cxx::__normal_iterator<const std::pair<bool,std::basic_string<char> >*,std::vector<std::pair<bool,std::basic_string<char> > > >
+class edm::reftobase::VectorHolder<reco::Candidate,edm::RefVector<std::vector<pat::CompositeCandidate>,pat::CompositeCandidate,edm::refhelper::FindUsingAdvance<std::vector<pat::CompositeCandidate>,pat::CompositeCandidate> > >
+class edm::reftobase::RefVectorHolder<edm::RefVector<std::vector<pat::CompositeCandidate>,pat::CompositeCandidate,edm::refhelper::FindUsingAdvance<std::vector<pat::CompositeCandidate>,pat::CompositeCandidate> > >
+class edm::reftobase::RefHolder<edm::Ref<std::vector<pat::TriggerObjectStandAlone>,pat::TriggerObjectStandAlone,edm::refhelper::FindUsingAdvance<std::vector<pat::TriggerObjectStandAlone>,pat::TriggerObjectStandAlone> > >
+class edm::reftobase::RefHolder<edm::Ref<std::vector<pat::TriggerObject>,pat::TriggerObject,edm::refhelper::FindUsingAdvance<std::vector<pat::TriggerObject>,pat::TriggerObject> > >
+class edm::reftobase::RefHolder<edm::Ref<std::vector<pat::GenericParticle>,pat::GenericParticle,edm::refhelper::FindUsingAdvance<std::vector<pat::GenericParticle>,pat::GenericParticle> > >
+class edm::reftobase::RefHolder<edm::Ref<std::vector<pat::PFParticle>,pat::PFParticle,edm::refhelper::FindUsingAdvance<std::vector<pat::PFParticle>,pat::PFParticle> > >
+class edm::reftobase::RefHolder<edm::Ref<std::vector<pat::CompositeCandidate>,pat::CompositeCandidate,edm::refhelper::FindUsingAdvance<std::vector<pat::CompositeCandidate>,pat::CompositeCandidate> > >
+class edm::reftobase::RefHolder<edm::Ref<std::vector<pat::Particle>,pat::Particle,edm::refhelper::FindUsingAdvance<std::vector<pat::Particle>,pat::Particle> > >
+class edm::reftobase::RefHolder<edm::Ref<std::vector<pat::MET>,pat::MET,edm::refhelper::FindUsingAdvance<std::vector<pat::MET>,pat::MET> > >
+class edm::reftobase::RefHolder<edm::Ref<std::vector<pat::Jet>,pat::Jet,edm::refhelper::FindUsingAdvance<std::vector<pat::Jet>,pat::Jet> > >
+class edm::reftobase::RefHolder<edm::Ref<std::vector<pat::Photon>,pat::Photon,edm::refhelper::FindUsingAdvance<std::vector<pat::Photon>,pat::Photon> > >
+class edm::reftobase::RefHolder<edm::Ref<std::vector<pat::Tau>,pat::Tau,edm::refhelper::FindUsingAdvance<std::vector<pat::Tau>,pat::Tau> > >
+class edm::reftobase::RefHolder<edm::Ref<std::vector<pat::Muon>,pat::Muon,edm::refhelper::FindUsingAdvance<std::vector<pat::Muon>,pat::Muon> > >
+class edm::reftobase::RefHolder<edm::Ref<std::vector<pat::Electron>,pat::Electron,edm::refhelper::FindUsingAdvance<std::vector<pat::Electron>,pat::Electron> > >
+class edm::reftobase::Holder<reco::Candidate,edm::Ref<std::vector<pat::TriggerObjectStandAlone>,pat::TriggerObjectStandAlone,edm::refhelper::FindUsingAdvance<std::vector<pat::TriggerObjectStandAlone>,pat::TriggerObjectStandAlone> > >
+class edm::reftobase::Holder<reco::Candidate,edm::Ref<std::vector<pat::TriggerObject>,pat::TriggerObject,edm::refhelper::FindUsingAdvance<std::vector<pat::TriggerObject>,pat::TriggerObject> > >
+class edm::reftobase::Holder<reco::Candidate,edm::Ref<std::vector<pat::GenericParticle>,pat::GenericParticle,edm::refhelper::FindUsingAdvance<std::vector<pat::GenericParticle>,pat::GenericParticle> > >
+class edm::reftobase::Holder<reco::Candidate,edm::Ref<std::vector<pat::PFParticle>,pat::PFParticle,edm::refhelper::FindUsingAdvance<std::vector<pat::PFParticle>,pat::PFParticle> > >
+class edm::reftobase::Holder<reco::Candidate,edm::Ref<std::vector<pat::CompositeCandidate>,pat::CompositeCandidate,edm::refhelper::FindUsingAdvance<std::vector<pat::CompositeCandidate>,pat::CompositeCandidate> > >
+class edm::reftobase::Holder<reco::Candidate,edm::Ref<std::vector<pat::Particle>,pat::Particle,edm::refhelper::FindUsingAdvance<std::vector<pat::Particle>,pat::Particle> > >
+class edm::reftobase::Holder<reco::Candidate,edm::Ref<std::vector<pat::MET>,pat::MET,edm::refhelper::FindUsingAdvance<std::vector<pat::MET>,pat::MET> > >
+class edm::reftobase::Holder<reco::Candidate,edm::Ref<std::vector<pat::Jet>,pat::Jet,edm::refhelper::>> Compiling edm plugin /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/PhysicsTools/PatAlgos/plugins/PATPFParticleProducer.cc 
+>> Compiling edm plugin /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/PhysicsTools/PatAlgos/plugins/PATPhotonProducer.cc 
+>> Compiling edm plugin /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/PhysicsTools/PatAlgos/plugins/PATPrimaryVertexCleaner.cc 
+FindUsingAdvance<std::vector<pat::Jet>,pat::Jet> > >
+class edm::reftobase::Holder<reco::Candidate,edm::Ref<std::vector<pat::Photon>,pat::Photon,edm::refhelper::FindUsingAdvance<std::vector<pat::Photon>,pat::Photon> > >
+class edm::reftobase::Holder<reco::Candidate,edm::Ref<std::vector<pat::Tau>,pat::Tau,edm::refhelper::FindUsingAdvance<std::vector<pat::Tau>,pat::Tau> > >
+class edm::reftobase::Holder<reco::Candidate,edm::Ref<std::vector<pat::Muon>,pat::Muon,edm::refhelper::FindUsingAdvance<std::vector<pat::Muon>,pat::Muon> > >
+class edm::reftobase::Holder<reco::Candidate,edm::Ref<std::vector<pat::Electron>,pat::Electron,edm::refhelper::FindUsingAdvance<std::vector<pat::Electron>,pat::Electron> > >
+enum pat::IsolationKeys
+>> Compiling edm plugin /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/PhysicsTools/PatAlgos/plugins/PATSingleVertexSelector.cc 
+>> Compiling edm plugin /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/PhysicsTools/PatAlgos/plugins/PATTauProducer.cc 
+>> Compiling edm plugin /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/PhysicsTools/PatAlgos/plugins/PATTriggerEventProducer.cc 
+>> Compiling edm plugin /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/PhysicsTools/PatAlgos/plugins/PATTriggerMatchEmbedder.cc 
+>> Compiling edm plugin /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/PhysicsTools/PatAlgos/plugins/PATTriggerMatcher.cc 
+>> Compiling edm plugin /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/PhysicsTools/PatAlgos/plugins/PATTriggerProducer.cc 
+>> Compiling edm plugin /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/PhysicsTools/PatAlgos/plugins/StringResolutionProviderESProducer.cc 
+>> Compiling edm plugin /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/PhysicsTools/PatAlgos/plugins/TauJetCorrFactorsProducer.cc 
+>> Compiling edm plugin /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/PhysicsTools/PatAlgos/plugins/VertexAssociationProducer.cc 
+>> Compiling LCG dictionary: tmp/slc5_amd64_gcc462/src/DataFormats/METReco/src/DataFormatsMETReco/a/xr.cc
+>> Compiling LCG dictionary: tmp/slc5_amd64_gcc462/src/DataFormats/PatCandidates/src/DataFormatsPatCandidates/a/xr.cc
+>> Compiling  /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/PhysicsTools/PatAlgos/src/BaseIsolator.cc 
+>> Compiling  /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/PhysicsTools/PatAlgos/src/EfficiencyLoader.cc 
+>> Compiling  /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/PhysicsTools/PatAlgos/src/HemisphereAlgo.cc 
+>> Compiling  /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/PhysicsTools/PatAlgos/src/IsoDepositIsolator.cc 
+>> Compiling  /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/PhysicsTools/PatAlgos/src/KinResolutionsLoader.cc 
+>> Compiling  /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/PhysicsTools/PatAlgos/src/KinematicResolutionRcd.cc 
+>> Compiling  /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/PhysicsTools/PatAlgos/src/MultiIsolator.cc 
+>> Compiling  /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/PhysicsTools/PatAlgos/src/OverlapTest.cc 
+>> Compiling  /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/PhysicsTools/PatAlgos/src/PATPrimaryVertexSelector.cc 
+>> Compiling  /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/PhysicsTools/PatAlgos/src/PATUserDataMerger.cc 
+>> Compiling  /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/PhysicsTools/PatAlgos/src/SimpleIsolator.cc 
+>> Compiling  /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/PhysicsTools/PatAlgos/src/StringResolutionProvider.cc 
+>> Compiling  /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/PhysicsTools/PatAlgos/src/VertexingHelper.cc 
+>> Compiling LCG dictionary: tmp/slc5_amd64_gcc462/src/PhysicsTools/PatUtils/src/PhysicsToolsPatUtils/a/xr.cc
+>> Compiling  /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/RecoEgamma/EgammaTools/src/ConversionFinder.cc 
+>> Compiling  /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/RecoEgamma/EgammaTools/src/ConversionLikelihoodCalculator.cc 
+>> Compiling  /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/RecoEgamma/EgammaTools/src/ConversionTools.cc 
+>> Compiling  /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/RecoEgamma/EgammaTools/src/ECALPositionCalculator.cc 
+>> Compiling  /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/RecoEgamma/EgammaTools/src/EGEnergyCorrector.cc 
+>> Compiling  /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/RecoEgamma/EgammaTools/src/EcalClusterLocal.cc 
+>> Compiling  /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/RecoEgamma/EgammaTools/src/HoECalculator.cc 
+>> Compiling  /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/RecoEgamma/EgammaTools/src/Mustache.cc 
+>> Compiling  /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/RecoEgamma/EgammaTools/src/ggPFClusters.cc 
+>> Compiling  /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/RecoEgamma/EgammaTools/src/ggPFESClusters.cc 
+>> Compiling  /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/RecoEgamma/EgammaTools/src/ggPFPhotons.cc 
+>> Compiling  /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/RecoEgamma/EgammaTools/src/ggPFTracks.cc 
+>> Compiling  /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/PhysicsTools/PatAlgos/test/runtestPhysicsToolsPatAlgos.cpp 
+>> Compiling edm plugin /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/PhysicsTools/PatAlgos/test/private/PATUserDataTestModule.cc 
+>> Compiling edm plugin /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/PhysicsTools/PatAlgos/test/private/TestEventHypothesisReader.cc 
+>> Compiling edm plugin /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/PhysicsTools/PatAlgos/test/private/TestEventHypothesisWriter.cc 
+>> Compiling edm plugin /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/PhysicsTools/PatUtils/plugins/CorrectedPATMETProducer.cc 
+/afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/RecoEgamma/EgammaTools/src/ggPFPhotons.cc: In static member function 'static std::pair<double, double> ggPFPhotons::SuperClusterSize(reco::SuperCluster, edm::Handle<edm::SortedCollection<EcalRecHit> >&, edm::Handle<edm::SortedCollection<EcalRecHit> >&, const CaloSubdetectorGeometry*, const CaloSubdetectorGeometry*)':
+/afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/RecoEgamma/EgammaTools/src/ggPFPhotons.cc:476:10: warning: unused variable 'MaxR' [-Wunused-variable]
+>> Compiling edm plugin /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/PhysicsTools/PatUtils/plugins/MinPatMETProducer.cc 
+>> Compiling edm plugin /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/PhysicsTools/PatUtils/plugins/PATCaloJetMETcorrInputProducer.cc 
+>> Compiling edm plugin /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/PhysicsTools/PatUtils/plugins/PATPFJetMETcorrInputProducer.cc 
+>> Compiling edm plugin /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/PhysicsTools/PatUtils/plugins/ShiftedJetProducer.cc 
+>> Compiling edm plugin /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/PhysicsTools/PatUtils/plugins/ShiftedMETcorrInputProducer.cc 
+>> Compiling edm plugin /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/PhysicsTools/PatUtils/plugins/ShiftedPATJetProducer.cc 
+>> Compiling edm plugin /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/PhysicsTools/PatUtils/plugins/ShiftedPATObjectProducer.cc 
+>> Compiling edm plugin /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/PhysicsTools/PatUtils/plugins/ShiftedPFCandidateProducer.cc 
+>> Compiling edm plugin /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/PhysicsTools/PatUtils/plugins/ShiftedPFCandidateProducerForNoPileUpPFMEt.cc 
+>> Compiling edm plugin /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/PhysicsTools/PatUtils/plugins/ShiftedPFCandidateProducerForPFMEtMVA.cc 
+>> Compiling edm plugin /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/PhysicsTools/PatUtils/plugins/ShiftedParticleMETcorrInputProducer.cc 
+>> Compiling edm plugin /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/PhysicsTools/PatUtils/plugins/SmearedJetProducer.cc 
+>> Compiling edm plugin /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/PhysicsTools/PatUtils/plugins/SmearedPATJetProducer.cc 
+>> Compiling  /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/JetMETCorrections/Type1MET/src/METCorrectionAlgorithm.cc 
+>> Compiling  /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/JetMETCorrections/Type1MET/src/TauMETAlgo.cc 
+>> Compiling  /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/JetMETCorrections/Type1MET/src/Type1METAlgo.cc 
+>> Compiling  /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/DataFormats/PatCandidates/test/testKinParametrizations.cc 
+>> Compiling  /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/DataFormats/PatCandidates/test/testKinResolutions.cc 
+>> Compiling  /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/DataFormats/PatCandidates/test/testRunner.cpp 
+>> Compiling edm plugin /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/JetMETCorrections/Type1MET/plugins/CaloJetMETcorrInputProducer.cc 
+>> Compiling edm plugin /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/JetMETCorrections/Type1MET/plugins/CorrectedCaloMETProducer.cc 
+>> Compiling edm plugin /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/JetMETCorrections/Type1MET/plugins/CorrectedCaloMETProducer2.cc 
+>> Compiling edm plugin /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/JetMETCorrections/Type1MET/plugins/CorrectedPFMETProducer.cc 
+>> Compiling edm plugin /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/JetMETCorrections/Type1MET/plugins/CorrectedPFMETProducer2.cc 
+>> Compiling edm plugin /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/JetMETCorrections/Type1MET/plugins/MuonMETcorrInputProducer.cc 
+>> Compiling edm plugin /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/JetMETCorrections/Type1MET/plugins/PFCandMETcorrInputProducer.cc 
+>> Compiling edm plugin /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/JetMETCorrections/Type1MET/plugins/PFJetMETcorrInputProducer.cc 
+>> Compiling edm plugin /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/JetMETCorrections/Type1MET/plugins/PFchsMETcorrInputProducer.cc 
+>> Compiling edm plugin /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/JetMETCorrections/Type1MET/plugins/ScaleCorrMETData.cc 
+>> Compiling edm plugin /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/JetMETCorrections/Type1MET/plugins/SysShiftMETcorrInputProducer.cc 
+>> Compiling edm plugin /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/JetMETCorrections/Type1MET/plugins/TauMET.cc 
+>> Compiling edm plugin /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/JetMETCorrections/Type1MET/plugins/Type0PFMETcorrInputProducer.cc 
+>> Compiling edm plugin /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/JetMETCorrections/Type1MET/plugins/Type1MET.cc 
+>> Compiling edm plugin /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/JetMETCorrections/Type1MET/plugins/Type2CorrectionProducer.cc 
+>> Compiling edm plugin /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/RecoMET/METAnalyzers/src/CSCHaloFilter.cc 
+>> Compiling edm plugin /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/RecoMET/METAnalyzers/src/ExampleAnalyzer.cc 
+>> Compiling edm plugin /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/RecoMET/METAnalyzers/src/HcalNoiseInfoAnalyzer.cc 
+>> Compiling edm plugin /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/RecoParticleFlow/PFProducer/plugins/EFilter.cc 
+>> Compiling edm plugin /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/RecoParticleFlow/PFProducer/plugins/PFBlockProducer.cc 
+>> Compiling edm plugin /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/RecoParticleFlow/PFProducer/plugins/PFCandidateChecker.cc 
+>> Compiling edm plugin /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/RecoParticleFlow/PFProducer/plugins/PFConcretePFCandidateProducer.cc 
+>> Compiling edm plugin /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/RecoParticleFlow/PFProducer/plugins/PFElectronTranslator.cc 
+>> Compiling edm plugin /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/RecoParticleFlow/PFProducer/plugins/PFLinker.cc 
+>> Compiling edm plugin /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/RecoParticleFlow/PFProducer/plugins/PFPhotonTranslator.cc 
+>> Compiling edm plugin /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/RecoParticleFlow/PFProducer/plugins/PFProducer.cc 
+>> Compiling edm plugin /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/RecoParticleFlow/PFProducer/plugins/SealModule.cc 
+>> Compiling  /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/RecoParticleFlow/PFProducer/src/KDTreeLinkerAlgo.cc 
+>> Compiling  /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/RecoParticleFlow/PFProducer/src/KDTreeLinkerBase.cc 
+>> Compiling  /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/RecoParticleFlow/PFProducer/src/KDTreeLinkerPSEcal.cc 
+>> Compiling  /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/RecoParticleFlow/PFProducer/src/KDTreeLinkerTrackEcal.cc 
+>> Compiling  /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/RecoParticleFlow/PFProducer/src/KDTreeLinkerTrackHcal.cc 
+>> Compiling  /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/RecoParticleFlow/PFProducer/src/PFAlgo.cc 
+>> Compiling  /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/RecoParticleFlow/PFProducer/src/PFAlgoTestBenchConversions.cc 
+>> Compiling  /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/RecoParticleFlow/PFProducer/src/PFAlgoTestBenchElectrons.cc 
+>> Compiling  /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/RecoParticleFlow/PFProducer/src/PFBlockAlgo.cc 
+>> Compiling  /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/RecoParticleFlow/PFProducer/src/PFBlockLink.cc 
+>> Compiling  /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/RecoParticleFlow/PFProducer/src/PFCandConnector.cc 
+>> Compiling  /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/RecoParticleFlow/PFProducer/src/PFElectronAlgo.cc 
+>> Compiling  /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/RecoParticleFlow/PFProducer/src/PFMuonAlgo.cc 
+>> Compiling  /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/RecoParticleFlow/PFProducer/src/PFPhotonAlgo.cc 
+>> Compiling  /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/RecoParticleFlow/PFProducer/src/PhotonSelectorAlgo.cc 
+>> Compiling  /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/RecoParticleFlow/PFProducer/src/Utils.cc 
+>> Compiling edm plugin /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/RecoParticleFlow/PFProducer/test/PFSuperClusterReader.cc 
+>> Compiling edm plugin /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/RecoParticleFlow/PFProducer/test/PFIsoReader.cc 
+>> Compiling edm plugin /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/RecoEgamma/EgammaTools/plugins/EGEnergyAnalyzer.cc 
+>> Compiling edm plugin /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/RecoEgamma/EgammaTools/plugins/GBRWrapperMaker.cc 
+>> Compiling edm plugin /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/RecoEgamma/EgammaTools/plugins/PhotonConversionMVAComputerCondUtilities.cc 
+>> Compiling edm plugin /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/RecoEgamma/EgammaTools/plugins/ggPFPhotonAnalyzer.cc 
+>> Compiling  /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/TopQuarkAnalysis/SingleTop/bin/03-tmva-train.cpp 
+>> Compiling edm plugin /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/TopQuarkAnalysis/SingleTop/src/CandOrCounter.cc 
+>> Compiling edm plugin /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/TopQuarkAnalysis/SingleTop/src/CandOrCounterNoOverlap.cc 
+/afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/TopQuarkAnalysis/SingleTop/bin/03-tmva-train.cpp: In function 'int main()':
+/afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/TopQuarkAnalysis/SingleTop/bin/03-tmva-train.cpp:158:9: warning: unused variable 'isW' [-Wunused-variable]
+/afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/TopQuarkAnalysis/SingleTop/bin/03-tmva-train.cpp:67:8: warning: unused variable 'variableList' [-Wunused-variable]
+>> Compiling edm plugin /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/TopQuarkAnalysis/SingleTop/src/EGammaCutBasedEleId_Local.cc 
+>> Compiling edm plugin /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/TopQuarkAnalysis/SingleTop/src/Lumi3DReWeighting.cc 
+>> Compiling edm plugin /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/TopQuarkAnalysis/SingleTop/src/NamedCompositeCandidateBooster.cc 
+>> Compiling edm plugin /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/TopQuarkAnalysis/SingleTop/src/PATBoosters.cc 
+>> Compiling edm plugin /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/TopQuarkAnalysis/SingleTop/src/PDFInfoDumper.cc 
+/afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/TopQuarkAnalysis/SingleTop/src/CandOrCounter.cc: In member function 'virtual bool CandOrCounter::filter(edm::Event&, const edm::EventSetup&)':
+/afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/TopQuarkAnalysis/SingleTop/src/CandOrCounter.cc:37:7: warning: unused variable 'non_overlapping' [-Wunused-variable]
+>> Compiling edm plugin /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/TopQuarkAnalysis/SingleTop/src/ReWeighting.cc 
+>> Compiling edm plugin /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/TopQuarkAnalysis/SingleTop/src/SimpleEventDumper.cc 
+>> Compiling edm plugin /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/TopQuarkAnalysis/SingleTop/src/SingleTopAnalyzer.cc 
+>> Compiling edm plugin /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/TopQuarkAnalysis/SingleTop/src/SingleTopBJetsProducer.cc 
+>> Compiling edm plugin /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/TopQuarkAnalysis/SingleTop/src/SingleTopDoubleCounter.cc 
+>> Compiling edm plugin /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/TopQuarkAnalysis/SingleTop/src/SingleTopDoubleFilter.cc 
+>> Compiling edm plugin /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/TopQuarkAnalysis/SingleTop/src/SingleTopElectronProducer.cc 
+/afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/TopQuarkAnalysis/SingleTop/src/SimpleEventDumper.cc: In member function 'virtual void SimpleEventDumper::analyze(const edm::Event&, const edm::EventSetup&)':
+/afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/TopQuarkAnalysis/SingleTop/src/SimpleEventDumper.cc:543:10: warning: unused variable 'metL5' [-Wunused-variable]
+/afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/TopQuarkAnalysis/SingleTop/src/SimpleEventDumper.cc:544:10: warning: unused variable 'phiL5' [-Wunused-variable]
+/afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/TopQuarkAnalysis/SingleTop/src/SimpleEventDumper.cc:579:10: warning: variable 'met_calo_x' set but not used [-Wunused-but-set-variable]
+/afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/TopQuarkAnalysis/SingleTop/src/SimpleEventDumper.cc:580:10: warning: variable 'met_calo_y' set but not used [-Wunused-but-set-variable]
+/afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/TopQuarkAnalysis/SingleTop/src/SimpleEventDumper.cc: In member function 'double SimpleEventDumper::METfit(double, int)':
+/afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/TopQuarkAnalysis/SingleTop/src/SimpleEventDumper.cc:863:12: warning: variable 'Pxnu' set but not used [-Wunused-but-set-variable]
+>> Compiling edm plugin /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/TopQuarkAnalysis/SingleTop/src/SingleTopGenJetPtEtaProducer.cc 
+>> Compiling edm plugin /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/TopQuarkAnalysis/SingleTop/src/SingleTopJetsProducer.cc 
+>> Compiling edm plugin /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/TopQuarkAnalysis/SingleTop/src/SingleTopLeptonCounter.cc 
+/afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/TopQuarkAnalysis/SingleTop/src/SingleTopJetsProducer.cc:41:61: fatal error: CMGTools/External/interface/PileupJetIdentifier.h: No such file or directory
+compilation terminated.
+>> Compiling edm plugin /afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/TopQuarkAnalysis/SingleTop/src/SingleTopMCProducer.cc 
+/afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/TopQuarkAnalysis/SingleTop/src/SingleTopJetsProducer.cc:41:61: fatal error: CMGTools/External/interface/PileupJetIdentifier.h: No such file or directory
+compilation terminated.
+gmake: *** [tmp/slc5_amd64_gcc462/src/TopQuarkAnalysis/SingleTop/src/TopQuarkAnalysisSingleTop/SingleTopJetsProducer.o] Error 1
+gmake: *** Waiting for unfinished jobs....
+/afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/TopQuarkAnalysis/SingleTop/src/SingleTopMCProducer.cc: In member function 'virtual void SingleTopMCProducer::produce(edm::Event&, const edm::EventSetup&)':
+/afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/TopQuarkAnalysis/SingleTop/src/SingleTopMCProducer.cc:497:8: warning: variable 'isNewPhysics_' set but not used [-Wunused-but-set-variable]
+/afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/TopQuarkAnalysis/SingleTop/src/SingleTopMCProducer.cc:499:20: warning: variable 'top_' set but not used [-Wunused-but-set-variable]
+/afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/TopQuarkAnalysis/SingleTop/src/SingleTopMCProducer.cc:499:32: warning: unused variable 'stop_' [-Wunused-variable]
+/afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/TopQuarkAnalysis/SingleTop/src/SingleTopMCProducer.cc:499:46: warning: variable 'lepton_' set but not used [-Wunused-but-set-variable]
+/afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/TopQuarkAnalysis/SingleTop/src/SingleTopMCProducer.cc:499:61: warning: variable 'quark_' set but not used [-Wunused-but-set-variable]
+/afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/TopQuarkAnalysis/SingleTop/src/SingleTopMCProducer.cc:499:75: warning: variable 'bquark_' set but not used [-Wunused-but-set-variable]
+/afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/TopQuarkAnalysis/SingleTop/src/SingleTopMCProducer.cc:499:89: warning: variable 'bquarkHiggs_' set but not used [-Wunused-but-set-variable]
+/afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/TopQuarkAnalysis/SingleTop/src/SingleTopMCProducer.cc:499:109: warning: unused variable 'gluino_' [-Wunused-variable]
+/afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/TopQuarkAnalysis/SingleTop/src/SingleTopMCProducer.cc:499:124: warning: variable 'neutrino_' set but not used [-Wunused-but-set-variable]
+/afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/TopQuarkAnalysis/SingleTop/src/SingleTopMCProducer.cc:500:20: warning: variable 'W_' set but not used [-Wunused-but-set-variable]
+/afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/TopQuarkAnalysis/SingleTop/src/SingleTopMCProducer.cc:500:30: warning: variable 'quarkBar_' set but not used [-Wunused-but-set-variable]
+/afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/TopQuarkAnalysis/SingleTop/src/SingleTopMCProducer.cc:500:48: warning: variable 'higgs_' set but not used [-Wunused-but-set-variable]
+/afs/cern.ch/work/o/oiorio/git_test/CMSSW_5_3_11_patch6/src/TopQuarkAnalysis/SingleTop/src/SingleTopMCProducer.cc:943:7: warning: label 'reco' defined but not used [-Wunused-label]
+gmake: *** [There are compilation/build errors. Please see the detail log above.] Error 2
