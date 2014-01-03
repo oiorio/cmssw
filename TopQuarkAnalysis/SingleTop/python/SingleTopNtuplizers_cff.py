@@ -113,6 +113,10 @@ nTupleTopJetsPF = cms.EDProducer(
     cms.PSet(
     tag = cms.untracked.string("Smear"),
     quantity = cms.untracked.string("userFloat('jer_smear')")
+    ),
+    cms.PSet(
+    tag = cms.untracked.string("GenPt"),
+    quantity = cms.untracked.string("userFloat('gen_pt')")
     ), 
    cms.PSet(
     tag = cms.untracked.string("SmearUp"),

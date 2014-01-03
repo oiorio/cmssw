@@ -50,7 +50,7 @@ SingleTopSystematicsTreesDumper::SingleTopSystematicsTreesDumper(const edm::Para
 {
     //MCLightQuarkProducer   = iConfig.getParameter<InputTag>("MCLightQuarkProducer");
     systematics = iConfig.getUntrackedParameter<std::vector<std::string> >("systematics");
-    rate_systematics = iConfig.getUntrackedParameter<std::vector<std::string> >("rateSystematics");
+    //    rate_systematics = iConfig.getUntrackedParameter<std::vector<std::string> >("rateSystematics");
     //Channel information
 
     channelInfo = iConfig.getParameter<edm::ParameterSet>("channelInfo");
@@ -112,7 +112,6 @@ SingleTopSystematicsTreesDumper::SingleTopSystematicsTreesDumper(const edm::Para
 
 
     //Jets
-
     jetsEta_ =  iConfig.getParameter< edm::InputTag >("jetsEta");
     jetsPt_ =  iConfig.getParameter< edm::InputTag >("jetsPt");
     jetsPhi_ =  iConfig.getParameter< edm::InputTag >("jetsPhi");
@@ -125,33 +124,44 @@ SingleTopSystematicsTreesDumper::SingleTopSystematicsTreesDumper(const edm::Para
     
     jetsBTagAlgo_ =  iConfig.getParameter< edm::InputTag >("jetsBTagAlgo");
     jetsAntiBTagAlgo_ =  iConfig.getParameter< edm::InputTag >("jetsAntiBTagAlgo");
-
+    
     jetsPileUpID_ =  iConfig.getParameter< edm::InputTag >("jetsPileUpDiscr");
     jetsPileUpWP_ =  iConfig.getParameter< edm::InputTag >("jetsPileUpWP");
-
+    
     jetsBeta_ =  iConfig.getParameter< edm::InputTag >("jetsBeta");
     jetsDZ_ =  iConfig.getParameter< edm::InputTag >("jetsDZ");
     jetsRMS_ =  iConfig.getParameter< edm::InputTag >("jetsRMS");
 
     jetsFlavour_ =  iConfig.getParameter< edm::InputTag >("jetsFlavour");
 
-    genJetsPt_  = iConfig.getParameter< edm::InputTag >("genJetsPt");
-    genJetsEta_  = iConfig.getParameter< edm::InputTag >("genJetsEta");
-
-    genAllJetsPt_  = iConfig.getParameter< edm::InputTag >("genAllJetsPt");
-    genAllJetsEta_  = iConfig.getParameter< edm::InputTag >("genAllJetsEta");
-
-
     METPhi_ =  iConfig.getParameter< edm::InputTag >("METPhi");
     METPt_ =  iConfig.getParameter< edm::InputTag >("METPt");
 
-    UnclMETPx_ =  iConfig.getParameter< edm::InputTag >("UnclusteredMETPx");
-    UnclMETPy_ =  iConfig.getParameter< edm::InputTag >("UnclusteredMETPy");
+    UnclUpMETPhi_ =  iConfig.getParameter< edm::InputTag >("UnclUpMETPhi");
+    UnclUpMETPt_ =  iConfig.getParameter< edm::InputTag >("UnclUpMETPt");
+
+    UnclDownMETPhi_ =  iConfig.getParameter< edm::InputTag >("UnclDownMETPhi");
+    UnclDownMETPt_ =  iConfig.getParameter< edm::InputTag >("UnclDownMETPt");
+
+    JESUpMETPhi_ =  iConfig.getParameter< edm::InputTag >("JESUpMETPhi");
+    JESUpMETPt_ =  iConfig.getParameter< edm::InputTag >("JESUpMETPt");
+
+    JESDownMETPhi_ =  iConfig.getParameter< edm::InputTag >("JESDownMETPhi");
+    JESDownMETPt_ =  iConfig.getParameter< edm::InputTag >("JESDownMETPt");
+
+
+    JERUpMETPhi_ =  iConfig.getParameter< edm::InputTag >("JERUpMETPhi");
+    JERUpMETPt_ =  iConfig.getParameter< edm::InputTag >("JERUpMETPt");
+
+    JERDownMETPhi_ =  iConfig.getParameter< edm::InputTag >("JERDownMETPhi");
+    JERDownMETPt_ =  iConfig.getParameter< edm::InputTag >("JERDownMETPt");
+
+
+
 
 
     jetsCorrTotal_ =  iConfig.getParameter< edm::InputTag >("jetsCorrTotal");
 
-    doBScan_  =  iConfig.getUntrackedParameter< bool >("doBScan", false);
     doQCD_  =  iConfig.getUntrackedParameter< bool >("doQCD", true);
 
     doPDF_  =  iConfig.getUntrackedParameter< bool >("doPDF", true);
@@ -184,7 +194,6 @@ SingleTopSystematicsTreesDumper::SingleTopSystematicsTreesDumper(const edm::Para
 
     doPU_ = iConfig.getUntrackedParameter< bool >("doPU", false);
     doResol_ = iConfig.getUntrackedParameter< bool >("doResol", false);
-    doTurnOn_ = iConfig.getUntrackedParameter< bool >("doTurnOn", true);
 
     doReCorrection_ = iConfig.getUntrackedParameter< bool >("doReCorrection", false);
     dataPUFile_ =  channelInfo.getUntrackedParameter< std::string >("Season", "SummerMean11");
@@ -311,18 +320,9 @@ SingleTopSystematicsTreesDumper::SingleTopSystematicsTreesDumper(const edm::Para
     TFileDirectory SingleTopSystematics = fs->mkdir( "systematics_histograms" );
     TFileDirectory SingleTopTrees = fs->mkdir( "systematics_trees" );
     
-    
-    for (size_t i = 0; i < rate_systematics.size(); ++i)
-    {
-      all_syst.push_back(rate_systematics.at(i));
-    }
-
-
     for (size_t i = 0; i < all_syst.size(); ++i)
     {
-
-
-        string syst = all_syst[i];
+      string syst = all_syst[i];
 
         if (doJetTrees_)
         {
@@ -360,15 +360,11 @@ SingleTopSystematicsTreesDumper::SingleTopSystematicsTreesDumper(const edm::Para
             treesNJets[syst]->Branch("w1CSVL", &w1CSVM);
             treesNJets[syst]->Branch("w2CSVL", &w2CSVM);
             treesNJets[syst]->Branch("PUWeight", &PUWeightTree);
-            treesNJets[syst]->Branch("turnOnWeight", &turnOnWeightTree);
-            treesNJets[syst]->Branch("turnOnReWeight", &turnOnReWeightTree);
             treesNJets[syst]->Branch("leptonPt", &lepPt);
             treesNJets[syst]->Branch("leptonEta", &lepEta);
             treesNJets[syst]->Branch("leptonPhi", &lepPhi);
             treesNJets[syst]->Branch("leptonDeltaCorrectedRelIso", &lepDeltaCorrectedRelIso);
             treesNJets[syst]->Branch("leptonRhoCorrectedRelIso", &lepRhoCorrectedRelIso);
-            treesNJets[syst]->Branch("leptonEff", &lepEff);
-            treesNJets[syst]->Branch("leptonEffB", &lepEffB);
             treesNJets[syst]->Branch("leptonSF", &lepSF);
             treesNJets[syst]->Branch("leptonSFB", &lepSFB);
             treesNJets[syst]->Branch("leptonSFC", &lepSFC);
@@ -478,38 +474,12 @@ SingleTopSystematicsTreesDumper::SingleTopSystematicsTreesDumper(const edm::Para
             trees2J[bj][syst]->Branch("PUWeightPUUp", &PUWeightTreePUUp);
             trees2J[bj][syst]->Branch("PUWeightPUDown", &PUWeightTreePUDown);
 
-            //Systematics turn on weights
-            trees2J[bj][syst]->Branch("turnOnWeight", &turnOnWeightTree);
-            trees2J[bj][syst]->Branch("turnOnReWeight", &turnOnReWeightTree);
-	    
-            trees2J[bj][syst]->Branch("turnOnWeightJetTrig1Up", &turnOnWeightTreeJetTrig1Up);
-            trees2J[bj][syst]->Branch("turnOnWeightJetTrig1Down", &turnOnWeightTreeJetTrig1Down);
-	    
-            trees2J[bj][syst]->Branch("turnOnWeightJetTrig2Up", &turnOnWeightTreeJetTrig2Up);
-            trees2J[bj][syst]->Branch("turnOnWeightJetTrig2Down", &turnOnWeightTreeJetTrig2Down);
-
-            trees2J[bj][syst]->Branch("turnOnWeightJetTrig3Up", &turnOnWeightTreeJetTrig3Up);
-            trees2J[bj][syst]->Branch("turnOnWeightJetTrig3Down", &turnOnWeightTreeJetTrig3Down);
-
-            trees2J[bj][syst]->Branch("turnOnWeightBTagTrig1Up", &turnOnWeightTreeBTagTrig1Up);
-            trees2J[bj][syst]->Branch("turnOnWeightBTagTrig1Down", &turnOnWeightTreeBTagTrig1Down);
-
-            trees2J[bj][syst]->Branch("turnOnWeightBTagTrig2Up", &turnOnWeightTreeBTagTrig2Up);
-            trees2J[bj][syst]->Branch("turnOnWeightBTagTrig2Down", &turnOnWeightTreeBTagTrig2Down);
-
-            trees2J[bj][syst]->Branch("turnOnWeightBTagTrig3Up", &turnOnWeightTreeBTagTrig3Up);
-            trees2J[bj][syst]->Branch("turnOnWeightBTagTrig3Down", &turnOnWeightTreeBTagTrig3Down);
-
-
             //other observables
             trees2J[bj][syst]->Branch("leptonPt", &lepPt);
             trees2J[bj][syst]->Branch("leptonEta", &lepEta);
             trees2J[bj][syst]->Branch("leptonPhi", &lepPhi);
             trees2J[bj][syst]->Branch("leptonDeltaCorrectedRelIso", &lepDeltaCorrectedRelIso);
             trees2J[bj][syst]->Branch("leptonRhoCorrectedRelIso", &lepRhoCorrectedRelIso);
-
-            trees2J[bj][syst]->Branch("leptonEff", &lepEff);
-            trees2J[bj][syst]->Branch("leptonEffB", &lepEffB);
 
             trees2J[bj][syst]->Branch("leptonSF", &lepSF);
             trees2J[bj][syst]->Branch("leptonSFB", &lepSFB);
@@ -724,7 +694,7 @@ SingleTopSystematicsTreesDumper::SingleTopSystematicsTreesDumper(const edm::Para
 	    
 	    for (int p = 1; p <= 52; ++p)
             {
-                stringstream w_n;
+                 stringstream w_n;
                 w_n << p;
                 trees2J[bj][syst]->Branch(("PDFWeight" + w_n.str()).c_str(), &pdf_weights[p - 1]);
             }
@@ -770,12 +740,10 @@ SingleTopSystematicsTreesDumper::SingleTopSystematicsTreesDumper(const edm::Para
             trees3J[bj][syst]->Branch("leptonDeltaCorrectedRelIso", &lepDeltaCorrectedRelIso);
             trees3J[bj][syst]->Branch("leptonRhoCorrectedRelIso", &lepRhoCorrectedRelIso);
 
-            trees3J[bj][syst]->Branch("leptonEff", &lepEff);
-            trees3J[bj][syst]->Branch("leptonEffB", &lepEffB);
             trees3J[bj][syst]->Branch("leptonSF", &lepSF);
             trees3J[bj][syst]->Branch("leptonSFB", &lepSFB);
             trees3J[bj][syst]->Branch("leptonSFC", &lepSFC);
-	    //            trees3J[bj][syst]->Branch("leptonSFD", &lepSFD);
+	    trees3J[bj][syst]->Branch("leptonSFD", &lepSFD);
 
 
             trees3J[bj][syst]->Branch("fJetPt", &fJetPt);
@@ -865,29 +833,6 @@ SingleTopSystematicsTreesDumper::SingleTopSystematicsTreesDumper(const edm::Para
             trees3J[bj][syst]->Branch("PUWeightPUUp", &PUWeightTreePUUp);
             trees3J[bj][syst]->Branch("PUWeightPUDown", &PUWeightTreePUDown);
 
-            //Systematics turn on weights
-            trees3J[bj][syst]->Branch("turnOnWeight", &turnOnWeightTree);
-            trees3J[bj][syst]->Branch("turnOnReWeight", &turnOnReWeightTree);
-
-            trees3J[bj][syst]->Branch("turnOnWeightJetTrig1Up", &turnOnWeightTreeJetTrig1Up);
-            trees3J[bj][syst]->Branch("turnOnWeightJetTrig1Down", &turnOnWeightTreeJetTrig1Down);
-
-            trees3J[bj][syst]->Branch("turnOnWeightJetTrig2Up", &turnOnWeightTreeJetTrig2Up);
-            trees3J[bj][syst]->Branch("turnOnWeightJetTrig2Down", &turnOnWeightTreeJetTrig2Down);
-
-            trees3J[bj][syst]->Branch("turnOnWeightJetTrig3Up", &turnOnWeightTreeJetTrig3Up);
-            trees3J[bj][syst]->Branch("turnOnWeightJetTrig3Down", &turnOnWeightTreeJetTrig3Down);
-
-
-            trees3J[bj][syst]->Branch("turnOnWeightBTagTrig1Up", &turnOnWeightTreeBTagTrig1Up);
-            trees3J[bj][syst]->Branch("turnOnWeightBTagTrig1Down", &turnOnWeightTreeBTagTrig1Down);
-
-            trees3J[bj][syst]->Branch("turnOnWeightBTagTrig2Up", &turnOnWeightTreeBTagTrig2Up);
-            trees3J[bj][syst]->Branch("turnOnWeightBTagTrig2Down", &turnOnWeightTreeBTagTrig2Down);
-
-            trees3J[bj][syst]->Branch("turnOnWeightBTagTrig3Up", &turnOnWeightTreeBTagTrig3Up);
-            trees3J[bj][syst]->Branch("turnOnWeightBTagTrig3Down", &turnOnWeightTreeBTagTrig3Down);
-
             for (int p = 1; p <= 52; ++p)
             {
                 stringstream w_n;
@@ -975,8 +920,6 @@ SingleTopSystematicsTreesDumper::SingleTopSystematicsTreesDumper(const edm::Para
 	      treesMCTruth->Branch("MCTopW"+num+"DauOneId", &MCTopWsDauOneIdVec[p-1]);
 	      
 	    }
-	  
-	  
 	  for (int p = 1; p <= 12; ++p)
 	    {
 	      stringstream w_n;
@@ -1055,28 +998,14 @@ SingleTopSystematicsTreesDumper::SingleTopSystematicsTreesDumper(const edm::Para
 
 
     //JetResolution part
-    string fileResolName = "Spring10_PtResolution_AK5PF.txt";
-    bool  doGaussianResol = false;
-    //  ptResol = new JetResolution(fileResolName, doGaussianResol);
 
     leptonRelIsoQCDCutUpper = 0.9, leptonRelIsoQCDCutLower = 0.2;
 
-
-    topMassMeas = 172.9;
-
-    InitializeTurnOnReWeight("CentralJet30BTagIP_2ndSF_mu.root");
     //   LHAPDF::initPDFSet(1, "cteq66.LHgrid");
    
     LHAPDF::initPDFSet(1, "CT10.LHgrid");
     LHAPDF::initPDFSet(2, "MSTW2008nlo68cl.LHgrid");
-    //LHAPDF::initPDFSet(3, "MSTW2008nlo68cl.LHgrid");
-    //    LHAPDF::initPDFSet(3, "NNPDF21_100.LHgrid");
-    //  LHAPDF::initPDFSet(4, "HERAPDF01.LHgrid");
-    //    LHAPDF::initPDFSet(4, "GJR08VFnloB.LHgrid");
-    //LHAPDF::initPDFSet(5, "GJR08FFnloE.LHgrid");
-    //LHAPDF::initPDFSet(6, "GJR08FFdis.LHgrid");
-    //LHAPDF::initPDFSet(3, "HERAPDF01.LHgrid");
-    //    //LHAPDF::initPDFSet(7, "Alekhin_100.LHgrid");
+    //    LHAPDF::initPDFSet(3, "CT10.LHgrid");
 
 
     //  //cout<< "I work for now but I do nothing. But again, if you gotta do nothing, you better do it right. To prove my good will I will provide you with somse numbers later."<<endl;
@@ -1086,164 +1015,45 @@ SingleTopSystematicsTreesDumper::SingleTopSystematicsTreesDumper(const edm::Para
 void SingleTopSystematicsTreesDumper::initBranchVars()
 {
 #define INT_NAN 9999
-#define FLOAT_NAN 9999.0
+#define FLOAT_NAN 9999.0  
 #define DOUBLE_NAN 9999.0
 
     //ints
-    chargeTree = INT_NAN;
-    runTree = INT_NAN;
-    lumiTree = INT_NAN;
-    eventTree = INT_NAN;
-    eventFlavourTree = INT_NAN;
-    firstJetFlavourTree = INT_NAN;
-    secondJetFlavourTree = INT_NAN;
-    thirdJetFlavourTree = INT_NAN;
-    nJ = INT_NAN;
-    nJNoPU = INT_NAN;
-    nJCentral = INT_NAN;
-    nJCentralNoPU = INT_NAN;
-    nJForward = INT_NAN;
-    nJForwardNoPU = INT_NAN;
-    nVertices = INT_NAN;
-    npv = INT_NAN;
-    ntchpt_tags = INT_NAN;
-    ncsvt_tags = INT_NAN;
-    ncsvm_tags = INT_NAN;
+    chargeTree = INT_NAN;    runTree = INT_NAN;
+    lumiTree = INT_NAN;    eventTree = INT_NAN;
+    eventFlavourTree = INT_NAN;    firstJetFlavourTree = INT_NAN;
+    secondJetFlavourTree = INT_NAN;    thirdJetFlavourTree = INT_NAN;    nJ = INT_NAN;
+    nJNoPU = INT_NAN;    nJCentral = INT_NAN;    nJCentralNoPU = INT_NAN;
+    nJForward = INT_NAN;    nJForwardNoPU = INT_NAN;    nVertices = INT_NAN;
+    npv = INT_NAN;    ntchpt_tags = INT_NAN;    ncsvt_tags = INT_NAN;    ncsvm_tags = INT_NAN;
 
     //doubles
-    weightTree = DOUBLE_NAN;
-    w1TCHPT = DOUBLE_NAN;
-    w2TCHPT = DOUBLE_NAN;
-    w1CSVT = DOUBLE_NAN;
-    w2CSVT = DOUBLE_NAN;
-    w1CSVM = DOUBLE_NAN;
-    w2CSVM = DOUBLE_NAN;
-    PUWeightTree = DOUBLE_NAN;
-    turnOnWeightTree = DOUBLE_NAN;
-    turnOnReWeightTree = DOUBLE_NAN;
-    lepPt = DOUBLE_NAN;
-    lepEta = DOUBLE_NAN;
-    lepPhi = DOUBLE_NAN;
-    lepDeltaCorrectedRelIso = DOUBLE_NAN;
-    lepRhoCorrectedRelIso = DOUBLE_NAN;
-    lepEff = DOUBLE_NAN;
-    mtwMassTree = DOUBLE_NAN;
-    metPt = DOUBLE_NAN;
-    firstJetPt = DOUBLE_NAN;
-    firstJetEta = DOUBLE_NAN;
-    firstJetPhi = DOUBLE_NAN;
-    firstJetE = DOUBLE_NAN;
-    secondJetPt = DOUBLE_NAN;
-    secondJetEta = DOUBLE_NAN;
-    secondJetPhi = DOUBLE_NAN;
-    secondJetE = DOUBLE_NAN;
-    thirdJetPt = DOUBLE_NAN;
-    thirdJetEta = DOUBLE_NAN;
-    thirdJetPhi = DOUBLE_NAN;
-    thirdJetE = DOUBLE_NAN;
-    bJetPt = DOUBLE_NAN;
-    fJetPt = DOUBLE_NAN;
-    bJetEta = DOUBLE_NAN;
-    fJetEta = DOUBLE_NAN;
-    fJetPUID = DOUBLE_NAN;
+    weightTree = DOUBLE_NAN;    w1TCHPT = DOUBLE_NAN;    w2TCHPT = DOUBLE_NAN;    
+    w1CSVT = DOUBLE_NAN;    w2CSVT = DOUBLE_NAN;    w1CSVM = DOUBLE_NAN;    w2CSVM = DOUBLE_NAN;  
+    PUWeightTree = DOUBLE_NAN;    lepPt = DOUBLE_NAN;    lepEta = DOUBLE_NAN;    lepPhi = DOUBLE_NAN;    lepDeltaCorrectedRelIso = DOUBLE_NAN;
+    lepRhoCorrectedRelIso = DOUBLE_NAN;    mtwMassTree = DOUBLE_NAN;       lepDeltaCorrectedRelIso = DOUBLE_NAN;
+    thirdJetEta = DOUBLE_NAN;    thirdJetPhi = DOUBLE_NAN;    thirdJetE = DOUBLE_NAN;
+    bJetPt = DOUBLE_NAN;    fJetPt = DOUBLE_NAN;    bJetEta = DOUBLE_NAN;    fJetEta = DOUBLE_NAN;    fJetPUID = DOUBLE_NAN;
     fJetPUWP = DOUBLE_NAN;
-    //58 lines
-
-    etaTree = DOUBLE_NAN;
-    cosTree = DOUBLE_NAN;
-    cosBLTree = DOUBLE_NAN;
-    mtwMassTree = DOUBLE_NAN;
-
-    chargeTree = INT_NAN;
-    runTree = INT_NAN;
-    lumiTree = INT_NAN;
-    eventTree = INT_NAN;
-
-    weightTree = DOUBLE_NAN;
-
-    fJetFlavourTree = INT_NAN;
-    bJetFlavourTree = INT_NAN;
-    eventFlavourTree = INT_NAN;
-    nVertices = INT_NAN;
-    npv = INT_NAN;
-    firstJetFlavourTree = INT_NAN;
-    secondJetFlavourTree = INT_NAN;
-    thirdJetFlavourTree = INT_NAN;
-
-    bWeightTreeBTagUp = DOUBLE_NAN;
-    bWeightTreeBTagDown = DOUBLE_NAN;
-    bWeightTreeMisTagUp = DOUBLE_NAN;
-    bWeightTreeMisTagDown = DOUBLE_NAN;
-    PUWeightTree = DOUBLE_NAN;
-    PUWeightTreePUUp = DOUBLE_NAN;
-    PUWeightTreePUDown = DOUBLE_NAN;
-    turnOnWeightTree = DOUBLE_NAN;
-    turnOnReWeightTree = DOUBLE_NAN;
-    turnOnWeightTreeJetTrig1Up = DOUBLE_NAN;
-    turnOnWeightTreeJetTrig1Down = DOUBLE_NAN;
-    turnOnWeightTreeJetTrig2Up = DOUBLE_NAN;
-    turnOnWeightTreeJetTrig2Down = DOUBLE_NAN;
-    turnOnWeightTreeJetTrig3Up = DOUBLE_NAN;
-    turnOnWeightTreeJetTrig3Down = DOUBLE_NAN;
-    turnOnWeightTreeBTagTrig1Up = DOUBLE_NAN;
-    turnOnWeightTreeBTagTrig1Down = DOUBLE_NAN;
-    turnOnWeightTreeBTagTrig2Up = DOUBLE_NAN;
-    turnOnWeightTreeBTagTrig2Down = DOUBLE_NAN;
-    turnOnWeightTreeBTagTrig3Up = DOUBLE_NAN;
-    turnOnWeightTreeBTagTrig3Down = DOUBLE_NAN;
-    lepPt = DOUBLE_NAN;
-    lepEta = DOUBLE_NAN;
-    lepPhi = DOUBLE_NAN;
-    lepDeltaCorrectedRelIso = DOUBLE_NAN;
-    lepRhoCorrectedRelIso = DOUBLE_NAN;
-    lepEff = DOUBLE_NAN;
-    lepEffB = DOUBLE_NAN;
-    fJetPt = DOUBLE_NAN;
-    fJetE = DOUBLE_NAN;
-    fJetEta = DOUBLE_NAN;
-    fJetPhi = DOUBLE_NAN;
-    fJetBTag = DOUBLE_NAN;
-    fJetPUID = DOUBLE_NAN;
-    fJetPUWP = DOUBLE_NAN;
-    bJetPt = DOUBLE_NAN;
-    bJetE = DOUBLE_NAN;
-    bJetEta = DOUBLE_NAN;
-    bJetPhi = DOUBLE_NAN;
-    bJetBTag = DOUBLE_NAN;
-    bJetPUID = DOUBLE_NAN;
-    bJetPUWP = DOUBLE_NAN;
-    firstJetPt = DOUBLE_NAN;
-    firstJetEta = DOUBLE_NAN;
-    firstJetPhi = DOUBLE_NAN;
-    firstJetE = DOUBLE_NAN;
-    secondJetPt = DOUBLE_NAN;
-    secondJetEta = DOUBLE_NAN;
-    secondJetPhi = DOUBLE_NAN;
-    secondJetE = DOUBLE_NAN;
-    thirdJetPt = DOUBLE_NAN;
-    thirdJetEta = DOUBLE_NAN;
-    thirdJetPhi = DOUBLE_NAN;
-    thirdJetE = DOUBLE_NAN;
-    metPt = DOUBLE_NAN;
-    metPhi = DOUBLE_NAN;
-    topMassTree = DOUBLE_NAN;
-    topMtwTree = DOUBLE_NAN;
-    topPt = DOUBLE_NAN;
-    topPhi = DOUBLE_NAN;
-    topEta = DOUBLE_NAN;
-    topE = DOUBLE_NAN;
+    etaTree = DOUBLE_NAN;    cosTree = DOUBLE_NAN;    cosBLTree = DOUBLE_NAN;    mtwMassTree = DOUBLE_NAN;
+    chargeTree = INT_NAN;    runTree = INT_NAN;    lumiTree = INT_NAN;    eventTree = INT_NAN;
+    weightTree = DOUBLE_NAN;    fJetFlavourTree = INT_NAN;    bJetFlavourTree = INT_NAN;    eventFlavourTree = INT_NAN;    nVertices = INT_NAN;
+    npv = INT_NAN;    firstJetFlavourTree = INT_NAN;    secondJetFlavourTree = INT_NAN;    thirdJetFlavourTree = INT_NAN;
+    bWeightTreeBTagUp = DOUBLE_NAN;    bWeightTreeBTagDown = DOUBLE_NAN;    bWeightTreeMisTagUp = DOUBLE_NAN;    bWeightTreeMisTagDown = DOUBLE_NAN;
+    PUWeightTree = DOUBLE_NAN;    PUWeightTreePUUp = DOUBLE_NAN;    PUWeightTreePUDown = DOUBLE_NAN;
+    fJetPt = DOUBLE_NAN;    fJetE = DOUBLE_NAN;    fJetEta = DOUBLE_NAN;    fJetPhi = DOUBLE_NAN;    fJetBTag = DOUBLE_NAN;
+    fJetPUID = DOUBLE_NAN;    fJetPUWP = DOUBLE_NAN;
+    bJetPt = DOUBLE_NAN;    bJetE = DOUBLE_NAN;    bJetEta = DOUBLE_NAN;    bJetPhi = DOUBLE_NAN;    bJetBTag = DOUBLE_NAN;
+    bJetPUID = DOUBLE_NAN;    bJetPUWP = DOUBLE_NAN;
+    firstJetPt = DOUBLE_NAN;    firstJetEta = DOUBLE_NAN;    firstJetPhi = DOUBLE_NAN;    firstJetE = DOUBLE_NAN;
+    secondJetPt = DOUBLE_NAN;    secondJetEta = DOUBLE_NAN;    secondJetPhi = DOUBLE_NAN;    secondJetE = DOUBLE_NAN;
+    thirdJetPt = DOUBLE_NAN;    thirdJetEta = DOUBLE_NAN;    thirdJetPhi = DOUBLE_NAN;    thirdJetE = DOUBLE_NAN;
+    metPt = DOUBLE_NAN;    metPhi = DOUBLE_NAN;
+    topMassTree = DOUBLE_NAN;    topMtwTree = DOUBLE_NAN;    topPt = DOUBLE_NAN;    topPhi = DOUBLE_NAN;    topEta = DOUBLE_NAN;    topE = DOUBLE_NAN;
     electronID = DOUBLE_NAN;
-    totalEnergy = DOUBLE_NAN;
-    totalMomentum = DOUBLE_NAN;
-    lowBTagTree = DOUBLE_NAN;
-    highBTagTree = DOUBLE_NAN;
+    totalEnergy = DOUBLE_NAN;    totalMomentum = DOUBLE_NAN;    lowBTagTree = DOUBLE_NAN;    highBTagTree = DOUBLE_NAN;
 
-    pdf_weights_mstw =FLOAT_NAN;
-    pdf_weights_nnpdf21=FLOAT_NAN;
-    pdf_weights_gjr_ff=FLOAT_NAN;
-    pdf_weights_gjr_fv=FLOAT_NAN;
-    pdf_weights_gjr_fdis=FLOAT_NAN;
-    pdf_weights_alekhin=FLOAT_NAN;
+    pdf_weights_mstw =FLOAT_NAN;    pdf_weights_nnpdf21=FLOAT_NAN;    pdf_weights_gjr_ff=FLOAT_NAN;    pdf_weights_gjr_fv=FLOAT_NAN;    pdf_weights_gjr_fdis=FLOAT_NAN;    pdf_weights_alekhin=FLOAT_NAN;
 
 
     for (int i = 0; i < 52; i++)
@@ -1253,11 +1063,11 @@ void SingleTopSystematicsTreesDumper::initBranchVars()
 
 }
 
+////Beginning of main per-event loop
 void SingleTopSystematicsTreesDumper::analyze(const Event &iEvent, const EventSetup &iSetup)
 {
 
     initBranchVars();
-
     //cout <<" test 1 "<<endl;
     iEvent.getByLabel(jetsEta_, jetsEta);
     iEvent.getByLabel(jetsPt_, jetsPt);
@@ -1265,19 +1075,6 @@ void SingleTopSystematicsTreesDumper::analyze(const Event &iEvent, const EventSe
     //    if (jetsPt->size() > 22 )return; //Crazy events with huge jet multiplicity in mc
     //if (jetsPt->size() > 20 && channel != "Data")return; //Crazy events with huge jet multiplicity in mc
     iEvent.getByLabel(jetsPhi_, jetsPhi);
-
-    if (isFirstEvent && takeBTagSFFromDB_)
-    {
-        //cout <<  "isfirst " << endl;
-        iSetup.get<BTagPerformanceRecord>().get("MISTAGTCHPT", perfMHP);
-        iSetup.get<BTagPerformanceRecord>().get("MISTAGTCHPM", perfMHPM);
-        iSetup.get<BTagPerformanceRecord>().get("MISTAGTCHEL", perfMHE);
-
-        iSetup.get<BTagPerformanceRecord>().get("BTAGTCHPM", perfBHPM);
-        iSetup.get<BTagPerformanceRecord>().get("BTAGTCHPT", perfBHP);
-        iSetup.get<BTagPerformanceRecord>().get("BTAGTCHEL", perfBHE);
-        isFirstEvent = false;
-    }
 
     gotLeptons = 0;
     gotPV = 0;
@@ -1321,17 +1118,16 @@ void SingleTopSystematicsTreesDumper::analyze(const Event &iEvent, const EventSe
     double PUWeight = 1;
     double PUWeightNoSyst = 1;
     double bWeightNoSyst = 1;
-    double turnOnWeightValueNoSyst = 1;
-    double turnOnReWeightTreeNoSyst = 1;
-
-    BinningPointByMap measurePoint;
 
     float metPx = 0;
     float metPy = 0;
 
-    metPx = METPt->at(0) * cos(METPhi->at(0));
-    metPy = METPt->at(0) * sin(METPhi->at(0));
+    //    metPx = METPt->at(0) * cos(METPhi->at(0));
+    //metPy = METPt->at(0) * sin(METPhi->at(0));
 
+    float metPtNom =0;
+    float metPhiNom =0;
+    
     float metPxTmp = metPx;
     float metPyTmp = metPy;
 
@@ -1401,308 +1197,14 @@ void SingleTopSystematicsTreesDumper::analyze(const Event &iEvent, const EventSe
                                   || syst_name == "JERUp" || syst_name == "JERDown"
                                  ) && channel != "Data"
                                 );
-
-
-
-	if( syst == "noSyst" && doMCTruth_ && doFullMCTruth_){
-	  	      iEvent.getByLabel(MCTopQuarksEta_, MCTopQuarksEta); iEvent.getByLabel(MCTopQuarksPt_, MCTopQuarksPt); iEvent.getByLabel(MCTopQuarksPhi_, MCTopQuarksPhi); iEvent.getByLabel(MCTopQuarksEnergy_, MCTopQuarksEnergy); iEvent.getByLabel(MCTopQuarksMotherId_, MCTopQuarksMotherId);
-
-	      iEvent.getByLabel(MCTopQuarkBarsEta_, MCTopQuarkBarsEta); iEvent.getByLabel(MCTopQuarkBarsPt_, MCTopQuarkBarsPt); iEvent.getByLabel(MCTopQuarkBarsPhi_, MCTopQuarkBarsPhi); iEvent.getByLabel(MCTopQuarkBarsEnergy_, MCTopQuarkBarsEnergy); iEvent.getByLabel(MCTopQuarkBarsMotherId_, MCTopQuarkBarsMotherId);
-
-	      iEvent.getByLabel(MCTopLeptonsEta_, MCTopLeptonsEta); iEvent.getByLabel(MCTopLeptonsPt_, MCTopLeptonsPt); iEvent.getByLabel(MCTopLeptonsPhi_, MCTopLeptonsPhi); iEvent.getByLabel(MCTopLeptonsEnergy_, MCTopLeptonsEnergy); iEvent.getByLabel(MCTopLeptonsMotherId_, MCTopLeptonsMotherId);
-
-	      iEvent.getByLabel(MCTopNeutrinosEta_, MCTopNeutrinosEta); iEvent.getByLabel(MCTopNeutrinosPt_, MCTopNeutrinosPt); iEvent.getByLabel(MCTopNeutrinosPhi_, MCTopNeutrinosPhi); iEvent.getByLabel(MCTopNeutrinosEnergy_, MCTopNeutrinosEnergy); iEvent.getByLabel(MCTopNeutrinosMotherId_, MCTopNeutrinosMotherId);
-
-	      iEvent.getByLabel(MCTopBQuarksEta_, MCTopBQuarksEta); iEvent.getByLabel(MCTopBQuarksPt_, MCTopBQuarksPt); iEvent.getByLabel(MCTopBQuarksPhi_, MCTopBQuarksPhi); iEvent.getByLabel(MCTopBQuarksEnergy_, MCTopBQuarksEnergy); iEvent.getByLabel(MCTopBQuarksMotherId_, MCTopBQuarksMotherId);
-
-	      iEvent.getByLabel(MCTopWsEta_, MCTopWsEta); iEvent.getByLabel(MCTopWsPt_, MCTopWsPt); iEvent.getByLabel(MCTopWsPhi_, MCTopWsPhi); iEvent.getByLabel(MCTopWsEnergy_, MCTopWsEnergy); iEvent.getByLabel(MCTopWsDauOneId_, MCTopWsDauOneId);
-
-
-	      
-	      iEvent.getByLabel(MCLeptonsEta_, MCLeptonsEta); iEvent.getByLabel(MCLeptonsPt_, MCLeptonsPt); iEvent.getByLabel(MCLeptonsPhi_, MCLeptonsPhi); iEvent.getByLabel(MCLeptonsEnergy_, MCLeptonsEnergy);
-	      iEvent.getByLabel(MCNeutrinosEta_, MCNeutrinosEta); iEvent.getByLabel(MCNeutrinosPt_, MCNeutrinosPt); iEvent.getByLabel(MCNeutrinosPhi_, MCNeutrinosPhi); iEvent.getByLabel(MCNeutrinosEnergy_, MCNeutrinosEnergy);
-	      iEvent.getByLabel(MCBQuarksEta_, MCBQuarksEta); iEvent.getByLabel(MCBQuarksPt_, MCBQuarksPt); iEvent.getByLabel(MCBQuarksPhi_, MCBQuarksPhi); iEvent.getByLabel(MCBQuarksEnergy_, MCBQuarksEnergy);
-	      iEvent.getByLabel(MCQuarksEta_, MCQuarksEta); iEvent.getByLabel(MCQuarksPt_, MCQuarksPt); iEvent.getByLabel(MCQuarksPhi_, MCQuarksPhi); iEvent.getByLabel(MCQuarksEnergy_, MCQuarksEnergy);
-	      
-	      iEvent.getByLabel(MCTopBQuarksPdgId_, MCTopBQuarksPdgId);iEvent.getByLabel(MCTopWsPdgId_, MCTopWsPdgId);
-	      iEvent.getByLabel(MCTopQuarksPdgId_, MCTopQuarksPdgId);iEvent.getByLabel(MCTopsPdgId_, MCTopsPdgId);
-	      iEvent.getByLabel(MCTopQuarkBarsPdgId_, MCTopQuarkBarsPdgId);
-	      iEvent.getByLabel(MCTopLeptonsPdgId_, MCTopLeptonsPdgId);
-	      iEvent.getByLabel(MCTopNeutrinosPdgId_, MCTopNeutrinosPdgId);
-	      
-	      iEvent.getByLabel(MCBQuarksPdgId_, MCBQuarksPdgId); iEvent.getByLabel(MCQuarksPdgId_, MCQuarksPdgId);
-	      iEvent.getByLabel(MCLeptonsPdgId_, MCLeptonsPdgId); iEvent.getByLabel(MCNeutrinosPdgId_, MCNeutrinosPdgId);
-
-	      iEvent.getByLabel(MCBQuarksMotherId_, MCBQuarksMotherId); iEvent.getByLabel(MCQuarksMotherId_, MCQuarksMotherId);
-	      iEvent.getByLabel(MCLeptonsMotherId_, MCLeptonsMotherId); iEvent.getByLabel(MCNeutrinosMotherId_, MCNeutrinosMotherId);
-	      
-	      for (size_t p = 1; p <= 12; ++p){
-
-		if(!(MCQuarksEta->size() < p) ){
-		  MCQuarksEtaVec[p-1]=MCQuarksEta->at(p-1);
-		  MCQuarksPhiVec[p-1]=MCQuarksPhi->at(p-1);
-		  MCQuarksPtVec[p-1]=MCQuarksPt->at(p-1);
-		  MCQuarksEnergyVec[p-1]=MCQuarksEnergy->at(p-1);
-		  MCQuarksPdgIdVec[p-1]=MCQuarksPdgId->at(p-1);
-		  MCQuarksMotherIdVec[p-1]=MCQuarksMotherId->at(p-1);
-		}
-		else{
-		  MCQuarksEtaVec[p-1]=-999;
-		  MCQuarksPhiVec[p-1]=-999;
-		  MCQuarksPtVec[p-1]=-999;
-		  MCQuarksEnergyVec[p-1]=-999;
-		  MCQuarksPdgIdVec[p-1]=-999;
-		  MCQuarksMotherIdVec[p-1]=-999;
-		}
-	      }
-	      for (size_t p = 1; p <= 4; ++p){
-		if(!(MCLeptonsEta->size() < p) ){
-		  MCLeptonsEtaVec[p-1]=MCLeptonsEta->at(p-1);
-		  MCLeptonsPhiVec[p-1]=MCLeptonsPhi->at(p-1);
-		  MCLeptonsPtVec[p-1]=MCLeptonsPt->at(p-1);
-		  MCLeptonsEnergyVec[p-1]=MCLeptonsEnergy->at(p-1);
-		  MCLeptonsPdgIdVec[p-1]=MCLeptonsPdgId->at(p-1);
-		  MCLeptonsMotherIdVec[p-1]=MCLeptonsMotherId->at(p-1);
-
-		}
-		else{
-		  MCLeptonsEtaVec[p-1]=-999;
-		  MCLeptonsPhiVec[p-1]=-999;
-		  MCLeptonsPtVec[p-1]=-999;
-		  MCLeptonsEnergyVec[p-1]=-999;
-		  MCLeptonsPdgIdVec[p-1]=-999;
-		  MCLeptonsMotherIdVec[p-1]=-999;
-		  
-		}
-		if(!(MCBQuarksEta->size() < p) ){
-		  MCBQuarksEtaVec[p-1]=MCBQuarksEta->at(p-1);
-		  MCBQuarksPhiVec[p-1]=MCBQuarksPhi->at(p-1);
-		  MCBQuarksPtVec[p-1]=MCBQuarksPt->at(p-1);
-		  MCBQuarksEnergyVec[p-1]=MCBQuarksEnergy->at(p-1);
-		  MCBQuarksPdgIdVec[p-1]=MCBQuarksPdgId->at(p-1);
-		  MCBQuarksMotherIdVec[p-1]=MCBQuarksMotherId->at(p-1);
-		}
-		else{
-		  MCBQuarksEtaVec[p-1]=-999;
-		  MCBQuarksPhiVec[p-1]=-999;
-		  MCBQuarksPtVec[p-1]=-999;
-		  MCBQuarksEnergyVec[p-1]=-999;
-		  MCBQuarksPdgIdVec[p-1]=-999;
-		  MCBQuarksMotherIdVec[p-1]=-999;
-		}
-		if(!(MCNeutrinosEta->size() < p) ){
-		  MCNeutrinosEtaVec[p-1]=MCNeutrinosEta->at(p-1);
-		  MCNeutrinosPhiVec[p-1]=MCNeutrinosPhi->at(p-1);
-		  MCNeutrinosPtVec[p-1]=MCNeutrinosPt->at(p-1);
-		  MCNeutrinosEnergyVec[p-1]=MCNeutrinosEnergy->at(p-1);
-		  MCNeutrinosPdgIdVec[p-1]=MCNeutrinosPdgId->at(p-1);
-		  MCNeutrinosMotherIdVec[p-1]=MCNeutrinosMotherId->at(p-1);
-		}
-		else{
-		  MCNeutrinosEtaVec[p-1]=-999;
-		  MCNeutrinosPhiVec[p-1]=-999;
-		  MCNeutrinosPtVec[p-1]=-999;
-		  MCNeutrinosEnergyVec[p-1]=-999;
-		  MCNeutrinosPdgIdVec[p-1]=-999;
-		  MCNeutrinosMotherIdVec[p-1]=-999;
-		}
-	      }
-	      
-	      nMCTruthLeptons = 0;
 	
-	      for (size_t p = 1; p <= 2; ++p){
-		
-		bool isLeptonic = false;
-		bool isHadronic = false;
-		
-		
-		size_t position = 0;
-		
-		if(isSingleTopCompHEP_){
-		  if (MCTopLeptonsEta->size() < p)continue;
-		  position = p;
-		  MCTopLeptonsEtaVec[p-1]=MCTopLeptonsEta->at(position-1);
-		  MCTopLeptonsPhiVec[p-1]=MCTopLeptonsPhi->at(position-1);
-		  MCTopLeptonsPtVec[p-1]=MCTopLeptonsPt->at(position-1);
-		  MCTopLeptonsEnergyVec[p-1]=MCTopLeptonsEnergy->at(position-1);
-		  MCTopLeptonsPdgIdVec[p-1]=MCTopLeptonsPdgId->at(position-1);
-		  MCTopLeptonsMotherIdVec[p-1]=MCTopLeptonsMotherId->at(position-1);
-		  
-		  MCTopNeutrinosEtaVec[p-1]=MCTopNeutrinosEta->at(position-1);
-		  MCTopNeutrinosPhiVec[p-1]=MCTopNeutrinosPhi->at(position-1);
-		  MCTopNeutrinosPtVec[p-1]=MCTopNeutrinosPt->at(position-1);
-		  MCTopNeutrinosEnergyVec[p-1]=MCTopNeutrinosEnergy->at(position-1);
-		  MCTopNeutrinosPdgIdVec[p-1]=MCTopNeutrinosPdgId->at(position-1);
-		  MCTopNeutrinosMotherIdVec[p-1]=MCTopNeutrinosMotherId->at(position-1);
-
-		  if(!(MCTopBQuarksEta->size() < p) ){
-		    MCTopBQuarksEtaVec[p-1]=MCTopBQuarksEta->at(p-1);
-		    MCTopBQuarksPhiVec[p-1]=MCTopBQuarksPhi->at(p-1);
-		    MCTopBQuarksPtVec[p-1]=MCTopBQuarksPt->at(p-1);
-		    MCTopBQuarksEnergyVec[p-1]=MCTopBQuarksEnergy->at(p-1);
-		    MCTopBQuarksPdgIdVec[p-1]=MCTopBQuarksPdgId->at(p-1);
-		    MCTopBQuarksMotherIdVec[p-1]=MCTopBQuarksMotherId->at(p-1);
-		  }
-		  
-
-		}
-		else{
-		  if (MCTopWsEta->size() < p)continue;
-		  if(MCTopNeutrinosEta->size()!=MCTopLeptonsEta->size())continue;
-		  if(MCTopQuarksEta->size()!=MCTopQuarkBarsEta->size())continue;
-		  
-		  for (size_t l = 1; l <= MCTopQuarksEta->size();++l ){
-		    
-		    cout << " quark id "<<   MCTopQuarksPdgId->at(l-1) << " quarkbar id "<< MCTopQuarkBarsPdgId->at(l-1) <<
-		      " W dau one id "<< MCTopWsDauOneId->at(p-1) << endl;
-		    
-		    cout  << " quark mother id "<<  MCTopQuarksMotherId->at(l-1) << " quarkbar id "<< MCTopQuarkBarsMotherId->at(l-1) << 
-		      " W  id "<< MCTopWsPdgId->at(p-1) << endl;
-		    if(  MCTopQuarksPdgId->at(l-1) == MCTopWsDauOneId->at(p-1) ||  MCTopQuarkBarsPdgId->at(l-1) == MCTopWsDauOneId->at(p-1) ){
-		      position = l;
-		      isHadronic = true;
-		    }
-		  }
-		  for (size_t l = 1; l <= MCTopLeptonsEta->size();++l ){
-		    
-		    cout << " lepton id "<<  MCTopLeptonsPdgId->at(l-1) << " neutrino id "<< MCTopNeutrinosPdgId->at(l-1)<< 
-		      " W dau one id "<< MCTopWsDauOneId->at(p-1) << endl;
-		    
-		    cout << " lepton mother id "<<  MCTopLeptonsMotherId->at(l-1) << " neutrino id "<< MCTopNeutrinosMotherId->at(l-1) << 
-		      " W  id "<< MCTopWsPdgId->at(p-1) << endl;
-		    
-		    if(  MCTopLeptonsPdgId->at(l-1) == MCTopWsDauOneId->at(p-1) ||  MCTopNeutrinosPdgId->at(l-1) == MCTopWsDauOneId->at(p-1) ){
-		      position = l;
-		      ++nMCTruthLeptons;
-		      isLeptonic = true;
-		    }
-		  }
-		  
-		  
-		  cout <<" pos "<<  position <<"  islep "<<  isLeptonic<< " lep size "<< MCTopLeptonsEta->size()<< " neu size "<< MCTopNeutrinosEta->size()<< endl;
-		  cout <<" pos "<<  position <<"  ishad "<<  isHadronic<< " quark size"<< MCTopQuarksEta->size()<< " qbar size "<< MCTopQuarkBarsEta->size()<< endl;
-		  if(isLeptonic){
-		    MCTopLeptonsEtaVec[p-1]=MCTopLeptonsEta->at(position-1);
-		    MCTopLeptonsPhiVec[p-1]=MCTopLeptonsPhi->at(position-1);
-		    MCTopLeptonsPtVec[p-1]=MCTopLeptonsPt->at(position-1);
-		    MCTopLeptonsEnergyVec[p-1]=MCTopLeptonsEnergy->at(position-1);
-		    MCTopLeptonsPdgIdVec[p-1]=MCTopLeptonsPdgId->at(position-1);
-		    MCTopLeptonsMotherIdVec[p-1]=MCTopLeptonsMotherId->at(position-1);
-		    
-		    MCTopNeutrinosEtaVec[p-1]=MCTopNeutrinosEta->at(position-1);
-		    MCTopNeutrinosPhiVec[p-1]=MCTopNeutrinosPhi->at(position-1);
-		    MCTopNeutrinosPtVec[p-1]=MCTopNeutrinosPt->at(position-1);
-		    MCTopNeutrinosEnergyVec[p-1]=MCTopNeutrinosEnergy->at(position-1);
-		    MCTopNeutrinosPdgIdVec[p-1]=MCTopNeutrinosPdgId->at(position-1);
-		    MCTopNeutrinosMotherIdVec[p-1]=MCTopNeutrinosMotherId->at(position-1);
-		    
-		  }
-		  else{
-		    MCTopLeptonsEtaVec[p-1]=-999;
-		    MCTopLeptonsPhiVec[p-1]=-999;
-		    MCTopLeptonsPtVec[p-1]=-999;
-		    MCTopLeptonsEnergyVec[p-1]=-999;
-		    MCTopLeptonsPdgIdVec[p-1]=-999;
-		    MCTopLeptonsMotherIdVec[p-1]=-999;
-		    
-		    MCTopNeutrinosEtaVec[p-1]=-999;
-		    MCTopNeutrinosPhiVec[p-1]=-999;
-		    MCTopNeutrinosPtVec[p-1]=-999;
-		    MCTopNeutrinosEnergyVec[p-1]=-999;
-		    MCTopNeutrinosPdgIdVec[p-1]=-999;
-		    MCTopNeutrinosMotherIdVec[p-1]=-999;
-		  }
-		  if(isHadronic){
-		    
-		    MCTopQuarksEtaVec[p-1]=MCTopQuarksEta->at(position-1);
-		    MCTopQuarksPhiVec[p-1]=MCTopQuarksPhi->at(position-1);
-		    MCTopQuarksPtVec[p-1]=MCTopQuarksPt->at(position-1);
-		    MCTopQuarksEnergyVec[p-1]=MCTopQuarksEnergy->at(position-1);
-		    MCTopQuarksPdgIdVec[p-1]=MCTopQuarksPdgId->at(position-1);
-		    MCTopQuarksMotherIdVec[p-1]=MCTopQuarksMotherId->at(position-1);
-		    
-		    MCTopQuarkBarsEtaVec[p-1]=MCTopQuarkBarsEta->at(position-1);
-		    MCTopQuarkBarsPhiVec[p-1]=MCTopQuarkBarsPhi->at(position-1);
-		    MCTopQuarkBarsPtVec[p-1]=MCTopQuarkBarsPt->at(position-1);
-		    MCTopQuarkBarsEnergyVec[p-1]=MCTopQuarkBarsEnergy->at(position-1);
-		    MCTopQuarkBarsPdgIdVec[p-1]=MCTopQuarkBarsPdgId->at(position-1);
-		    MCTopQuarkBarsMotherIdVec[p-1]=MCTopQuarkBarsMotherId->at(position-1);
-		    
-		  }
-		  else{
-		    MCTopQuarksEtaVec[p-1]=-999;
-		    MCTopQuarksPhiVec[p-1]=-999;
-		    MCTopQuarksPtVec[p-1]=-999;
-		    MCTopQuarksEnergyVec[p-1]=-999;
-		    MCTopQuarksPdgIdVec[p-1]=-999;
-		    MCTopQuarksMotherIdVec[p-1]=-999;
-		    
-		    MCTopQuarkBarsEtaVec[p-1]=-999;
-		    MCTopQuarkBarsPhiVec[p-1]=-999;
-		    MCTopQuarkBarsPtVec[p-1]=-999;
-		    MCTopQuarkBarsEnergyVec[p-1]=-999;
-		    MCTopQuarkBarsPdgIdVec[p-1]=-999;
-		    MCTopQuarkBarsMotherIdVec[p-1]=-999;
-		    
-	      }
-		  if(!(MCTopWsEta->size() < p) ){
-		    MCTopWsEtaVec[p-1]=MCTopWsEta->at(p-1);
-		    MCTopWsPhiVec[p-1]=MCTopWsPhi->at(p-1);
-		    MCTopWsPtVec[p-1]=MCTopWsPt->at(p-1);
-		    MCTopWsEnergyVec[p-1]=MCTopWsEnergy->at(p-1);
-		    MCTopWsPdgIdVec[p-1]=MCTopWsPdgId->at(p-1);
-		  }
-		  else{
-		    MCTopWsEtaVec[p-1]=-999;
-		    MCTopWsPhiVec[p-1]=-999;
-		    MCTopWsPtVec[p-1]=-999;
-		    MCTopWsEnergyVec[p-1]=-999;
-		    MCTopWsPdgIdVec[p-1]=-999;
-		  }
-		  if(!(MCTopBQuarksEta->size() < p) ){
-		    MCTopBQuarksEtaVec[p-1]=MCTopBQuarksEta->at(p-1);
-		    MCTopBQuarksPhiVec[p-1]=MCTopBQuarksPhi->at(p-1);
-		    MCTopBQuarksPtVec[p-1]=MCTopBQuarksPt->at(p-1);
-		    MCTopBQuarksEnergyVec[p-1]=MCTopBQuarksEnergy->at(p-1);
-		    MCTopBQuarksPdgIdVec[p-1]=MCTopBQuarksPdgId->at(p-1);
-		    MCTopBQuarksMotherIdVec[p-1]=MCTopBQuarksMotherId->at(p-1);
-		  }
-		  else{
-		    MCTopBQuarksEtaVec[p-1]=-999;
-		    MCTopBQuarksPhiVec[p-1]=-999;
-		    MCTopBQuarksPtVec[p-1]=-999;
-		    MCTopBQuarksEnergyVec[p-1]=-999;
-		    MCTopBQuarksPdgIdVec[p-1]=-999;
-		    MCTopBQuarksMotherIdVec[p-1]=-999;
-		  }
-		  if( (!(MCBQuarksEta->size() < p)) && (!(MCTopWsEta->size() < p))){
-		    math::PtEtaPhiELorentzVector mctop = math::PtEtaPhiELorentzVector(
-										      (MCTopBQuarksPtVec[p-1]+MCTopWsPtVec[p-1]),
-										      (MCTopBQuarksEtaVec[p-1]+MCTopWsEtaVec[p-1]),
-										      (MCTopBQuarksPhiVec[p-1]+MCTopWsPhiVec[p-1]),
-										      (MCTopBQuarksEnergyVec[p-1]+MCTopWsEnergyVec[p-1]) );
-		    MCTopsPtVec[p-1]=mctop.pt();
-		    MCTopsEtaVec[p-1]=mctop.eta();
-		    MCTopsPhiVec[p-1]=mctop.phi();
-		    MCTopsEnergyVec[p-1]=mctop.energy();
-		    MCTopsPdgIdVec[p-1]=6* MCTopBQuarksPdgIdVec[p-1]/5.;
-		  }
-		  else{
-		    MCTopsEtaVec[p-1]=-999;
-		    MCTopsPhiVec[p-1]=-999;
-		    MCTopsPtVec[p-1]=-999;
-		    MCTopsEnergyVec[p-1]=-999;
-		    MCTopsPdgIdVec[p-1]=-999;
-		  }
-		}
-	      }
-	      
-	      treesMCTruth->Fill();
+	if( syst == "noSyst" && doMCTruth_ && doFullMCTruth_){	
+	  fillMCTruth(iEvent);
+	  treesMCTruth->Fill();
 	}
-	
-        //Setup for systematics
 
-        //This is done according to old b-tagging prescriptions
+
+        //Setup for systematics
 
         //Here we have vectors of weights
         //to be associated with the
@@ -1736,18 +1238,14 @@ void SingleTopSystematicsTreesDumper::analyze(const Event &iEvent, const EventSe
         //position of lowest and highest b-tag used to chose the top candidate
         int lowBTagTreePosition = -1;
         lowBTagTree = 99999;
-
-        int highBTagTreePosition = -1;
+	int highBTagTreePosition = -1;
         highBTagTree = -9999;
-
-
         int maxPtTreePosition = -1;
         maxPtTree = -99999;
-
         int minPtTreePosition = -1;
         minPtTree = 99999;
-
-        secondPt = -1;
+        
+	secondPt = -1;
         thirdPt = -1;
         secondPtPosition = -1;
         thirdPtPosition = -1;
@@ -1758,18 +1256,48 @@ void SingleTopSystematicsTreesDumper::analyze(const Event &iEvent, const EventSe
 
         if (syst_name == "UnclusteredMETUp")
         {
-            iEvent.getByLabel(UnclMETPx_, UnclMETPx);
-            iEvent.getByLabel(UnclMETPy_, UnclMETPy);
-            metPx += (*UnclMETPx) * 0.1;
-            metPy += (*UnclMETPy) * 0.1;
+	  iEvent.getByLabel(UnclUpMETPt_, UnclUpMETPt);
+	  iEvent.getByLabel(UnclUpMETPhi_, UnclUpMETPhi);
+	  metPhi = UnclUpMETPhi->at(0);
+	  metPt = UnclUpMETPt->at(0);
         }
         if (syst_name == "UnclusteredMETDown")
         {
-            iEvent.getByLabel(UnclMETPx_, UnclMETPx);
-            iEvent.getByLabel(UnclMETPy_, UnclMETPy);
-            metPx -= (*UnclMETPx) * 0.1;
-            metPy -= (*UnclMETPy) * 0.1;
-        }
+	  iEvent.getByLabel(UnclDownMETPt_, UnclDownMETPt);
+	  iEvent.getByLabel(UnclDownMETPhi_, UnclDownMETPhi);
+	  metPhi = UnclDownMETPhi->at(0);
+	  metPt = UnclDownMETPt->at(0);
+	}
+        if (syst_name == "JERUp")
+        {
+	  iEvent.getByLabel(JERUpMETPt_, JERUpMETPt);
+	  iEvent.getByLabel(JERUpMETPhi_, JERUpMETPhi);
+
+	  metPhi = UnclUpMETPhi->at(0);
+	  metPt = UnclUpMETPt->at(0);
+	}
+        if (syst_name == "JERDown")
+        {
+	  iEvent.getByLabel(JERDownMETPt_, JERDownMETPt);
+	  iEvent.getByLabel(JERDownMETPhi_, JERDownMETPhi);
+	  metPhi = JERDownMETPhi->at(0);
+	  metPt = JERDownMETPt->at(0);
+	}
+	if (syst_name == "JESUp")
+        {
+	  iEvent.getByLabel(JESUpMETPt_, JESUpMETPt);
+	  iEvent.getByLabel(JESUpMETPhi_, JESUpMETPhi);
+	  metPhi = UnclUpMETPhi->at(0);
+	  metPt = UnclUpMETPt->at(0);
+	}
+        if (syst_name == "JESDown")
+        {
+	  iEvent.getByLabel(JESDownMETPt_, JESDownMETPt);
+	  iEvent.getByLabel(JESDownMETPhi_, JESDownMETPhi);
+	  metPhi = JESDownMETPhi->at(0);
+	  metPt = JESDownMETPt->at(0);
+	}
+
 
 
         //Define - initialize some variables
@@ -1781,7 +1309,7 @@ void SingleTopSystematicsTreesDumper::analyze(const Event &iEvent, const EventSe
         //Loops to apply systematics on jets-leptons
 
 
-        //cout << " before leptons "<<endl;
+        cout << " before leptons "<<endl;
 	
         //Lepton loop
 	if (!didLeptonLoop)
@@ -1802,39 +1330,35 @@ void SingleTopSystematicsTreesDumper::analyze(const Event &iEvent, const EventSe
                     iEvent.getByLabel(leptonsRhoCorrectedRelIso_, leptonsRhoCorrectedRelIso);
 		    leptonRelIsoRhoCorr = leptonsRhoCorrectedRelIso->at(i);
 		    if (leptonRelIsoRhoCorr > RelIsoCut)continue;
-		    //		    cout << " inside lepton loop: lepton n "<< i +1 << " reliso " <<  leptonsRhoCorrectedRelIso->at(i) <<" nLeptons before: "<<nLeptons<<endl;                 
+		    cout << " inside lepton loop: lepton n "<< i +1 << " reliso " <<  leptonsRhoCorrectedRelIso->at(i) <<" nLeptons before: "<<nLeptons<<endl;                 
 
                 }
-		
-                float leptonPt = 0.;
-		//		cout << "lep " << i <<endl;
-	    		
-                iEvent.getByLabel(leptonsPt_, leptonsPt);
+		float leptonPt = 0.;
+		cout << "lep " << i <<endl;
+		iEvent.getByLabel(leptonsPt_, leptonsPt);
                 leptonPt = leptonsPt->at(i)*1.;
                 if ( leptonPt < 26.) continue;
                 //Apply isolation cut
                 if (!gotLeptons)
                 {
-		  
 		  if (leptonsFlavour_ == "muon")
                     {
 		      iEvent.getByLabel(leptonsRhoCorrectedRelIso_, leptonsRhoCorrectedRelIso);
 		      lepRhoCorrectedRelIso = leptonsRhoCorrectedRelIso->at(i);
                     }
-
-                    iEvent.getByLabel(leptonsEta_, leptonsEta);
-                    iEvent.getByLabel(leptonsPhi_, leptonsPhi);
-                    iEvent.getByLabel(leptonsEnergy_, leptonsEnergy);
-                    iEvent.getByLabel(leptonsCharge_, leptonsCharge);
-                    iEvent.getByLabel(leptonsID_, leptonsID);
-                    iEvent.getByLabel(leptonsDB_, leptonsDB);
-                    gotLeptons = true;
+		  iEvent.getByLabel(leptonsEta_, leptonsEta);
+		  iEvent.getByLabel(leptonsPhi_, leptonsPhi);
+		  iEvent.getByLabel(leptonsEnergy_, leptonsEnergy);
+		  iEvent.getByLabel(leptonsCharge_, leptonsCharge);
+		  iEvent.getByLabel(leptonsID_, leptonsID);
+		  iEvent.getByLabel(leptonsDB_, leptonsDB);
+		  gotLeptons = true;
                 }
                 //if electron apply ID cuts
                 if (leptonsFlavour_ == "electron"  )
-                {
+		  {
                     if (leptonsID->size() == 0)cout << "warning requiring ele id of collection which has no entries! Check the leptonsFlavour parameter " << endl;
-
+		    
                     float leptonRelIsoRhoCorr = leptonsRhoCorrectedRelIso->at(i);
                     lepRhoCorrectedRelIso = leptonRelIsoRhoCorr;
 		    
@@ -1845,7 +1369,6 @@ void SingleTopSystematicsTreesDumper::analyze(const Event &iEvent, const EventSe
 		    leptonMVAIDTemp = leptonsMVAID->at(i);
 		    leptonNHitsTemp = leptonsNHits->at(i);
 		    
-
                     electronID = leptonID;
 		    
 		    if(useCutBasedID_>0){
@@ -1874,52 +1397,41 @@ void SingleTopSystematicsTreesDumper::analyze(const Event &iEvent, const EventSe
                 //Build the lepton 4-momentum
                 ++nLeptons;
 		//if( lepRhoCorrectedRelIso > RelIsoCut )cout << " lepton n "<< nLeptons<< " syst "<<syst<< " " << lepRhoCorrectedRelIso<< " relisocut "<<RelIsoCut<< endl;
-	
 		leptons[nLeptons - 1] = math::PtEtaPhiELorentzVector(leptonPt, leptonEta, leptonPhi, leptonE);
                 //  Leptons.push_back(math::PtEtaPhiELorentzVector(leptonPt,leptonEta,leptonPhi,leptonE));
                 if (nLeptons >= 3) break;
 		
-                //  cout<< " lepton number " << nLeptons << " pt "<< leptonPt << " eta " << fabs(leptonEta)<< endl;
+                  cout<< " lepton number " << nLeptons << " pt "<< leptonPt << " eta " << fabs(leptonEta)<< endl;
             }
             bool passesLeptons = (nLeptons == 1);
             bool passesOneLepton = (nLeptons == 1);
             if (passesLeptons)
             {
-                if (passesLeptons && syst == "noSyst")++passingLepton;
-
-                iEvent.getByLabel(looseMuonsDeltaCorrectedRelIso_, looseMuonsDeltaCorrectedRelIso);
-                if (passesLeptons && syst == "noSyst" && looseMuonsDeltaCorrectedRelIso->size() == 1)++passingMuonVeto;
-                iEvent.getByLabel(looseElectronsDeltaCorrectedRelIso_, looseElectronsDeltaCorrectedRelIso);
-                bool passesLooseLeptons = (looseMuonsDeltaCorrectedRelIso->size() + looseElectronsDeltaCorrectedRelIso->size()) == 1;
-                passesLeptons = passesLeptons && passesLooseLeptons;
+	      if (passesLeptons && syst == "noSyst")++passingLepton;
+	      
+	      iEvent.getByLabel(looseMuonsDeltaCorrectedRelIso_, looseMuonsDeltaCorrectedRelIso);
+	      if (passesLeptons && syst == "noSyst" && looseMuonsDeltaCorrectedRelIso->size() == 1)++passingMuonVeto;
+	      iEvent.getByLabel(looseElectronsDeltaCorrectedRelIso_, looseElectronsDeltaCorrectedRelIso);
+	      bool passesLooseLeptons = (looseMuonsDeltaCorrectedRelIso->size() + looseElectronsDeltaCorrectedRelIso->size()) == 1;
+	      passesLeptons = passesLeptons && passesLooseLeptons;
             }
             if (passesLeptons && syst == "noSyst")++passingLeptonVeto;
-
-            isQCD = (!passesLeptons);
-
-            //Loop for the qcd leptons
+	    isQCD = (!passesLeptons);
+            
+	    //Loop for the qcd leptons
             if (doQCD_ && isQCD)
             {
                 iEvent.getByLabel(qcdLeptonsDeltaCorrectedRelIso_, qcdLeptonsDeltaCorrectedRelIso);
 		iEvent.getByLabel(qcdLeptonsRhoCorrectedRelIso_, qcdLeptonsRhoCorrectedRelIso);
-		
 		cout << "qcd lep size" <<qcdLeptonsDeltaCorrectedRelIso->size()<<endl;
-
                 for (size_t i = 0; i < qcdLeptonsDeltaCorrectedRelIso->size(); ++i)
                 {
-
 		  float leptonPt = 0.;
-		  
 		  iEvent.getByLabel(qcdLeptonsPt_, qcdLeptonsPt);
 		  leptonPt = qcdLeptonsPt->at(i);
 		  if ( leptonPt < 26.) continue;
-		  
-		  
 		  float leptonRelIso = qcdLeptonsDeltaCorrectedRelIso->at(i);
 		  //		    cout << "qcd lep " << i << "rel iso "<<leptonRelIso<<endl;
-		  
-		  
-		  
 		  float leptonQCDRelIso = leptonRelIso;
 		  //Use an anti-isolation requirement
 		  
@@ -1938,137 +1450,96 @@ void SingleTopSystematicsTreesDumper::analyze(const Event &iEvent, const EventSe
 			  iEvent.getByLabel(qcdLeptonsEnergy_, qcdLeptonsEnergy);
 			  iEvent.getByLabel(qcdLeptonsCharge_, qcdLeptonsCharge);
 			  iEvent.getByLabel(qcdLeptonsID_, qcdLeptonsID);
+			  iEvent.getByLabel(qcdLeptonsDB_, qcdLeptonsDB);
+			  gotQCDLeptons = true;
 
-
-                            iEvent.getByLabel(qcdLeptonsDB_, qcdLeptonsDB);
-                            gotQCDLeptons = true;
-
-			    //			    cout << " qcd lep "<< endl;
                         }
                     }
-
-                    if (leptonsFlavour_ == "electron"  )
+		  if (leptonsFlavour_ == "electron"  )
                     {
 		      bool QCDCondition = false;
 		      iEvent.getByLabel(qcdLeptonsID_, qcdLeptonsID);
 		      iEvent.getByLabel(qcdLeptonsDB_, qcdLeptonsDB);
 		      float leptonID = qcdLeptonsID->at(i);
-                        float beamspot  = abs(qcdLeptonsDB->at(i));
-                        bool isid = (leptonID ==  1 || leptonID == 3 || leptonID == 5 || leptonID == 7);
-			QCDCondition = (!(lepRhoCorrectedRelIso < 0.1) );
-			
-                        //if (!QCDCondition) continue;
-                        electronID = leptonID;
-                        if (!gotQCDLeptons)
-                        {
-                            iEvent.getByLabel(qcdLeptonsEta_, qcdLeptonsEta);
-                            iEvent.getByLabel(qcdLeptonsPhi_, qcdLeptonsPhi);
-                            iEvent.getByLabel(qcdLeptonsEnergy_, qcdLeptonsEnergy);
-                            iEvent.getByLabel(qcdLeptonsCharge_, qcdLeptonsCharge);
-                            gotQCDLeptons = true;
+		      float beamspot  = abs(qcdLeptonsDB->at(i));
+		      bool isid = (leptonID ==  1 || leptonID == 3 || leptonID == 5 || leptonID == 7);
+		      QCDCondition = (!(lepRhoCorrectedRelIso < 0.1) );
+		      
+		      //if (!QCDCondition) continue;
+		      electronID = leptonID;
+		      if (!gotQCDLeptons)
+			{
+			  iEvent.getByLabel(qcdLeptonsEta_, qcdLeptonsEta);
+			  iEvent.getByLabel(qcdLeptonsPhi_, qcdLeptonsPhi);
+			  iEvent.getByLabel(qcdLeptonsEnergy_, qcdLeptonsEnergy);
+			  iEvent.getByLabel(qcdLeptonsCharge_, qcdLeptonsCharge);
+			  gotQCDLeptons = true;
                         }
                     }
-		    
-                    lepRelIso = leptonRelIso;
-
-                    float qcdLeptonPt = qcdLeptonsPt->at(i);
-                    float qcdLeptonPhi = qcdLeptonsPhi->at(i);
-                    float qcdLeptonEta = qcdLeptonsEta->at(i);
-                    float qcdLeptonE = qcdLeptonsEnergy->at(i);
-                    //Create the lepton
-                    ++nQCDLeptons;
-		    
-                    qcdLeptons[nQCDLeptons - 1] = math::PtEtaPhiELorentzVector(qcdLeptonPt, qcdLeptonEta, qcdLeptonPhi, qcdLeptonE);
-                    //   leptonsQCD.push_back(math::PtEtaPhiELorentzVector(leptonPt,leptonEta,leptonPhi,leptonE));
-                    if (nQCDLeptons == 3) break;
-
-                }
+		  
+		  lepRelIso = leptonRelIso;
+		  
+		  float qcdLeptonPt = qcdLeptonsPt->at(i);
+		  float qcdLeptonPhi = qcdLeptonsPhi->at(i);
+		  float qcdLeptonEta = qcdLeptonsEta->at(i);
+		  float qcdLeptonE = qcdLeptonsEnergy->at(i);
+		  //Create the lepton
+		  ++nQCDLeptons;
+		  
+		  qcdLeptons[nQCDLeptons - 1] = math::PtEtaPhiELorentzVector(qcdLeptonPt, qcdLeptonEta, qcdLeptonPhi, qcdLeptonE);
+		  //   leptonsQCD.push_back(math::PtEtaPhiELorentzVector(leptonPt,leptonEta,leptonPhi,leptonE));
+		  if (nQCDLeptons == 3) break;
+		}
             }
             didLeptonLoop = true;
-	    
 	    isQCD = (nQCDLeptons == 1 && !passesLeptons);
-	    
-            passesLeptonStep = (passesLeptons || isQCD);
-	    //cout << " nqcd lep "<<nQCDLeptons<< " passes leptons? " <<passesLeptons<<endl;
+	    passesLeptonStep = (passesLeptons || isQCD);
+	    cout << " nqcd lep "<<nQCDLeptons<< " passes leptons? " <<passesLeptons<<endl;
 	}
         if (!passesLeptonStep)continue;
-
-        if (!gotPV)
+	if (!gotPV)
         {
             iEvent.getByLabel(vertexZ_, vertexZ);
             npv = vertexZ->size();
         }
 
-        ntchpt_tags = 0;
-        ncsvl_tags = 0;
-        ncsvt_tags = 0;
-        ncsvm_tags = 0;
-
-        ntight_tags = 0;
-
-        jsfshpt.clear();//  bjs.clear();cjs.clear();ljs.clear();
-        jsfscsvt.clear();//  bjs.clear();cjs.clear();ljs.clear();
-        jsfscsvm.clear();//  bjs.clear();cjs.clear();ljs.clear();
-
-        bool hasTurnOnWeight = false;
-        double turnOnWeightValue = 1;
-        turnOnReWeightTree = 1;
-        turnOnWeightTreeJetTrig1Up = 1;
-        turnOnWeightTreeJetTrig1Down = 1;
-        turnOnWeightTreeJetTrig2Up = 1;
-        turnOnWeightTreeJetTrig2Down = 1;
-        turnOnWeightTreeJetTrig3Up = 1;
-        turnOnWeightTreeJetTrig3Down = 1;
-
-        turnOnWeightTreeBTagTrig1Up = 1;
-        turnOnWeightTreeBTagTrig1Down = 1;
-        turnOnWeightTreeBTagTrig2Up = 1;
-        turnOnWeightTreeBTagTrig2Down = 1;
-        turnOnWeightTreeBTagTrig3Up = 1;
-        turnOnWeightTreeBTagTrig3Down = 1;
-
-        bWeightTree = 1;
-        bWeightTreeBTagUp = 1;
-        bWeightTreeMisTagUp = 1;
-        bWeightTreeBTagDown = 1;
-        bWeightTreeMisTagDown = 1;
-
-
+	cout << " before mets "<<endl;
         if (!gotMets)
         {
             iEvent.getByLabel(METPhi_, METPhi);
             iEvent.getByLabel(METPt_, METPt);
 
-            metPx = METPt->at(0) * cos(METPhi->at(0));
-            metPy = METPt->at(0) * sin(METPhi->at(0));
-
-            metPxTmp = metPx;
-            metPyTmp = metPy;
-
-            metPhi = METPhi->at(0);
-
+	    metPhiNom = METPhi->at(0);
+	    metPtNom = METPhi->at(0);
 
             gotMets = true;
         }
-
+	if(syst == "noSyst"){
+	  metPhi = metPhiNom;
+	  metPt = metPtNom;
+	}
+	
+	metPx = metPt * cos(metPhi);
+	metPy = metPt * sin(metPhi);
+	
+	metPxTmp = metPx;
+	metPyTmp = metPy;
+	
         metPx = metPxTmp;
         metPy = metPyTmp;
 
 
-        if (syst_name == "UnclusteredMETUp")
-        {
-            iEvent.getByLabel(UnclMETPx_, UnclMETPx);
-            iEvent.getByLabel(UnclMETPy_, UnclMETPy);
-            metPx += (*UnclMETPx) * 0.1;
-            metPy += (*UnclMETPy) * 0.1;
-        }
-        if (syst_name == "UnclusteredMETDown")
-        {
-            iEvent.getByLabel(UnclMETPx_, UnclMETPx);
-            iEvent.getByLabel(UnclMETPy_, UnclMETPy);
-            metPx -= (*UnclMETPx) * 0.1;
-            metPy -= (*UnclMETPy) * 0.1;
-        }
+
+	//Initialization of number of b-tags before jet loop
+        ntchpt_tags = 0;        ncsvl_tags = 0;        ncsvt_tags = 0;        ncsvm_tags = 0;        ntight_tags = 0;
+
+        jsfshpt.clear();//  bjs.clear();cjs.clear();ljs.clear();
+        jsfscsvt.clear();//  bjs.clear();cjs.clear();ljs.clear();
+        jsfscsvm.clear();//  bjs.clear();cjs.clear();ljs.clear();
+        
+	bWeightTree = 1;        bWeightTreeBTagUp = 1;        bWeightTreeMisTagUp = 1;        bWeightTreeBTagDown = 1;        bWeightTreeMisTagDown = 1;
+	
+	cout << " before jets "<<endl;
 
         if (!gotJets)
         {
@@ -2088,7 +1559,7 @@ void SingleTopSystematicsTreesDumper::analyze(const Event &iEvent, const EventSe
 
             iEvent.getByLabel(jetsFlavour_, jetsFlavour);
             iEvent.getByLabel(jetsCorrTotal_, jetsCorrTotal);
-            if (doResol_)iEvent.getByLabel(genJetsPt_, genJetsPt);
+	    //            if (doResol_)iEvent.getByLabel(genJetsPt_, genJetsPt);
 
             gotJets = true;
         }
@@ -2103,76 +1574,48 @@ void SingleTopSystematicsTreesDumper::analyze(const Event &iEvent, const EventSe
             for (size_t i = 0; i < jetsPt->size(); ++i)
             {
 	      
-                eta = jetsEta->at(i);
+	      eta = jetsEta->at(i);
                 if (fabs(eta ) > 4.7)continue;
                 ptCorr = jetsPt->at(i);
                 flavour = jetsFlavour->at(i);
                 double energyCorr = jetsEnergy->at(i);
+		double ptUncorr=ptCorr, energyUncorr=energyCorr;
 
                 float genpt = -1.;
-                if (doResol_)genpt = genJetsPt->at(i);
+		//                if (doResol_)genpt = genJetsPt->at(i);
                 float rndm = 0.1;
 		
-                //If systematics JES up/down we need to change the pt of the jet
-                //consider if it passes the threshold or not
-		double smear = 1.;//TMath::QuietNaN();
-                if (doResol_ && genpt > 0.0)
-		  {
-                    resolScale = resolSF(fabs(eta), syst_name);
-		    smear = std::max((double)(0.0), (double)(ptCorr + (ptCorr - genpt) * resolScale) / ptCorr);
-		    
-		    
-		  }
-		energyCorr = energyCorr * smear;
-		ptCorr = ptCorr * smear;	
+		//Part of JES and JER: not needed as it's included in the jets definition atm.
+                ptCorr = offlineJESJERApplicationPt(ptUncorr,energyUncorr,eta,syst);
+		energyCorr = offlineJESJERApplicationE(ptUncorr,eta,energyUncorr,syst);
 		
-		//		metPx -= (jetsPt->at(i) * cos(jetsPhi->at(i))) * (smear-1);
-		//metPy -= (jetsPt->at(i) * sin(jetsPhi->at(i))) * (smear-1);
-		
-                if (syst_name == "JESUp")
-                {
-                    unc = jetUncertainty( eta,  ptCorr, flavour);
-		    //		    cout << syst << "  "<< unc << endl; 
-                    ptCorr = ptCorr * (1 + unc);
-                    energyCorr = energyCorr * (1 + unc);
-                }
-                if (syst_name == "JESDown")
-                {
-                    unc = jetUncertainty( eta,  ptCorr, flavour);
-                    ptCorr = ptCorr * (1 - unc);
-                    energyCorr = energyCorr * (1 - unc);
-                }
-
 		
 		HT+= (math::PtEtaPhiELorentzVector(ptCorr, jetsEta->at(i), jetsPhi->at(i), energyCorr)).Et();
-
-		//		cout << "jet i " <<  i << endl;
+		
+		cout << "jet i " <<  i << endl;
                 //Pt cut
-                bool passesPtCut = ptCorr > ptCut;
+		bool passesPtCut = ptCorr > ptCut;
                 if (passesPtCut)
                 {
-                    ++nJets;
-                    if ( fabs(eta) < 2.5)++nJetsCentral;
-                    else ++nJetsForward;
-                    if ( jetsPileUpWP->at(i) > 2.5)
+		  ++nJets;
+		  if ( fabs(eta) < 2.5)++nJetsCentral;
+		  else ++nJetsForward;
+		  if ( jetsPileUpWP->at(i) > 2.5)
                     {
-                        ++nJetsNoPU;
-                        if ( fabs(eta) < 2.5)++nJetsCentralNoPU;
-                        else ++nJetsForwardNoPU;
+		      ++nJetsNoPU;
+		      if ( fabs(eta) < 2.5)++nJetsCentralNoPU;
+		      else ++nJetsForwardNoPU;
                     }
-                    jets[nJets - 1] = math::PtEtaPhiELorentzVector(ptCorr, jetsEta->at(i), jetsPhi->at(i), energyCorr);
-                    flavours[nJets - 1] = flavour;
-                    if (syst == "noSyst")
+		  jets[nJets - 1] = math::PtEtaPhiELorentzVector(ptCorr, jetsEta->at(i), jetsPhi->at(i), energyCorr);
+		  flavours[nJets - 1] = flavour;
+		  if (syst == "noSyst")
                     {
-                        ++nJetsNoSyst;
-                        jetsNoSyst[nJets - 1] = jets[nJets - 1];
-			//			cout <<" jet no syst "<< nJets-1<<" pt "  <<jetsNoSyst[nJets-1].pt()<<endl;
-			
+		      ++nJetsNoSyst;
+		      jetsNoSyst[nJets - 1] = jets[nJets - 1];
+		      cout <<" jet no syst "<< nJets-1<<" pt "  <<jetsNoSyst[nJets-1].pt()<<endl;
 		    }
 		}
-
                 //b tag thresholds
-
                 double valueTCHPT = jetsBTagAlgo->at(i);
                 double valueCSV = jetsAntiBTagAlgo->at(i);
 
@@ -2181,253 +1624,32 @@ void SingleTopSystematicsTreesDumper::analyze(const Event &iEvent, const EventSe
 
 		bool passesCSVM = jetsAntiBTagAlgo->at(i)>0.679;//CSVM Working point
 		//		bool passesCSVM = jetsAntiBTagAlgo->at(i)>0.244;//CSVL Working point
-		
-                double valueChosenAlgo = valueCSV;
+		double valueChosenAlgo = valueCSV;
                 if (algo_ == "TCHPT")valueChosenAlgo = valueTCHPT;
-
-                if (!passesPtCut) continue;
+                
+		if (!passesPtCut) continue;
 
                 //max pt position:
                 int pos = nJets - 1;
-                //cout << " pos " << pos << " j pt " << ptCorr << endl;
+                cout << " pos " << pos << " j pt " << ptCorr << endl;
                 if (ptCorr > maxPtTree)
                 {
                     maxPtTreePosition = nJets - 1;
                     maxPtTree = ptCorr;
                     firstJetFlavourTree = flavour;
 		}
-		
-                //min pt position:
+		//min pt position:
                 if (ptCorr < minPtTree)
                 {
                     minPtTreePosition = nJets - 1;
                     minPtTree = ptCorr;
                 }
-
                 //Passes first algorithm (b tag requirement in the case of t-channel standard selection)
-
-                double etaMin =  min(fabs(eta), (float)2.3999);
+		double etaMin =  min(fabs(eta), (float)2.3999);
                 double ptMin =  min(ptCorr, (float)239.9); //min(jets.back().pt(),998.0);
-                measurePoint.insert(BinningVariables::JetAbsEta, etaMin);
-                measurePoint.insert(BinningVariables::JetEt, ptMin);
                 //Apply different SFs if it is b,c or light jet
-                if (abs(flavour) == 4)
-                {
-		  ++nc;
-		  if (is_btag_relevant )
-                    {
-		      double hptSF = 1;
-		      double hptSFErr = 0;
-		      
-		      double csvtSF = 1;
-		      double csvtSFErr = 0;
-		      
-		      double csvmSF = 1;
-		      double csvmSFErr = 0;
-		      
-		      double hpteff = EFFMap("TCHPT_C");
-		      double csvteff = EFFMap("CSVT_C", channel);
-		      double csvmeff = EFFMap("CSVL_C", channel);
-		      
-		      if (abs(eta) > 2.6)
-                        {
-			  hpteff = 0;
-			  csvteff = 0;
-			  csvmeff = 0;
-                        }
-		      
-		      if (  takeBTagSFFromDB_)
-                        {
-			  hptSF = (perfBHP->getResult(PerformanceResult::BTAGBEFFCORR, measurePoint));
-			  hptSFErr = fabs(perfBHP->getResult(PerformanceResult::BTAGBERRCORR, measurePoint));
-                        }
-		      else
-                        {
-			  hptSF = BTagSFNew(ptCorr, "TCHPT");
-			  csvtSF = BTagSFNew(ptCorr, "CSVT");
-			  csvmSF = BTagSFNew(ptCorr, "CSVL");
-
-			  hptSFErr = BTagSFErrNew(ptCorr, "TCHPT") ;
-			  csvtSFErr = BTagSFErrNew(ptCorr, "CSVT") ;
-			  csvmSFErr = BTagSFErrNew(ptCorr, "CSVL") ;
-			  
-                        }
-
-                        jsfshpt.push_back(BTagWeight::JetInfo(hpteff, hptSF));
-                        jsfshpt_mis_tag_up.push_back(BTagWeight::JetInfo(hpteff, hptSF));
-                        jsfshpt_mis_tag_down.push_back(BTagWeight::JetInfo(hpteff, hptSF));
-
-                        jsfscsvt.push_back(BTagWeight::JetInfo(csvteff, csvtSF));
-                        jsfscsvt_mis_tag_up.push_back(BTagWeight::JetInfo(csvteff, csvtSF));
-                        jsfscsvt_mis_tag_down.push_back(BTagWeight::JetInfo(csvteff, csvtSF));
-
-                        jsfscsvm.push_back(BTagWeight::JetInfo(csvmeff, csvmSF));
-                        jsfscsvm_mis_tag_up.push_back(BTagWeight::JetInfo(csvmeff, csvmSF));
-                        jsfscsvm_mis_tag_down.push_back(BTagWeight::JetInfo(csvmeff, csvmSF));
-
-
-                        if (syst == "noSyst")
-                        {
-			  jsfshpt_b_tag_up.push_back(BTagWeight::JetInfo(hpteff, hptSF + 2 * hptSFErr));
-			  jsfshpt_b_tag_down.push_back(BTagWeight::JetInfo(hpteff, hptSF - 2 * hptSFErr));
-			  
-			  jsfscsvt_b_tag_up.push_back(BTagWeight::JetInfo(csvteff, csvtSF + 2 * csvtSFErr));
-			  jsfscsvt_b_tag_down.push_back(BTagWeight::JetInfo(csvteff, csvtSF - 2 * csvtSFErr));
-			  
-			  jsfscsvm_b_tag_up.push_back(BTagWeight::JetInfo(csvmeff, csvmSF + 2 * csvmSFErr));
-			  jsfscsvm_b_tag_down.push_back(BTagWeight::JetInfo(csvmeff, csvmSF - 2 * csvmSFErr));
-			  
-                        }
-                    }
-                }
-                else if (abs(flavour) == 5)
-                {
-                    ++nb;
-                    if (is_btag_relevant )
-                    {
-                        double hptSF = 1;
-                        double hptSFErr = 0;
-                        double csvtSF = 1;
-                        double csvtSFErr = 0;
-                        double csvmSF = 1;
-                        double csvmSFErr = 0;
-
-                        double hpteff = EFFMap("TCHPT_B");
-                        double csvteff = EFFMap("CSVT_B", channel);
-                        double csvmeff = EFFMap("CSVL_B", channel);
-
-			if (abs(eta) > 2.6)
-                        {
-                            hpteff = 0;
-                            csvteff = 0;
-                            csvmeff = 0;
-                        }
-
-                        if (  takeBTagSFFromDB_)
-                        {
-                            hptSF = (perfBHP->getResult(PerformanceResult::BTAGBEFFCORR, measurePoint));
-                            hptSFErr = fabs(perfBHP->getResult(PerformanceResult::BTAGBERRCORR, measurePoint));
-                        }
-                        else
-                        {
-                            hptSF = BTagSFNew(ptCorr, "TCHPT");
-                            csvtSF = BTagSFNew(ptCorr, "CSVT");
-                            csvmSF = BTagSFNew(ptCorr, "CSVL");
-			    
-                            hptSFErr = BTagSFErrNew(ptCorr, "TCHPT") ;
-                            csvtSFErr = BTagSFErrNew(ptCorr, "CSVT") ;
-                            csvmSFErr = BTagSFErrNew(ptCorr, "CSVL") ;
-			    
-                        }
-			
-                        jsfshpt.push_back(BTagWeight::JetInfo(hpteff, hptSF));
-                        jsfshpt_mis_tag_up.push_back(BTagWeight::JetInfo(hpteff, hptSF));
-                        jsfshpt_mis_tag_down.push_back(BTagWeight::JetInfo(hpteff, hptSF));
-
-                        jsfscsvt.push_back(BTagWeight::JetInfo(csvteff, csvtSF));
-                        jsfscsvt_mis_tag_up.push_back(BTagWeight::JetInfo(csvteff, csvtSF));
-                        jsfscsvt_mis_tag_down.push_back(BTagWeight::JetInfo(csvteff, csvtSF));
-
-                        jsfscsvm.push_back(BTagWeight::JetInfo(csvmeff, csvmSF));
-                        jsfscsvm_mis_tag_up.push_back(BTagWeight::JetInfo(csvmeff, csvmSF));
-                        jsfscsvm_mis_tag_down.push_back(BTagWeight::JetInfo(csvmeff, csvmSF));
-
-
-                        if (syst == "noSyst")
-                        {
-                            jsfshpt_b_tag_up.push_back(BTagWeight::JetInfo(hpteff, hptSF + hptSFErr));
-                            jsfshpt_b_tag_down.push_back(BTagWeight::JetInfo(hpteff, hptSF - hptSFErr));
-
-                            jsfscsvt_b_tag_up.push_back(BTagWeight::JetInfo(csvteff, csvtSF + csvtSFErr));
-                            jsfscsvt_b_tag_down.push_back(BTagWeight::JetInfo(csvteff, csvtSF - csvtSFErr));
-
-                            jsfscsvm_b_tag_up.push_back(BTagWeight::JetInfo(csvmeff, csvmSF + csvmSFErr));
-                            jsfscsvm_b_tag_down.push_back(BTagWeight::JetInfo(csvmeff, csvmSF - csvmSFErr));
-
-                        }
-                    }
-
-                }
-                else
-                {
-                    if (is_btag_relevant )
-                    {
-                        double hptSF = 1;
-                        double hptSFErrUp = 0;
-                        double hptSFErrDown = 0;
-
-                        double csvtSF = 1;
-                        double csvtSFErrUp = 0;
-                        double csvtSFErrDown = 0;
-
-                        double csvmSF = 1;
-                        double csvmSFErrUp = 0;
-                        double csvmSFErrDown = 0;
-
-                        double hpteff = EFFMap("TCHPT_L");
-                        double csvteff = EFFMap("CSVT_L", channel);
-                        double csvmeff = EFFMap("CSVL_L", channel);
-
-
-                        if (abs(eta) > 2.6)
-                        {
-                            hpteff = 0;
-                            csvteff = 0;
-                            csvmeff = 0;
-                        }
-
-                        if (  takeBTagSFFromDB_)
-                        {
-                            hpteff = (perfMHP->getResult(PerformanceResult::BTAGLEFF, measurePoint));
-                            hptSF = (perfMHP->getResult(PerformanceResult::BTAGLEFFCORR, measurePoint));
-
-                        }
-                        else
-                        {
-                          
-			  hptSF = MisTagSFNew(ptCorr, eta, "TCHPT");
-			  hptSFErrUp = MisTagSFErrNewUp(ptCorr, eta, "TCHPT");
-			  hptSFErrDown = MisTagSFErrNewDown(ptCorr, eta, "TCHPT");
-
-			  csvmSF = MisTagSFNew(ptCorr, eta, "CSVL");
-			  csvmSFErrUp = MisTagSFErrNewUp(ptCorr, eta, "CSVL");
-			  csvmSFErrDown = MisTagSFErrNewDown(ptCorr, eta, "CSVL");
-			  
-			  csvtSF = MisTagSFNew(ptCorr, eta, "CSVT");
-			  csvtSFErrUp = MisTagSFErrNewUp(ptCorr, eta, "CSVT");
-			  csvtSFErrDown = MisTagSFErrNewDown(ptCorr, eta, "CSVT");
-                        }
-
-                        jsfshpt.push_back(BTagWeight::JetInfo(hpteff, hptSF));
-                        jsfshpt_b_tag_up.push_back(BTagWeight::JetInfo(hpteff, hptSF));
-                        jsfshpt_b_tag_down.push_back(BTagWeight::JetInfo(hpteff, hptSF));
-
-                        jsfscsvt.push_back(BTagWeight::JetInfo(csvteff, hptSF));
-                        jsfscsvt_b_tag_up.push_back(BTagWeight::JetInfo(csvteff, hptSF));
-                        jsfscsvt_b_tag_down.push_back(BTagWeight::JetInfo(csvteff, hptSF));
-
-                        jsfscsvm.push_back(BTagWeight::JetInfo(csvmeff, hptSF));
-                        jsfscsvm_b_tag_up.push_back(BTagWeight::JetInfo(csvmeff, hptSF));
-                        jsfscsvm_b_tag_down.push_back(BTagWeight::JetInfo(csvmeff, hptSF));
-
-                        if (syst == "noSyst")
-                        {
-                            jsfshpt_mis_tag_up.push_back(BTagWeight::JetInfo(hpteff, hptSFErrUp));
-                            jsfshpt_mis_tag_down.push_back(BTagWeight::JetInfo(hpteff, hptSFErrDown));
-
-                            jsfscsvt_mis_tag_up.push_back(BTagWeight::JetInfo(csvteff, csvtSFErrUp));
-                            jsfscsvt_mis_tag_down.push_back(BTagWeight::JetInfo(csvteff, csvtSFErrDown));
-
-                            jsfscsvm_mis_tag_up.push_back(BTagWeight::JetInfo(csvmeff, csvmSFErrUp));
-                            jsfscsvm_mis_tag_down.push_back(BTagWeight::JetInfo(csvmeff, csvmSFErrDown));
-
-                        }
-                    }
-                    ++nudsg;
-                }
-
-                if (is_btag_relevant) measurePoint.reset();
-
+		setBTagWeights(ptCorr,fabs(eta),abs(flavour),is_btag_relevant,syst,channel);
+		
 		if (passesCSVT)
                 {
                     ++ncsvt_tags;
@@ -2545,106 +1767,29 @@ void SingleTopSystematicsTreesDumper::analyze(const Event &iEvent, const EventSe
         if (passesLeptonStep == false)continue;
 
         eventFlavourTree = eventFlavour(channel, nb, nc, nudsg);
-        //if( !flavourFilter(channel,nb,nc,nudsg) ) continue;
-    
-	if ( syst_name == "JESUp" || syst_name == "JESDown" || syst_name == "JERDown" || syst_name == "JERUp" || syst_name == "noSyst"){
-	  
-          if(!gotAllJets){
-            iEvent.getByLabel(allJetsPt_, allJetsPt);
-            iEvent.getByLabel(allJetsPhi_, allJetsPhi);
-            iEvent.getByLabel(allJetsEta_, allJetsEta);
-            iEvent.getByLabel(allJetsFlavour_, allJetsFlavour);
-            if (doResol_)iEvent.getByLabel(genAllJetsPt_, genAllJetsPt);
-	    gotAllJets = true ;
-          }
-	  for (size_t i = 0; i < allJetsPt->size(); ++i) {
-	    
-            double ptCorr = allJetsPt->at(i);
-            double eta = allJetsEta->at(i);	
-	    double flavour = allJetsFlavour->at(i);
-            double jphi = allJetsPhi->at(i);
-
-	    if(ptCorr < 10) continue;
-	      
-	    /*	    if (syst_name == "JERUp" || syst_name == "JERDown"){
-	      
-	      if(ptCorr > 40) continue;
-	      
-	      metPx -= (ptCorr * cos(jphi)) * unc;
-	      metPy -= (ptCorr * sin(jphi)) * unc;
-	      }*/
-	    
-	    double energyCorr =1.;
-	    double smear = 1.;//TMath::QuietNaN();
-	    double resolScale =0.;
-	    double unc=0.;
-
-	    float genpt = -1.;
-	    if (doResol_)genpt = genAllJetsPt->at(i);
-	    float rndm = 0.1;
-
-	    cout << " genpt = "<< genpt<<endl;
-
-	    if (doResol_ && genpt > 0.0)
-	      {
-		resolScale = resolSF(fabs(eta), syst_name);
-		smear = std::max((double)(0.0), (double)(ptCorr + (ptCorr - genpt) * resolScale) / ptCorr);
-		
-		
-	      }
-	    
-	    metPx -= (ptCorr * cos(jphi)) * (smear-1);
-	    metPy -= (ptCorr * sin(jphi)) * (smear-1);
-
-	    	    
-	    cout << " correction x" <<  (ptCorr * cos(jphi)) * (smear-1)  <<" met " << metPx <<endl;
-
-	    energyCorr = energyCorr * smear;
-	    ptCorr = ptCorr * smear;	
-	    
-
-	    if (syst_name == "JESUp")
-              {
-                unc = jetUncertainty( eta,  ptCorr, flavour);
-                metPx -= (ptCorr * cos(jphi)) * unc;
-                metPy -= (ptCorr * sin(jphi)) * unc;
-              }
-            if (syst_name == "JESDown")
-              {
-                unc = jetUncertainty( eta,  ptCorr, flavour);
-                metPx -= -(ptCorr * cos(jphi)) * unc;
-                metPy -= -(ptCorr * sin(jphi)) * unc;
-              }
-          }
-        }
-
-
-
+	
         /////////
         ///End of the standard lepton-jet loop
         /////////
-
         if (doPU_)
         {
             if (!gotPU )
             {
-                //  //cout << " before npv "<<endl;
+	      cout << " before npv "<<endl;
                 iEvent.getByLabel(n0_, n0);
                 nVertices = *n0;
                 gotPU = true;
             }
-
         }
         else(nVertices = -1);
-
         if (doPU_)
-        {
+	  {
             if (syst == "noSyst")
-            {
+	      {
                 PUWeightNoSyst = pileUpSF(syst); PUWeight = PUWeightNoSyst;
                 PUWeightTreePUUp = pileUpSF("PUUp");
                 PUWeightTreePUDown = pileUpSF("PUDown");
-                //    cout<< "n0 " << nVertices <<   " weight = "<< PUWeightNoSyst<< " cross-check "  <<endl;
+		cout<< "n0 " << nVertices <<   " weight = "<< PUWeightNoSyst<< " cross-check "  <<endl;
             }
             else PUWeight = PUWeightNoSyst;
         }
@@ -2653,7 +1798,6 @@ void SingleTopSystematicsTreesDumper::analyze(const Event &iEvent, const EventSe
         weightTree = Weight;
 
         //Jet trees:
-
         if (isQCD)
         {
             leptonPFour = qcdLeptons[0];
@@ -2668,14 +1812,10 @@ void SingleTopSystematicsTreesDumper::analyze(const Event &iEvent, const EventSe
         metPt = sqrt(metPx * metPx + metPy * metPy);
         MTWValue =  sqrt((leptonPFour.pt() + metPt) * (leptonPFour.pt() + metPt)  - (leptonPFour.px() + metPx) * (leptonPFour.px() + metPx) - (leptonPFour.py() + metPy) * (leptonPFour.py() + metPy));
         mtwMassTree = MTWValue;
-
         bool passesMet = false;
-
-
         runTree = iEvent.eventAuxiliary().run();
         lumiTree = iEvent.eventAuxiliary().luminosityBlock();
         eventTree = iEvent.eventAuxiliary().event();
-	
         for (size_t J_ = 0; J_ < nJets; ++J_ )
         {
             double ptCorr = jets[J_].pt();
@@ -2686,7 +1826,6 @@ void SingleTopSystematicsTreesDumper::analyze(const Event &iEvent, const EventSe
                 secondJetFlavourTree = flavours[J_];
             }
         }
-
         for (size_t J_ = 0; J_ < nJets; ++J_ )
         {
             double ptCorr = jets[J_].pt();
@@ -2697,166 +1836,112 @@ void SingleTopSystematicsTreesDumper::analyze(const Event &iEvent, const EventSe
                 thirdJetFlavourTree = flavours[J_];
 	    }
         }
-
 	//if (thirdPt > secondPt ) cout << "  sanity check: Pt3 > Pt2 at event" << eventTree << " njets "<< nJets <<endl;
         //if (secondPt > maxPtTree ) cout << "  sanity check: Pt2 > Pt1 at event" << eventTree <<" njets "<< nJets <<endl;
         //if (thirdPt > maxPtTree ) cout << "  sanity check: Pt3 > Pt1 at event" << eventTree << " njets "<< nJets <<endl;
-
         if (nJets > 0)
         {
-
-            firstJetPt = jets[maxPtTreePosition].pt();
-            firstJetE = jets[maxPtTreePosition].energy();
-            firstJetEta = jets[maxPtTreePosition].eta();
-            firstJetPhi = jets[maxPtTreePosition].phi();
-
-
-
-            if (nJets > 1)
+	  firstJetPt = jets[maxPtTreePosition].pt();
+	  firstJetE = jets[maxPtTreePosition].energy();
+	  firstJetEta = jets[maxPtTreePosition].eta();
+	  firstJetPhi = jets[maxPtTreePosition].phi();
+	  if (nJets > 1)
             {
-
-                secondJetPt = jets[secondPtPosition].pt();
-                secondJetE = jets[secondPtPosition].energy();
-                secondJetEta = jets[secondPtPosition].eta();
-                secondJetPhi = jets[secondPtPosition].phi();
-
-            }
-
-            if (nJets > 2)
+	      secondJetPt = jets[secondPtPosition].pt();
+	      secondJetE = jets[secondPtPosition].energy();
+	      secondJetEta = jets[secondPtPosition].eta();
+	      secondJetPhi = jets[secondPtPosition].phi();
+	    }
+	  if (nJets > 2)
             {
-                thirdJetPt = jets[thirdPtPosition].pt();
-                thirdJetE = jets[thirdPtPosition].energy();
-                thirdJetEta = jets[thirdPtPosition].eta();
-                thirdJetPhi = jets[thirdPtPosition].phi();
-
-            }
+	      thirdJetPt = jets[thirdPtPosition].pt();
+	      thirdJetE = jets[thirdPtPosition].energy();
+	      thirdJetEta = jets[thirdPtPosition].eta();
+	      thirdJetPhi = jets[thirdPtPosition].phi();
+	    }
         }
         else
-        {
-            firstJetFlavourTree = 0;
-            secondJetFlavourTree = 0;
-            thirdJetFlavourTree = 0;
-
-            firstJetPt = 0;
-            firstJetE = 0;
-            firstJetEta = -99;
-            firstJetPhi = -99;
-
-            secondJetPt = 0;
-            secondJetE = 0;
-            secondJetEta = -99;
-            secondJetPhi = -99;
-
-            thirdJetPt = 0;
-            thirdJetE = 0;
-            thirdJetEta = -99;
-            thirdJetPhi = -99;
-
-
-        }
+	  { firstJetFlavourTree = 0;  secondJetFlavourTree = 0;  thirdJetFlavourTree = 0;
+            firstJetPt = 0;  firstJetE = 0;  firstJetEta = -99;  firstJetPhi = -99;
+	    secondJetPt = 0;  secondJetE = 0;   secondJetEta = -9;    secondJetPhi = -99;
+	    thirdJetPt = 0;  thirdJetE = 0;  thirdJetEta = -99;  thirdJetPhi = -99;
+	  }
 	
 	if(doJetTrees_)isQCDTree= isQCD;
         if (doJetTrees_ && !isQCD)
         {
-            if (syst == "noSyst")
+	  if (syst == "noSyst")
             {
-                jetprobs.clear();
-                for (size_t i = 0; i < jetsEta->size(); ++i)
-                {
-                    double eta = jetsEta->at(i);
-                    double btag = jetsBTagAlgo->at(i);
-                    double pt = jetsPt->at(i);
-                    if (fabs(eta) > 2.6) jetprobs.push_back(0.);
-                    jetprobs.push_back(jetprob(pt, btag, eta, syst));
-                }
-
-                if (leptonsFlavour_ == "muon" )lepEff = muonHLTEff(leptons[0].eta(),"Mu2012A");
-                if (leptonsFlavour_ == "muon" )lepEffB = muonHLTEff(leptons[0].eta(),"Mu2012B");
-		if (leptonsFlavour_ == "muon" ) muonHLTSF(leptons[0].eta(),leptons[0].pt());
-		if (leptonsFlavour_ == "electron" ) electronHLTSF(leptons[0].eta(),leptons[0].pt());
-
-                lepPt = leptons[0].pt();
-		
-                if(doTurnOn_)turnOnWeightValue = turnOnProbs("noSyst", 1);
-                
-		if(doBTagSF_){w1TCHPT = b_tchpt_1_tag.weight(jsfshpt, ntchpt_tags);
+	      if (leptonsFlavour_ == "muon" ) muonHLTSF(leptons[0].eta(),leptons[0].pt());
+	      if (leptonsFlavour_ == "electron" ) electronHLTSF(leptons[0].eta(),leptons[0].pt());
+	      
+	      lepPt = leptons[0].pt();
+	      
+	      if(doBTagSF_){w1TCHPT = b_tchpt_1_tag.weight(jsfshpt, ntchpt_tags);
                 w2TCHPT = b_tchpt_2_tags.weight(jsfshpt, ntchpt_tags);
                 w1CSVT = b_csvt_1_tag.weight(jsfscsvt, ncsvt_tags);
                 w2CSVT = b_csvt_2_tags.weight(jsfscsvt, ncsvt_tags);
                 w1CSVM = b_csvm_1_tag.weight(jsfscsvt, ncsvm_tags);
                 w2CSVM = b_csvm_2_tags.weight(jsfscsvt, ncsvm_tags);
-		}
-                nJ = nJets;
-                nJNoPU = nJetsNoPU;
-
-                nJCentralNoPU = nJetsCentralNoPU;
-                nJCentral = nJetsCentral;
+	      }
+	      nJ = nJets;
+	      nJNoPU = nJetsNoPU;
+	      
+	      nJCentralNoPU = nJetsCentralNoPU;
+	      nJCentral = nJetsCentral;
+	      
+	      nJForwardNoPU = nJetsForwardNoPU;
+	      nJForward = nJetsForward;
+	      
+	      if(addPDFToNJets){
+		iEvent.getByLabel(x1_, x1h);
+		iEvent.getByLabel(x2_, x2h);
 		
-                nJForwardNoPU = nJetsForwardNoPU;
-                nJForward = nJetsForward;
-
-		if(addPDFToNJets){
-		  
-		  iEvent.getByLabel(x1_, x1h);
-		  iEvent.getByLabel(x2_, x2h);
-		  
-		  iEvent.getByLabel(scalePDF_, scalePDFh);
-		  iEvent.getByLabel(id1_, id1h);
-		  iEvent.getByLabel(id2_, id2h);
-		  
-		  x1 = *x1h;
-		  x2 = *x2h;
-		  
-		  scalePDF = *scalePDFh;
-		  
-		  id1 = *id1h;
-		  id2 = *id2h;
-
-		  LHAPDF::usePDFMember(1, 0);
-		  double xpdf1 = LHAPDF::xfx(1, x1, scalePDF, id1);
-		  double xpdf2 = LHAPDF::xfx(1, x2, scalePDF, id2);
-		  double w0 = xpdf1 * xpdf2;
-		  for (int p = 1; p <= 52; ++p)
-                    {
-		      
-		      LHAPDF::usePDFMember(1, p);
-		      double xpdf1_new = LHAPDF::xfx(1, x1, scalePDF, id1);
-		      double xpdf2_new = LHAPDF::xfx(1, x2, scalePDF, id2);
-		      double pweight = xpdf1_new * xpdf2_new / w0;
-		      pdf_weights[p - 1] = pweight;
-
-                    }
-
-		  LHAPDF::usePDFMember(2, 0);
-		  double xpdf1_new = LHAPDF::xfx(2, x1, scalePDF, id1);
-		  double xpdf2_new = LHAPDF::xfx(2, x2, scalePDF, id2);
-		  pdf_weights_mstw= xpdf1_new * xpdf2_new / w0;
-		  LHAPDF::usePDFMember(3, 0);
-		  xpdf1_new = LHAPDF::xfx(3, x1, scalePDF, id1);
-		  xpdf2_new = LHAPDF::xfx(3, x2, scalePDF, id2);
-		  pdf_weights_nnpdf21 = xpdf1_new * xpdf2_new / w0;
-		  pdf_weights_gjr_fv = xpdf1_new * xpdf2_new / w0;
-		  pdf_weights_gjr_ff = xpdf1_new * xpdf2_new / w0;
-		  pdf_weights_gjr_fdis = xpdf1_new * xpdf2_new / w0;
-		  gotPDFs = true;
-		} 
-		treesNJets[syst]->Fill();
+		iEvent.getByLabel(scalePDF_, scalePDFh);
+		iEvent.getByLabel(id1_, id1h);
+		iEvent.getByLabel(id2_, id2h);
+		
+		x1 = *x1h;
+		x2 = *x2h;
+		
+		scalePDF = *scalePDFh;
+		
+		id1 = *id1h;
+		id2 = *id2h;
+		
+		LHAPDF::usePDFMember(1, 0);
+		double xpdf1 = LHAPDF::xfx(1, x1, scalePDF, id1);
+		double xpdf2 = LHAPDF::xfx(1, x2, scalePDF, id2);
+		double w0 = xpdf1 * xpdf2;
+		for (int p = 1; p <= 52; ++p)
+		  {
+		    LHAPDF::usePDFMember(1, p);
+		    double xpdf1_new = LHAPDF::xfx(1, x1, scalePDF, id1);
+		    double xpdf2_new = LHAPDF::xfx(1, x2, scalePDF, id2);
+		    double pweight = xpdf1_new * xpdf2_new / w0;
+		    pdf_weights[p - 1] = pweight;
+		  }
+		LHAPDF::usePDFMember(2, 0);
+		double xpdf1_new = LHAPDF::xfx(2, x1, scalePDF, id1);
+		double xpdf2_new = LHAPDF::xfx(2, x2, scalePDF, id2);
+		pdf_weights_mstw= xpdf1_new * xpdf2_new / w0;
+		gotPDFs = true;
+	      } 
+	      treesNJets[syst]->Fill();
             }
-	    
-        }
+	}
 	if (doJetTrees_ && isQCD && doQCD_)
 	  {
-                lepPt = qcdLeptons[0].pt();
-                lepEta = qcdLeptons[0].eta();
-                lepPhi = qcdLeptons[0].phi();
-		treesNJets[syst]->Fill();
+	    lepPt = qcdLeptons[0].pt();
+	    lepEta = qcdLeptons[0].eta();
+	    lepPhi = qcdLeptons[0].phi();
+	    treesNJets[syst]->Fill();
 	  }
         ntight_tags = ncsvt_tags;
         if (algo_ == "TCHPT")ntight_tags = ntchpt_tags;
         if ( nJets < 2 )continue;
         if (nJets > 3)continue;
-
-        //LEGENDA
+	//LEGENDA
         //    0T = 0;
         //    1T = 1;
         //    2T = 2;
@@ -2865,144 +1950,50 @@ void SingleTopSystematicsTreesDumper::analyze(const Event &iEvent, const EventSe
 	//    2T_QCD=5;
         if (nJets == 2 || nJets == 3)
         {
-
-            int B;
-            if (ntight_tags == 0) B = 0 ;
-            else if (ntight_tags == 1)B = 1;
-            else if (ntight_tags == 2)B = 2;
-            else continue;
-
-	    if(lepRhoCorrectedRelIso>0.1){
-	      cout<< "rho corr rel iso is: " <<lepRhoCorrectedRelIso<< " leptons size "<<nLeptons<< " B is " << B << " nJets is "  << nJets << " is qcd? "<< isQCD << " passes lepton? "<< passesLeptonStep <<endl;
-	    }
-	    
-
-            if (isQCD)
+	  int B;
+	  if (ntight_tags == 0) B = 0 ;
+	  else if (ntight_tags == 1)B = 1;
+	  else if (ntight_tags == 2)B = 2;
+	  else continue;
+	  if(lepRhoCorrectedRelIso>0.1){
+	    cout<< "rho corr rel iso is: " <<lepRhoCorrectedRelIso<< " leptons size "<<nLeptons<< " B is " << B << " nJets is "  << nJets << " is qcd? "<< isQCD << " passes lepton? "<< passesLeptonStep <<endl;
+	  }
+	  
+	  if (isQCD)
             {
-                B += 3;
+	      B += 3;
             }
-
-            if ( syst == "noSyst" && nJets == 2 && B < 3)
+	  
+	  if ( syst == "noSyst" && nJets == 2 && B < 3)
             {
-                ++passingJets;
+	      ++passingJets;
             }
+	  
+	  if ( (B == 0 || B == 3 ) && (ntchpt_tags != 0  || lowBTagTreePosition < 0 || lowBTagTreePosition == highBTagTreePosition) ) continue; //Sample A condition, ok for now
+	  
+	  if(doLooseBJetVeto_)if(nJets==2 && (B == 1 || B==4))if( ncsvl_tags != 1 )continue;
 
-            if ( (B == 0 || B == 3 ) && (ntchpt_tags != 0  || lowBTagTreePosition < 0 || lowBTagTreePosition == highBTagTreePosition) ) continue; //Sample A condition, ok for now
-	    
-	    if(doLooseBJetVeto_)if(nJets==2 && (B == 1 || B==4))if( ncsvl_tags != 1 )continue;
+	  cout << "test before bweight "<<endl;
 
-
-            if (syst == "noSyst")
+	  
+	  if (syst == "noSyst")
             {
-                bWeightNoSyst = bTagSF(B);  bWeightTree = bWeightNoSyst;
-                bWeightTreeBTagUp = bTagSF(B, "BTagUp");
-                bWeightTreeBTagDown = bTagSF(B, "BTagDown");
-                bWeightTreeMisTagUp = bTagSF(B, "MisTagUp");
-                bWeightTreeMisTagDown = bTagSF(B, "MisTagDown");
+	      bWeightNoSyst = bTagSF(B);  bWeightTree = bWeightNoSyst;
+	      bWeightTreeBTagUp = bTagSF(B, "BTagUp");
+	      bWeightTreeBTagDown = bTagSF(B, "BTagDown");
+	      bWeightTreeMisTagUp = bTagSF(B, "MisTagUp");
+	      bWeightTreeMisTagDown = bTagSF(B, "MisTagDown");
             }
-            else if (syst == "JESUp" || syst == "JESDown" ||
-                     syst == "JERUp" || syst == "JERDown" ||
-                     syst == "BTagUp" || syst == "BTagDown" ||
-                     syst == "MisTagUp" || syst == "MisTagDown" ) bWeightTree = bTagSF(B);
-            else bWeightTree = bWeightNoSyst;
+	  else if (syst == "JESUp" || syst == "JESDown" ||
+		   syst == "JERUp" || syst == "JERDown" ||
+		   syst == "BTagUp" || syst == "BTagDown" ||
+		   syst == "MisTagUp" || syst == "MisTagDown" ) bWeightTree = bTagSF(B);
+	  else bWeightTree = bWeightNoSyst;
 
-            if ( //leptonsFlavour_ == "electron" &&
-                doTurnOn_)
+	  cout << "test before pdf "<<endl;
+	  
+	  if (syst == "noSyst" && doPDF_ )
             {
-                if (syst == "noSyst" && (B == 1 || B == 4))
-                {
-                    jetprobs.clear();
-                    jetprobs_j1up.clear();
-                    jetprobs_j2up.clear();
-                    jetprobs_j3up.clear();
-                    jetprobs_b1up.clear();
-                    jetprobs_b2up.clear();
-                    jetprobs_b3up.clear();
-                    jetprobs_j1down.clear();
-                    jetprobs_j2down.clear();
-                    jetprobs_j3down.clear();
-                    jetprobs_b1down.clear();
-                    jetprobs_b2down.clear();
-                    jetprobs_b3down.clear();
-                    for (size_t i = 0; i < jetsEta->size(); ++i)
-                    {
-                        double eta = jetsEta->at(i);
-                        double btag = jetsBTagAlgo->at(i);
-                        double pt = jetsPt->at(i);
-
-                        pushJetProbs(pt, btag, eta);
-                    }
-                    //cout << "right before turn on "<< endl;
-                    turnOnWeightValue = turnOnProbs("noSyst", 1);
-                    turnOnWeightTreeJetTrig1Up = turnOnProbs("JetTrig1Up", 1);
-                    turnOnWeightTreeJetTrig1Down = turnOnProbs("JetTrig1Down", 1);
-                    turnOnWeightTreeJetTrig2Up = turnOnProbs("JetTrig2Up", 1);
-                    turnOnWeightTreeJetTrig2Down = turnOnProbs("JetTrig2Down", 1);
-                    turnOnWeightTreeJetTrig3Up = turnOnProbs("JetTrig3Up", 1);
-                    turnOnWeightTreeJetTrig3Down = turnOnProbs("JetTrig3Down", 1);
-
-                    turnOnWeightTreeBTagTrig1Up = turnOnProbs("BTagTrig1Up", 1);
-                    turnOnWeightTreeBTagTrig1Down = turnOnProbs("BTagTrig1Down", 1);
-                    turnOnWeightTreeBTagTrig2Up = turnOnProbs("BTagTrig2Up", 1);
-                    turnOnWeightTreeBTagTrig2Down = turnOnProbs("BTagTrig2Down", 1);
-                    turnOnWeightTreeBTagTrig3Up = turnOnProbs("BTagTrig3Up", 1);
-                    turnOnWeightTreeBTagTrig3Down = turnOnProbs("BTagTrig3Down", 1);
-                    //    turnOnWeightValue = turnOnWeight(jetprobs,1);
-                    if (syst == "noSyst") turnOnWeightValueNoSyst = turnOnWeightValue;
-                    if (syst == "noSyst") turnOnReWeightTreeNoSyst = turnOnReWeight(turnOnWeightValue, jets[highBTagTreePosition].pt(), highBTagTree);
-                }
-                else
-                {
-
-                    jetprobs.clear();
-
-                    for (size_t i = 0; i < jetsEta->size(); ++i)
-                    {
-                        double eta = jetsEta->at(i);
-                        double btag = jetsBTagAlgo->at(i);
-                        double pt = jetsPt->at(i);
-                        if (fabs(eta) > 2.6) jetprobs.push_back(0.);
-                        jetprobs.push_back(jetprob(pt, btag, eta, syst));
-                    }
-
-                    turnOnWeightValue = turnOnWeight(jetprobs, 1);
-                    turnOnWeightTreeJetTrig1Up = turnOnWeightValue;
-                    turnOnWeightTreeJetTrig1Down = turnOnWeightValue;
-                    turnOnWeightTreeJetTrig2Up = turnOnWeightValue;
-                    turnOnWeightTreeJetTrig2Down = turnOnWeightValue;
-                    turnOnWeightTreeJetTrig3Up = turnOnWeightValue;
-                    turnOnWeightTreeJetTrig3Down = turnOnWeightValue;
-
-                    turnOnWeightTreeBTagTrig1Up = turnOnWeightValue;
-                    turnOnWeightTreeBTagTrig1Down = turnOnWeightValue;
-                    turnOnWeightTreeBTagTrig2Up = turnOnWeightValue;
-                    turnOnWeightTreeBTagTrig2Down = turnOnWeightValue;
-                    turnOnWeightTreeBTagTrig3Up = turnOnWeightValue;
-                    turnOnWeightTreeBTagTrig3Down = turnOnWeightValue;
-                }
-
-                //  //cout << "jetprobs @syst: " << syst << " test 3" <<endl;
-                ////cout << " njets "<< nJets << " high b-tag " <<highBTagTree<< " high b-tag tree position" << highBTagTreePosition<<endl;
-
-                turnOnReWeightTree =  turnOnReWeightTreeNoSyst;
-		
-            }
-            if (leptonsFlavour_ == "none" && doTurnOn_)
-            {
-                jetprobs.clear();
-                for (size_t i = 0; i < jetsEta->size(); ++i)
-                {
-                    double eta = jetsEta->at(i);
-                    double btag = jetsBTagAlgo->at(i);
-                    double pt = jetsPt->at(i);
-                    if (fabs(eta) > 2.6) jetprobs.push_back(0.);
-                    jetprobs.push_back(jetprobbtag(btag));
-                }
-                turnOnWeightValue = turnOnWeight(jetprobs, 1);
-            }
-	    if (syst == "noSyst" && doPDF_ )
-            {
-
 	      if (channel != "Data" && !gotPDFs)
                 {
 		  iEvent.getByLabel(x1_, x1h);
@@ -3021,11 +2012,14 @@ void SingleTopSystematicsTreesDumper::analyze(const Event &iEvent, const EventSe
 		  id2 = *id2h;
 
 		  //Q2 = x1 * x2 * 7000*7000;	
+		  cout << "before first member"<<endl;
 		  LHAPDF::usePDFMember(1, 0);
 		  double xpdf1 = LHAPDF::xfx(1, x1, scalePDF, id1);
 		  double xpdf2 = LHAPDF::xfx(1, x2, scalePDF, id2);
 		  double w0 = xpdf1 * xpdf2;
-		  //cout << "scale " << scalePDF<< " x1 "<< x1 <<" x2 "<< x2 <<endl;	
+		  cout << "scale " << scalePDF<< " x1 "<< x1 <<" x2 "<< x2 <<endl;	
+
+		  cout << "before error loop"<<endl;
 		  for (int p = 1; p <= 52; ++p)
                     {
 		      LHAPDF::usePDFMember(1, p);
@@ -3034,20 +2028,13 @@ void SingleTopSystematicsTreesDumper::analyze(const Event &iEvent, const EventSe
 		      double pweight = xpdf1_new * xpdf2_new / w0;
 		      pdf_weights[p - 1] = pweight;
                     }
+		  cout << "before second member"<<endl;
 		  LHAPDF::usePDFMember(2, 0);
 		  double xpdf1_new = LHAPDF::xfx(2, x1, scalePDF, id1);
 		  double xpdf2_new = LHAPDF::xfx(2, x2, scalePDF, id2);
 		  pdf_weights_mstw= xpdf1_new * xpdf2_new / w0;
-		  LHAPDF::usePDFMember(3, 0);
-		  xpdf1_new = LHAPDF::xfx(3, x1, scalePDF, id1);
-		  xpdf2_new = LHAPDF::xfx(3, x2, scalePDF, id2);
-		  pdf_weights_nnpdf21 = xpdf1_new * xpdf2_new / w0;
-		  pdf_weights_gjr_fv = xpdf1_new * xpdf2_new / w0;
-		  pdf_weights_gjr_ff = xpdf1_new * xpdf2_new / w0;	//	  cout <<" gjr dis " << endl;
-		  pdf_weights_gjr_fdis = xpdf1_new * xpdf2_new / w0;
 		}
             }
-            turnOnWeightTree = turnOnWeightValue;
 
             if ( syst == "noSyst" && nJets == 2)
             {
@@ -3067,6 +2054,8 @@ void SingleTopSystematicsTreesDumper::analyze(const Event &iEvent, const EventSe
 		++passingBJets;
             }
 	    
+	    cout << "test before top reco"<<endl;
+
             math::PtEtaPhiELorentzVector top = top4Momentum(leptonPFour, jets[highBTagTreePosition], metPx, metPy);
             float fCosThetaLJ =  cosThetaLJ(leptonPFour, jets[lowBTagTreePosition], top);
             cosBLTree =  cosTheta_eta_bl(leptonPFour, jets[lowBTagTreePosition], top);
@@ -3082,15 +2071,8 @@ void SingleTopSystematicsTreesDumper::analyze(const Event &iEvent, const EventSe
             lepEta = leptonPFour.eta();
             lepPhi = leptonPFour.phi();
 
-	    if (leptonsFlavour_ == "muon" )lepEff = muonHLTEff(lepEta,"Mu2012A");
-	    if (leptonsFlavour_ == "muon" )lepEffB = muonHLTEff(lepEta,"Mu2012B");
-
 	    if (leptonsFlavour_ == "muon" )muonHLTSF(leptons[0].eta(),leptons[0].pt());
 	    if (leptonsFlavour_ == "electron" )electronHLTSF(leptons[0].eta(),leptons[0].pt());
-
-	    if (leptonsFlavour_ == "electron" )lepEff = 1;
-
-
 
             bJetPt = jets[highBTagTreePosition].pt();
             bJetE = jets[highBTagTreePosition].energy();
@@ -3102,8 +2084,6 @@ void SingleTopSystematicsTreesDumper::analyze(const Event &iEvent, const EventSe
             fJetEta = jets[lowBTagTreePosition].eta();
             fJetPhi = jets[lowBTagTreePosition].phi();
 
-            totalWeightTree = bWeightTree * turnOnWeightValue * PUWeight * Weight;
-
             etaTree = fabs(jets[lowBTagTreePosition].eta());
             etaTree2 = fabs(jets[highBTagTreePosition].eta());
             cosTree = fCosThetaLJ;
@@ -3111,318 +2091,31 @@ void SingleTopSystematicsTreesDumper::analyze(const Event &iEvent, const EventSe
             topEta = top.eta();
             topPhi = top.phi();
             topPt = top.pt();
+
+	    cout << "test before mcTruth"<<endl;
 	
 	    if(B==1 && nJets ==2 && syst == "noSyst" && doMCTruth_ && ! doFullMCTruth_){
-	      
-	      iEvent.getByLabel(MCTopsEta_, MCTopsEta); iEvent.getByLabel(MCTopsPt_, MCTopsPt); iEvent.getByLabel(MCTopsPhi_, MCTopsPhi); iEvent.getByLabel(MCTopsEnergy_, MCTopsEnergy); iEvent.getByLabel(MCTopsMotherId_, MCTopsMotherId);
-
-	      iEvent.getByLabel(MCTopQuarksEta_, MCTopQuarksEta); iEvent.getByLabel(MCTopQuarksPt_, MCTopQuarksPt); iEvent.getByLabel(MCTopQuarksPhi_, MCTopQuarksPhi); iEvent.getByLabel(MCTopQuarksEnergy_, MCTopQuarksEnergy); iEvent.getByLabel(MCTopQuarksMotherId_, MCTopQuarksMotherId);
-
-	      iEvent.getByLabel(MCTopQuarkBarsEta_, MCTopQuarkBarsEta); iEvent.getByLabel(MCTopQuarkBarsPt_, MCTopQuarkBarsPt); iEvent.getByLabel(MCTopQuarkBarsPhi_, MCTopQuarkBarsPhi); iEvent.getByLabel(MCTopQuarkBarsEnergy_, MCTopQuarkBarsEnergy); iEvent.getByLabel(MCTopQuarkBarsMotherId_, MCTopQuarkBarsMotherId);
-
-	      iEvent.getByLabel(MCTopLeptonsEta_, MCTopLeptonsEta); iEvent.getByLabel(MCTopLeptonsPt_, MCTopLeptonsPt); iEvent.getByLabel(MCTopLeptonsPhi_, MCTopLeptonsPhi); iEvent.getByLabel(MCTopLeptonsEnergy_, MCTopLeptonsEnergy); iEvent.getByLabel(MCTopLeptonsMotherId_, MCTopLeptonsMotherId);
-
-	      iEvent.getByLabel(MCTopNeutrinosEta_, MCTopNeutrinosEta); iEvent.getByLabel(MCTopNeutrinosPt_, MCTopNeutrinosPt); iEvent.getByLabel(MCTopNeutrinosPhi_, MCTopNeutrinosPhi); iEvent.getByLabel(MCTopNeutrinosEnergy_, MCTopNeutrinosEnergy); iEvent.getByLabel(MCTopNeutrinosMotherId_, MCTopNeutrinosMotherId);
-
-	      iEvent.getByLabel(MCTopBQuarksEta_, MCTopBQuarksEta); iEvent.getByLabel(MCTopBQuarksPt_, MCTopBQuarksPt); iEvent.getByLabel(MCTopBQuarksPhi_, MCTopBQuarksPhi); iEvent.getByLabel(MCTopBQuarksEnergy_, MCTopBQuarksEnergy); iEvent.getByLabel(MCTopBQuarksMotherId_, MCTopBQuarksMotherId);
-
-	      iEvent.getByLabel(MCTopWsEta_, MCTopWsEta); iEvent.getByLabel(MCTopWsPt_, MCTopWsPt); iEvent.getByLabel(MCTopWsPhi_, MCTopWsPhi); iEvent.getByLabel(MCTopWsEnergy_, MCTopWsEnergy); iEvent.getByLabel(MCTopWsDauOneId_, MCTopWsDauOneId);
-
-
-	      
-	      iEvent.getByLabel(MCLeptonsEta_, MCLeptonsEta); iEvent.getByLabel(MCLeptonsPt_, MCLeptonsPt); iEvent.getByLabel(MCLeptonsPhi_, MCLeptonsPhi); iEvent.getByLabel(MCLeptonsEnergy_, MCLeptonsEnergy);
-	      iEvent.getByLabel(MCNeutrinosEta_, MCNeutrinosEta); iEvent.getByLabel(MCNeutrinosPt_, MCNeutrinosPt); iEvent.getByLabel(MCNeutrinosPhi_, MCNeutrinosPhi); iEvent.getByLabel(MCNeutrinosEnergy_, MCNeutrinosEnergy);
-	      iEvent.getByLabel(MCBQuarksEta_, MCBQuarksEta); iEvent.getByLabel(MCBQuarksPt_, MCBQuarksPt); iEvent.getByLabel(MCBQuarksPhi_, MCBQuarksPhi); iEvent.getByLabel(MCBQuarksEnergy_, MCBQuarksEnergy);
-	      iEvent.getByLabel(MCQuarksEta_, MCQuarksEta); iEvent.getByLabel(MCQuarksPt_, MCQuarksPt); iEvent.getByLabel(MCQuarksPhi_, MCQuarksPhi); iEvent.getByLabel(MCQuarksEnergy_, MCQuarksEnergy);
-	      
-	      iEvent.getByLabel(MCTopBQuarksPdgId_, MCTopBQuarksPdgId);iEvent.getByLabel(MCTopWsPdgId_, MCTopWsPdgId);
-	      iEvent.getByLabel(MCTopQuarksPdgId_, MCTopQuarksPdgId);iEvent.getByLabel(MCTopsPdgId_, MCTopsPdgId);
-	      iEvent.getByLabel(MCTopQuarkBarsPdgId_, MCTopQuarkBarsPdgId);
-	      iEvent.getByLabel(MCTopLeptonsPdgId_, MCTopLeptonsPdgId);
-	      iEvent.getByLabel(MCTopNeutrinosPdgId_, MCTopNeutrinosPdgId);
-	      
-	      iEvent.getByLabel(MCBQuarksPdgId_, MCBQuarksPdgId); iEvent.getByLabel(MCQuarksPdgId_, MCQuarksPdgId);
-	      iEvent.getByLabel(MCLeptonsPdgId_, MCLeptonsPdgId); iEvent.getByLabel(MCNeutrinosPdgId_, MCNeutrinosPdgId);
-
-	      iEvent.getByLabel(MCBQuarksMotherId_, MCBQuarksMotherId); iEvent.getByLabel(MCQuarksMotherId_, MCQuarksMotherId);
-	      iEvent.getByLabel(MCLeptonsMotherId_, MCLeptonsMotherId); iEvent.getByLabel(MCNeutrinosMotherId_, MCNeutrinosMotherId);
-	      
-	      for (size_t p = 1; p <= 12; ++p){
-		//		cout << "in loop 1" << endl; 
-		if(!(MCQuarksEta->size() < p) ){
-		  MCQuarksEtaVec[p-1]=MCQuarksEta->at(p-1);
-		  //  cout << " lepton eta "<< MCQuarksEtaVec[p-1]<<endl;
-		  MCQuarksPhiVec[p-1]=MCQuarksPhi->at(p-1);
-		  MCQuarksPtVec[p-1]=MCQuarksPt->at(p-1);
-		  MCQuarksEnergyVec[p-1]=MCQuarksEnergy->at(p-1);
-		  MCQuarksPdgIdVec[p-1]=MCQuarksPdgId->at(p-1);
-		  MCQuarksMotherIdVec[p-1]=MCQuarksMotherId->at(p-1);
-		}
-		else{
-		  MCQuarksEtaVec[p-1]=-999;
-		  MCQuarksPhiVec[p-1]=-999;
-		  MCQuarksPtVec[p-1]=-999;
-		  MCQuarksEnergyVec[p-1]=-999;
-		  MCQuarksPdgIdVec[p-1]=-999;
-		  MCQuarksMotherIdVec[p-1]=-999;
-		}
-	      }
-	      for (size_t p = 1; p <= 4; ++p){
-		if(!(MCLeptonsEta->size() < p) ){
-		  MCLeptonsEtaVec[p-1]=MCLeptonsEta->at(p-1);
-		  MCLeptonsPhiVec[p-1]=MCLeptonsPhi->at(p-1);
-		  MCLeptonsPtVec[p-1]=MCLeptonsPt->at(p-1);
-		  MCLeptonsEnergyVec[p-1]=MCLeptonsEnergy->at(p-1);
-		  MCLeptonsPdgIdVec[p-1]=MCLeptonsPdgId->at(p-1);
-		  MCLeptonsMotherIdVec[p-1]=MCLeptonsMotherId->at(p-1);
-		}
-		else{
-		  MCLeptonsEtaVec[p-1]=-999;
-		  MCLeptonsPhiVec[p-1]=-999;
-		  MCLeptonsPtVec[p-1]=-999;
-		  MCLeptonsEnergyVec[p-1]=-999;
-		  MCLeptonsPdgIdVec[p-1]=-999;
-		  MCLeptonsMotherIdVec[p-1]=-999;
-		}
-		if(!(MCBQuarksEta->size() < p) ){
-		  MCBQuarksEtaVec[p-1]=MCBQuarksEta->at(p-1);
-		  MCBQuarksPhiVec[p-1]=MCBQuarksPhi->at(p-1);
-		  MCBQuarksPtVec[p-1]=MCBQuarksPt->at(p-1);
-		  MCBQuarksEnergyVec[p-1]=MCBQuarksEnergy->at(p-1);
-		  MCBQuarksPdgIdVec[p-1]=MCBQuarksPdgId->at(p-1);
-		  MCBQuarksMotherIdVec[p-1]=MCBQuarksMotherId->at(p-1);
-		}
-		else{
-		  MCBQuarksEtaVec[p-1]=-999;
-		  MCBQuarksPhiVec[p-1]=-999;
-		  MCBQuarksPtVec[p-1]=-999;
-		  MCBQuarksEnergyVec[p-1]=-999;
-		  MCBQuarksPdgIdVec[p-1]=-999;
-		  MCBQuarksMotherIdVec[p-1]=-999;
-		}
-		if(!(MCNeutrinosEta->size() < p) ){
-		  MCNeutrinosEtaVec[p-1]=MCNeutrinosEta->at(p-1);
-		  MCNeutrinosPhiVec[p-1]=MCNeutrinosPhi->at(p-1);
-		  MCNeutrinosPtVec[p-1]=MCNeutrinosPt->at(p-1);
-		  MCNeutrinosEnergyVec[p-1]=MCNeutrinosEnergy->at(p-1);
-		  MCNeutrinosPdgIdVec[p-1]=MCNeutrinosPdgId->at(p-1);
-		  MCNeutrinosMotherIdVec[p-1]=MCNeutrinosMotherId->at(p-1);
-		}
-		else{
-		  MCNeutrinosEtaVec[p-1]=-999;
-		  MCNeutrinosPhiVec[p-1]=-999;
-		  MCNeutrinosPtVec[p-1]=-999;
-		  MCNeutrinosEnergyVec[p-1]=-999;
-		  MCNeutrinosPdgIdVec[p-1]=-999;
-		  MCNeutrinosMotherIdVec[p-1]=-999;
-		}
-	      }
-	      
-	      nMCTruthLeptons = 0;
-	      
-	      for (size_t p = 1; p <= 2; ++p){
-		//		cout << "in loop 2" << endl; 
-		//		cout << " p is "<< p << " leptons size "<< MCTopLeptonsEta->size()<<endl;
-		bool isLeptonic = false;
-		bool isHadronic = false;
-		size_t position = 0;
-		//		cout << " loop 1 "<<endl;
-		//		cout << MCTopWsEta->size() << " p " << p<< endl;
-		if(isSingleTopCompHEP_){
-		  if (MCTopLeptonsEta->size() < p)continue;
-		  position = p;
-		  MCTopLeptonsEtaVec[p-1]=MCTopLeptonsEta->at(position-1);
-		  MCTopLeptonsPhiVec[p-1]=MCTopLeptonsPhi->at(position-1);
-		  MCTopLeptonsPtVec[p-1]=MCTopLeptonsPt->at(position-1);
-		  MCTopLeptonsEnergyVec[p-1]=MCTopLeptonsEnergy->at(position-1);
-		  MCTopLeptonsPdgIdVec[p-1]=MCTopLeptonsPdgId->at(position-1);
-		  MCTopLeptonsMotherIdVec[p-1]=MCTopLeptonsMotherId->at(position-1);
-		  
-		  MCTopNeutrinosEtaVec[p-1]=MCTopNeutrinosEta->at(position-1);
-		  MCTopNeutrinosPhiVec[p-1]=MCTopNeutrinosPhi->at(position-1);
-		  MCTopNeutrinosPtVec[p-1]=MCTopNeutrinosPt->at(position-1);
-		  MCTopNeutrinosEnergyVec[p-1]=MCTopNeutrinosEnergy->at(position-1);
-		  MCTopNeutrinosPdgIdVec[p-1]=MCTopNeutrinosPdgId->at(position-1);
-		  MCTopNeutrinosMotherIdVec[p-1]=MCTopNeutrinosMotherId->at(position-1);
-		  
-		  if(!(MCTopBQuarksEta->size() < p) ){
-		    MCTopBQuarksEtaVec[p-1]=MCTopBQuarksEta->at(p-1);
-		    MCTopBQuarksPhiVec[p-1]=MCTopBQuarksPhi->at(p-1);
-		    MCTopBQuarksPtVec[p-1]=MCTopBQuarksPt->at(p-1);
-		    MCTopBQuarksEnergyVec[p-1]=MCTopBQuarksEnergy->at(p-1);
-		    MCTopBQuarksPdgIdVec[p-1]=MCTopBQuarksPdgId->at(p-1);
-		    MCTopBQuarksMotherIdVec[p-1]=MCTopBQuarksMotherId->at(p-1);
-		  }
-		}
-		else {
-		if (MCTopWsEta->size() < p)continue;
-		if(MCTopNeutrinosEta->size()!=MCTopLeptonsEta->size())continue;
-		if(MCTopQuarksEta->size()!=MCTopQuarkBarsEta->size())continue;
-		
-		for (size_t l = 1; l <= MCTopQuarksEta->size();++l ){
-		  
-		  		  cout << " quark id "<<   MCTopQuarksPdgId->at(l-1) << " quarkbar id "<< MCTopQuarkBarsPdgId->at(l-1) <<
-		  " W dau one id "<< MCTopWsDauOneId->at(p-1) << endl;
-		  
-		  		  cout  << " quark mother id "<<  MCTopQuarksMotherId->at(l-1) << " quarkbar id "<< MCTopQuarkBarsMotherId->at(l-1) << 
-		  " W  id "<< MCTopWsPdgId->at(p-1) << endl;
-		  if(  MCTopQuarksPdgId->at(l-1) == MCTopWsDauOneId->at(p-1) ||  MCTopQuarkBarsPdgId->at(l-1) == MCTopWsDauOneId->at(p-1) ){
-		    position = l;
-		    isHadronic = true;
-		  }
-		}
-		for (size_t l = 1; l <= MCTopLeptonsEta->size();++l ){
-		  
-		  		  cout << " lepton id "<<  MCTopLeptonsPdgId->at(l-1) << " neutrino id "<< MCTopNeutrinosPdgId->at(l-1)<< 
-		    " W dau one id "<< MCTopWsDauOneId->at(p-1) << endl;
-		  
-		  		  cout << " lepton mother id "<<  MCTopLeptonsMotherId->at(l-1) << " neutrino id "<< MCTopNeutrinosMotherId->at(l-1) << 
-		    " W  id "<< MCTopWsPdgId->at(p-1) << endl;
-		  
-		  if(  MCTopLeptonsPdgId->at(l-1) == MCTopWsDauOneId->at(p-1) ||  MCTopNeutrinosPdgId->at(l-1) == MCTopWsDauOneId->at(p-1) ){
-		    position = l;
-		    ++nMCTruthLeptons;
-		    isLeptonic = true;
-		  }
-		}
-		cout <<" pos "<<  position <<"  islep "<<  isLeptonic<< " lep size "<< MCTopLeptonsEta->size()<< " neu size "<< MCTopNeutrinosEta->size()<< endl;
-		cout <<" pos "<<  position <<"  ishad "<<  isHadronic<< " quark size"<< MCTopQuarksEta->size()<< " qbar size "<< MCTopQuarkBarsEta->size()<< endl;
-		if(isLeptonic){
-		  MCTopLeptonsEtaVec[p-1]=MCTopLeptonsEta->at(position-1);
-		  MCTopLeptonsPhiVec[p-1]=MCTopLeptonsPhi->at(position-1);
-		  MCTopLeptonsPtVec[p-1]=MCTopLeptonsPt->at(position-1);
-		  MCTopLeptonsEnergyVec[p-1]=MCTopLeptonsEnergy->at(position-1);
-		  MCTopLeptonsPdgIdVec[p-1]=MCTopLeptonsPdgId->at(position-1);
-		  MCTopLeptonsMotherIdVec[p-1]=MCTopLeptonsMotherId->at(position-1);
-
-		  MCTopNeutrinosEtaVec[p-1]=MCTopNeutrinosEta->at(position-1);
-		  MCTopNeutrinosPhiVec[p-1]=MCTopNeutrinosPhi->at(position-1);
-		  MCTopNeutrinosPtVec[p-1]=MCTopNeutrinosPt->at(position-1);
-		  MCTopNeutrinosEnergyVec[p-1]=MCTopNeutrinosEnergy->at(position-1);
-		  MCTopNeutrinosPdgIdVec[p-1]=MCTopNeutrinosPdgId->at(position-1);
-		  MCTopNeutrinosMotherIdVec[p-1]=MCTopNeutrinosMotherId->at(position-1);
-		}
-		else{
-		  MCTopLeptonsEtaVec[p-1]=-999;
-		  MCTopLeptonsPhiVec[p-1]=-999;
-		  MCTopLeptonsPtVec[p-1]=-999;
-		  MCTopLeptonsEnergyVec[p-1]=-999;
-		  MCTopLeptonsPdgIdVec[p-1]=-999;
-		  MCTopLeptonsMotherIdVec[p-1]=-999;
-		  
-		  MCTopNeutrinosEtaVec[p-1]=-999;
-		  MCTopNeutrinosPhiVec[p-1]=-999;
-		  MCTopNeutrinosPtVec[p-1]=-999;
-		  MCTopNeutrinosEnergyVec[p-1]=-999;
-		  MCTopNeutrinosPdgIdVec[p-1]=-999;
-		  MCTopNeutrinosMotherIdVec[p-1]=-999;
-		}
-		if(isHadronic){
-		  
-		  MCTopQuarksEtaVec[p-1]=MCTopQuarksEta->at(position-1);
-		  MCTopQuarksPhiVec[p-1]=MCTopQuarksPhi->at(position-1);
-		  MCTopQuarksPtVec[p-1]=MCTopQuarksPt->at(position-1);
-		  MCTopQuarksEnergyVec[p-1]=MCTopQuarksEnergy->at(position-1);
-		  MCTopQuarksPdgIdVec[p-1]=MCTopQuarksPdgId->at(position-1);
-		  MCTopQuarksMotherIdVec[p-1]=MCTopQuarksMotherId->at(position-1);
-
-		  MCTopQuarkBarsEtaVec[p-1]=MCTopQuarkBarsEta->at(position-1);
-		  MCTopQuarkBarsPhiVec[p-1]=MCTopQuarkBarsPhi->at(position-1);
-		  MCTopQuarkBarsPtVec[p-1]=MCTopQuarkBarsPt->at(position-1);
-		  MCTopQuarkBarsEnergyVec[p-1]=MCTopQuarkBarsEnergy->at(position-1);
-		  MCTopQuarkBarsPdgIdVec[p-1]=MCTopQuarkBarsPdgId->at(position-1);
-		  MCTopQuarkBarsMotherIdVec[p-1]=MCTopQuarkBarsMotherId->at(position-1);
-		  
-		}
-		else{
-		  MCTopQuarksEtaVec[p-1]=-999;
-		  MCTopQuarksPhiVec[p-1]=-999;
-		  MCTopQuarksPtVec[p-1]=-999;
-		  MCTopQuarksEnergyVec[p-1]=-999;
-		  MCTopQuarksPdgIdVec[p-1]=-999;
-		  MCTopQuarksMotherIdVec[p-1]=-999;
-		
-		  MCTopQuarkBarsEtaVec[p-1]=-999;
-		  MCTopQuarkBarsPhiVec[p-1]=-999;
-		  MCTopQuarkBarsPtVec[p-1]=-999;
-		  MCTopQuarkBarsEnergyVec[p-1]=-999;
-		  MCTopQuarkBarsPdgIdVec[p-1]=-999;
-		  MCTopQuarkBarsMotherIdVec[p-1]=-999;
-		  
-		}
-		if(!(MCTopWsEta->size() < p) ){
-		  MCTopWsEtaVec[p-1]=MCTopWsEta->at(p-1);
-		  MCTopWsPhiVec[p-1]=MCTopWsPhi->at(p-1);
-		  MCTopWsPtVec[p-1]=MCTopWsPt->at(p-1);
-		  MCTopWsEnergyVec[p-1]=MCTopWsEnergy->at(p-1);
-		  MCTopWsPdgIdVec[p-1]=MCTopWsPdgId->at(p-1);
-		}
-		else{
-		  MCTopWsEtaVec[p-1]=-999;
-		  MCTopWsPhiVec[p-1]=-999;
-		  MCTopWsPtVec[p-1]=-999;
-		  MCTopWsEnergyVec[p-1]=-999;
-		  MCTopWsPdgIdVec[p-1]=-999;
-		}
-		if(!(MCTopBQuarksEta->size() < p) ){
-		  MCTopBQuarksEtaVec[p-1]=MCTopBQuarksEta->at(p-1);
-		  MCTopBQuarksPhiVec[p-1]=MCTopBQuarksPhi->at(p-1);
-		  MCTopBQuarksPtVec[p-1]=MCTopBQuarksPt->at(p-1);
-		  MCTopBQuarksEnergyVec[p-1]=MCTopBQuarksEnergy->at(p-1);
-		  MCTopBQuarksPdgIdVec[p-1]=MCTopBQuarksPdgId->at(p-1);
-		  MCTopBQuarksMotherIdVec[p-1]=MCTopBQuarksMotherId->at(p-1);
-		}
-		else{
-		  MCTopBQuarksEtaVec[p-1]=-999;
-		  MCTopBQuarksPhiVec[p-1]=-999;
-		  MCTopBQuarksPtVec[p-1]=-999;
-		  MCTopBQuarksEnergyVec[p-1]=-999;
-		  MCTopBQuarksPdgIdVec[p-1]=-999;
-		  MCTopBQuarksMotherIdVec[p-1]=-999;
-		}
-		if( (!(MCBQuarksEta->size() < p)) && (!(MCTopWsEta->size() < p))){
-		  math::PtEtaPhiELorentzVector mctop = math::PtEtaPhiELorentzVector(
-										    (MCTopBQuarksPtVec[p-1]+MCTopWsPtVec[p-1]),
-										    (MCTopBQuarksEtaVec[p-1]+MCTopWsEtaVec[p-1]),
-										    (MCTopBQuarksPhiVec[p-1]+MCTopWsPhiVec[p-1]),
-										    (MCTopBQuarksEnergyVec[p-1]+MCTopWsEnergyVec[p-1]) );
-		  MCTopsEtaVec[p-1]=MCTopsEta->at(p-1);
-		  MCTopsPhiVec[p-1]=MCTopsPhi->at(p-1);
-		  MCTopsPtVec[p-1]=MCTopsPt->at(p-1);
-		  MCTopsEnergyVec[p-1]=MCTopsEnergy->at(p-1);
-		  MCTopsPdgIdVec[p-1]=MCTopsPdgId->at(p-1);
-		}
-		else{
-		  MCTopsEtaVec[p-1]=-999;
-		  MCTopsPhiVec[p-1]=-999;
-		  MCTopsPtVec[p-1]=-999;
-		  MCTopsEnergyVec[p-1]=-999;
-		  MCTopsPdgIdVec[p-1]=-999;
-		}
-		}
-	      }
-
+	      fillMCTruth(iEvent);
 	    }
 	    if (nJets == 2)
-            {
-	      //cout << " B is "<< B<< " syst is "<<syst_name <<endl;
-	      //cout<< " tree name "<< trees2J[B][syst_name]->GetName() <<endl;
+	      {
+		cout << " B is "<< B<< " syst is "<<syst_name <<endl;
+		cout<< " tree name "<< trees2J[B][syst_name]->GetName() <<endl;
 	      trees2J[B][syst_name]->Fill();
             }
             if (nJets == 3)
 	      {
-		//cout << " B is "<< B<< " syst is "<<syst_name <<endl;
-                //  cout << " tree name "<< trees3J[B][syst_name]->GetName() <<endl;
+		cout << " B is "<< B<< " syst is "<<syst_name <<endl;
+		cout << " tree name "<< trees3J[B][syst_name]->GetName() <<endl;
                 trees3J[B][syst_name]->Fill();
             }
         }
-
-    
-
-
-
     }
 }
+
+////End of main per-event loop
+
+////Functions for the reconstruction of kinematic variables:
 
 //CosThetalj given top quark, lepton and light jet
 float SingleTopSystematicsTreesDumper::cosThetaLJ(math::PtEtaPhiELorentzVector lepton, math::PtEtaPhiELorentzVector jet, math::PtEtaPhiELorentzVector top)
@@ -3455,7 +2148,6 @@ float SingleTopSystematicsTreesDumper::cosTheta_eta_bl(math::PtEtaPhiELorentzVec
     return ROOT::Math::VectorUtil::CosTheta(boostedBeamLine.Vect(), boostedLepton.Vect());
 
 }
-
 
 double SingleTopSystematicsTreesDumper::topMtw(math::PtEtaPhiELorentzVector lepton, math::PtEtaPhiELorentzVector jet, float metPx, float metPy)
 {
@@ -3669,6 +2361,304 @@ math::XYZTLorentzVector SingleTopSystematicsTreesDumper::NuMomentum(float lepton
     return result;
 }
 
+
+////Function for getting MC truth observables:
+
+void SingleTopSystematicsTreesDumper::fillMCTruth(const Event &iEvent ){
+    iEvent.getByLabel(MCTopQuarksEta_, MCTopQuarksEta); iEvent.getByLabel(MCTopQuarksPt_, MCTopQuarksPt); iEvent.getByLabel(MCTopQuarksPhi_, MCTopQuarksPhi); iEvent.getByLabel(MCTopQuarksEnergy_, MCTopQuarksEnergy); iEvent.getByLabel(MCTopQuarksMotherId_, MCTopQuarksMotherId);
+    
+    iEvent.getByLabel(MCTopQuarkBarsEta_, MCTopQuarkBarsEta); iEvent.getByLabel(MCTopQuarkBarsPt_, MCTopQuarkBarsPt); iEvent.getByLabel(MCTopQuarkBarsPhi_, MCTopQuarkBarsPhi); iEvent.getByLabel(MCTopQuarkBarsEnergy_, MCTopQuarkBarsEnergy); iEvent.getByLabel(MCTopQuarkBarsMotherId_, MCTopQuarkBarsMotherId);
+    
+    iEvent.getByLabel(MCTopLeptonsEta_, MCTopLeptonsEta); iEvent.getByLabel(MCTopLeptonsPt_, MCTopLeptonsPt); iEvent.getByLabel(MCTopLeptonsPhi_, MCTopLeptonsPhi); iEvent.getByLabel(MCTopLeptonsEnergy_, MCTopLeptonsEnergy); iEvent.getByLabel(MCTopLeptonsMotherId_, MCTopLeptonsMotherId);
+    
+    iEvent.getByLabel(MCTopNeutrinosEta_, MCTopNeutrinosEta); iEvent.getByLabel(MCTopNeutrinosPt_, MCTopNeutrinosPt); iEvent.getByLabel(MCTopNeutrinosPhi_, MCTopNeutrinosPhi); iEvent.getByLabel(MCTopNeutrinosEnergy_, MCTopNeutrinosEnergy); iEvent.getByLabel(MCTopNeutrinosMotherId_, MCTopNeutrinosMotherId);
+    
+    iEvent.getByLabel(MCTopBQuarksEta_, MCTopBQuarksEta); iEvent.getByLabel(MCTopBQuarksPt_, MCTopBQuarksPt); iEvent.getByLabel(MCTopBQuarksPhi_, MCTopBQuarksPhi); iEvent.getByLabel(MCTopBQuarksEnergy_, MCTopBQuarksEnergy); iEvent.getByLabel(MCTopBQuarksMotherId_, MCTopBQuarksMotherId);
+    
+    iEvent.getByLabel(MCTopWsEta_, MCTopWsEta); iEvent.getByLabel(MCTopWsPt_, MCTopWsPt); iEvent.getByLabel(MCTopWsPhi_, MCTopWsPhi); iEvent.getByLabel(MCTopWsEnergy_, MCTopWsEnergy); iEvent.getByLabel(MCTopWsDauOneId_, MCTopWsDauOneId);
+    
+    
+    
+    iEvent.getByLabel(MCLeptonsEta_, MCLeptonsEta); iEvent.getByLabel(MCLeptonsPt_, MCLeptonsPt); iEvent.getByLabel(MCLeptonsPhi_, MCLeptonsPhi); iEvent.getByLabel(MCLeptonsEnergy_, MCLeptonsEnergy);
+    iEvent.getByLabel(MCNeutrinosEta_, MCNeutrinosEta); iEvent.getByLabel(MCNeutrinosPt_, MCNeutrinosPt); iEvent.getByLabel(MCNeutrinosPhi_, MCNeutrinosPhi); iEvent.getByLabel(MCNeutrinosEnergy_, MCNeutrinosEnergy);
+    iEvent.getByLabel(MCBQuarksEta_, MCBQuarksEta); iEvent.getByLabel(MCBQuarksPt_, MCBQuarksPt); iEvent.getByLabel(MCBQuarksPhi_, MCBQuarksPhi); iEvent.getByLabel(MCBQuarksEnergy_, MCBQuarksEnergy);
+    iEvent.getByLabel(MCQuarksEta_, MCQuarksEta); iEvent.getByLabel(MCQuarksPt_, MCQuarksPt); iEvent.getByLabel(MCQuarksPhi_, MCQuarksPhi); iEvent.getByLabel(MCQuarksEnergy_, MCQuarksEnergy);
+    
+    iEvent.getByLabel(MCTopBQuarksPdgId_, MCTopBQuarksPdgId);iEvent.getByLabel(MCTopWsPdgId_, MCTopWsPdgId);
+    iEvent.getByLabel(MCTopQuarksPdgId_, MCTopQuarksPdgId);iEvent.getByLabel(MCTopsPdgId_, MCTopsPdgId);
+    iEvent.getByLabel(MCTopQuarkBarsPdgId_, MCTopQuarkBarsPdgId);
+    iEvent.getByLabel(MCTopLeptonsPdgId_, MCTopLeptonsPdgId);
+    iEvent.getByLabel(MCTopNeutrinosPdgId_, MCTopNeutrinosPdgId);
+    
+    iEvent.getByLabel(MCBQuarksPdgId_, MCBQuarksPdgId); iEvent.getByLabel(MCQuarksPdgId_, MCQuarksPdgId);
+    iEvent.getByLabel(MCLeptonsPdgId_, MCLeptonsPdgId); iEvent.getByLabel(MCNeutrinosPdgId_, MCNeutrinosPdgId);
+    
+    iEvent.getByLabel(MCBQuarksMotherId_, MCBQuarksMotherId); iEvent.getByLabel(MCQuarksMotherId_, MCQuarksMotherId);
+    iEvent.getByLabel(MCLeptonsMotherId_, MCLeptonsMotherId); iEvent.getByLabel(MCNeutrinosMotherId_, MCNeutrinosMotherId);
+    
+    for (size_t p = 1; p <= 12; ++p){
+      
+      if(!(MCQuarksEta->size() < p) ){
+	MCQuarksEtaVec[p-1]=MCQuarksEta->at(p-1);
+	MCQuarksPhiVec[p-1]=MCQuarksPhi->at(p-1);
+	MCQuarksPtVec[p-1]=MCQuarksPt->at(p-1);
+	MCQuarksEnergyVec[p-1]=MCQuarksEnergy->at(p-1);
+	MCQuarksPdgIdVec[p-1]=MCQuarksPdgId->at(p-1);
+	MCQuarksMotherIdVec[p-1]=MCQuarksMotherId->at(p-1);
+      }
+      else{
+	MCQuarksEtaVec[p-1]=-999;
+	MCQuarksPhiVec[p-1]=-999;
+	MCQuarksPtVec[p-1]=-999;
+	MCQuarksEnergyVec[p-1]=-999;
+	MCQuarksPdgIdVec[p-1]=-999;
+	MCQuarksMotherIdVec[p-1]=-999;
+      }
+    }
+    for (size_t p = 1; p <= 4; ++p){
+      if(!(MCLeptonsEta->size() < p) ){
+	MCLeptonsEtaVec[p-1]=MCLeptonsEta->at(p-1);
+	MCLeptonsPhiVec[p-1]=MCLeptonsPhi->at(p-1);
+	MCLeptonsPtVec[p-1]=MCLeptonsPt->at(p-1);
+	MCLeptonsEnergyVec[p-1]=MCLeptonsEnergy->at(p-1);
+	MCLeptonsPdgIdVec[p-1]=MCLeptonsPdgId->at(p-1);
+	MCLeptonsMotherIdVec[p-1]=MCLeptonsMotherId->at(p-1);
+	
+      }
+      else{
+	MCLeptonsEtaVec[p-1]=-999;
+	MCLeptonsPhiVec[p-1]=-999;
+	MCLeptonsPtVec[p-1]=-999;
+	MCLeptonsEnergyVec[p-1]=-999;
+	MCLeptonsPdgIdVec[p-1]=-999;
+	MCLeptonsMotherIdVec[p-1]=-999;
+	
+      }
+      if(!(MCBQuarksEta->size() < p) ){
+	MCBQuarksEtaVec[p-1]=MCBQuarksEta->at(p-1);
+	MCBQuarksPhiVec[p-1]=MCBQuarksPhi->at(p-1);
+	MCBQuarksPtVec[p-1]=MCBQuarksPt->at(p-1);
+	MCBQuarksEnergyVec[p-1]=MCBQuarksEnergy->at(p-1);
+	MCBQuarksPdgIdVec[p-1]=MCBQuarksPdgId->at(p-1);
+	MCBQuarksMotherIdVec[p-1]=MCBQuarksMotherId->at(p-1);
+      }
+      else{
+	MCBQuarksEtaVec[p-1]=-999;
+	MCBQuarksPhiVec[p-1]=-999;
+	MCBQuarksPtVec[p-1]=-999;
+	MCBQuarksEnergyVec[p-1]=-999;
+	MCBQuarksPdgIdVec[p-1]=-999;
+	MCBQuarksMotherIdVec[p-1]=-999;
+      }
+      if(!(MCNeutrinosEta->size() < p) ){
+	MCNeutrinosEtaVec[p-1]=MCNeutrinosEta->at(p-1);
+	MCNeutrinosPhiVec[p-1]=MCNeutrinosPhi->at(p-1);
+	MCNeutrinosPtVec[p-1]=MCNeutrinosPt->at(p-1);
+	MCNeutrinosEnergyVec[p-1]=MCNeutrinosEnergy->at(p-1);
+	MCNeutrinosPdgIdVec[p-1]=MCNeutrinosPdgId->at(p-1);
+	MCNeutrinosMotherIdVec[p-1]=MCNeutrinosMotherId->at(p-1);
+      }
+      else{
+	MCNeutrinosEtaVec[p-1]=-999;
+	MCNeutrinosPhiVec[p-1]=-999;
+	MCNeutrinosPtVec[p-1]=-999;
+	MCNeutrinosEnergyVec[p-1]=-999;
+	MCNeutrinosPdgIdVec[p-1]=-999;
+	MCNeutrinosMotherIdVec[p-1]=-999;
+      }
+    }
+    nMCTruthLeptons = 0;
+    
+    for (size_t p = 1; p <= 2; ++p){
+      
+      bool isLeptonic = false;
+      bool isHadronic = false;
+      
+      
+      size_t position = 0;
+      
+      if(isSingleTopCompHEP_){
+	if (MCTopLeptonsEta->size() < p)continue;
+	position = p;
+	MCTopLeptonsEtaVec[p-1]=MCTopLeptonsEta->at(position-1);
+	MCTopLeptonsPhiVec[p-1]=MCTopLeptonsPhi->at(position-1);
+	MCTopLeptonsPtVec[p-1]=MCTopLeptonsPt->at(position-1);
+	MCTopLeptonsEnergyVec[p-1]=MCTopLeptonsEnergy->at(position-1);
+	MCTopLeptonsPdgIdVec[p-1]=MCTopLeptonsPdgId->at(position-1);
+	MCTopLeptonsMotherIdVec[p-1]=MCTopLeptonsMotherId->at(position-1);
+	
+	MCTopNeutrinosEtaVec[p-1]=MCTopNeutrinosEta->at(position-1);
+	MCTopNeutrinosPhiVec[p-1]=MCTopNeutrinosPhi->at(position-1);
+	MCTopNeutrinosPtVec[p-1]=MCTopNeutrinosPt->at(position-1);
+	MCTopNeutrinosEnergyVec[p-1]=MCTopNeutrinosEnergy->at(position-1);
+	MCTopNeutrinosPdgIdVec[p-1]=MCTopNeutrinosPdgId->at(position-1);
+	MCTopNeutrinosMotherIdVec[p-1]=MCTopNeutrinosMotherId->at(position-1);
+	
+	if(!(MCTopBQuarksEta->size() < p) ){
+	  MCTopBQuarksEtaVec[p-1]=MCTopBQuarksEta->at(p-1);
+	  MCTopBQuarksPhiVec[p-1]=MCTopBQuarksPhi->at(p-1);
+	  MCTopBQuarksPtVec[p-1]=MCTopBQuarksPt->at(p-1);
+	  MCTopBQuarksEnergyVec[p-1]=MCTopBQuarksEnergy->at(p-1);
+	  MCTopBQuarksPdgIdVec[p-1]=MCTopBQuarksPdgId->at(p-1);
+	  MCTopBQuarksMotherIdVec[p-1]=MCTopBQuarksMotherId->at(p-1);
+	}
+	
+	
+      }
+      else{
+	if (MCTopWsEta->size() < p)continue;
+	if(MCTopNeutrinosEta->size()!=MCTopLeptonsEta->size())continue;
+	if(MCTopQuarksEta->size()!=MCTopQuarkBarsEta->size())continue;
+	
+	for (size_t l = 1; l <= MCTopQuarksEta->size();++l ){
+	  
+	  cout << " quark id "<<   MCTopQuarksPdgId->at(l-1) << " quarkbar id "<< MCTopQuarkBarsPdgId->at(l-1) <<
+	    " W dau one id "<< MCTopWsDauOneId->at(p-1) << endl;
+	  
+	  cout  << " quark mother id "<<  MCTopQuarksMotherId->at(l-1) << " quarkbar id "<< MCTopQuarkBarsMotherId->at(l-1) << 
+	    " W  id "<< MCTopWsPdgId->at(p-1) << endl;
+	  if(  MCTopQuarksPdgId->at(l-1) == MCTopWsDauOneId->at(p-1) ||  MCTopQuarkBarsPdgId->at(l-1) == MCTopWsDauOneId->at(p-1) ){
+	    position = l;
+	    isHadronic = true;
+	  }
+	}
+	for (size_t l = 1; l <= MCTopLeptonsEta->size();++l ){
+	  
+	  cout << " lepton id "<<  MCTopLeptonsPdgId->at(l-1) << " neutrino id "<< MCTopNeutrinosPdgId->at(l-1)<< 
+	    " W dau one id "<< MCTopWsDauOneId->at(p-1) << endl;
+	  
+	  cout << " lepton mother id "<<  MCTopLeptonsMotherId->at(l-1) << " neutrino id "<< MCTopNeutrinosMotherId->at(l-1) << 
+	    " W  id "<< MCTopWsPdgId->at(p-1) << endl;
+	  
+	  if(  MCTopLeptonsPdgId->at(l-1) == MCTopWsDauOneId->at(p-1) ||  MCTopNeutrinosPdgId->at(l-1) == MCTopWsDauOneId->at(p-1) ){
+	    position = l;
+	    ++nMCTruthLeptons;
+	    isLeptonic = true;
+	  }
+	}
+		  
+	cout <<" pos "<<  position <<"  islep "<<  isLeptonic<< " lep size "<< MCTopLeptonsEta->size()<< " neu size "<< MCTopNeutrinosEta->size()<< endl;
+	cout <<" pos "<<  position <<"  ishad "<<  isHadronic<< " quark size"<< MCTopQuarksEta->size()<< " qbar size "<< MCTopQuarkBarsEta->size()<< endl;
+	if(isLeptonic){
+	  MCTopLeptonsEtaVec[p-1]=MCTopLeptonsEta->at(position-1);
+	  MCTopLeptonsPhiVec[p-1]=MCTopLeptonsPhi->at(position-1);
+	  MCTopLeptonsPtVec[p-1]=MCTopLeptonsPt->at(position-1);
+	  MCTopLeptonsEnergyVec[p-1]=MCTopLeptonsEnergy->at(position-1);
+	  MCTopLeptonsPdgIdVec[p-1]=MCTopLeptonsPdgId->at(position-1);
+	  MCTopLeptonsMotherIdVec[p-1]=MCTopLeptonsMotherId->at(position-1);
+	  
+	  MCTopNeutrinosEtaVec[p-1]=MCTopNeutrinosEta->at(position-1);
+	  MCTopNeutrinosPhiVec[p-1]=MCTopNeutrinosPhi->at(position-1);
+	  MCTopNeutrinosPtVec[p-1]=MCTopNeutrinosPt->at(position-1);
+	  MCTopNeutrinosEnergyVec[p-1]=MCTopNeutrinosEnergy->at(position-1);
+	  MCTopNeutrinosPdgIdVec[p-1]=MCTopNeutrinosPdgId->at(position-1);
+	  MCTopNeutrinosMotherIdVec[p-1]=MCTopNeutrinosMotherId->at(position-1);
+	  
+	}
+	else{
+	  MCTopLeptonsEtaVec[p-1]=-999;
+	  MCTopLeptonsPhiVec[p-1]=-999;
+	  MCTopLeptonsPtVec[p-1]=-999;
+	  MCTopLeptonsEnergyVec[p-1]=-999;
+	  MCTopLeptonsPdgIdVec[p-1]=-999;
+	  MCTopLeptonsMotherIdVec[p-1]=-999;
+		    
+	  MCTopNeutrinosEtaVec[p-1]=-999;
+	  MCTopNeutrinosPhiVec[p-1]=-999;
+	  MCTopNeutrinosPtVec[p-1]=-999;
+	  MCTopNeutrinosEnergyVec[p-1]=-999;
+	  MCTopNeutrinosPdgIdVec[p-1]=-999;
+	  MCTopNeutrinosMotherIdVec[p-1]=-999;
+	}
+	if(isHadronic){
+	  
+	  MCTopQuarksEtaVec[p-1]=MCTopQuarksEta->at(position-1);
+	  MCTopQuarksPhiVec[p-1]=MCTopQuarksPhi->at(position-1);
+	  MCTopQuarksPtVec[p-1]=MCTopQuarksPt->at(position-1);
+	  MCTopQuarksEnergyVec[p-1]=MCTopQuarksEnergy->at(position-1);
+	  MCTopQuarksPdgIdVec[p-1]=MCTopQuarksPdgId->at(position-1);
+	  MCTopQuarksMotherIdVec[p-1]=MCTopQuarksMotherId->at(position-1);
+	  
+	  MCTopQuarkBarsEtaVec[p-1]=MCTopQuarkBarsEta->at(position-1);
+	  MCTopQuarkBarsPhiVec[p-1]=MCTopQuarkBarsPhi->at(position-1);
+	  MCTopQuarkBarsPtVec[p-1]=MCTopQuarkBarsPt->at(position-1);
+	  MCTopQuarkBarsEnergyVec[p-1]=MCTopQuarkBarsEnergy->at(position-1);
+	  MCTopQuarkBarsPdgIdVec[p-1]=MCTopQuarkBarsPdgId->at(position-1);
+	  MCTopQuarkBarsMotherIdVec[p-1]=MCTopQuarkBarsMotherId->at(position-1);
+	  
+	}
+	else{
+	  MCTopQuarksEtaVec[p-1]=-999;
+	  MCTopQuarksPhiVec[p-1]=-999;
+	  MCTopQuarksPtVec[p-1]=-999;
+	  MCTopQuarksEnergyVec[p-1]=-999;
+	  MCTopQuarksPdgIdVec[p-1]=-999;
+	  MCTopQuarksMotherIdVec[p-1]=-999;
+	  
+	  MCTopQuarkBarsEtaVec[p-1]=-999;
+	  MCTopQuarkBarsPhiVec[p-1]=-999;
+	  MCTopQuarkBarsPtVec[p-1]=-999;
+	  MCTopQuarkBarsEnergyVec[p-1]=-999;
+	  MCTopQuarkBarsPdgIdVec[p-1]=-999;
+	  MCTopQuarkBarsMotherIdVec[p-1]=-999;
+	  
+	}
+	if(!(MCTopWsEta->size() < p) ){
+	  MCTopWsEtaVec[p-1]=MCTopWsEta->at(p-1);
+	  MCTopWsPhiVec[p-1]=MCTopWsPhi->at(p-1);
+	  MCTopWsPtVec[p-1]=MCTopWsPt->at(p-1);
+	  MCTopWsEnergyVec[p-1]=MCTopWsEnergy->at(p-1);
+	  MCTopWsPdgIdVec[p-1]=MCTopWsPdgId->at(p-1);
+	}
+	else{
+	  MCTopWsEtaVec[p-1]=-999;
+	  MCTopWsPhiVec[p-1]=-999;
+	  MCTopWsPtVec[p-1]=-999;
+	  MCTopWsEnergyVec[p-1]=-999;
+	  MCTopWsPdgIdVec[p-1]=-999;
+	}
+	if(!(MCTopBQuarksEta->size() < p) ){
+	  MCTopBQuarksEtaVec[p-1]=MCTopBQuarksEta->at(p-1);
+	  MCTopBQuarksPhiVec[p-1]=MCTopBQuarksPhi->at(p-1);
+	  MCTopBQuarksPtVec[p-1]=MCTopBQuarksPt->at(p-1);
+	  MCTopBQuarksEnergyVec[p-1]=MCTopBQuarksEnergy->at(p-1);
+	  MCTopBQuarksPdgIdVec[p-1]=MCTopBQuarksPdgId->at(p-1);
+	  MCTopBQuarksMotherIdVec[p-1]=MCTopBQuarksMotherId->at(p-1);
+	}
+	else{
+	  MCTopBQuarksEtaVec[p-1]=-999;
+	  MCTopBQuarksPhiVec[p-1]=-999;
+	  MCTopBQuarksPtVec[p-1]=-999;
+	  MCTopBQuarksEnergyVec[p-1]=-999;
+	  MCTopBQuarksPdgIdVec[p-1]=-999;
+	  MCTopBQuarksMotherIdVec[p-1]=-999;
+	}
+	if( (!(MCBQuarksEta->size() < p)) && (!(MCTopWsEta->size() < p))){
+	  math::PtEtaPhiELorentzVector mctop = math::PtEtaPhiELorentzVector(
+									    (MCTopBQuarksPtVec[p-1]+MCTopWsPtVec[p-1]),
+									    (MCTopBQuarksEtaVec[p-1]+MCTopWsEtaVec[p-1]),
+									    (MCTopBQuarksPhiVec[p-1]+MCTopWsPhiVec[p-1]),
+									    (MCTopBQuarksEnergyVec[p-1]+MCTopWsEnergyVec[p-1]) );
+	  MCTopsPtVec[p-1]=mctop.pt();
+	  MCTopsEtaVec[p-1]=mctop.eta();
+	  MCTopsPhiVec[p-1]=mctop.phi();
+	  MCTopsEnergyVec[p-1]=mctop.energy();
+	  MCTopsPdgIdVec[p-1]=6* MCTopBQuarksPdgIdVec[p-1]/5.;
+	}
+	else{
+	  MCTopsEtaVec[p-1]=-999;
+	  MCTopsPhiVec[p-1]=-999;
+	  MCTopsPtVec[p-1]=-999;
+	  MCTopsEnergyVec[p-1]=-999;
+	  MCTopsPdgIdVec[p-1]=-999;
+	}
+      }
+    }
+}
+
+
+////Functions for experimental effects (JECs/JERs. b-tag SFs, lepton SFs):
+
 //JES uncertainty as a function of pt, eta and jet flavour
 double SingleTopSystematicsTreesDumper::jetUncertainty(double eta, double ptCorr, int flavour)
 {
@@ -3678,139 +2668,191 @@ double SingleTopSystematicsTreesDumper::jetUncertainty(double eta, double ptCorr
     return JetCorrection;
 }
 
-
-
-float SingleTopSystematicsTreesDumper::muonHLTEff(float eta, string period)
-{
-    float eff = 0.87;
-
-    /*    if(period == "Mu2012A"){
-    if (eta < -1.1 && eta > -2.1) eff = 0.81;
-    if (eta > -1.1 && eta < -0.9) eff = 0.835;
-    if (eta > -0.9 && eta < -0.0) eff = 0.919;
-    if (eta > 0.0 && eta < 0.9) eff = 0.921;
-    if (eta > 0.9 && eta < 1.1) eff = 0.83;
-    if (eta > 1.1 && eta < 2.1) eff = 0.815;
-    }
-
-
-    if(period == "Mu2012B"){
-    if (eta < -1.1 && eta > -2.1) eff = 0.81;
-    if (eta > -1.1 && eta < -0.9) eff = 0.841;
-    if (eta > -0.9 && eta < -0.0) eff = 0.938;
-    if (eta > 0.0 && eta < 0.9) eff = 0.940;
-    if (eta > 0.9 && eta < 1.1) eff = 0.84;
-    if (eta > 1.1 && eta < 2.1) eff = 0.821;
-    }OLD
-    */
-
-
-    if(period == "Mu2012A"){
-      //    if (eta < -1.2 && eta > -2.1) eff = 0.8083;      if (eta > -1.2 && eta < -0.9) eff = 0.8339;      if (eta > -0.9 && eta < -0.0) eff = 0.9151;      if (eta > 0.0 && eta < 0.9) eff = 0.9151;      if (eta > 0.9 && eta < 1.2) eff = 0.8339;      if (eta > 1.2 && eta < 2.1) eff = 0.8083;
-      if(eta>-2.1 && eta <-1.2)eff = 0.8077;
-      if(eta>-1.2 && eta <-0.9)eff = 0.8573;
-      if(eta>-0.9 && eta < 0.9)eff = 0.9346;
-      if(eta> 0.9 && eta < 1.2)eff = 0.8573;
-      if(eta> 1.2 && eta < 2.1)eff = 0.8077;
-      
-    }
-    
-    if(period == "Mu2012B"){
-      //    if (eta < -1.2 && eta > -2.1) eff = 0.8047;      if (eta > -1.2 && eta < -0.9) eff = 0.8394;      if (eta > -0.9 && eta < -0.0) eff = 0.9326;      if (eta > 0.0 && eta < 0.9) eff = 0.9326;      if (eta > 0.9 && eta < 1.2) eff = 0.8394;      if (eta > 1.2 && eta < 2.1) eff = 0.8047;
-      if(eta>-2.1 && eta <-1.2)eff = 0.8077;
-      if(eta>-1.2 && eta <-0.9)eff = 0.8573;
-      if(eta>-0.9 && eta < 0.9)eff = 0.9346;
-      if(eta> 0.9 && eta < 1.2)eff = 0.8573;
-      if(eta> 1.2 && eta < 2.1)eff = 0.8077;
-
-    }
-
-    if(period == "Mu2012ASF"){
-      if(eta>-2.1 && eta <-1.2)eff = 0.9809;
-      if(eta>-1.2 && eta <-0.9)eff = 0.9528;
-      if(eta>-0.9 && eta < 0.9)eff = 0.9560;
-      if(eta> 0.9 && eta < 1.2)eff = 0.9528;
-      if(eta> 1.2 && eta < 2.1)eff = 0.9809;
-    }
-
-    if(period == "Mu2012BSF"){
-      if(eta>-2.1 && eta <-1.2)eff = 0.9814;
-      if(eta>-1.2 && eta <-0.9)eff = 0.9618;
-      if(eta>-0.9 && eta < 0.9)eff = 0.9798;
-      if(eta> 0.9 && eta < 1.2)eff = 0.9618;
-      if(eta> 1.2 && eta < 2.1)eff = 0.9814;
-    }
-
-    if(period == "Mu2012CSF"){
-      if(eta>-2.1 && eta <-1.2)eff = 1.0021;
-      if(eta>-1.2 && eta <-0.9)eff = 0.9688;
-      if(eta>-0.9 && eta < 0.9)eff = 0.9841;
-      if(eta> 0.9 && eta < 1.2)eff = 0.9688;
-      if(eta> 1.2 && eta < 2.1)eff = 1.0021;
-    }
-
-    return eff;
+//When in need to recalculate offline the corrections:
+double SingleTopSystematicsTreesDumper::offlineJESJERApplicationPt(double ptUncorr,double energyUncorr,double eta,string syst){
+  return ptUncorr;
 }
 
-//EndJob filling rate systematics trees
-void SingleTopSystematicsTreesDumper::endJob()
-{
+double SingleTopSystematicsTreesDumper::offlineJESJERApplicationE(double ptUncorr,double energyUncorr,double eta,string syst){
+  return energyUncorr;
+}
 
-    //part for rate systematics
+void SingleTopSystematicsTreesDumper::setBTagWeights(double pt, double eta, int flavour, bool is_btag_relevant=true,string syst="noSyst",string channel = "TChannel"){
+  double hptSF = 1;		      double hptSFErr = 0;
+  double csvtSF = 1;		      double csvtSFErr = 0;
+  double csvmSF = 1;		      double csvmSFErr = 0;
 
-    cout << endl << passingLepton << " | " << passingMuonVeto << " | " << passingLeptonVeto << " | "  << passingJets << " | " << passingMET << " | " << passingBJets << endl << endl;
-
-    //  resetWeightsDoubles();
-    /*  for(size_t i = 0; i < rate_systematics.size();++i){
-      string syst = rate_systematics[i];
-      string treename = (channel+"_"+syst);
-
-      cout<< " endjob"  << syst<< " 0 "<<endl;
-      int bj =0;
-      trees2J[bj][syst]->CopyAddresses(trees2J[bj]["noSyst"]);
-
-
-          cout<< " endjob"  << syst<< " 1 "<<endl;
-
-
-      //modify the weight by a constant factor
-      double tmpWeight = 0;
-      double weightSF = 1.;
-
-      TBranch * b = trees2J[bj]["noSyst"]->GetBranch("weight");
-      int entries = b->GetEntries();
-      b->SetAddress(&tmpWeight);
-
-
-      cout<< " endjob"  << syst<< " 2 "<<endl;
-
-      trees2J[bj][syst]->GetBranch("weight")->Reset();
-      trees2J[bj][syst]->GetBranch("weight")->SetAddress(&tmpWeight);
-
-
-      cout<< " endjob"  << syst<< " 3 "<<endl;
-
-      for(int t =0; t < entries ; ++t){
-        b->GetEntry(t);
-        tmpWeight*=weightSF;
-        trees2J[bj][syst]->GetBranch("weight")->Fill();
-
-      }
-
-
-
-      b->SetAddress(&weightTree);
-      trees2J[bj][syst]->GetBranch("weight")->SetAddress(&weightTree);
-
-
-
-      //    cout<< " syst "<< syst<< " weights entries "<<  entries <<endl;
-
-    }*/
+  double hptSFErrUp = 0;
+  double hptSFErrDown = 0;
+  double csvtSFErrUp = 0;
+  double csvtSFErrDown = 0;
+  double csvmSFErrUp = 0;
+  double csvmSFErrDown = 0;
+  
+  if (abs(flavour) == 4)
+    {
+      ++nc;
+      if (is_btag_relevant )
+	{
+	  
+	  double hpteff = EFFMap("TCHPT_C", channel);
+	  double csvteff = EFFMap("CSVT_C", channel);
+	  double csvmeff = EFFMap("CSVL_C", channel);
+	  if (abs(eta) > 2.6)
+	    {
+	      hpteff = 0;			  csvteff = 0;			  csvmeff = 0;
+	    }
+	  
+	  hptSF = BTagSFNew(pt, "TCHPT");
+	  csvtSF = BTagSFNew(pt, "CSVT");
+	  csvmSF = BTagSFNew(pt, "CSVL");
+	  
+	  hptSFErr = BTagSFErrNew(pt, "TCHPT") ;
+	  csvtSFErr = BTagSFErrNew(pt, "CSVT") ;
+	  csvmSFErr = BTagSFErrNew(pt, "CSVL") ;
+	  
+	  jsfshpt.push_back(BTagWeight::JetInfo(hpteff, hptSF));
+	  jsfshpt_mis_tag_up.push_back(BTagWeight::JetInfo(hpteff, hptSF));
+	  jsfshpt_mis_tag_down.push_back(BTagWeight::JetInfo(hpteff, hptSF));
+	  
+	  jsfscsvt.push_back(BTagWeight::JetInfo(csvteff, csvtSF));
+	  jsfscsvt_mis_tag_up.push_back(BTagWeight::JetInfo(csvteff, csvtSF));
+	  jsfscsvt_mis_tag_down.push_back(BTagWeight::JetInfo(csvteff, csvtSF));
+	  
+	  jsfscsvm.push_back(BTagWeight::JetInfo(csvmeff, csvmSF));
+	  jsfscsvm_mis_tag_up.push_back(BTagWeight::JetInfo(csvmeff, csvmSF));
+	  jsfscsvm_mis_tag_down.push_back(BTagWeight::JetInfo(csvmeff, csvmSF));
+	  
+	  
+	  if (syst == "noSyst")
+	    {
+	      jsfshpt_b_tag_up.push_back(BTagWeight::JetInfo(hpteff, hptSF + 2 * hptSFErr));
+	      jsfshpt_b_tag_down.push_back(BTagWeight::JetInfo(hpteff, hptSF - 2 * hptSFErr));
+	      
+	      jsfscsvt_b_tag_up.push_back(BTagWeight::JetInfo(csvteff, csvtSF + 2 * csvtSFErr));
+	      jsfscsvt_b_tag_down.push_back(BTagWeight::JetInfo(csvteff, csvtSF - 2 * csvtSFErr));
+	      
+	      jsfscsvm_b_tag_up.push_back(BTagWeight::JetInfo(csvmeff, csvmSF + 2 * csvmSFErr));
+	      jsfscsvm_b_tag_down.push_back(BTagWeight::JetInfo(csvmeff, csvmSF - 2 * csvmSFErr));
+	      
+	    }
+	}
+    }
+  else if (abs(flavour) == 5)
+    {
+      ++nb;
+      if (is_btag_relevant )
+	{
+	  
+	  double hpteff = EFFMap("TCHPT_B", channel);
+	  double csvteff = EFFMap("CSVT_B", channel);
+	  double csvmeff = EFFMap("CSVL_B", channel);
+	  if (abs(eta) > 2.6)
+	    {
+	      hpteff = 0;                            csvteff = 0;                            csvmeff = 0;
+	    }
+	  
+	  hptSF = BTagSFNew(pt, "TCHPT");
+	  csvtSF = BTagSFNew(pt, "CSVT");
+	  csvmSF = BTagSFNew(pt, "CSVL");
+			
+	  hptSFErr = BTagSFErrNew(pt, "TCHPT") ;
+	  csvtSFErr = BTagSFErrNew(pt, "CSVT") ;
+	  csvmSFErr = BTagSFErrNew(pt, "CSVL") ;
+	  
+	  jsfshpt.push_back(BTagWeight::JetInfo(hpteff, hptSF));
+	  jsfshpt_mis_tag_up.push_back(BTagWeight::JetInfo(hpteff, hptSF));
+	  jsfshpt_mis_tag_down.push_back(BTagWeight::JetInfo(hpteff, hptSF));
+	  
+	  jsfscsvt.push_back(BTagWeight::JetInfo(csvteff, csvtSF));
+	  jsfscsvt_mis_tag_up.push_back(BTagWeight::JetInfo(csvteff, csvtSF));
+	  jsfscsvt_mis_tag_down.push_back(BTagWeight::JetInfo(csvteff, csvtSF));
+	  
+	  jsfscsvm.push_back(BTagWeight::JetInfo(csvmeff, csvmSF));
+	  jsfscsvm_mis_tag_up.push_back(BTagWeight::JetInfo(csvmeff, csvmSF));
+	  jsfscsvm_mis_tag_down.push_back(BTagWeight::JetInfo(csvmeff, csvmSF));
+	  
+	  
+	  if (syst == "noSyst")
+	    {
+	      jsfshpt_b_tag_up.push_back(BTagWeight::JetInfo(hpteff, hptSF + hptSFErr));
+	      jsfshpt_b_tag_down.push_back(BTagWeight::JetInfo(hpteff, hptSF - hptSFErr));
+	      
+	      jsfscsvt_b_tag_up.push_back(BTagWeight::JetInfo(csvteff, csvtSF + csvtSFErr));
+	      jsfscsvt_b_tag_down.push_back(BTagWeight::JetInfo(csvteff, csvtSF - csvtSFErr));
+	      
+	      jsfscsvm_b_tag_up.push_back(BTagWeight::JetInfo(csvmeff, csvmSF + csvmSFErr));
+	      jsfscsvm_b_tag_down.push_back(BTagWeight::JetInfo(csvmeff, csvmSF - csvmSFErr));
+	      
+	    }
+	}
+      
+    }
+  else
+    {
+      if (is_btag_relevant )
+	{
+	  double csvtSF = 1;
+	  double csvtSFErrUp = 0;
+	  double csvtSFErrDown = 0;
+	  
+	  double csvmSF = 1;
+	  double csvmSFErrUp = 0;
+	  double csvmSFErrDown = 0;
+	  
+	  double hpteff = EFFMap("TCHPT_L", channel);
+	  double csvteff = EFFMap("CSVT_L", channel);
+	  double csvmeff = EFFMap("CSVL_L", channel);
+	  
+	  if (abs(eta) > 2.6)
+	    {
+	      hpteff = 0;
+	      csvteff = 0;
+	      csvmeff = 0;
+	    }
+	  
+	  hptSF = MisTagSFNew(pt, eta, "TCHPT");
+	  hptSFErrUp = MisTagSFErrNewUp(pt, eta, "TCHPT");
+	  hptSFErrDown = MisTagSFErrNewDown(pt, eta, "TCHPT");
+	  
+	  csvmSF = MisTagSFNew(pt, eta, "CSVL");
+	  csvmSFErrUp = MisTagSFErrNewUp(pt, eta, "CSVL");
+	  csvmSFErrDown = MisTagSFErrNewDown(pt, eta, "CSVL");
+	  
+	  csvtSF = MisTagSFNew(pt, eta, "CSVT");
+	  csvtSFErrUp = MisTagSFErrNewUp(pt, eta, "CSVT");
+	  csvtSFErrDown = MisTagSFErrNewDown(pt, eta, "CSVT");
+	  
+	  jsfshpt.push_back(BTagWeight::JetInfo(hpteff, hptSF));
+	  jsfshpt_b_tag_up.push_back(BTagWeight::JetInfo(hpteff, hptSF));
+	  jsfshpt_b_tag_down.push_back(BTagWeight::JetInfo(hpteff, hptSF));
+	  
+	  jsfscsvt.push_back(BTagWeight::JetInfo(csvteff, csvtSF));
+	  jsfscsvt_b_tag_up.push_back(BTagWeight::JetInfo(csvteff, csvtSF));
+	  jsfscsvt_b_tag_down.push_back(BTagWeight::JetInfo(csvteff, csvtSF));
+	  
+	  jsfscsvm.push_back(BTagWeight::JetInfo(csvmeff, csvmSF));
+	  jsfscsvm_b_tag_up.push_back(BTagWeight::JetInfo(csvmeff, csvmSF));
+	  jsfscsvm_b_tag_down.push_back(BTagWeight::JetInfo(csvmeff, csvmSF));
+	  
+	  if (syst == "noSyst")
+	    {
+	      jsfshpt_mis_tag_up.push_back(BTagWeight::JetInfo(hpteff, hptSFErrUp));
+	      jsfshpt_mis_tag_down.push_back(BTagWeight::JetInfo(hpteff, hptSFErrDown));
+	      
+	      jsfscsvt_mis_tag_up.push_back(BTagWeight::JetInfo(csvteff, csvtSFErrUp));
+	      jsfscsvt_mis_tag_down.push_back(BTagWeight::JetInfo(csvteff, csvtSFErrDown));
+	      
+	      jsfscsvm_mis_tag_up.push_back(BTagWeight::JetInfo(csvmeff, csvmSFErrUp));
+	      jsfscsvm_mis_tag_down.push_back(BTagWeight::JetInfo(csvmeff, csvmSFErrDown));
+	      
+	    }
+	}
+      ++nudsg;
+    }
 }
 
 //B-C weight as function of jet flavour, systematics and scale factors:
-//WILL BE CHANGED VERY SOON ACCORDING TO NEW PRESCRIPTIONS
 double SingleTopSystematicsTreesDumper::BTagSFNew(double pt, string algo)
 {
     if (algo == "CSVM")return 0.6981 * ((1. + (0.414063 * pt)) / (1. + (0.300155 * pt)));
@@ -3818,11 +2860,8 @@ double SingleTopSystematicsTreesDumper::BTagSFNew(double pt, string algo)
     if (algo == "TCHPT")return 0.305208*((1.+(0.595166*pt))/(1.+(0.186968*pt)));
     //old prescription    if (algo == "TCHPT")return 0.895596 * ((1. + (9.43219e-05 * pt)) / (1. + (-4.63927e-05 * pt)));
     if (algo == "CSVL") return 1.02658 * ((1. + (0.0195388 * pt)) / (1. + (0.0209145 * pt)));
-
-
     return 1;
 }
-
 
 double SingleTopSystematicsTreesDumper::BTagSFErrNew(double pt, string algo)
 {
@@ -3981,87 +3020,92 @@ double SingleTopSystematicsTreesDumper::EFFMapNew(double btag, string algo)
     return 1;
 }
 
-double SingleTopSystematicsTreesDumper::EFFMap(string algo )
-{
-    if (algo == "TCHPT_B")return 0.365 * 1.;
-    if (algo == "TCHPT_C")return 0.0365;
-    if (algo == "TCHPT_L")return 0.0017;
+double SingleTopSystematicsTreesDumper::EFFMap(string algo ){
 
-    if (algo == "CSVT_B")return 0.5;
-    if (algo == "CSVT_C")return 0.05;
-    if (algo == "CSVT_L")return 0.003;
-
-    if (algo == "CSVM_B")return 0.365;
-    if (algo == "CSVM_C")return 0.0365;
-    if (algo == "CSVM_L")return 0.0017;
-
-    if (algo == "CSVL_B")return 0.8;
-    if (algo == "CSVL_C")return 0.36;
-    if (algo == "CSVL_L")return 0.2;
-
-    return 0.36;
+  if (algo == "TCHPT_B")return 0.365 * 1.;
+  if (algo == "TCHPT_C")return 0.0365;
+  if (algo == "TCHPT_L")return 0.0017;
+  
+  if (algo == "CSVT_B")return 0.54;
+  if (algo == "CSVT_C")return 0.037;
+  if (algo == "CSVT_L")return 0.002;
+  
+  
+  if (algo == "CSVL_B")return 0.8;
+  if (algo == "CSVL_C")return 0.36;
+  if (algo == "CSVL_L")return 0.2;
+  
+  return 0.36;
 }
 
 double SingleTopSystematicsTreesDumper::EFFMap(string algo, string channel )
 {
-
     if (channel == "TChannel" || channel == "TbarChannel" || channel == "SChannel" || channel == "SbarChannel" || channel == "TWChannel" || channel == "TbarWChannel")
-    {
-        if (algo == "CSVT_B")return 0.54;
-        if (algo == "CSVT_C")return 0.037;
-        if (algo == "CSVT_L")return 0.002;
-
-        if (algo == "CSVL_B")return 0.84;
-        if (algo == "CSVL_C")return 0.33;
-        if (algo == "CSVL_L")return 0.2;
-
-    }
-
+      {
+	if (algo == "TCHPT_B")return 0.365 * 1.;
+	if (algo == "TCHPT_C")return 0.0365;
+	if (algo == "TCHPT_L")return 0.0017;
+	
+	if (algo == "CSVT_B")return 0.54;
+	if (algo == "CSVT_C")return 0.037;
+	if (algo == "CSVT_L")return 0.002;
+	
+	if (algo == "CSVL_B")return 0.84;
+	if (algo == "CSVL_C")return 0.33;
+	if (algo == "CSVL_L")return 0.2;
+	
+      }
+    
     if (channel == "TTBar")
-    {
-        if (algo == "CSVT_B")return 0.66;
-        if (algo == "CSVT_C")return 0.052;
-        if (algo == "CSVT_L")return 0.047;
-
-        if (algo == "CSVL_B")return 0.92;
-        if (algo == "CSVL_C")return 0.44;
-        if (algo == "CSVL_L")return 0.3;
-
-
-
-    }
-
+      {
+	if (algo == "TCHPT_B")return 0.365 * 1.;
+	if (algo == "TCHPT_C")return 0.0365;
+	if (algo == "TCHPT_L")return 0.0017;
+	
+	if (algo == "CSVT_B")return 0.66;
+	if (algo == "CSVT_C")return 0.052;
+	if (algo == "CSVT_L")return 0.047;
+	
+	if (algo == "CSVL_B")return 0.92;
+	if (algo == "CSVL_C")return 0.44;
+	if (algo == "CSVL_L")return 0.3;
+	
+      }
+    
     if (channel == "WJets")
-    {
-        if (algo == "CSVT_B")return 0.31;
-        if (algo == "CSVT_C")return 0.046;
-        if (algo == "CSVT_L")return 0.0015;
-
-        if (algo == "CSVL_B")return 0.63;
-        if (algo == "CSVL_C")return 0.40;
-        if (algo == "CSVL_L")return 0.14;
-
-
-    }
-
+      {
+	
+	if (algo == "TCHPT_B")return 0.365 * 1.;
+	if (algo == "TCHPT_C")return 0.0365;
+	if (algo == "TCHPT_L")return 0.0017;
+	
+	if (algo == "CSVT_B")return 0.31;
+	if (algo == "CSVT_C")return 0.046;
+	if (algo == "CSVT_L")return 0.0015;
+	
+	if (algo == "CSVL_B")return 0.63;
+	if (algo == "CSVL_C")return 0.40;
+	if (algo == "CSVL_L")return 0.14;
+	
+      }
+    
     if (channel == "ZJets")
-    {
-
-        if (algo == "CSVT_B")return 0.41;
-        if (algo == "CSVT_C")return 0.047;
-        if (algo == "CSVT_L")return 0.002;
-
-        if (algo == "CSVL_B")return 0.76;
-        if (algo == "CSVL_C")return 0.41;
-        if (algo == "CSVL_L")return 0.2;
-
-
-    }
-
-
-
+      {
+	
+	if (algo == "TCHPT_B")return 0.365 * 1.;
+	if (algo == "TCHPT_C")return 0.0365;
+	if (algo == "TCHPT_L")return 0.0017;
+	
+	if (algo == "CSVT_B")return 0.41;
+	if (algo == "CSVT_C")return 0.047;
+	if (algo == "CSVT_L")return 0.002;
+	
+	if (algo == "CSVL_B")return 0.76;
+	if (algo == "CSVL_C")return 0.41;
+	if (algo == "CSVL_L")return 0.2;
+	
+      }
     return EFFMap(algo);
-
 }
 
 double SingleTopSystematicsTreesDumper::EFFErrMap(string algo )
@@ -4079,29 +3123,6 @@ double SingleTopSystematicsTreesDumper::EFFErrMap(string algo )
     if (algo == "TCHEL_L")return 0.004;
 
     return 0.05;
-}
-
-double SingleTopSystematicsTreesDumper::turnOnWeight (std::vector<double> probabilities, int njets_req = 1)
-{
-    double prob = 0;
-    for (unsigned int i = 0; i < pow(2, probabilities.size()); ++i)
-    {
-        //at least njets_req objects for trigger required
-        int ntrigobj = 0;
-        for (unsigned int j = 0; j < probabilities.size(); ++j)
-        {
-            if ((int)(i / pow(2, j)) % 2) ntrigobj++;
-        }
-        if (ntrigobj < njets_req) continue;
-        double newprob = 1;
-        for (unsigned int j = 0; j < probabilities.size(); ++j)
-        {
-            if ((int)(i / pow(2, j)) % 2) newprob *= probabilities[j];
-            else newprob *= 1 - probabilities[j];
-        }
-        prob += newprob;
-    }
-    return prob;
 }
 
 
@@ -4132,916 +3153,6 @@ bool SingleTopSystematicsTreesDumper::flavourFilter(string ch, int nb, int nc, i
   prob*=0.902*exp((-5.995*exp(-0.604*btag)));
   return prob;
   }*/
-
-double SingleTopSystematicsTreesDumper::jetprob(double pt, double btag)
-{
-    double prob = 0.982 * exp(-30.6 * exp(-0.151 * pt)); //PT turnOn
-    prob *= 0.844 * exp((-6.72 * exp(-0.720 * btag))); //BTag turnOn
-    return prob;
-}
-
-
-double SingleTopSystematicsTreesDumper::jetprobpt(double pt)
-{
-    double prob = 0.982 * exp(-30.6 * exp(-0.151 * pt)); //PT turnOn
-    return prob;
-}
-
-double SingleTopSystematicsTreesDumper::jetprobbtag(double btag)
-{
-    double prob = 0.844 * exp((-6.72 * exp(-0.720 * btag))); //BTag turnOn
-    return prob;
-}
-
-double SingleTopSystematicsTreesDumper::turnOnProbs(string syst, int n)
-{
-
-  if(doTurnOn_)return 1.0;
-    if (syst == "JetTrig1Up")
-    {
-        return turnOnWeight(jetprobs_j1up, 1)
-               ;
-    }
-    else if (syst == "JetTrig2Up")
-    {
-        return turnOnWeight(jetprobs_j2up, 1)
-               ;
-    }
-    else if (syst == "JetTrig3Up")
-    {
-        return turnOnWeight(jetprobs_j3up, 1)
-               ;
-    }
-
-    if (syst == "JetTrig1Down")
-    {
-        return turnOnWeight(jetprobs_j1down, 1)
-               ;
-    }
-    else if (syst == "JetTrig2Down")
-    {
-        return turnOnWeight(jetprobs_j2down, 1)
-               ;
-    }
-    else if (syst == "JetTrig3Down")
-    {
-        return turnOnWeight(jetprobs_j3down, 1)
-               ;
-    }
-
-    if (syst == "BTagTrig1Up")
-    {
-        return turnOnWeight(jetprobs_b1up, 1)
-               ;
-    }
-    else if (syst == "BTagTrig2Up")
-    {
-        return turnOnWeight(jetprobs_b2up, 1)
-               ;
-    }
-    else if (syst == "BTagTrig3Up")
-    {
-        return turnOnWeight(jetprobs_b3up, 1)
-               ;
-    }
-
-    if (syst == "BTagTrig1Down")
-    {
-        return turnOnWeight(jetprobs_b1down, 1)
-               ;
-    }
-    else if (syst == "BTagTrig2Down")
-    {
-        return turnOnWeight(jetprobs_b2down, 1)
-               ;
-    }
-    else if (syst == "BTagTrig3Down")
-    {
-        return turnOnWeight(jetprobs_b3down, 1)
-               ;
-    }
-
-    return turnOnWeight(jetprobs, 1);
-
-
-}
-
-void SingleTopSystematicsTreesDumper::pushJetProbs(double pt, double btag, double eta)
-{
-
-    jetprobs.push_back(jetprob(pt, btag, eta, "noSyst"));
-
-    jetprobs_j1up.push_back(jetprob(pt, btag, eta, "JetTrig1Up"));
-    jetprobs_j1down.push_back(jetprob(pt, btag, eta, "JetTrig1Down"));
-
-    jetprobs_j2up.push_back(jetprob(pt, btag, eta, "JetTrig2Up"));
-    jetprobs_j2down.push_back(jetprob(pt, btag, eta, "JetTrig2Down"));
-
-    jetprobs_j3up.push_back(jetprob(pt, btag, eta, "JetTrig3Up"));
-    jetprobs_j3down.push_back(jetprob(pt, btag, eta, "JetTrig3Down"));
-
-
-    jetprobs_b1up.push_back(jetprob(pt, btag, eta, "BTagTrig1Up"));
-    jetprobs_b1down.push_back(jetprob(pt, btag, eta, "BTagTrig1Down"));
-
-    jetprobs_b2up.push_back(jetprob(pt, btag, eta, "BTagTrig2Up"));
-    jetprobs_b2down.push_back(jetprob(pt, btag, eta, "BTagTrig2Down"));
-
-    jetprobs_b3up.push_back(jetprob(pt, btag, eta, "BTagTrig3Up"));
-    jetprobs_b3down.push_back(jetprob(pt, btag, eta, "BTagTrig3Down"));
-
-
-
-
-}
-
-void SingleTopSystematicsTreesDumper::InitializeTurnOnReWeight(string rootFile = "CentralJet30BTagIP_2ndSF_mu.root")
-{
-
-    TFile f("CentralJet30BTagIP_2ndSF_mu.root");
-    TH2D *histSF = dynamic_cast<TH2D *>(f.Get("ScaleFactor"));
-
-    histoSFs = *histSF;
-    f.Close();
-    //  cout << " histo random test bin " <<histoSFs.FindFixBin(61,6.5)<< " content "<<histoSFs.GetBinContent(histoSFs.FindFixBin(61,6.5)) << endl;
-    //  for
-    //  recorrection_weights[7][7];
-
-    //  float pt_bin_extremes[8];
-    //float tchpt_bin_extremes[8];
-
-    ;
-}
-
-double SingleTopSystematicsTreesDumper::turnOnReWeight (double preWeight, double pt, double tchpt)
-{
-  //    cout << "reweight pt" <<  pt << " tchpt " << tchpt << endl;
-  //  cout << " bin " << histoSFs.FindFixBin(pt, tchpt) << " sf ";
-  //    cout << histoSFs.GetBinContent(histoSFs.FindFixBin(pt, tchpt)) << endl;
-    double a = histoSFs.GetBinContent(histoSFs.FindFixBin(pt, tchpt));
-    return a;
-    //  return 1;//preWeight;
-}
-
-
-double SingleTopSystematicsTreesDumper::jetprob(double pt, double btag, double eta, string syst)
-{
-    double prob = 1.;
-    if (fabs(eta) > 2.6) return 0.;
-
-    double a = 0, b = 1, c = 1;
-
-    if (syst == "BTagTrig1Up")
-    {
-        if (btag < -10.)
-        {
-            a = 0.0142;
-            b = -27.7;
-            c = -0.128;
-        };
-        if (btag > -10. && btag < -4)
-        {
-            a = 0.0735;
-            b = -4.24;
-            c = -0.0615;
-        };
-        if (btag > -4. && btag < 0.0)
-        {
-            a = 0.0196;
-            b = -7.71;
-            c = -0.0647;
-        };
-        if (btag > 0. && btag < 1.0)
-        {
-            a = 0.027;
-            b = -16.3;
-            c = -0.0933;
-        };
-        if (btag > 1. && btag < 2.0)
-        {
-            a = 0.071;
-            b = -50.;
-            c = -0.138;
-        };
-        if (btag > 2. && btag < 2.4)
-        {
-            a = 0.255;
-            b = -109.4;
-            c = -0.172;
-        };
-        if (btag > 2.4 && btag < 2.8)
-        {
-            a = 0.39;
-            b = -112.;
-            c = -0.168;
-        };
-        if (btag > 2.8 && btag < 3.2)
-        {
-            a = 0.534;
-            b = -113.;
-            c = -0.166;
-        };
-        if (btag > 3.2 && btag < 3.6)
-        {
-            a = 0.647;
-            b = -69.3;
-            c = -0.15;
-        };
-        if (btag > 3.6 && btag < 4.0)
-        {
-            a = 0.734;
-            b = -107;
-            c = -0.164;
-        };
-        if (btag > 4.0 && btag < 5.0)
-        {
-            a = 0.816;
-            b = -102;
-            c = -0.162;
-        };
-        if (btag > 5.0 && btag < 6.0)
-        {
-            a = 0.868;
-            b = -96.2;
-            c = -0.158;
-        };
-        if (btag > 6.0 && btag < 7.0)
-        {
-            a = 0.878;
-            b = -111;
-            c = -0.165;
-        };
-        if (btag > 7.0 && btag < 10.0)
-        {
-            a = 0.893;
-            b = -83.9;
-            c = -0.156;
-        };
-        if (btag > 10.0 )
-        {
-            a = 0.886;
-            b = -59.6;
-            c = -0.141;
-        };
-    }
-
-    else if (syst == "BTagTrig1Down")
-    {
-        if (btag < -10.)
-        {
-            a = 0.0138;
-            b = -45.4;
-            c = -0.146;
-        };
-        if (btag > -10. && btag < -4)
-        {
-            a = 0.065;
-            b = -14.6;
-            c = -0.104;
-        };
-        if (btag > -4. && btag < 0.0)
-        {
-            a = 0.019;
-            b = -9.33;
-            c = -0.0719;
-        };
-        if (btag > 0. && btag < 1.0)
-        {
-            a = 0.0266;
-            b = -20.7;
-            c = -0.0102;
-        };
-        if (btag > 1. && btag < 2.0)
-        {
-            a = 0.0706;
-            b = -65.1;
-            c = -0.147;
-        };
-        if (btag > 2. && btag < 2.4)
-        {
-            a = 0.253;
-            b = -192.;
-            c = -0.191;
-        };
-        if (btag > 2.4 && btag < 2.8)
-        {
-            a = 0.387;
-            b = -192.;
-            c = -0.186;
-        };
-        if (btag > 2.8 && btag < 3.2)
-        {
-            a = 0.529;
-            b = -188.;
-            c = -0.183;
-        };
-        if (btag > 3.2 && btag < 3.6)
-        {
-            a = 0.642;
-            b = -106.;
-            c = -0.164;
-        };
-        if (btag > 3.6 && btag < 4.0)
-        {
-            a = 0.73;
-            b = -161.;
-            c = -0.179;
-        };
-        if (btag > 4.0 && btag < 5.0)
-        {
-            a = 0.813;
-            b = -129.;
-            c = -0.17;
-        };
-        if (btag > 5.0 && btag < 6.0)
-        {
-            a = 0.865;
-            b = -123.;
-            c = -0.166;
-        };
-        if (btag > 6.0 && btag < 7.0)
-        {
-            a = 0.881;
-            b = -151.;
-            c = -0.176;
-        };
-        if (btag > 7.0 && btag < 10.0)
-        {
-            a = 0.891;
-            b = -103.;
-            c = -0.162;
-        };
-        if (btag > 10.0 )
-        {
-            a = 0.885;
-            b = -70.6;
-            c = -0.146;
-        };
-    }
-    else if (syst == "BTagTrig2Up")
-    {
-        if (btag < -10.)
-        {
-            a = 0.0141;
-            b = -36.5;
-            c = -0.136;
-        };
-        if (btag > -10. && btag < -4)
-        {
-            a = 0.0727;
-            b = -9.42;
-            c = -0.0797;
-        };
-        if (btag > -4. && btag < 0.0)
-        {
-            a = 0.0195;
-            b = -8.52;
-            c = -0.0677;
-        };
-        if (btag > 0. && btag < 1.0)
-        {
-            a = 0.027;
-            b = -18.5;
-            c = -0.0969;
-        };
-        if (btag > 1. && btag < 2.0)
-        {
-            a = 0.071;
-            b = -57.5;
-            c = -0.142;
-        };
-        if (btag > 2. && btag < 2.4)
-        {
-            a = 0.256;
-            b = -150.;
-            c = -0.181;
-        };
-        if (btag > 2.4 && btag < 2.8)
-        {
-            a = 0.392;
-            b = -152.;
-            c = -0.176;
-        };
-        if (btag > 2.8 && btag < 3.2)
-        {
-            a = 0.536;
-            b = -151.;
-            c = -0.174;
-        };
-        if (btag > 3.2 && btag < 3.6)
-        {
-            a = 0.649;
-            b = -87.5;
-            c = -0.156;
-        };
-        if (btag > 3.6 && btag < 4.0)
-        {
-            a = 0.737;
-            b = -134.0;
-            c = -0.171;
-        };
-        if (btag > 4.0 && btag < 5.0)
-        {
-            a = 0.818;
-            b = -115.;
-            c = -0.166;
-        };
-        if (btag > 5.0 && btag < 6.0)
-        {
-            a = 0.869;
-            b = -110.;
-            c = -0.162;
-        };
-        if (btag > 6.0 && btag < 7.0)
-        {
-            a = 0.883;
-            b = -131.;
-            c = -0.171;
-        };
-        if (btag > 7.0 && btag < 10.0)
-        {
-            a = 0.894;
-            b = -93.4;
-            c = -0.159;
-        };
-        if (btag > 10.0 )
-        {
-            a = 0.887;
-            b = -65.1;
-            c = -0.144;
-        };
-
-    }
-    else if (syst == "BTagTrig2Down")
-    {
-        if (btag < -10.)
-        {
-            a = 0.0138;
-            b = -36.5;
-            c = -0.138;
-        };
-        if (btag > -10. && btag < -4)
-        {
-            a = 0.0658;
-            b = -9.42;
-            c = -0.0859;
-        };
-        if (btag > -4. && btag < 0.0)
-        {
-            a = 0.0191;
-            b = -8.52;
-            c = -0.0689;
-        };
-        if (btag > 0. && btag < 1.0)
-        {
-            a = 0.0267;
-            b = -18.5;
-            c = -0.098;
-        };
-        if (btag > 1. && btag < 2.0)
-        {
-            a = 0.0706;
-            b = -57.5;
-            c = -0.144;
-        };
-        if (btag > 2. && btag < 2.4)
-        {
-            a = 0.252;
-            b = -150;
-            c = -0.182;
-        };
-        if (btag > 2.4 && btag < 2.8)
-        {
-            a = 0.384;
-            b = -152.;
-            c = -0.177;
-        };
-        if (btag > 2.8 && btag < 3.2)
-        {
-            a = 0.527;
-            b = -151.;
-            c = -0.175;
-        };
-        if (btag > 3.2 && btag < 3.6)
-        {
-            a = 0.639;
-            b = -87.5;
-            c = -0.157;
-        };
-        if (btag > 3.6 && btag < 4.0)
-        {
-            a = 0.727;
-            b = -134.0;
-            c = -0.172;
-        };
-        if (btag > 4.0 && btag < 5.0)
-        {
-            a = 0.812;
-            b = -115.;
-            c = -0.166;
-        };
-        if (btag > 5.0 && btag < 6.0)
-        {
-            a = 0.863;
-            b = -110.;
-            c = -0.162;
-        };
-        if (btag > 6.0 && btag < 7.0)
-        {
-            a = 0.877;
-            b = -131.;
-            c = -0.170;
-        };
-        if (btag > 7.0 && btag < 10.0)
-        {
-            a = 0.89;
-            b = -93.4;
-            c = -0.159;
-        };
-        if (btag > 10.0 )
-        {
-            a = 0.884;
-            b = -65.1;
-            c = -0.144;
-        };
-
-    }
-    else if (syst == "BTagTrig3Up")
-    {
-        if (btag < -10.)
-        {
-            a = 0.0139;
-            b = -36.5;
-            c = -0.137;
-        };
-        if (btag > -10. && btag < -4)
-        {
-            a = 0.0702;
-            b = -9.42;
-            c = -0.0839;
-        };
-        if (btag > -4. && btag < 0.0)
-        {
-            a = 0.0192;
-            b = -8.52;
-            c = -0.0683;
-        };
-        if (btag > 0. && btag < 1.0)
-        {
-            a = 0.0267;
-            b = -18.5;
-            c = -0.0974;
-        };
-        if (btag > 1. && btag < 2.0)
-        {
-            a = 0.0705;
-            b = -57.5;
-            c = -0.143;
-        };
-        if (btag > 2. && btag < 2.4)
-        {
-            a = 0.254;
-            b = -150.;
-            c = -0.183;
-        };
-        if (btag > 2.4 && btag < 2.8)
-        {
-            a = 0.388;
-            b = -152.;
-            c = -0.178;
-        };
-        if (btag > 2.8 && btag < 3.2)
-        {
-            a = 0.531;
-            b = -151.;
-            c = -0.175;
-        };
-        if (btag > 3.2 && btag < 3.6)
-        {
-            a = 0.644;
-            b = -87.5;
-            c = -0.158;
-        };
-        if (btag > 3.6 && btag < 4.0)
-        {
-            a = 0.732;
-            b = -134.0;
-            c = -0.172;
-        };
-        if (btag > 4.0 && btag < 5.0)
-        {
-            a = 0.815;
-            b = -115.;
-            c = -0.166;
-        };
-        if (btag > 5.0 && btag < 6.0)
-        {
-            a = 0.866;
-            b = -110.;
-            c = -0.163;
-        };
-        if (btag > 6.0 && btag < 7.0)
-        {
-            a = 0.880;
-            b = -131.;
-            c = -0.171;
-        };
-        if (btag > 7.0 && btag < 10.0)
-        {
-            a = 0.892;
-            b = -93.4;
-            c = -0.160;
-        };
-        if (btag > 10.0 )
-        {
-            a = 0.886;
-            b = -65.1;
-            c = -0.144;
-        };
-    }
-    else if (syst == "BTagTrig3Down")
-    {
-        if (btag < -10.)
-        {
-            a = 0.0141;
-            b = -36.5;
-            c = -0.137;
-        };
-        if (btag > -10. && btag < -4)
-        {
-            a = 0.0683;
-            b = -9.42;
-            c = -0.0817;
-        };
-        if (btag > -4. && btag < 0.0)
-        {
-            a = 0.0194;
-            b = -8.52;
-            c = -0.0684;
-        };
-        if (btag > 0. && btag < 1.0)
-        {
-            a = 0.027;
-            b = -18.5;
-            c = -0.0975;
-        };
-        if (btag > 1. && btag < 2.0)
-        {
-            a = 0.0711;
-            b = -57.5;
-            c = -0.143;
-        };
-        if (btag > 2. && btag < 2.4)
-        {
-            a = 0.253;
-            b = -150.;
-            c = -0.18;
-        };
-        if (btag > 2.4 && btag < 2.8)
-        {
-            a = 0.388;
-            b = -152.;
-            c = -0.176;
-        };
-        if (btag > 2.8 && btag < 3.2)
-        {
-            a = 0.531;
-            b = -151.;
-            c = -0.174;
-        };
-        if (btag > 3.2 && btag < 3.6)
-        {
-            a = 0.644;
-            b = -87.5;
-            c = -0.156;
-        };
-        if (btag > 3.6 && btag < 4.0)
-        {
-            a = 0.732;
-            b = -134.0;
-            c = -0.171;
-        };
-        if (btag > 4.0 && btag < 5.0)
-        {
-            a = 0.815;
-            b = -115.;
-            c = -0.165;
-        };
-        if (btag > 5.0 && btag < 6.0)
-        {
-            a = 0.866;
-            b = -110.;
-            c = -0.162;
-        };
-        if (btag > 6.0 && btag < 7.0)
-        {
-            a = 0.880;
-            b = -131.;
-            c = -0.170;
-        };
-        if (btag > 7.0 && btag < 10.0)
-        {
-            a = 0.892;
-            b = -93.4;
-            c = -0.159;
-        };
-        if (btag > 10.0 )
-        {
-            a = 0.886;
-            b = -65.11;
-            c = -0.143;
-        };
-
-    }
-    else
-    {
-        if (btag < -10.)
-        {
-            a = 0.014;
-            b = -36.55;
-            c = -0.137;
-        };
-        if (btag > -10. && btag < -4)
-        {
-            a = 0.069;
-            b = -9.42;
-            c = -0.083;
-        };
-        if (btag > -4. && btag < 0.0)
-        {
-            a = 0.019;
-            b = -8.52;
-            c = -0.068;
-        };
-        if (btag > 0. && btag < 1.0)
-        {
-            a = 0.027;
-            b = -18.51;
-            c = -0.097;
-        };
-        if (btag > 1. && btag < 2.0)
-        {
-            a = 0.071;
-            b = -57.54;
-            c = -0.143;
-        };
-        if (btag > 2. && btag < 2.4)
-        {
-            a = 0.254;
-            b = -150.48;
-            c = -0.182;
-        };
-        if (btag > 2.4 && btag < 2.8)
-        {
-            a = 0.388;
-            b = -151.97;
-            c = -0.177;
-        };
-        if (btag > 2.8 && btag < 3.2)
-        {
-            a = 0.531;
-            b = -150.73;
-            c = -0.175;
-        };
-        if (btag > 3.2 && btag < 3.6)
-        {
-            a = 0.644;
-            b = -87.52;
-            c = -0.157;
-        };
-        if (btag > 3.6 && btag < 4.0)
-        {
-            a = 0.732;
-            b = -134.05;
-            c = -0.172;
-        };
-        if (btag > 4.0 && btag < 5.0)
-        {
-            a = 0.815;
-            b = -115.25;
-            c = -0.166;
-        };
-        if (btag > 5.0 && btag < 6.0)
-        {
-            a = 0.866;
-            b = -109.53;
-            c = -0.162;
-        };
-        if (btag > 6.0 && btag < 7.0)
-        {
-            a = 0.880;
-            b = -130.84;
-            c = -0.170;
-        };
-        if (btag > 7.0 && btag < 10.0)
-        {
-            a = 0.892;
-            b = -93.41;
-            c = -0.159;
-        };
-        if (btag > 10.0 )
-        {
-            a = 0.886;
-            b = -65.11;
-            c = -0.144;
-        };
-    }
-    prob = a * exp(b * exp(c * pt));
-    return prob;
-}
-
-double SingleTopSystematicsTreesDumper::jetprobold(double pt, double btag, double eta, string syst)
-{
-    double prob = 1.;
-
-    if (fabs(eta) > 2.6) return 0.;
-    //PT turnOn
-    if (syst == "JetTrig1Up")
-    {
-
-        if (eta < -1.4)prob = 0.981 * exp(-37.49 * exp(-0.158 * pt));
-        if (eta > -1.4 && eta < 0)prob = 0.982 * exp(-27.51 * exp(-0.146 * pt));
-        if (eta < 1.4 && eta > 0)prob = 0.982 * exp(-26.63 * exp(-0.145 * pt));
-        if (eta > 1.4)prob = 0.984 * exp(-42.17 * exp(-0.158 * pt));
-        ;
-    }
-    else if (syst == "JetTrig2Up")
-    {
-        if (eta < -1.4)prob = 0.982 * exp(-41.17 * exp(-0.161 * pt));
-        if (eta > -1.4 && eta < 0)prob = 0.983 * exp(-27.03 * exp(-0.147 * pt));
-        if (eta < 1.4 && eta > 0)prob = 0.983 * exp(-26.18 * exp(-0.146 * pt));
-        if (eta > 1.4)prob = 0.986 * exp(-45.11 * exp(-0.161 * pt));
-        ;
-    }
-    else if (syst == "JetTrig3Up")
-    {
-        if (eta < -1.4)prob = 0.981 * exp(-41.17 * exp(-0.162 * pt));
-        if (eta > -1.4 && eta < 0)prob = 0.982 * exp(-27.03 * exp(-0.146 * pt));
-        if (eta < 1.4 && eta > 0)prob = 0.982 * exp(-26.18 * exp(-0.146 * pt));
-        if (eta > 1.4)prob = 0.985 * exp(-45.11 * exp(-0.161 * pt));
-
-        prob = 0.982 * exp(-30.6 * exp(-0.151 * pt));
-        ;
-    }
-    else if (syst == "JetTrig1Down")
-    {
-        if (eta < -1.4)prob = 0.981 * exp(-44.84 * exp(-0.164 * pt));
-        if (eta > -1.4 && eta < 0)prob = 0.982 * exp(-26.56 * exp(-0.147 * pt));
-        if (eta < 1.4 && eta > 0)prob = 0.983 * exp(-25.72 * exp(-0.147 * pt));
-        if (eta > 1.4)prob = 0.985 * exp(-48.05 * exp(-0.164 * pt))
-                                 ;
-    }
-    else if (syst == "JetTrig2Down")
-    {
-        if (eta < -1.4)prob = 0.98 * exp(-41.17 * exp(-0.161 * pt));
-        if (eta > -1.4 && eta < 0)prob = 0.982 * exp(-27.03 * exp(-0.147 * pt));
-        if (eta < 1.4 && eta > 0)prob = 0.982 * exp(-26.18 * exp(-0.146 * pt));
-        if (eta > 1.4)prob = 0.984 * exp(-45.11 * exp(-0.161 * pt));
-
-        ;
-    }
-    else if (syst == "JetTrig3Down")
-    {
-        if (eta < -1.4)prob = 0.981 * exp(-41.17 * exp(-0.161 * pt));
-        if (eta > -1.4 && eta < 0)prob = 0.982 * exp(-27.03 * exp(-0.147 * pt));
-        if (eta < 1.4 && eta > 0)prob = 0.982 * exp(-26.18 * exp(-0.146 * pt));
-        if (eta > 1.4)prob = 0.985 * exp(-45.11 * exp(-0.16 * pt));
-
-        ;
-    }
-    else prob = 0.982 * exp(-30.6 * exp(-0.151 * pt));
-
-
-    //BTag turnOn
-    if (syst == "BTagTrig1Up")
-    {
-        prob *= 0.85 * exp(-6.35 * exp(-0.681 * btag));
-    }
-    else if (syst == "BTagTrig1Down")
-    {
-        prob *= 0.839 * exp(-7.1 * exp(-0.759 * btag));
-    }
-    else if (syst == "BTagTrig2Up")
-    {
-        prob *= 0.824 * exp(-6.72 * exp(-0.733 * btag));
-    }
-    else if (syst == "BTagTrig2Down")
-    {
-        prob *= 0.865 * exp(-6.73 * exp(-0.707 * btag));
-    }
-    else if (syst == "BTagTrig3Up")
-    {
-        prob *= 0.838 * exp(-6.73 * exp(-0.71 * btag));
-    }
-    else if (syst == "BTagTrig3Down")
-    {
-        prob *= 0.851 * exp(-6.72 * exp(-0.73 * btag));
-    }
-    else prob *= 0.844 * exp((-6.72 * exp(-0.720 * btag)));
-
-    return prob;
-
-}
 
 double SingleTopSystematicsTreesDumper::bTagSF(int B)
 {
@@ -5086,28 +3197,27 @@ double SingleTopSystematicsTreesDumper::bTagSF(int B)
 double SingleTopSystematicsTreesDumper::bTagSF(int B, string syst)
 {
   if (doBTagSF_ == false )return 1.0;
-
-    //  cout<< " B " << " ntchhpt "<<   ntchpt_tags << " jsfshpt size "<<
-    // jsfshpt.size() << " ntchel " << ntchel_tags<< " jsfshel size " << jsfshel.size()<<endl;
-    if (algo_ == "TCHPT")
+  //  cout<< " B " << " ntchhpt "<<   ntchpt_tags << " jsfshpt size "<<
+  // jsfshpt.size() << " ntchel " << ntchel_tags<< " jsfshel size " << jsfshel.size()<<endl;
+  if (algo_ == "TCHPT")
     {
-        if (B == 0 || B == 3)
+      if (B == 0 || B == 3)
         {
-            if (syst == "BTagUp")    return b_tchpt_0_tags.weight(jsfshpt_b_tag_up, ntchpt_tags); //*b_tchel_0_tags.weight(jsfshel_b_tag_up,ntchel_tags);
-            if (syst == "BTagDown")    return b_tchpt_0_tags.weight(jsfshpt_b_tag_down, ntchpt_tags); //*b_tchel_0_tags.weight(jsfshel_b_tag_down,ntchel_tags);
-            if (syst == "MisTagUp")    return b_tchpt_0_tags.weight(jsfshpt_mis_tag_up, ntchpt_tags); //*b_tchel_0_tags.weight(jsfshel_mis_tag_up,ntchel_tags);
-            if (syst == "MisTagDown")    return b_tchpt_0_tags.weight(jsfshpt_mis_tag_down, ntchpt_tags); //*b_tchel_0_tags.weight(jsfshel_mis_tag_down,ntchel_tags);
-            return b_tchpt_0_tags.weight(jsfshpt, ntchpt_tags); //*b_tchel_0_tags.weight(jsfshel,ntchel_tags);
+	  if (syst == "BTagUp")    return b_tchpt_0_tags.weight(jsfshpt_b_tag_up, ntchpt_tags); //*b_tchel_0_tags.weight(jsfshel_b_tag_up,ntchel_tags);
+	  if (syst == "BTagDown")    return b_tchpt_0_tags.weight(jsfshpt_b_tag_down, ntchpt_tags); //*b_tchel_0_tags.weight(jsfshel_b_tag_down,ntchel_tags);
+	  if (syst == "MisTagUp")    return b_tchpt_0_tags.weight(jsfshpt_mis_tag_up, ntchpt_tags); //*b_tchel_0_tags.weight(jsfshel_mis_tag_up,ntchel_tags);
+	  if (syst == "MisTagDown")    return b_tchpt_0_tags.weight(jsfshpt_mis_tag_down, ntchpt_tags); //*b_tchel_0_tags.weight(jsfshel_mis_tag_down,ntchel_tags);
+	  return b_tchpt_0_tags.weight(jsfshpt, ntchpt_tags); //*b_tchel_0_tags.weight(jsfshel,ntchel_tags);
         }
-        if (B == 1 || B == 4)
+      if (B == 1 || B == 4)
         {
-
-            if (syst == "BTagUp")    return b_tchpt_1_tag.weight(jsfshpt_b_tag_up, ntchpt_tags);
-            if (syst == "BTagDown")    return b_tchpt_1_tag.weight(jsfshpt_b_tag_down, ntchpt_tags);
-            if (syst == "MisTagUp")    return b_tchpt_1_tag.weight(jsfshpt_mis_tag_up, ntchpt_tags);
-            if (syst == "MisTagDown")    return b_tchpt_1_tag.weight(jsfshpt_mis_tag_down, ntchpt_tags);
-
-            return b_tchpt_1_tag.weight(jsfshpt, ntchpt_tags);
+	  
+	  if (syst == "BTagUp")    return b_tchpt_1_tag.weight(jsfshpt_b_tag_up, ntchpt_tags);
+	  if (syst == "BTagDown")    return b_tchpt_1_tag.weight(jsfshpt_b_tag_down, ntchpt_tags);
+	  if (syst == "MisTagUp")    return b_tchpt_1_tag.weight(jsfshpt_mis_tag_up, ntchpt_tags);
+	  if (syst == "MisTagDown")    return b_tchpt_1_tag.weight(jsfshpt_mis_tag_down, ntchpt_tags);
+	  
+	  return b_tchpt_1_tag.weight(jsfshpt, ntchpt_tags);
         }
         if (B == 2 || B == 5)
         {
@@ -5116,30 +3226,27 @@ double SingleTopSystematicsTreesDumper::bTagSF(int B, string syst)
             if (syst == "BTagDown")    return b_tchpt_2_tags.weight(jsfshpt_b_tag_down, ntchpt_tags);
             if (syst == "MisTagUp")    return b_tchpt_2_tags.weight(jsfshpt_mis_tag_up, ntchpt_tags);
             if (syst == "MisTagDown")    return b_tchpt_2_tags.weight(jsfshpt_mis_tag_down, ntchpt_tags);
-
+	    
             return b_tchpt_2_tags.weight(jsfshpt, ntchpt_tags);
         }
     }
-
-    //Loose jet veto:
-    if(doLooseBJetVeto_){
-      if (B == 1 || B == 4)
-	{
-	  //	  if(syst ) return b_csvt_1_tag.weightWithVeto(jsfscsvt,ncsvt_tags,jsfscsvm,ncsvl_tags);	  
-	  if (syst == "BTagUp")    return b_csvt_1_tag.weightWithVeto(jsfscsvt_b_tag_up, ncsvt_tags,jsfscsvm_b_tag_up, ncsvl_tags);
-	  if (syst == "BTagDown")    return b_csvt_1_tag.weightWithVeto(jsfscsvt_b_tag_down, ncsvt_tags,jsfscsvm_b_tag_down, ncsvl_tags);
-	  if (syst == "MisTagUp")    return b_csvt_1_tag.weightWithVeto(jsfscsvt_mis_tag_up, ncsvt_tags,jsfscsvm_mis_tag_up, ncsvl_tags);
-	  if (syst == "MisTagDown")    return b_csvt_1_tag.weightWithVeto(jsfscsvt_mis_tag_down, ncsvt_tags,jsfscsvm_mis_tag_down, ncsvl_tags);
-
-	  return b_csvt_1_tag.weightWithVeto(jsfscsvt,ncsvt_tags,jsfscsvm,ncsvl_tags);	  
+  
+  //Loose jet veto:
+  if(doLooseBJetVeto_){
+    if (B == 1 || B == 4)
+      {
+	//	  if(syst ) return b_csvt_1_tag.weightWithVeto(jsfscsvt,ncsvt_tags,jsfscsvm,ncsvl_tags);	  
+	if (syst == "BTagUp")    return b_csvt_1_tag.weightWithVeto(jsfscsvt_b_tag_up, ncsvt_tags,jsfscsvm_b_tag_up, ncsvl_tags);
+	if (syst == "BTagDown")    return b_csvt_1_tag.weightWithVeto(jsfscsvt_b_tag_down, ncsvt_tags,jsfscsvm_b_tag_down, ncsvl_tags);
+	if (syst == "MisTagUp")    return b_csvt_1_tag.weightWithVeto(jsfscsvt_mis_tag_up, ncsvt_tags,jsfscsvm_mis_tag_up, ncsvl_tags);
+	if (syst == "MisTagDown")    return b_csvt_1_tag.weightWithVeto(jsfscsvt_mis_tag_down, ncsvt_tags,jsfscsvm_mis_tag_down, ncsvl_tags);
+	return b_csvt_1_tag.weightWithVeto(jsfscsvt,ncsvt_tags,jsfscsvm,ncsvl_tags);	  
 	
-	}
-    }
-
-
-    //Default case: use csvt
-
-    if (B == 0 || B == 3)
+      }
+  }
+  //Default case: use csvt
+  
+  if (B == 0 || B == 3)
     {
       if (syst == "BTagUp")    return b_csvt_0_tags.weight(jsfscsvt_b_tag_up, ncsvt_tags); //*b_tchel_0_tags.weight(jsfshel_b_tag_up,ntchel_tags);
       if (syst == "BTagDown")    return b_csvt_0_tags.weight(jsfscsvt_b_tag_down, ncsvt_tags); //*b_tchel_0_tags.weight(jsfshel_b_tag_down,ntchel_tags);
@@ -5147,22 +3254,22 @@ double SingleTopSystematicsTreesDumper::bTagSF(int B, string syst)
       if (syst == "MisTagDown")    return b_csvt_0_tags.weight(jsfscsvt_mis_tag_down, ncsvt_tags); //*b_tchel_0_tags.weight(jsfshel_mis_tag_down,ntchel_tags);
       return b_csvt_0_tags.weight(jsfscsvt, ncsvt_tags); //*b_tchel_0_tags.weight(jsfshel,ntchel_tags);
     }
-    
-    if (B == 1 || B == 4)
+  
+  if (B == 1 || B == 4)
     {
-
-        if (syst == "BTagUp")    return b_csvt_1_tag.weight(jsfscsvt_b_tag_up, ncsvt_tags);
-        if (syst == "BTagDown")    return b_csvt_1_tag.weight(jsfscsvt_b_tag_down, ncsvt_tags);
-        if (syst == "MisTagUp")    return b_csvt_1_tag.weight(jsfscsvt_mis_tag_up, ncsvt_tags);
-        if (syst == "MisTagDown")    return b_csvt_1_tag.weight(jsfscsvt_mis_tag_down, ncsvt_tags);
-
-        return b_csvt_1_tag.weight(jsfscsvt, ncsvt_tags);
+      
+      if (syst == "BTagUp")    return b_csvt_1_tag.weight(jsfscsvt_b_tag_up, ncsvt_tags);
+      if (syst == "BTagDown")    return b_csvt_1_tag.weight(jsfscsvt_b_tag_down, ncsvt_tags);
+      if (syst == "MisTagUp")    return b_csvt_1_tag.weight(jsfscsvt_mis_tag_up, ncsvt_tags);
+      if (syst == "MisTagDown")    return b_csvt_1_tag.weight(jsfscsvt_mis_tag_down, ncsvt_tags);
+      
+      return b_csvt_1_tag.weight(jsfscsvt, ncsvt_tags);
     }
-    if (B == 2 || B == 5)
+  if (B == 2 || B == 5)
     {
-
-        if (syst == "BTagUp")    return b_csvt_2_tags.weight(jsfscsvt_b_tag_up, ncsvt_tags);
-        if (syst == "BTagDown")    return b_csvt_2_tags.weight(jsfscsvt_b_tag_down, ncsvt_tags);
+      
+      if (syst == "BTagUp")    return b_csvt_2_tags.weight(jsfscsvt_b_tag_up, ncsvt_tags);
+      if (syst == "BTagDown")    return b_csvt_2_tags.weight(jsfscsvt_b_tag_down, ncsvt_tags);
         if (syst == "MisTagUp")    return b_csvt_2_tags.weight(jsfscsvt_mis_tag_up, ncsvt_tags);
         if (syst == "MisTagDown")    return b_csvt_2_tags.weight(jsfscsvt_mis_tag_down, ncsvt_tags);
 
@@ -5171,7 +3278,6 @@ double SingleTopSystematicsTreesDumper::bTagSF(int B, string syst)
 
     return 1.;
 }
-
 
 double SingleTopSystematicsTreesDumper::pileUpSF(string syst)
 {
@@ -5230,7 +3336,6 @@ float SingleTopSystematicsTreesDumper::BTagWeight::weight(vector<JetInfo> jets, 
                 data *= (1. - jets[j].eff * jets[j].sf);
             }
         }
-
         if (filter(ntagged))
         {
             //  std::cout << mc << " " << data << endl;
@@ -5238,7 +3343,6 @@ float SingleTopSystematicsTreesDumper::BTagWeight::weight(vector<JetInfo> jets, 
             pData += data;
         }
     }
-
     if (pMC == 0) return 0;
     return pData / pMC;
 }
@@ -5246,8 +3350,7 @@ float SingleTopSystematicsTreesDumper::BTagWeight::weight(vector<JetInfo> jets, 
 float SingleTopSystematicsTreesDumper::BTagWeight::weightWithVeto(vector<JetInfo> jetsTags, int tags, vector<JetInfo> jetsVetoes, int vetoes)
 {//This function takes into account cases where you have n b-tags and m vetoes, but they have different thresholds. 
     if (!filter(tags))
-    {
-        //   std::cout << "nThis event should not pass the selection, what is it doing here?" << std::endl;
+    {   //   std::cout << "nThis event should not pass the selection, what is it doing here?" << std::endl;
         return 0;
     }
     int njets = jetsTags.size();
@@ -5289,7 +3392,7 @@ float SingleTopSystematicsTreesDumper::BTagWeight::weightWithVeto(vector<JetInfo
 }
 
 
-void SingleTopSystematicsTreesDumper::muonHLTSF(float etaMu, float ptMu){
+void SingleTopSystematicsTreesDumper::muonHLTSF(float etaMu, float ptMu){//Muon scale factors 
 
   double pt = ptMu;
   double eta = etaMu;
@@ -5518,11 +3621,9 @@ if(fabs(eta)<2.1&& fabs(eta)>1.2) {  if (pt > 25 && pt <  30){sfTrig = 0.980088;
 
  lepSFTrigUp=sfID*sfIso*sfTrigup;
  lepSFTrigDown=sfID*sfIso*sfTrigdown;
-
-////
 }
 
-void SingleTopSystematicsTreesDumper::electronHLTSF(float etaEle, float ptEle){
+void SingleTopSystematicsTreesDumper::electronHLTSF(float etaEle, float ptEle){// Electron scale factors
 
   double pt = ptEle;
   double eta = etaEle;
@@ -5533,36 +3634,27 @@ void SingleTopSystematicsTreesDumper::electronHLTSF(float etaEle, float ptEle){
   cout << " cutbased "<< useCutBasedID_<< " mnva "<< useMVAID_<<endl; 
   if(useMVAID_>0){
     if(fabs(eta)<0.8){
-      if(pt>30 && pt <40 ){sfID=0.939;
-	sfIDdown=sfID-0.003;sfIDup=sfID+0.003;
+      if(pt>30 && pt <40 ){sfID=0.939;	sfIDdown=sfID-0.003;sfIDup=sfID+0.003;
       }
-      if(pt>40 && pt <50 ){sfID=0.950;
-	sfTrigdown=sfTrig-0.001;sfTrigup=sfTrig+0.001;
+      if(pt>40 && pt <50 ){sfID=0.950;	sfTrigdown=sfTrig-0.001;sfTrigup=sfTrig+0.001;
       }
-      if(pt>50 ){sfID=0.957;
-	sfIDdown=sfID-0.001;sfIDup=sfID+0.001;
+      if(pt>50 ){sfID=0.957;	sfIDdown=sfID-0.001;sfIDup=sfID+0.001;
       }
     }
     if(fabs(eta)>0.8&&fabs(eta)<1.478){
-      if(pt>30 && pt <40 ){sfID=0.920;
-	sfIDdown=sfID-0.001;sfIDup=sfID+0.002;
+      if(pt>30 && pt <40 ){sfID=0.920;	sfIDdown=sfID-0.001;sfIDup=sfID+0.002;
       }
-      if(pt>40 && pt <50 ){sfID=0.949;
-	sfIDdown=sfID-0.002;sfIDup=sfID+0.002;
+      if(pt>40 && pt <50 ){sfID=0.949;	sfIDdown=sfID-0.002;sfIDup=sfID+0.002;
       }
-      if(pt>50 ){sfID=0.959;
-	sfIDdown=sfID-0.003;sfIDup=sfID+0.003;
+      if(pt>50 ){sfID=0.959;	sfIDdown=sfID-0.003;sfIDup=sfID+0.003;
       }
     }
     if(fabs(eta)>1.478){
-      if(pt>30 && pt <40 ){sfID=0.907;
-	sfIDdown=sfID-0.005;sfIDup=sfID+0.005;
+      if(pt>30 && pt <40 ){sfID=0.907;	sfIDdown=sfID-0.005;sfIDup=sfID+0.005;
       }
-      if(pt>40 && pt <50 ){sfID=0.937;
-	sfIDdown=sfID-0.008;sfIDup=sfID+0.008;
+      if(pt>40 && pt <50 ){sfID=0.937;	sfIDdown=sfID-0.008;sfIDup=sfID+0.008;
       }
-      if(pt>50 ){sfID=0.954;
-	sfIDdown=sfID-0.010;sfIDup=sfID+0.011;
+      if(pt>50 ){sfID=0.954;	sfIDdown=sfID-0.010;sfIDup=sfID+0.011;
       }
     }
   }
@@ -5571,116 +3663,86 @@ void SingleTopSystematicsTreesDumper::electronHLTSF(float etaEle, float ptEle){
     cout << " using cutbased, eta "<<eta << " pt "<<pt<<" sfID "<< sfID <<endl; 
     if(fabs(eta)<0.8){
       if(pt>30 && pt <40 ){
-	sfID=0.976;
-	sfIDdown=sfID-0.001;sfIDup=sfID+0.001;
+	sfID=0.976;	sfIDdown=sfID-0.001;sfIDup=sfID+0.001;
       } 
       if(pt>40 && pt <50 ){
-	sfID=0.983;
-	sfIDdown=sfID-0.001;sfIDup=sfID+0.001;
+	sfID=0.983;	sfIDdown=sfID-0.001;sfIDup=sfID+0.001;
       } 
       if(pt>50){
-	sfID=0.980;
-	sfIDdown=sfID-0.001;sfIDup=sfID+0.001;
+	sfID=0.980;	sfIDdown=sfID-0.001;sfIDup=sfID+0.001;
       } 
     }	
     if(fabs(eta)>0.8&&fabs(eta)<1.442){
       if(pt>30 && pt <40 ){
-	sfID=0.967;
-	sfIDdown=sfID-0.001;sfIDup=sfID+0.001;
+	sfID=0.967;	sfIDdown=sfID-0.001;sfIDup=sfID+0.001;
       } 
       if(pt>40 && pt <50 ){
-	sfID=0.981;
-	sfIDdown=sfID-0.001;sfIDup=sfID+0.001;
+	sfID=0.981;	sfIDdown=sfID-0.001;sfIDup=sfID+0.001;
       } 
       if(pt>50){
-	sfID=0.980;
-	sfIDdown=sfID-0.001;sfIDup=sfID+0.001;
+	sfID=0.980;	sfIDdown=sfID-0.001;sfIDup=sfID+0.001;
       } 
     }	
-    
     if(fabs(eta)>1.442&&fabs(eta)<1.556){
       if(pt>30 && pt <40 ){
-	sfID=0.966;
-	sfIDdown=sfID-0.008;sfIDup=sfID+0.008;
+	sfID=0.966;	sfIDdown=sfID-0.008;sfIDup=sfID+0.008;
       } 
       if(pt>40 && pt <50 ){
-	sfID=0.951;
-	sfIDdown=sfID-0.006;sfIDup=sfID+0.006;
+	sfID=0.951;	sfIDdown=sfID-0.006;sfIDup=sfID+0.006;
       } 
       if(pt>50){
-	sfID=0.942;
-	sfIDdown=sfID-0.017;sfIDup=sfID+0.017;
+	sfID=0.942;	sfIDdown=sfID-0.017;sfIDup=sfID+0.017;
       } 
     }	
     if(fabs(eta)>1.556&&fabs(eta)<2.0){
       if(pt>30 && pt <40 ){
-	sfID=0.961;
-	sfIDdown=sfID-0.001;sfIDup=sfID+0.003;
+	sfID=0.961;	sfIDdown=sfID-0.001;sfIDup=sfID+0.003;
       } 
       if(pt>40 && pt <50 ){
-	sfID=0.982;
-	sfIDdown=sfID-0.002;sfIDup=sfID+0.002;
+	sfID=0.982;	sfIDdown=sfID-0.002;sfIDup=sfID+0.002;
       } 
       if(pt>50){
-	sfID=0.986;
-	sfIDdown=sfID-0.001;sfIDup=sfID+0.001;
+	sfID=0.986;	sfIDdown=sfID-0.001;sfIDup=sfID+0.001;
       } 
     }	
-    
     if(fabs(eta)>2.0&&fabs(eta)<2.5){
       if(pt>30 && pt <40 ){
-	sfID=1.006;
-	sfIDdown=sfID-0.001;sfIDup=sfID+0.003;
+	sfID=1.006;	sfIDdown=sfID-0.001;sfIDup=sfID+0.003;
       } 
       if(pt>40 && pt <50 ){
-	sfID=1.012;
-	sfIDdown=sfID-0.001;sfIDup=sfID+0.001;
+	sfID=1.012;	sfIDdown=sfID-0.001;sfIDup=sfID+0.001;
       } 
       if(pt>50){
-	sfID=1.016;
-	sfIDdown=sfID-0.002;sfIDup=sfID+0.002;
+	sfID=1.016;	sfIDdown=sfID-0.002;sfIDup=sfID+0.002;
       } 
     }	
   }
   cout << " after cutbased, eta "<<eta << " pt "<<pt<<" sfID after "<< sfID <<endl; 
   
   if(fabs(eta)<0.8){
-    if(pt>30 && pt <40 ){sfTrig=0.987;
-      sfTrigdown=sfTrig-0.003;sfTrigup=sfTrig+0.003;
+    if(pt>30 && pt <40 ){sfTrig=0.987;      sfTrigdown=sfTrig-0.003;sfTrigup=sfTrig+0.003;
     }
-    if(pt>40 && pt <50 ){sfTrig=0.997;
-      sfTrigdown=sfTrig-0.001;sfTrigup=sfTrig+0.001;
+    if(pt>40 && pt <50 ){sfTrig=0.997;      sfTrigdown=sfTrig-0.001;sfTrigup=sfTrig+0.001;
     }
-    if(pt>50 ){sfTrig=0.998;
-      sfTrigdown=sfTrig-0.002;sfTrigup=sfTrig+0.002;
+    if(pt>50 ){sfTrig=0.998;      sfTrigdown=sfTrig-0.002;sfTrigup=sfTrig+0.002;
     }
   }
   if(fabs(eta)>0.8&&fabs(eta)<1.478){
-    if(pt>30 && pt <40 ){sfTrig=0.964;
-      sfTrigdown=sfTrig-0.001;sfTrigup=sfTrig+0.002;
+    if(pt>30 && pt <40 ){sfTrig=0.964;      sfTrigdown=sfTrig-0.001;sfTrigup=sfTrig+0.002;
     }
-    if(pt>40 && pt <50 ){sfTrig=0.980;
-      sfTrigdown=sfTrig-0.001;sfTrigup=sfTrig+0.001;
+    if(pt>40 && pt <50 ){sfTrig=0.980;      sfTrigdown=sfTrig-0.001;sfTrigup=sfTrig+0.001;
     }
-    if(pt>50 ){sfTrig=0.988;
-      sfTrigdown=sfTrig-0.002;sfTrigup=sfTrig+0.002;
+    if(pt>50 ){sfTrig=0.988;      sfTrigdown=sfTrig-0.002;sfTrigup=sfTrig+0.002;
     }
   }
   if(fabs(eta)>1.478){
-    if(pt>30 && pt <40 ){sfTrig=1.004;
-      sfTrigdown=sfTrig-0.006;sfTrigup=sfTrig+0.006;
+    if(pt>30 && pt <40 ){sfTrig=1.004;      sfTrigdown=sfTrig-0.006;sfTrigup=sfTrig+0.006;
     }
-    if(pt>40 && pt <50 ){sfTrig=1.033;
-      sfTrigdown=sfTrig-0.007;sfTrigup=sfTrig+0.007;
+    if(pt>40 && pt <50 ){sfTrig=1.033;      sfTrigdown=sfTrig-0.007;sfTrigup=sfTrig+0.007;
     }
-    if(pt>50 ){sfTrig=0.976;
-      sfTrigdown=sfTrig-0.012;sfTrigup=sfTrig+0.015;
+    if(pt>50 ){sfTrig=0.976;      sfTrigdown=sfTrig-0.012;sfTrigup=sfTrig+0.015;
     }
   }
-
-
-
- 
   lepSF=sfTrig*sfIso*sfID;
   lepSFIDUp=sfTrig*sfIso*sfIDup;
   lepSFIDDown=sfTrig*sfIso*sfIDdown;
@@ -5692,54 +3754,12 @@ void SingleTopSystematicsTreesDumper::electronHLTSF(float etaEle, float ptEle){
   lepSFTrigDown=sfID*sfIso*sfTrigdown;
 
 }
+
+//EndJob 
+void SingleTopSystematicsTreesDumper::endJob()
+{
+  cout << endl << passingLepton << " | " << passingMuonVeto << " | " << passingLeptonVeto << " | "  << passingJets << " | " << passingMET << " | " << passingBJets << endl << endl;
+}
+
 //define this as a plug-in
 DEFINE_FWK_MODULE(SingleTopSystematicsTreesDumper);
-
-
-/*
-  if(fabs(eta)<0.8){
-    if(pt>30 && pt <40 ){sfID=0.939;sfTrig=0.987;
-      sfIDdown=sfID-0.003;sfIDup=sfID+0.003;
-      sfTrigdown=sfTrig-0.003;sfTrigup=sfTrig+0.003;
-    }
-  if(pt>40 && pt <50 ){sfID=0.950;sfTrig=0.997;
-      sfIDdown=sfID-0.001;sfIDup=sfID+0.001;
-      sfTrigdown=sfTrig-0.001;sfTrigup=sfTrig+0.001;
-    }
-  if(pt>50 ){sfID=0.957;sfTrig=0.998;
-      sfIDdown=sfID-0.001;sfIDup=sfID+0.001;
-      sfTrigdown=sfTrig-0.002;sfTrigup=sfTrig+0.002;
-    }
-  }
-
-  if(fabs(eta)>0.8&&fabs(eta)<1.478){
-    if(pt>30 && pt <40 ){sfID=0.920;sfTrig=0.964;
-      sfIDdown=sfID-0.001;sfIDup=sfID+0.002;
-      sfTrigdown=sfTrig-0.001;sfTrigup=sfTrig+0.002;
-    }
-  if(pt>40 && pt <50 ){sfID=0.949;sfTrig=0.980;
-      sfIDdown=sfID-0.002;sfIDup=sfID+0.002;
-      sfTrigdown=sfTrig-0.001;sfTrigup=sfTrig+0.001;
-    }
-  if(pt>50 ){sfID=0.959;sfTrig=0.988;
-      sfIDdown=sfID-0.003;sfIDup=sfID+0.003;
-      sfTrigdown=sfTrig-0.002;sfTrigup=sfTrig+0.002;
-    }
-  }
-
-  if(fabs(eta)>1.478){
-    if(pt>30 && pt <40 ){sfID=0.907;sfTrig=1.004;
-      sfIDdown=sfID-0.005;sfIDup=sfID+0.005;
-      sfTrigdown=sfTrig-0.006;sfTrigup=sfTrig+0.006;
-    }
-  if(pt>40 && pt <50 ){sfID=0.937;sfTrig=1.033;
-      sfIDdown=sfID-0.008;sfIDup=sfID+0.008;
-      sfTrigdown=sfTrig-0.007;sfTrigup=sfTrig+0.007;
-    }
-  if(pt>50 ){sfID=0.954;sfTrig=0.976;
-      sfIDdown=sfID-0.010;sfIDup=sfID+0.011;
-      sfTrigdown=sfTrig-0.012;sfTrigup=sfTrig+0.015;
-    }
-  }
-
-*/

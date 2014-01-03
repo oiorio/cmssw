@@ -190,6 +190,7 @@ void SingleTopJetsProducer::produce(edm::Event & iEvent, const edm::EventSetup &
 	smearDown = 1;
       }
       
+      jet.addUserFloat("gen_pt",genpt);
       jet.addUserFloat("jer_smear",smear);
       jet.addUserFloat("jer_smear_up",smearUp);
       jet.addUserFloat("jer_smear_down",smearDown);

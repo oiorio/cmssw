@@ -34,8 +34,8 @@ process.source = cms.Source ("PoolSource",
                              fileNames = cms.untracked.vstring (
 #'file:/tmp/oiorio/edmntuple_TTBar.root',
 #'file:edmntuple_TChannel.root',
-#'file:singleTopEdmNtuple_TChannel_GSF.root'
-'file:/afs/cern.ch/work/o/oiorio/test_instr/CMSSW_5_3_7/src/showering_CMSSW/Hadronizer_8TeV_single_top_t-channel_aMCatNLO_herwig6_tauola_cff_py_GEN__FASTSIM_HLT_PU_big.root'
+'file:singleTopEdmNtuple_TChannel.root'
+#'file:/afs/cern.ch/work/o/oiorio/test_instr/CMSSW_5_3_7/src/showering_CMSSW/Hadronizer_8TeV_single_top_t-channel_aMCatNLO_herwig6_tauola_cff_py_GEN__FASTSIM_HLT_PU_big.root'
 #'edmntuple_TChannel_4_1_px5.root',
 ),
 duplicateCheckMode = cms.untracked.string('noDuplicateCheck'),
@@ -81,6 +81,9 @@ process.HLTFilterMuOrEleMC.isMC = MC_instruction
 if channel_instruction == "allmc":
     process.TreesMu.doQCD = cms.untracked.bool(True)
     process.TreesEle.doQCD = cms.untracked.bool(True)
+
+#    process.TreesMu.doPDF = cms.untracked.bool(False)
+#    process.TreesEle.doPDF = cms.untracked.bool(False)
 
     process.TreesMu.doResol = cms.untracked.bool(True)
     process.TreesEle.doResol = cms.untracked.bool(True)

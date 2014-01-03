@@ -123,6 +123,7 @@ private:
   void electronHLTSF(float etaEle, float ptEle);
 
   //B-weight generating functions
+  void setBTagWeights(double ptCorr, double eta, int flavour, bool , string, string);
   double resolSF(double eta, string syst);
   double pileUpSF(string syst);
   double bTagSF(int B);
@@ -130,39 +131,29 @@ private:
   
   double EFFMap(string); double EFFMap(string, string);  double EFFErrMap(string);
   
-  void InitializeTurnOnReWeight(string SFFile);
 
   //Jet uncertainty as a function of eta pt and jet flavour
   double jetUncertainty(double eta, double ptCorr, int flavour);
-  
+  double offlineJESJERApplicationPt(double ptUncorr,double energyUncorr,double eta,string syst);
+  double offlineJESJERApplicationE(double ptUncorr,double energyUncorr,double eta,string syst);
+
   //  int nsrc;// = 16;
   //  std::vector<JetCorrectionUncertainty*> vsrc(16);
-  
-  
   
   bool flavourFilter(string c, int nb, int nc, int nl);
   int eventFlavour(string c, int nb, int nc, int nl);
   
   
-  //Weight and probabilities for TurnOn curves
-  double turnOnWeight (std::vector<double> probs, int njets_req);
-  double turnOnReWeight (double preWeight, double pt, double tchpt);
-  double jetprob(double pt, double tchp);
-  double jetprob(double pt, double tchp, double eta, string syst);
-  double jetprobold(double pt, double tchp, double eta, string syst);
-  double jetprobpt(double pt);
-  double jetprobbtag(double tchp);
   
   double BTagSFNew(double pt, string algo);
   double MisTagSFNew(double pt, double eta, string algo);
-  
+
   double BTagSFErrNew(double pt, string algo);
   double MisTagSFErrNewUp(double pt, double eta, string algo);
   double MisTagSFErrNewDown(double pt, double eta, string algo);
   double EFFMapNew(double btag, string algo);
 
-  double turnOnProbs (string syst, int njets_req);
-  void pushJetProbs (double pt, double btag, double eta);
+  void fillMCTruth(const Event &iEvent);
   void resetWeightsDoubles();
   
   
@@ -322,9 +313,21 @@ private:
     jetsRMS_,
     METPt_,
     METPhi_,
+    UnclDownMETPt_,
+    UnclDownMETPhi_,
+    UnclUpMETPt_,
+    UnclUpMETPhi_,
+
+    JESDownMETPt_,
+    JESDownMETPhi_,
+    JESUpMETPt_,
+    JESUpMETPhi_,
+
+    JERDownMETPt_,
+    JERDownMETPhi_,
+    JERUpMETPt_,
+    JERUpMETPhi_,
     jetsFlavour_,
-    UnclMETPx_,
-    UnclMETPy_,
     npv_,
     n0_,
     np1_,
@@ -397,6 +400,20 @@ private:
 
     METPhi,
     METPt,
+    UnclUpMETPhi,
+    UnclUpMETPt,
+    UnclDownMETPhi,
+    UnclDownMETPt,
+
+    JERUpMETPhi,
+    JERUpMETPt,
+    JERDownMETPhi,
+    JERDownMETPt,
+
+    JESUpMETPhi,
+    JESUpMETPt,
+    JESDownMETPhi,
+    JESDownMETPt,
     
   //Tops
    
@@ -666,7 +683,7 @@ float    MCTopsPtVec[2],
     //Variables to use as trees references
 
     //Variables to use as trees references
-  double etaTree, etaTree2, cosTree, cosBLTree, topMassTree, totalWeightTree, weightTree, mtwMassTree, lowBTagTree, highBTagTree, maxPtTree, minPtTree, topMassLowBTagTree, topMassBestTopTree, topMassMeas, bWeightTree, PUWeightTree, turnOnWeightTree, limuWeightTree, turnOnReWeightTree, miscWeightTree, lepEff, lepEffB,lepSF,lepSFB,lepSFC , lepSFD, topMtwTree, HT ,
+  double etaTree, etaTree2, cosTree, cosBLTree, topMassTree, totalWeightTree, weightTree, mtwMassTree, lowBTagTree, highBTagTree, maxPtTree, minPtTree, topMassLowBTagTree, topMassBestTopTree, topMassMeas, bWeightTree, PUWeightTree, limuWeightTree, miscWeightTree, lepEff, lepEffB,lepSF,lepSFB,lepSFC , lepSFD, topMtwTree, HT ,
     lepSFIDUp,
     lepSFIDDown,
     lepSFIsoUp,
@@ -704,21 +721,10 @@ float    MCTopsPtVec[2],
            bWeightTreeBTagDown,
            bWeightTreeMisTagDown,
            PUWeightTreePUUp,
-           PUWeightTreePUDown,
-           turnOnWeightTreeJetTrig1Up,
-           turnOnWeightTreeJetTrig2Up,
-           turnOnWeightTreeJetTrig3Up,
-           turnOnWeightTreeJetTrig1Down,
-           turnOnWeightTreeJetTrig2Down,
-           turnOnWeightTreeJetTrig3Down,
-           turnOnWeightTreeBTagTrig1Up,
-           turnOnWeightTreeBTagTrig2Up,
-           turnOnWeightTreeBTagTrig3Up,
-           turnOnWeightTreeBTagTrig1Down,
-           turnOnWeightTreeBTagTrig2Down,
-           turnOnWeightTreeBTagTrig3Down;
+      PUWeightTreePUDown;
+  
 
-  int nJ, nJNoPU, nJCentral, nJCentralNoPU, nJForward, nJForwardNoPU, nTCHPT, nCSVT, nCSVM;
+   int nJ, nJNoPU, nJCentral, nJCentralNoPU, nJForward, nJForwardNoPU, nTCHPT, nCSVT, nCSVM;
     double w1TCHPT, w2TCHPT, w1CSVT, w2CSVT, w1CSVM, w2CSVM;
 
   int runTree, eventTree, lumiTree, chargeTree, electronID, bJetFlavourTree, fJetFlavourTree, eventFlavourTree, puZero, firstJetFlavourTree, secondJetFlavourTree, thirdJetFlavourTree, isQCDTree;
@@ -728,7 +734,7 @@ float    MCTopsPtVec[2],
 
     //Not used anymore:
     double loosePtCut, resolScale ;
-    bool doPU_, doTurnOn_, doResol_ ;
+    bool doPU_, doResol_ ;
 
     edm::LumiReWeighting LumiWeights_, LumiWeightsUp_, LumiWeightsDown_;
     std::string mcPUFile_, dataPUFile_, puHistoName_;

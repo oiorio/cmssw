@@ -7,17 +7,13 @@ TreesEle = cms.EDAnalyzer('SingleTopSystematicsTreesDumper',
 #systematics = cms.untracked.vstring("JESUp","JESDown","JERUp","JERDown"),
 #systematics = cms.untracked.vstring("JESUp","JESDown","UnclusteredMETUp","UnclusteredMETDown","JERUp","JERDown"),
 systematics = cms.untracked.vstring(""),
-doBScan = cms.untracked.bool(True),
 #rateSystematics = cms.untracked.vstring("WLightRateUp",                                        "WLightRateDown",                                        "TTBarRateUp",                                        "Ttbarratedown ",                                        "WHFRateUp",                                        "WHFRateDown"),
-rateSystematics = cms.untracked.vstring(),
 doPU = cms.untracked.bool(True),
 doMCTruth = cms.untracked.bool(True),
 doFullMCTruth = cms.untracked.bool(False),
 #doResol  = cms.untracked.bool(False),
 
 algo  = cms.untracked.string("TCHPT"),
-#algo  = cms.untracked.string("CSVT"),doLooseBJetVeto= cms.untracked.bool(False),
-
 doResol  = cms.untracked.bool(True),
 takeBTagSFFromDB = cms.untracked.bool(False),
 #dataPUFile = cms.untracked.string("pileUpDistr.root"),
@@ -100,18 +96,17 @@ qcdLeptonsID = cms.InputTag("nTupleQCDElectrons","QCDElectronsPassesTightID"),
 #looseMuonsDeltaCorrectedRelIso = cms.InputTag("nTupleVetoMuons","vetoMuonsPFDeltaCorrectedRelIso"),  
 #looseMuonsRhoCorrectedRelIso = cms.InputTag("nTupleVetoMuons","vetoMuonsPFRhoCorrectedRelIso"),  
 
-looseElectronsDeltaCorrectedRelIso = cms.InputTag("nTupleLooseElectrons","looseElectronsPFDeltaCorrectedRelIso"),  
-looseElectronsRhoCorrectedRelIso = cms.InputTag("nTupleLooseElectrons","looseElectronsPFRhoCorrectedRelIso"),  
-looseMuonsDeltaCorrectedRelIso = cms.InputTag("nTupleLooseMuons","looseMuonsPFDeltaCorrectedRelIso"),  
-looseMuonsRhoCorrectedRelIso = cms.InputTag("nTupleLooseMuons","looseMuonsPFRhoCorrectedRelIso"),  
+looseElectronsDeltaCorrectedRelIso = cms.InputTag("nTupleVetoElectrons","vetoElectronsPFDeltaCorrectedRelIso"),  
+looseElectronsRhoCorrectedRelIso = cms.InputTag("nTupleVetoElectrons","vetoElectronsPFRhoCorrectedRelIso"),  
+looseMuonsDeltaCorrectedRelIso = cms.InputTag("nTupleVetoMuons","vetoMuonsPFDeltaCorrectedRelIso"),  
+looseMuonsRhoCorrectedRelIso = cms.InputTag("nTupleVetoMuons","vetoMuonsPFRhoCorrectedRelIso"),  
 
 leptonsFlavour = cms.untracked.string("electron"),
 
 #Jets
 
-genJetsPt =cms.InputTag("genJetsPF","genJetsPt"),  
-genJetsEta =cms.InputTag("genJetsPF","genJetsEta"),  
-
+#genJetsPt =cms.InputTag("genJetsPF","genJetsPt"),  
+#genJetsEta =cms.InputTag("genJetsPF","genJetsEta"),  
 #genAllJetsPt =cms.InputTag("genAllJetsPF","genJetsPt"),  
 #genAllJetsEta =cms.InputTag("genAllJetsPF","genJetsEta"),  
 #genJetsPt =cms.InputTag("nTupleTopJetsPF","topJetsPFPt"),  
@@ -150,8 +145,25 @@ jetsCorrTotal = cms.InputTag("nTupleTopJetsPF","topJetsPFJetCorrTotal"),
 
 #MET 
 
-METPhi = cms.InputTag("nTuplePatMETsPF","patMETsPFPhiNoJER"),
-METPt = cms.InputTag("nTuplePatMETsPF","patMETsPFPtNoJER"),
+METPhi = cms.InputTag("nTuplePatMETsPF","patMETsPFPhi"),
+METPt = cms.InputTag("nTuplePatMETsPF","patMETsPFPt"),
+
+UnclUpMETPt = cms.InputTag("nTuplePatMETsPF","patMETsPFPtUnclusteredUp"),
+UnclUpMETPhi = cms.InputTag("nTuplePatMETsPF","patMETsPFPhiUnclusteredUp"),
+UnclDownMETPt = cms.InputTag("nTuplePatMETsPF","patMETsPFPtUnclusteredDown"),
+UnclDownMETPhi = cms.InputTag("nTuplePatMETsPF","patMETsPFPhiUnclusteredDown"),
+
+JESUpMETPt = cms.InputTag("nTuplePatMETsPF","patMETsPFPtJESUp"),
+JESUpMETPhi = cms.InputTag("nTuplePatMETsPF","patMETsPFPhiJESUp"),
+JESDownMETPt = cms.InputTag("nTuplePatMETsPF","patMETsPFPtJESDown"),
+JESDownMETPhi = cms.InputTag("nTuplePatMETsPF","patMETsPFPhiJESDown"),
+
+JERUpMETPt = cms.InputTag("nTuplePatMETsPF","patMETsPFPtJERUp"),
+JERUpMETPhi = cms.InputTag("nTuplePatMETsPF","patMETsPFPhiJERUp"),
+JERDownMETPt = cms.InputTag("nTuplePatMETsPF","patMETsPFPtJERDown"),
+JERDownMETPhi = cms.InputTag("nTuplePatMETsPF","patMETsPFPhiJERDown"),
+
+
 
 #METPhi = cms.InputTag("nTuplePatMETsPF","patMETsPFPhi"),
 #METPt = cms.InputTag("nTuplePatMETsPF","patMETsPFPt"),
@@ -159,8 +171,6 @@ METPt = cms.InputTag("nTuplePatMETsPF","patMETsPFPtNoJER"),
 #UnclusteredMETPx = cms.InputTag("nTuplePatMETsPF","patMETsPFPtUnclusteredUp"),
 #UnclusteredMETPy = cms.InputTag("nTuplePatMETsPF","patMETsPFPtUnclusteredUp"),
 
-UnclusteredMETPx = cms.InputTag("UnclusteredMETPF","UnclusteredMETPx"),
-UnclusteredMETPy = cms.InputTag("UnclusteredMETPF","UnclusteredMETPy"),
 
 #Vertices
 vertexZ = cms.InputTag("nTupleVertices","z"),  
@@ -288,14 +298,14 @@ qcdLeptonsRhoCorrectedRelIso = cms.InputTag("nTupleQCDMuons","QCDMuonsPFRhoCorre
 
 #qcdLeptonsID = cms.InputTag("nTupleMuons","tightMuonsSimpleEleId70cIso"),  
 
-looseElectronsDeltaCorrectedRelIso = cms.InputTag("nTupleLooseElectrons","looseElectronsPFDeltaCorrectedRelIso"),  
-looseElectronsRhoCorrectedRelIso = cms.InputTag("nTupleLooseElectrons","looseElectronsPFRhoCorrectedRelIso"),  
+looseElectronsDeltaCorrectedRelIso = cms.InputTag("nTupleVetoElectrons","vetoElectronsPFDeltaCorrectedRelIso"),  
+looseElectronsRhoCorrectedRelIso = cms.InputTag("nTupleVetoElectrons","vetoElectronsPFRhoCorrectedRelIso"),  
 
-looseMuonsDeltaCorrectedRelIso = cms.InputTag("nTupleLooseMuons","looseMuonsPFDeltaCorrectedRelIso"),  
-looseMuonsRhoCorrectedRelIso = cms.InputTag("nTupleLooseMuons","looseMuonsPFRhoCorrectedRelIso"),  
+looseMuonsDeltaCorrectedRelIso = cms.InputTag("nTupleVetoMuons","vetoMuonsPFDeltaCorrectedRelIso"),  
+looseMuonsRhoCorrectedRelIso = cms.InputTag("nTupleVetoMuons","vetoMuonsPFRhoCorrectedRelIso"),  
 
 #looseElectronsDeltaCorrectedRelIso = cms.InputTag("nTupleVetoElectrons","vetoElectronsPFDeltaCorrectedRelIso"),  
-#looseElectronsRhoCorrectedRelIso = cms.InputTag("nTupleVetoElectrons","vetoElectronsPFRhoCorrectedRelIso"),  
+#vetoElectronsRhoCorrectedRelIso = cms.InputTag("nTupleVetoElectrons","vetoElectronsPFRhoCorrectedRelIso"),  
 #
 #looseMuonsDeltaCorrectedRelIso = cms.InputTag("nTupleVetoMuons","vetoMuonsPFDeltaCorrectedRelIso"),  
 #Loosemuonsrhocorrectedreliso = cms.InputTag("nTupleVetoMuons","vetoMuonsPFRhoCorrectedRelIso"),  
