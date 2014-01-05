@@ -5,8 +5,9 @@ TreesEle = cms.EDAnalyzer('SingleTopSystematicsTreesDumper',
 #systematics = cms.untracked.vstring("BTagUp","BTagDown","MisTagUp","MisTagDown","JESUp","JESDown","UnclusteredMETUp","UnclusteredMETDown","PUUp","PUDown"),
 #systematics = cms.untracked.vstring("JESUp","JESDown","UnclusteredMETUp","UnclusteredMETDown","JERUp","JERDown"),
 #systematics = cms.untracked.vstring("JESUp","JESDown","JERUp","JERDown"),
-#systematics = cms.untracked.vstring("JESUp","JESDown","UnclusteredMETUp","UnclusteredMETDown","JERUp","JERDown"),
-systematics = cms.untracked.vstring(""),
+systematics = cms.untracked.vstring("JESUp","JESDown","UnclusteredMETUp","UnclusteredMETDown","JERUp","JERDown"),
+#systematics = cms.untracked.vstring("UnclusteredMETUp","UnclusteredMETDown"),
+#systematics = cms.untracked.vstring(""),
 #rateSystematics = cms.untracked.vstring("WLightRateUp",                                        "WLightRateDown",                                        "TTBarRateUp",                                        "Ttbarratedown ",                                        "WHFRateUp",                                        "WHFRateDown"),
 doPU = cms.untracked.bool(True),
 doMCTruth = cms.untracked.bool(True),
@@ -119,10 +120,23 @@ allJetsFlavour = cms.InputTag("nTupleAllJets","allJetsFlavour"),
 
 
 #jetsPt = cms.InputTag("nTupleTopJetsPF","topJetsPFPt"),
-jetsPt = cms.InputTag("nTupleTopJetsPF","topJetsPFPtNoJER"),  
-jetsPhi = cms.InputTag("nTupleTopJetsPF","topJetsPFPhi"),  
+jetsPt = cms.InputTag("nTupleTopJetsPF","topJetsPFPt"),  
 jetsEta = cms.InputTag("nTupleTopJetsPF","topJetsPFEta"),  
+jetsPhi = cms.InputTag("nTupleTopJetsPF","topJetsPFPhi"),  
 jetsEnergy = cms.InputTag("nTupleTopJetsPF","topJetsPFE"),  
+
+jetsPtJESDown = cms.InputTag("nTupleTopJetsPF","topJetsPFPtJESDown"),  
+jetsEnergyJESDown = cms.InputTag("nTupleTopJetsPF","topJetsPFEJESDown"),
+
+jetsPtJERDown = cms.InputTag("nTupleTopJetsPF","topJetsPFPtJERDown"),  
+jetsEnergyJERDown = cms.InputTag("nTupleTopJetsPF","topJetsPFEJERDown"),
+
+jetsPtJERUp = cms.InputTag("nTupleTopJetsPF","topJetsPFPtJERUp"),  
+jetsEnergyJERUp = cms.InputTag("nTupleTopJetsPF","topJetsPFEJERUp"),
+
+jetsPtJESUp = cms.InputTag("nTupleTopJetsPF","topJetsPFPtJESUp"),  
+jetsEnergyJESUp = cms.InputTag("nTupleTopJetsPF","topJetsPFEJESUp"),  
+
 
 jetsDZ = cms.InputTag("nTupleTopJetsPF","topJetsPFdZ"),  
 jetsBeta = cms.InputTag("nTupleTopJetsPF","topJetsPFBeta"),  

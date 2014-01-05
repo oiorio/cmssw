@@ -134,8 +134,15 @@ private:
 
   //Jet uncertainty as a function of eta pt and jet flavour
   double jetUncertainty(double eta, double ptCorr, int flavour);
+  void getJetPtE(const Event &iEvent, string syst );
+  void getMET(const Event &iEvent, string syst );
+
+
+
   double offlineJESJERApplicationPt(double ptUncorr,double energyUncorr,double eta,string syst);
   double offlineJESJERApplicationE(double ptUncorr,double energyUncorr,double eta,string syst);
+
+
 
   //  int nsrc;// = 16;
   //  std::vector<JetCorrectionUncertainty*> vsrc(16);
@@ -303,6 +310,16 @@ private:
     jetsPhi_,
     jetsEta_,
     jetsEnergy_,
+
+    jetsPtJESDown_,
+    jetsEnergyJESDown_,
+    jetsPtJERDown_,
+    jetsEnergyJERDown_,
+    jetsPtJERUp_,
+    jetsEnergyJERUp_,
+    jetsPtJESUp_,
+    jetsEnergyJESUp_,
+
     jetsBTagAlgo_,
     jetsCorrTotal_,
     jetsAntiBTagAlgo_,

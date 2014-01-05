@@ -222,13 +222,18 @@ void SingleTopMETsProducer::produce(edm::Event & iEvent, const edm::EventSetup &
 
       //      std::cout << "metPt "<< met.pt() << " corr x "<< (smear*jet.p4()).px() << std::endl; 
       
+  
+     
+      uncl_up_metx +=  (smear*jet.p4()).px();
+      uncl_up_mety +=  (smear*jet.p4()).py();
       
-
-      
+      uncl_down_metx +=  (smear*jet.p4()).px();
+      uncl_down_mety +=  (smear*jet.p4()).py();
 
 
       jer_up_metx += (smearUp*jet.p4()).px();
       jer_up_mety += (smearUp*jet.p4()).py();
+
       
       jer_down_metx += (smearDown*jet.p4()).px();
       jer_down_mety += (smearDown*jet.p4()).py();
