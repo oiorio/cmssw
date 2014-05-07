@@ -5,17 +5,23 @@ TreesEle = cms.EDAnalyzer('SingleTopSystematicsTreesDumper',
 #systematics = cms.untracked.vstring("BTagUp","BTagDown","MisTagUp","MisTagDown","JESUp","JESDown","UnclusteredMETUp","UnclusteredMETDown","PUUp","PUDown"),
 #systematics = cms.untracked.vstring("JESUp","JESDown","UnclusteredMETUp","UnclusteredMETDown","JERUp","JERDown"),
 #systematics = cms.untracked.vstring("JESUp","JESDown","JERUp","JERDown"),
+
 systematics = cms.untracked.vstring("JESUp","JESDown","UnclusteredMETUp","UnclusteredMETDown","JERUp","JERDown"),
+#systematics = cms.untracked.vstring("JESUp","JESDown","JERUp","JERDown"),
+
 #systematics = cms.untracked.vstring("UnclusteredMETUp","UnclusteredMETDown"),
 #systematics = cms.untracked.vstring(""),
 #rateSystematics = cms.untracked.vstring("WLightRateUp",                                        "WLightRateDown",                                        "TTBarRateUp",                                        "Ttbarratedown ",                                        "WHFRateUp",                                        "WHFRateDown"),
 doPU = cms.untracked.bool(True),
 doMCTruth = cms.untracked.bool(True),
-doFullMCTruth = cms.untracked.bool(False),
-#doResol  = cms.untracked.bool(False),
+doFullMCTruth = cms.untracked.bool(True),
+doResol  = cms.untracked.bool(False),
 
-algo  = cms.untracked.string("TCHPT"),
-doResol  = cms.untracked.bool(True),
+doTopPtReweighting  = cms.untracked.bool(True),
+doTopBestMass = cms.untracked.bool(True),
+doAsymmetricPtCut = cms.untracked.bool(False),  # DISCUSS
+
+algo  = cms.untracked.string("CSVT"),
 takeBTagSFFromDB = cms.untracked.bool(False),
 #dataPUFile = cms.untracked.string("pileUpDistr.root"),
 #mcPUFile = cms.untracked.string("pileupdistr_TChannel.root"),

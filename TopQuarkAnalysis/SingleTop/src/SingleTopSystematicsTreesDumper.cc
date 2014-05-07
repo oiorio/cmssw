@@ -686,7 +686,7 @@ SingleTopSystematicsTreesDumper::SingleTopSystematicsTreesDumper(const edm::Para
             trees2J[bj][syst]->Branch("lowBTag", &lowBTagTree);
             trees2J[bj][syst]->Branch("highBTag", &highBTagTree);
 	    
-	    if(doMCTruth_ && bj == 1 && syst == "noSyst" ){
+	    if(doMCTruth_ && (bj == 1 || bj == 2) && syst == "noSyst" ){
 	      
 	      for (int p = 1; p <= 2; ++p)
 		{
@@ -2401,7 +2401,7 @@ void SingleTopSystematicsTreesDumper::analyze(const Event &iEvent, const EventSe
 		cos1BLTree =   cosTheta_eta_bl(leptonPFour, jets[lowBTagTreePosition], top1);
 		
 		fCosThetaLJ2 = cosThetaLJ(leptonPFour, jets[lowBTagTreePosition], top2);
-		cos1BLTree =   cosTheta_eta_bl(leptonPFour, jets[lowBTagTreePosition], top2);
+		cos2BLTree =   cosTheta_eta_bl(leptonPFour, jets[lowBTagTreePosition], top2);
 		
 		//		cout<<"fCosThetaLJ" <<fCosThetaLJ<<"topmass" << top.mass()<<endl;
 		//   cout<<"jets[lowBTagTreePosition].Pt()"<< jets[lowBTagTreePosition].Pt()<<endl;
@@ -2596,7 +2596,7 @@ void SingleTopSystematicsTreesDumper::analyze(const Event &iEvent, const EventSe
 	    
 	    //	    cout << "test before mcTruth"<<endl;
 	    
-	    if(B==1 && nJets ==2 && syst == "noSyst" && doMCTruth_ && ! doFullMCTruth_){ 
+	    if((B==1 || B==2) && nJets ==2 && syst == "noSyst" && doMCTruth_ && ! doFullMCTruth_){ 
 	      fillMCTruth(iEvent);
 	    }
 	    

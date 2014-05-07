@@ -12,13 +12,13 @@ process.options = cms.untracked.PSet(
     )
 
 #process.maxEvents = cms.untracked.PSet( input = cms.untracked.int32(20) )
-process.maxEvents = cms.untracked.PSet( input = cms.untracked.int32(2000) )
-#process.maxEvents = cms.untracked.PSet( input = cms.untracked.int32(-1) )
+#process.maxEvents = cms.untracked.PSet( input = cms.untracked.int32(2000) )
+process.maxEvents = cms.untracked.PSet( input = cms.untracked.int32(-1) )
 
-ChannelName = "TChannel"
+ChannelName = "Mu_A_22Jan"
 
 #Data or MC:
-isData=False
+isData=True
 
 #Input file:
 process.source = cms.Source (
@@ -33,10 +33,10 @@ process.source = cms.Source (
 
 if isData: process.source.fileNames= cms.untracked.vstring ( "file:/afs/cern.ch/work/o/oiorio/public/xFrancescoFab/DataReRecoA.root" )
 
-#process.MessageLogger.cerr.FwkReport.reportEvery = 100
+process.MessageLogger.cerr.FwkReport.reportEvery = 1000
 
 #Include the hermetic top projection: 
-hermeticTopProjection=True
+hermeticTopProjection=False
 
 #Gsf electron or PF electron: 
 doGsfElectrons=False
@@ -45,10 +45,10 @@ doGsfElectrons=False
 addJetsCut=True 
 
 #Run JetMET uncertainties from JME tool
-doRunMETUncertainties=True
+doRunMETUncertainties=False
 
 #Enable PF taus (true = default: adds the PF tau objects;false = embed them in jets)
-EnablePFTaus=False
+EnablePFTaus=True
 
 #Geometry:
 process.load("Configuration.Geometry.GeometryIdeal_cff")
@@ -171,7 +171,7 @@ process.pfPileUp.Enable = True
 process.pfPileUp.checkClosestZVertex = cms.bool(False)
 
 #Disable top projection for taus
-process.pfNoTau.enable = EnablePFTaus
+#process.pfNoTau.enable = EnablePFTaus
 
 # Prepare MVA electronId
 process.load("EgammaAnalysis.ElectronTools.electronIdMVAProducer_cfi")
@@ -618,7 +618,7 @@ process.singleTopNTupleOut = cms.OutputModule(
 process.singleTopNTupleOut.dropMetaData = cms.untracked.string("ALL")
 
 process.outpath = cms.EndPath(
-    process.singleTopPatTuple +
+    #    process.singleTopPatTuple +
     process.singleTopNTupleOut
     )
 
