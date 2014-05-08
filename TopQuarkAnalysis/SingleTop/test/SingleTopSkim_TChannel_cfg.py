@@ -12,13 +12,13 @@ process.options = cms.untracked.PSet(
     )
 
 #process.maxEvents = cms.untracked.PSet( input = cms.untracked.int32(20) )
-#process.maxEvents = cms.untracked.PSet( input = cms.untracked.int32(2000) )
-process.maxEvents = cms.untracked.PSet( input = cms.untracked.int32(-1) )
+process.maxEvents = cms.untracked.PSet( input = cms.untracked.int32(2000) )
+#process.maxEvents = cms.untracked.PSet( input = cms.untracked.int32(-1) )
 
-ChannelName = "Mu_A_22Jan"
+ChannelName = "TChannel"
 
 #Data or MC:
-isData=True
+isData=False
 
 #Input file:
 process.source = cms.Source (
