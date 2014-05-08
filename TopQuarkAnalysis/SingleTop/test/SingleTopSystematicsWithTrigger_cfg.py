@@ -32,11 +32,13 @@ process.load ("RecoBTag.PerformanceDB.BTagPerformanceDB1107")
 process.maxEvents = cms.untracked.PSet( input = cms.untracked.int32(-1) )
 #process.maxEvents = cms.untracked.PSet( input = cms.untracked.int32(3000))
 
+IOdir = "." 
+
 process.source = cms.Source ("PoolSource",
                              fileNames = cms.untracked.vstring (
 
 #'file:./singleTopEdmNtuple_TChannel.root',
-'file:/tmp/mmerola/TChannelMerged.root',
+'file:'+IOdir+'/TChannelMerged.root',
 
 ),
 duplicateCheckMode = cms.untracked.string('noDuplicateCheck'),
@@ -48,12 +50,12 @@ duplicateCheckMode = cms.untracked.string('noDuplicateCheck'),
 
 #from TChannel import *
 #process.source.fileNames = TChannel_ntuple
-process.source.fileNames = cms.untracked.vstring("file:/tmp/mmerola/TChannelMerged.root")
+process.source.fileNames = cms.untracked.vstring("file:"+IOdir+"/TChannelMerged.root")
 
-#PileUpSync  
+
 
 #Output
-process.TFileService = cms.Service("TFileService", fileName = cms.string("/tmp/mmerola/TChannel.root"))
+process.TFileService = cms.Service("TFileService", fileName = cms.string(IOdir+"/TChannel.root"))
 #process.TFileService = cms.Service("TFileService", fileName = cms.string("/tmp/mmerola/edmntuple_TTBar.root"))
 #process.TFileService = cms.Service("TFileService", fileName = cms.string("testNoPU.root"))
 
