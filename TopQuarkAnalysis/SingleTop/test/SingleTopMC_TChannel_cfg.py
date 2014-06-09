@@ -22,7 +22,7 @@ ChannelName = "TChannel"
 #Data or MC:
 isData = False
 #isData = True
-
+makeAutoJES = False
 #Tag:
 process.GlobalTag.globaltag = cms.string('START53_V22::All')
 
@@ -64,16 +64,15 @@ from PhysicsTools.PatUtils.tools.metUncertaintyTools import *
 Postfix = ""
 runOnMC = (not isData)
 jetAlgoName = "AK5"
-usePF2PAT(process, runPF2PAT=True, jetAlgo=jetAlgoName, runOnMC=runOnMC, postfix=Postfix, jetCorrections=('AK5PFchs',['L1FastJet','L2Relative','L3Absolute']), pvCollection=cms.InputTag('goodOfflinePrimaryVertices'),  typeIMetCorrections=isData)
+usePF2PAT(process, runPF2PAT=True, jetAlgo=jetAlgoName, runOnMC=runOnMC, postfix=Postfix, jetCorrections=('AK5PFchs',['L1FastJet','L2Relative','L3Absolute']), pvCollection=cms.InputTag('goodOfflinePrimaryVertices'),  typeIMetCorrections=(not makeAutoJES))
 
-if (not(isData)):
+if (makeAutoJES):
     from PhysicsTools.PatUtils.tools.metUncertaintyTools import runMEtUncertainties
     runMEtUncertainties(process,electronCollection = "selectedPatElectrons", doSmearJets= False, muonCollection = "selectedPatMuons", tauCollection="selectedPatTaus", jetCollection = "selectedPatJets")
 #Note: we run the MET uncertainty tools if it is MC. If it is data, the type 1 corrected METs
 
 #Trigger matching:
-#switchOnTriggerMatchEmbedding(process,triggerMatchers = ['PatMuonTriggerMatchHLTIsoMu24','PatJetTriggerMatchHLTIsoMuBTagIP'])
-switchOnTriggerMatchEmbedding(process,triggerMatchers = ['PatElectronTriggerMatchHLTEle27WP80'])
+switchOnTriggerMatchEmbedding(process,triggerMatchers = ['PatMuonTriggerMatchHLTIsoMu24','PatJetTriggerMatchHLTIsoMuBTagIP'])
 
 #PF no Pileup:
 process.pfPileUp.Enable = True
@@ -111,6 +110,9 @@ process.muonMatchZeroIso = process.muonMatch.clone(src = cms.InputTag("pfIsolate
 process.patMuonsZeroIso.genParticleMatch = cms.InputTag("muonMatchZeroIso")
 process.patMuonsZeroIso.pfMuonSource = cms.InputTag("pfIsolatedMuonsZeroIso")
 
+process.topMETsPF.isData = cms.untracked.bool((not makeAutoJES))
+process.topJetsPF.isData = cms.untracked.bool((not makeAutoJES))
+
 #Electrons
 process.pfIsolatedElectronsZeroIso = process.pfIsolatedElectrons.clone(combinedIsolationCut = cms.double(float("inf")),
                                                                        isolationCut =  cms.double(float("inf")),
@@ -127,7 +129,7 @@ process.ZeroIsoLeptonSequence = cms.Sequence(
          )
 
 #Set max number of events:
-process.maxEvents = cms.untracked.PSet( input = cms.untracked.int32(1000) )
+process.maxEvents = cms.untracked.PSet( input = cms.untracked.int32(2000) )
 #process.maxEvents = cms.untracked.PSet( input = cms.untracked.int32(-1) )
 
 #Input file:
@@ -139,6 +141,8 @@ process.source = cms.Source ("PoolSource",
 ),
 duplicateCheckMode = cms.untracked.string('noDuplicateCheck')
 )
+
+#process.topMETsPF.metsSrc=cms.InputTag("patMETs")
 
 # path for preselection:
 process.pathPreselection = cms.Path (
