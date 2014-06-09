@@ -14,6 +14,8 @@ process.load("Configuration.StandardSequences.FrontierConditions_GlobalTag_cff")
 process.load("Configuration.StandardSequences.MagneticField_AutoFromDBCurrent_cff") ### real data
 process.GlobalTag.globaltag = cms.string("START52_V9::All")
 
+
+
 #Load B-Tag
 #MC measurements from 36X
 #process.load ("RecoBTag.PerformanceDB.PoolBTagPerformanceDBMC36X")
@@ -27,53 +29,83 @@ process.load ("RecoBTag.PerformanceDB.PoolBTagPerformanceDB1107")
 process.load ("RecoBTag.PerformanceDB.BTagPerformanceDB1107")
 
 
-#process.maxEvents = cms.untracked.PSet( input = cms.untracked.int32(-1) )
-process.maxEvents = cms.untracked.PSet( input = cms.untracked.int32(20000))
+process.maxEvents = cms.untracked.PSet( input = cms.untracked.int32(-1) )
+# Process.maxEvents = cms.untracked.PSet( input = cms.untracked.int32(20000))
 
 process.source = cms.Source ("PoolSource",
                              fileNames = cms.untracked.vstring (
-#'file:/tmp/oiorio/edmntuple_TTBar.root',
-#'file:edmntuple_TChannel.root',
-#'file:singleTopEdmNtuple_TChannel_GSF.root'
-#'file:/afs/cern.ch/work/o/oiorio/test_instr/CMSSW_5_3_7/src/showering_CMSSW/Hadronizer_8TeV_single_top_t-channel_aMCatNLO_herwig6_tauola_cff_py_GEN__FASTSIM_HLT_PU_big.root'
-#'file:/afs/cern.ch/work/x/xwmeng/public/xOiorio/edmntuple_TChannel.root'
-#"file:TbarChan.root"
-"file:/tmp/oiorio/Ele_D1_22Jan_part_1Merged.root"
-#'edmntuple_TChannel_4_1_px5.root',
+
+#'file:/tmp/oiorio/edmntuple_tchannel_big.root',
+'file:/tmp/oiorio/TChannelMerged.root',
+
 ),
 duplicateCheckMode = cms.untracked.string('noDuplicateCheck'),
 #eventsToProcess = cms.untracked.VEventRange('1:19517967-1:19517969'),
 )
 
-process.TFileService = cms.Service("TFileService", fileName = cms.string("TChannel_test_fullmva.root"))
+
+
+
+#from TChannel import *
+#process.source.fileNames = TChannel_ntuple
+process.source.fileNames = cms.untracked.vstring('file:edmntuple_TChannel.root',)
+
+#PileUpSync
+
+#Output
+process.TFileService = cms.Service("TFileService", fileName = cms.string("/tmp/oiorio/TChannel_1.root"))
+#process.TFileService = cms.Service("TFileService", fileName = cms.string("/tmp/oiorio/edmntuple_TTBar.root"))
+#process.TFileService = cms.Service("TFileService", fileName = cms.string("testNoPU.root"))
 
 #process.load("SingleTopAnalyzers_cfi")
 
-#process.load("SingleTopRootPlizer_cfi")
-process.load("SingleTopRootPlizer_FullMVA_cfi")
+process.load("SingleTopRootPlizer_cfi")
 process.load("SingleTopFilters_cfi")
 #from SingleTopPSets_cfi import *
 #from SingleTopPSetsFall11_cfi import *
-from SingleTopPSetsSummer_cfi import *
+#from SingleTopPSetsSummer_cfi import *
+from SingleTopPSetsFall_cfi import *
 
 process.TreesEle.dataPUFile = cms.untracked.string("pileUpDistr.root")
 process.TreesMu.dataPUFile = cms.untracked.string("pileUpDistr.root")
 
+#process.TreesEle.doTurnOn = cms.untracked.bool(False)
 process.TreesEle.channelInfo = TChannelEle
 process.TreesMu.channelInfo = TChannelMu
+
+#process.TreesEle.channelInfo.addPDFToNJets = cms.untracked.bool(True)
+#process.TreesMu.channelInfo.addPDFToNJets = cms.untracked.bool(True)
+
+process.TreesEle.channelInfo.addPDFToNJets = cms.untracked.bool(False)
+process.TreesMu.channelInfo.addPDFToNJets = cms.untracked.bool(False)
+
+#process.PlotsEle.channelInfo = TChannelEle
+#process.PlotsMu.channelInfo = TChannelMu
+#process.TreesMu.systematics = cms.untracked.vstring();
 
 
 #doPU = cms.untracked.bool(False)
 
-process.TreesMu.doQCD = cms.untracked.bool(False)
-process.TreesEle.doQCD = cms.untracked.bool(False)
-process.TreesMu.doResol = cms.untracked.bool(False)
-process.TreesEle.doResol = cms.untracked.bool(False)
+#process.WeightProducer.doPU = cms.untracked.bool(False)
+#process.TreesMu.doQCD = cms.untracked.bool(False)
+#process.TreesEle.doQCD = cms.untracked.bool(False)
+#process.TreesMu.doJetTrees = cms.untracked.bool(False)
+#process.TreesEle.doJetTrees = cms.untracked.bool(False)
+#process.TreesMu.doResol = cms.untracked.bool(False)
+#process.TreesEle.doResol = cms.untracked.bool(False)
 
-channel_instruction = "channel_instruction" #SWITCH_INSTRUCTION
+#process.TreesMu.doPU = cms.untracked.bool(False)
+#process.TreesEle.doPU = cms.untracked.bool(False)
+
+process.TreesMu.isSingleTopCompHEP = cms.untracked.bool(True)
+process.TreesEle.isSingleTopCompHEP = cms.untracked.bool(True)
+
+
+
 channel_instruction = "allmc" #SWITCH_INSTRUCTION
+#channel_instruction = "allmc" #SWITCH_INSTRUCTION
 
-MC_instruction = False #TRIGGER_INSTRUCTION
+MC_instruction = True #TRIGGER_INSTRUCTION
 
 process.HLTFilterMu.isMC = MC_instruction
 process.HLTFilterEle.isMC = MC_instruction
@@ -81,27 +113,30 @@ process.HLTFilterMuOrEle.isMC = MC_instruction
 process.HLTFilterMuOrEleMC.isMC = MC_instruction
     
 
+#process.PUWeightsPath = cms.Path(
+#    process.WeightProducer 
+#)
 
 if channel_instruction == "allmc":
-    process.TreesMu.doQCD = cms.untracked.bool(True)
-    process.TreesEle.doQCD = cms.untracked.bool(True)
-
     process.TreesMu.doResol = cms.untracked.bool(True)
     process.TreesEle.doResol = cms.untracked.bool(True)
-    
+    #    process.TreesEle.doTurnOn = cms.untracked.bool(True) 
     process.PathSysMu = cms.Path(
     process.HLTFilterMu2012 *
     process.TreesMu
     )
-    process.PathSysEle = cms.Path(
-    process.HLTFilterEle2012 *
-    process.TreesEle
-    )
+#    process.PathSysEle = cms.Path(
+#    process.HLTFilterEle2012 *
+#    process.HLTFilterEleMC *
+#    process.TreesEle
+#    )
 
 if channel_instruction == "all":
     process.TreesEle.doTurnOn = cms.untracked.bool(False) 
     process.TreesEle.doPU = cms.untracked.bool(False) 
     process.TreesMu.doPU = cms.untracked.bool(False) 
+    process.TreesMu.doMCTruth = cms.untracked.bool(False) 
+    process.TreesEle.doMCTruth = cms.untracked.bool(False) 
     process.PathSys = cms.Path(
     #    process.PlotsMu +
     #    process.PlotsEle +
@@ -113,10 +148,11 @@ if channel_instruction == "all":
 if channel_instruction == "mu":
     process.TreesMu.doPU = cms.untracked.bool(False) 
     process.TreesMu.doResol = cms.untracked.bool(False) 
+    process.TreesMu.doMCTruth = cms.untracked.bool(False) 
     process.PathSysMu = cms.Path(
     #    process.PlotsMu +
     #    process.PlotsEle +
-    process.HLTFilterMu2012 *
+   process.HLTFilterMu2012 *
     process.TreesMu 
     )
 
@@ -124,6 +160,7 @@ if channel_instruction == "ele":
     process.TreesEle.doTurnOn = cms.untracked.bool(False) 
     process.TreesEle.doPU = cms.untracked.bool(False) 
     process.TreesEle.doResol = cms.untracked.bool(False) 
+    process.TreesEle.doMCTruth = cms.untracked.bool(False) 
     process.PathSysMu = cms.Path(
     #    process.PlotsMu +
     #    process.PlotsEle +
@@ -134,6 +171,7 @@ if channel_instruction == "ele":
 if channel_instruction == "muqcd":
     process.TreesMu.doPU = cms.untracked.bool(False) 
     process.TreesMu.doResol = cms.untracked.bool(False) 
+    process.TreesMu.doMCTruth = cms.untracked.bool(False) 
     process.PathSysMu = cms.Path(
     #    process.PlotsMu +
     #    process.PlotsEle +
@@ -147,6 +185,7 @@ if channel_instruction == "eleqcd":
     process.TreesEle.doPU = cms.untracked.bool(False) 
     process.TreesEle.doResol = cms.untracked.bool(False) 
     process.TreesEle.isControlSample = cms.untracked.bool(True) 
+    process.TreesMu.doMCTruth = cms.untracked.bool(False) 
     process.PathSysEle = cms.Path(
     #    process.PlotsMu +
     #    process.PlotsEle +

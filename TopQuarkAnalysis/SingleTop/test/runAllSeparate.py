@@ -74,9 +74,9 @@ channels = [
 #"QCD_Pt_30to80_BCtoE","QCD_Pt_170to250_BCtoE","QCD_Pt_20to30_BCtoE","QCD_Pt_80to170_BCtoE",
 #"TbarChannel",
 
-"TChannel_part_1","TChannel_part_2","TChannel_part_3","TChannel_part_4","TChannel_part_5",
-"TbarChannel_part_1","TbarChannel_part_2","TbarChannel_part_3","TbarChannel_part_4","TbarChannel_part_5",
-"TWChannel", "TbarWChannel",
+"TChannel_part_1",#"TChannel_part_2","TChannel_part_3","TChannel_part_4","TChannel_part_5",
+#"TbarChannel_part_1","TbarChannel_part_2","TbarChannel_part_3","TbarChannel_part_4","TbarChannel_part_5",
+#"TWChannel", "TbarWChannel",
 
 #"SChannel_part_1", "SChannel_part_2", "SChannel_part_3", "SChannel_part_4", "SChannel_part_5",
 #"SbarChannel_part_1", "SbarChannel_part_2", "SbarChannel_part_3", "SbarChannel_part_4", "SbarChannel_part_5",
@@ -184,7 +184,7 @@ dataPath = "file:/tmp/oiorio/"
 
 #Choose if you want to run or just prepare the configuration files
 mode = ""
-mode = "cmsRun"
+#mode = "cmsRun"
 
 
 #Use mu , ele or both

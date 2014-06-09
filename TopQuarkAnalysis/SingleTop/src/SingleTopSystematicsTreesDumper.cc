@@ -3071,7 +3071,6 @@ void SingleTopSystematicsTreesDumper::analyze(const Event &iEvent, const EventSe
 	      cout<< "rho corr rel iso is: " <<lepRhoCorrectedRelIso<< " leptons size "<<nLeptons<< " B is " << B << " nJets is "  << nJets << " is qcd? "<< isQCD << " passes lepton? "<< passesLeptonStep <<endl;
 	    }
 	    
-
             if (isQCD)
             {
                 B += 3;
@@ -3083,9 +3082,9 @@ void SingleTopSystematicsTreesDumper::analyze(const Event &iEvent, const EventSe
             }
 
             if ( (B == 0 || B == 3 ) && (ntchpt_tags != 0  || lowBTagTreePosition < 0 || lowBTagTreePosition == highBTagTreePosition) ) continue; //Sample A condition, ok for now
+
 	    
 	    if(doLooseBJetVeto_)if(nJets==2 && (B == 1 || B==4))if( ncsvl_tags != 1 )continue;
-
 
             if (syst == "noSyst")
             {
@@ -3200,6 +3199,8 @@ void SingleTopSystematicsTreesDumper::analyze(const Event &iEvent, const EventSe
 
 	      if (channel != "Data" && !gotPDFs)
                 {
+
+
 		  iEvent.getByLabel(x1_, x1h);
 		  iEvent.getByLabel(x2_, x2h);
 		  
@@ -3214,6 +3215,7 @@ void SingleTopSystematicsTreesDumper::analyze(const Event &iEvent, const EventSe
 		  
 		  id1 = *id1h;
 		  id2 = *id2h;
+
 
 		  //Q2 = x1 * x2 * 7000*7000;	
 		  
@@ -3632,9 +3634,9 @@ void SingleTopSystematicsTreesDumper::analyze(const Event &iEvent, const EventSe
 	    }
 	    if (nJets == 2)
             {
-	      //cout << " B is "<< B<< " syst is "<<syst_name <<endl;
+	      //	      cout << " B is "<< B<< " syst is "<<syst_name <<endl;
 	      //cout<< " tree name "<< trees2J[B][syst_name]->GetName() <<endl;
-	      //	      if(B == 1 ) 
+	      	      if(B == 1 ) 
 	      trees2J[B][syst_name]->Fill();
             }
             if (nJets == 3)
@@ -3642,8 +3644,10 @@ void SingleTopSystematicsTreesDumper::analyze(const Event &iEvent, const EventSe
 		//cout << " B is "<< B<< " syst is "<<syst_name <<endl;
                 //cout << " tree name "<< trees3J[B][syst_name]->GetName() <<endl;
 		trees3J[B][syst_name]->Fill();
-            }
-        }
+	      }
+	    //	    cout << " test after filling syst"<< syst_name <<endl; 
+
+	}
 
     
 

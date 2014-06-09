@@ -1,0 +1,23 @@
+/APVCyclePhaseMonitor.cc/1.7/Fri Jul 30 12:22:13 2010//TV00-10-10-06
+/APVCyclePhaseProducerFromL1ABC.cc/1.3/Tue Jan 12 10:31:53 2010//TV00-10-10-06
+/APVCyclePhaseProducerFromL1TS.cc/1.4/Tue Aug  3 10:46:30 2010//TV00-10-10-06
+/APVShotsAnalyzer.cc/1.8/Fri Sep 16 13:55:00 2011//TV00-10-10-06
+/BigEventsDebugger.cc/1.1/Sun Oct  2 16:58:33 2011//TV00-10-10-06
+/BuildFile.xml/1.13/Thu Oct  4 17:06:36 2012//TV00-10-10-06
+/ByMultiplicityEventFilter.cc/1.3/Thu Oct  4 17:08:38 2012//TV00-10-10-06
+/ConfigurableAPVCyclePhaseProducer.cc/1.4/Tue Jan 12 09:13:04 2010//TV00-10-10-06
+/EventTimeDistribution.cc/1.13/Wed Sep 15 13:30:11 2010//TV00-10-10-06
+/EventWithHistoryEDFilter.cc/1.3/Tue Jan 12 09:13:04 2010//TV00-10-10-06
+/EventWithHistoryProducer.cc/1.2/Tue Jan 12 09:13:04 2010//TV00-10-10-06
+/EventWithHistoryProducerFromL1ABC.cc/1.6/Fri Jul 22 07:23:25 2011//TV00-10-10-06
+/FromClusterSummaryMultiplicityProducer.cc/1.2/Mon Oct  8 15:54:50 2012//TV00-10-10-06
+/L1ABCDebugger.cc/1.2/Tue Jan 12 09:13:04 2010//TV00-10-10-06
+/LargeEvents.cc/1.7/Tue Feb  1 08:19:51 2011//TV00-10-10-06
+/MultiplicityCorrelator.cc/1.3/Sun Dec 11 10:04:09 2011//TV00-10-10-06
+/MultiplicityInvestigator.cc/1.5/Wed Feb 15 11:13:25 2012//TV00-10-10-06
+/MultiplicityProducer.cc/1.3/Mon Mar 26 17:09:07 2012//TV00-10-10-06
+/MultiplicityTimeCorrelations.cc/1.1/Thu Mar 10 16:15:13 2011//TV00-10-10-06
+/SiStripDetWithSomething.cc/1.2/Tue Jan 12 09:13:04 2010//TV00-10-10-06
+/SiStripQualityHistory.cc/1.2/Tue Jul 20 02:58:23 2010//TV00-10-10-06
+/TrackerDpgAnalysis.cc/1.12/Thu Jul 21 21:15:03 2011//TV00-10-10-06
+D
