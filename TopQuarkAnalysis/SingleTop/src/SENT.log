@@ -1,0 +1,343 @@
+POST /srm/managerv2 HTTP/1.1
+Host: cmsse02.na.infn.it:8446
+User-Agent: gSOAP/2.7
+Content-Type: text/xml; charset=utf-8
+Content-Length: 737
+Connection: close
+SOAPAction: "Ls"
+
+<?xml version="1.0" encoding="UTF-8"?>
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:srm2="http://srm.lbl.gov/StorageResourceManager"><SOAP-ENV:Body SOAP-ENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"><srm2:srmLs><srmLsRequest><arrayOfSURLs><urlArray>srm://cmsse02.na.infn.it:8446/srm/managerv2?SFN=/dpm/na.infn.it/home/cms/store/user/oiorio/2012/Fall12/MergedApr2013</urlArray></arrayOfSURLs><fullDetailedList>true</fullDetailedList><numOfLevels>1</numOfLevels></srmLsRequest></srm2:srmLs></SOAP-ENV:Body></SOAP-ENV:Envelope>POST /srm/managerv2 HTTP/1.1
+Host: cmsse02.na.infn.it:8446
+User-Agent: gSOAP/2.7
+Content-Type: text/xml; charset=utf-8
+Content-Length: 733
+Connection: close
+SOAPAction: "Ls"
+
+<?xml version="1.0" encoding="UTF-8"?>
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:srm2="http://srm.lbl.gov/StorageResourceManager"><SOAP-ENV:Body SOAP-ENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"><srm2:srmLs><srmLsRequest><arrayOfSURLs><urlArray>srm://cmsse02.na.infn.it:8446/srm/managerv2?SFN=/dpm/na.infn.it/home/cms/store/user/oiorio/2012/Fall12/MergedApr</urlArray></arrayOfSURLs><fullDetailedList>true</fullDetailedList><numOfLevels>1</numOfLevels></srmLsRequest></srm2:srmLs></SOAP-ENV:Body></SOAP-ENV:Envelope>POST /srm/managerv2 HTTP/1.1
+Host: cmsse02.na.infn.it:8446
+User-Agent: gSOAP/2.7
+Content-Type: text/xml; charset=utf-8
+Content-Length: 737
+Connection: close
+SOAPAction: "Ls"
+
+<?xml version="1.0" encoding="UTF-8"?>
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:srm2="http://srm.lbl.gov/StorageResourceManager"><SOAP-ENV:Body SOAP-ENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"><srm2:srmLs><srmLsRequest><arrayOfSURLs><urlArray>srm://cmsse02.na.infn.it:8446/srm/managerv2?SFN=/dpm/na.infn.it/home/cms/store/user/oiorio/2012/Fall12/MergedApr2013</urlArray></arrayOfSURLs><fullDetailedList>true</fullDetailedList><numOfLevels>1</numOfLevels></srmLsRequest></srm2:srmLs></SOAP-ENV:Body></SOAP-ENV:Envelope>POST /srm/managerv2 HTTP/1.1
+Host: cmsse02.na.infn.it:8446
+User-Agent: gSOAP/2.7
+Content-Type: text/xml; charset=utf-8
+Content-Length: 737
+Connection: close
+SOAPAction: "Ls"
+
+<?xml version="1.0" encoding="UTF-8"?>
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:srm2="http://srm.lbl.gov/StorageResourceManager"><SOAP-ENV:Body SOAP-ENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"><srm2:srmLs><srmLsRequest><arrayOfSURLs><urlArray>srm://cmsse02.na.infn.it:8446/srm/managerv2?SFN=/dpm/na.infn.it/home/cms/store/user/oiorio/2012/Fall12/MergedApr2013</urlArray></arrayOfSURLs><fullDetailedList>true</fullDetailedList><numOfLevels>1</numOfLevels></srmLsRequest></srm2:srmLs></SOAP-ENV:Body></SOAP-ENV:Envelope>POST /srm/managerv2 HTTP/1.1
+Host: cmsse02.na.infn.it:8446
+User-Agent: gSOAP/2.7
+Content-Type: text/xml; charset=utf-8
+Content-Length: 764
+Connection: close
+SOAPAction: "Ls"
+
+<?xml version="1.0" encoding="UTF-8"?>
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:srm2="http://srm.lbl.gov/StorageResourceManager"><SOAP-ENV:Body SOAP-ENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"><srm2:srmLs><srmLsRequest><arrayOfSURLs><urlArray>srm://cmsse02.na.infn.it:8446/srm/managerv2?SFN=/dpm/na.infn.it/home/cms/store/user/oiorio/2012/Fall12/MergedApr2013/SChannel_part_1Merged.root</urlArray></arrayOfSURLs><fullDetailedList>true</fullDetailedList><numOfLevels>0</numOfLevels></srmLsRequest></srm2:srmLs></SOAP-ENV:Body></SOAP-ENV:Envelope>POST /srm/managerv2 HTTP/1.1
+Host: cmsse02.na.infn.it:8446
+User-Agent: gSOAP/2.7
+Content-Type: text/xml; charset=utf-8
+Content-Length: 1022
+Connection: close
+SOAPAction: "PrepareToGet"
+
+<?xml version="1.0" encoding="UTF-8"?>
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:srm2="http://srm.lbl.gov/StorageResourceManager"><SOAP-ENV:Body SOAP-ENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"><srm2:srmPrepareToGet><srmPrepareToGetRequest><arrayOfFileRequests><requestArray><sourceSURL>srm://cmsse02.na.infn.it:8446/srm/managerv2?SFN=/dpm/na.infn.it/home/cms/store/user/oiorio/2012/Fall12/MergedApr2013/SChannel_part_1Merged.root</sourceSURL></requestArray></arrayOfFileRequests><desiredFileStorageType>PERMANENT</desiredFileStorageType><desiredTotalRequestTime>3600</desiredTotalRequestTime><transferParameters><arrayOfTransferProtocols><stringArray>gsiftp</stringArray></arrayOfTransferProtocols></transferParameters></srmPrepareToGetRequest></srm2:srmPrepareToGet></SOAP-ENV:Body></SOAP-ENV:Envelope>POST /srm/managerv2 HTTP/1.1
+Host: cmsse02.na.infn.it:8446
+User-Agent: gSOAP/2.7
+Content-Type: text/xml; charset=utf-8
+Content-Length: 631
+Connection: close
+SOAPAction: "StatusOfGetRequest"
+
+<?xml version="1.0" encoding="UTF-8"?>
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:srm2="http://srm.lbl.gov/StorageResourceManager"><SOAP-ENV:Body SOAP-ENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"><srm2:srmStatusOfGetRequest><srmStatusOfGetRequestRequest><requestToken>70984b3b-37fa-486c-bee8-c324e773674a</requestToken></srmStatusOfGetRequestRequest></srm2:srmStatusOfGetRequest></SOAP-ENV:Body></SOAP-ENV:Envelope>POST /srm/managerv2 HTTP/1.1
+Host: cmsse02.na.infn.it:8446
+User-Agent: gSOAP/2.7
+Content-Type: text/xml; charset=utf-8
+Content-Length: 800
+Connection: close
+SOAPAction: "ReleaseFiles"
+
+<?xml version="1.0" encoding="UTF-8"?>
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:srm2="http://srm.lbl.gov/StorageResourceManager"><SOAP-ENV:Body SOAP-ENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"><srm2:srmReleaseFiles><srmReleaseFilesRequest><requestToken>70984b3b-37fa-486c-bee8-c324e773674a</requestToken><arrayOfSURLs><urlArray>srm://cmsse02.na.infn.it:8446/srm/managerv2?SFN=/dpm/na.infn.it/home/cms/store/user/oiorio/2012/Fall12/MergedApr2013/SChannel_part_1Merged.root</urlArray></arrayOfSURLs></srmReleaseFilesRequest></srm2:srmReleaseFiles></SOAP-ENV:Body></SOAP-ENV:Envelope>POST /srm/managerv2 HTTP/1.1
+Host: cmsse02.na.infn.it:8446
+User-Agent: gSOAP/2.7
+Content-Type: text/xml; charset=utf-8
+Content-Length: 767
+Connection: close
+SOAPAction: "Ls"
+
+<?xml version="1.0" encoding="UTF-8"?>
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:srm2="http://srm.lbl.gov/StorageResourceManager"><SOAP-ENV:Body SOAP-ENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"><srm2:srmLs><srmLsRequest><arrayOfSURLs><urlArray>srm://cmsse02.na.infn.it:8446/srm/managerv2?SFN=/dpm/na.infn.it/home/cms/store/user/oiorio/2012/Fall12/MergedApr2013/SbarChannel_part_1Merged.root</urlArray></arrayOfSURLs><fullDetailedList>true</fullDetailedList><numOfLevels>0</numOfLevels></srmLsRequest></srm2:srmLs></SOAP-ENV:Body></SOAP-ENV:Envelope>POST /srm/managerv2 HTTP/1.1
+Host: cmsse02.na.infn.it:8446
+User-Agent: gSOAP/2.7
+Content-Type: text/xml; charset=utf-8
+Content-Length: 1025
+Connection: close
+SOAPAction: "PrepareToGet"
+
+<?xml version="1.0" encoding="UTF-8"?>
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:srm2="http://srm.lbl.gov/StorageResourceManager"><SOAP-ENV:Body SOAP-ENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"><srm2:srmPrepareToGet><srmPrepareToGetRequest><arrayOfFileRequests><requestArray><sourceSURL>srm://cmsse02.na.infn.it:8446/srm/managerv2?SFN=/dpm/na.infn.it/home/cms/store/user/oiorio/2012/Fall12/MergedApr2013/SbarChannel_part_1Merged.root</sourceSURL></requestArray></arrayOfFileRequests><desiredFileStorageType>PERMANENT</desiredFileStorageType><desiredTotalRequestTime>3600</desiredTotalRequestTime><transferParameters><arrayOfTransferProtocols><stringArray>gsiftp</stringArray></arrayOfTransferProtocols></transferParameters></srmPrepareToGetRequest></srm2:srmPrepareToGet></SOAP-ENV:Body></SOAP-ENV:Envelope>POST /srm/managerv2 HTTP/1.1
+Host: cmsse02.na.infn.it:8446
+User-Agent: gSOAP/2.7
+Content-Type: text/xml; charset=utf-8
+Content-Length: 631
+Connection: close
+SOAPAction: "StatusOfGetRequest"
+
+<?xml version="1.0" encoding="UTF-8"?>
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:srm2="http://srm.lbl.gov/StorageResourceManager"><SOAP-ENV:Body SOAP-ENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"><srm2:srmStatusOfGetRequest><srmStatusOfGetRequestRequest><requestToken>44486b45-4129-4d83-a373-ec18b66094b4</requestToken></srmStatusOfGetRequestRequest></srm2:srmStatusOfGetRequest></SOAP-ENV:Body></SOAP-ENV:Envelope>POST /srm/managerv2 HTTP/1.1
+Host: cmsse02.na.infn.it:8446
+User-Agent: gSOAP/2.7
+Content-Type: text/xml; charset=utf-8
+Content-Length: 767
+Connection: close
+SOAPAction: "Ls"
+
+<?xml version="1.0" encoding="UTF-8"?>
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:srm2="http://srm.lbl.gov/StorageResourceManager"><SOAP-ENV:Body SOAP-ENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"><srm2:srmLs><srmLsRequest><arrayOfSURLs><urlArray>srm://cmsse02.na.infn.it:8446/srm/managerv2?SFN=/dpm/na.infn.it/home/cms/store/user/oiorio/2012/Fall12/MergedApr2013/SbarChannel_part_2Merged.root</urlArray></arrayOfSURLs><fullDetailedList>true</fullDetailedList><numOfLevels>0</numOfLevels></srmLsRequest></srm2:srmLs></SOAP-ENV:Body></SOAP-ENV:Envelope>POST /srm/managerv2 HTTP/1.1
+Host: cmsse02.na.infn.it:8446
+User-Agent: gSOAP/2.7
+Content-Type: text/xml; charset=utf-8
+Content-Length: 1025
+Connection: close
+SOAPAction: "PrepareToGet"
+
+<?xml version="1.0" encoding="UTF-8"?>
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:srm2="http://srm.lbl.gov/StorageResourceManager"><SOAP-ENV:Body SOAP-ENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"><srm2:srmPrepareToGet><srmPrepareToGetRequest><arrayOfFileRequests><requestArray><sourceSURL>srm://cmsse02.na.infn.it:8446/srm/managerv2?SFN=/dpm/na.infn.it/home/cms/store/user/oiorio/2012/Fall12/MergedApr2013/SbarChannel_part_2Merged.root</sourceSURL></requestArray></arrayOfFileRequests><desiredFileStorageType>PERMANENT</desiredFileStorageType><desiredTotalRequestTime>3600</desiredTotalRequestTime><transferParameters><arrayOfTransferProtocols><stringArray>gsiftp</stringArray></arrayOfTransferProtocols></transferParameters></srmPrepareToGetRequest></srm2:srmPrepareToGet></SOAP-ENV:Body></SOAP-ENV:Envelope>POST /srm/managerv2 HTTP/1.1
+Host: cmsse02.na.infn.it:8446
+User-Agent: gSOAP/2.7
+Content-Type: text/xml; charset=utf-8
+Content-Length: 767
+Connection: close
+SOAPAction: "Ls"
+
+<?xml version="1.0" encoding="UTF-8"?>
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:srm2="http://srm.lbl.gov/StorageResourceManager"><SOAP-ENV:Body SOAP-ENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"><srm2:srmLs><srmLsRequest><arrayOfSURLs><urlArray>srm://cmsse02.na.infn.it:8446/srm/managerv2?SFN=/dpm/na.infn.it/home/cms/store/user/oiorio/2012/Fall12/MergedApr2013/SbarChannel_part_3Merged.root</urlArray></arrayOfSURLs><fullDetailedList>true</fullDetailedList><numOfLevels>0</numOfLevels></srmLsRequest></srm2:srmLs></SOAP-ENV:Body></SOAP-ENV:Envelope>POST /srm/managerv2 HTTP/1.1
+Host: cmsse02.na.infn.it:8446
+User-Agent: gSOAP/2.7
+Content-Type: text/xml; charset=utf-8
+Content-Length: 631
+Connection: close
+SOAPAction: "StatusOfGetRequest"
+
+<?xml version="1.0" encoding="UTF-8"?>
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:srm2="http://srm.lbl.gov/StorageResourceManager"><SOAP-ENV:Body SOAP-ENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"><srm2:srmStatusOfGetRequest><srmStatusOfGetRequestRequest><requestToken>23da637e-4e30-4af4-9b25-a6f11ec36f7e</requestToken></srmStatusOfGetRequestRequest></srm2:srmStatusOfGetRequest></SOAP-ENV:Body></SOAP-ENV:Envelope>POST /srm/managerv2 HTTP/1.1
+Host: cmsse02.na.infn.it:8446
+User-Agent: gSOAP/2.7
+Content-Type: text/xml; charset=utf-8
+Content-Length: 1025
+Connection: close
+SOAPAction: "PrepareToGet"
+
+<?xml version="1.0" encoding="UTF-8"?>
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:srm2="http://srm.lbl.gov/StorageResourceManager"><SOAP-ENV:Body SOAP-ENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"><srm2:srmPrepareToGet><srmPrepareToGetRequest><arrayOfFileRequests><requestArray><sourceSURL>srm://cmsse02.na.infn.it:8446/srm/managerv2?SFN=/dpm/na.infn.it/home/cms/store/user/oiorio/2012/Fall12/MergedApr2013/SbarChannel_part_3Merged.root</sourceSURL></requestArray></arrayOfFileRequests><desiredFileStorageType>PERMANENT</desiredFileStorageType><desiredTotalRequestTime>3600</desiredTotalRequestTime><transferParameters><arrayOfTransferProtocols><stringArray>gsiftp</stringArray></arrayOfTransferProtocols></transferParameters></srmPrepareToGetRequest></srm2:srmPrepareToGet></SOAP-ENV:Body></SOAP-ENV:Envelope>POST /srm/managerv2 HTTP/1.1
+Host: cmsse02.na.infn.it:8446
+User-Agent: gSOAP/2.7
+Content-Type: text/xml; charset=utf-8
+Content-Length: 767
+Connection: close
+SOAPAction: "Ls"
+
+<?xml version="1.0" encoding="UTF-8"?>
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:srm2="http://srm.lbl.gov/StorageResourceManager"><SOAP-ENV:Body SOAP-ENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"><srm2:srmLs><srmLsRequest><arrayOfSURLs><urlArray>srm://cmsse02.na.infn.it:8446/srm/managerv2?SFN=/dpm/na.infn.it/home/cms/store/user/oiorio/2012/Fall12/MergedApr2013/SbarChannel_part_4Merged.root</urlArray></arrayOfSURLs><fullDetailedList>true</fullDetailedList><numOfLevels>0</numOfLevels></srmLsRequest></srm2:srmLs></SOAP-ENV:Body></SOAP-ENV:Envelope>POST /srm/managerv2 HTTP/1.1
+Host: cmsse02.na.infn.it:8446
+User-Agent: gSOAP/2.7
+Content-Type: text/xml; charset=utf-8
+Content-Length: 1025
+Connection: close
+SOAPAction: "PrepareToGet"
+
+<?xml version="1.0" encoding="UTF-8"?>
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:srm2="http://srm.lbl.gov/StorageResourceManager"><SOAP-ENV:Body SOAP-ENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"><srm2:srmPrepareToGet><srmPrepareToGetRequest><arrayOfFileRequests><requestArray><sourceSURL>srm://cmsse02.na.infn.it:8446/srm/managerv2?SFN=/dpm/na.infn.it/home/cms/store/user/oiorio/2012/Fall12/MergedApr2013/SbarChannel_part_4Merged.root</sourceSURL></requestArray></arrayOfFileRequests><desiredFileStorageType>PERMANENT</desiredFileStorageType><desiredTotalRequestTime>3600</desiredTotalRequestTime><transferParameters><arrayOfTransferProtocols><stringArray>gsiftp</stringArray></arrayOfTransferProtocols></transferParameters></srmPrepareToGetRequest></srm2:srmPrepareToGet></SOAP-ENV:Body></SOAP-ENV:Envelope>POST /srm/managerv2 HTTP/1.1
+Host: cmsse02.na.infn.it:8446
+User-Agent: gSOAP/2.7
+Content-Type: text/xml; charset=utf-8
+Content-Length: 631
+Connection: close
+SOAPAction: "StatusOfGetRequest"
+
+<?xml version="1.0" encoding="UTF-8"?>
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:srm2="http://srm.lbl.gov/StorageResourceManager"><SOAP-ENV:Body SOAP-ENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"><srm2:srmStatusOfGetRequest><srmStatusOfGetRequestRequest><requestToken>242cae83-877c-48a9-aa9e-9253853f6f9b</requestToken></srmStatusOfGetRequestRequest></srm2:srmStatusOfGetRequest></SOAP-ENV:Body></SOAP-ENV:Envelope>POST /srm/managerv2 HTTP/1.1
+Host: cmsse02.na.infn.it:8446
+User-Agent: gSOAP/2.7
+Content-Type: text/xml; charset=utf-8
+Content-Length: 767
+Connection: close
+SOAPAction: "Ls"
+
+<?xml version="1.0" encoding="UTF-8"?>
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:srm2="http://srm.lbl.gov/StorageResourceManager"><SOAP-ENV:Body SOAP-ENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"><srm2:srmLs><srmLsRequest><arrayOfSURLs><urlArray>srm://cmsse02.na.infn.it:8446/srm/managerv2?SFN=/dpm/na.infn.it/home/cms/store/user/oiorio/2012/Fall12/MergedApr2013/SbarChannel_part_5Merged.root</urlArray></arrayOfSURLs><fullDetailedList>true</fullDetailedList><numOfLevels>0</numOfLevels></srmLsRequest></srm2:srmLs></SOAP-ENV:Body></SOAP-ENV:Envelope>POST /srm/managerv2 HTTP/1.1
+Host: cmsse02.na.infn.it:8446
+User-Agent: gSOAP/2.7
+Content-Type: text/xml; charset=utf-8
+Content-Length: 631
+Connection: close
+SOAPAction: "StatusOfGetRequest"
+
+<?xml version="1.0" encoding="UTF-8"?>
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:srm2="http://srm.lbl.gov/StorageResourceManager"><SOAP-ENV:Body SOAP-ENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"><srm2:srmStatusOfGetRequest><srmStatusOfGetRequestRequest><requestToken>db609ce1-e59e-423f-b7af-c03e943bfa40</requestToken></srmStatusOfGetRequestRequest></srm2:srmStatusOfGetRequest></SOAP-ENV:Body></SOAP-ENV:Envelope>POST /srm/managerv2 HTTP/1.1
+Host: cmsse02.na.infn.it:8446
+User-Agent: gSOAP/2.7
+Content-Type: text/xml; charset=utf-8
+Content-Length: 1025
+Connection: close
+SOAPAction: "PrepareToGet"
+
+<?xml version="1.0" encoding="UTF-8"?>
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:srm2="http://srm.lbl.gov/StorageResourceManager"><SOAP-ENV:Body SOAP-ENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"><srm2:srmPrepareToGet><srmPrepareToGetRequest><arrayOfFileRequests><requestArray><sourceSURL>srm://cmsse02.na.infn.it:8446/srm/managerv2?SFN=/dpm/na.infn.it/home/cms/store/user/oiorio/2012/Fall12/MergedApr2013/SbarChannel_part_5Merged.root</sourceSURL></requestArray></arrayOfFileRequests><desiredFileStorageType>PERMANENT</desiredFileStorageType><desiredTotalRequestTime>3600</desiredTotalRequestTime><transferParameters><arrayOfTransferProtocols><stringArray>gsiftp</stringArray></arrayOfTransferProtocols></transferParameters></srmPrepareToGetRequest></srm2:srmPrepareToGet></SOAP-ENV:Body></SOAP-ENV:Envelope>POST /srm/managerv2 HTTP/1.1
+Host: cmsse02.na.infn.it:8446
+User-Agent: gSOAP/2.7
+Content-Type: text/xml; charset=utf-8
+Content-Length: 631
+Connection: close
+SOAPAction: "StatusOfGetRequest"
+
+<?xml version="1.0" encoding="UTF-8"?>
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:srm2="http://srm.lbl.gov/StorageResourceManager"><SOAP-ENV:Body SOAP-ENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"><srm2:srmStatusOfGetRequest><srmStatusOfGetRequestRequest><requestToken>7eec6fae-8ab7-4fbe-9bfd-d48a73283d9f</requestToken></srmStatusOfGetRequestRequest></srm2:srmStatusOfGetRequest></SOAP-ENV:Body></SOAP-ENV:Envelope>POST /srm/managerv2 HTTP/1.1
+Host: cmsse02.na.infn.it:8446
+User-Agent: gSOAP/2.7
+Content-Type: text/xml; charset=utf-8
+Content-Length: 803
+Connection: close
+SOAPAction: "ReleaseFiles"
+
+<?xml version="1.0" encoding="UTF-8"?>
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:srm2="http://srm.lbl.gov/StorageResourceManager"><SOAP-ENV:Body SOAP-ENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"><srm2:srmReleaseFiles><srmReleaseFilesRequest><requestToken>44486b45-4129-4d83-a373-ec18b66094b4</requestToken><arrayOfSURLs><urlArray>srm://cmsse02.na.infn.it:8446/srm/managerv2?SFN=/dpm/na.infn.it/home/cms/store/user/oiorio/2012/Fall12/MergedApr2013/SbarChannel_part_1Merged.root</urlArray></arrayOfSURLs></srmReleaseFilesRequest></srm2:srmReleaseFiles></SOAP-ENV:Body></SOAP-ENV:Envelope>POST /srm/managerv2 HTTP/1.1
+Host: cmsse02.na.infn.it:8446
+User-Agent: gSOAP/2.7
+Content-Type: text/xml; charset=utf-8
+Content-Length: 803
+Connection: close
+SOAPAction: "ReleaseFiles"
+
+<?xml version="1.0" encoding="UTF-8"?>
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:srm2="http://srm.lbl.gov/StorageResourceManager"><SOAP-ENV:Body SOAP-ENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"><srm2:srmReleaseFiles><srmReleaseFilesRequest><requestToken>23da637e-4e30-4af4-9b25-a6f11ec36f7e</requestToken><arrayOfSURLs><urlArray>srm://cmsse02.na.infn.it:8446/srm/managerv2?SFN=/dpm/na.infn.it/home/cms/store/user/oiorio/2012/Fall12/MergedApr2013/SbarChannel_part_2Merged.root</urlArray></arrayOfSURLs></srmReleaseFilesRequest></srm2:srmReleaseFiles></SOAP-ENV:Body></SOAP-ENV:Envelope>POST /srm/managerv2 HTTP/1.1
+Host: cmsse02.na.infn.it:8446
+User-Agent: gSOAP/2.7
+Content-Type: text/xml; charset=utf-8
+Content-Length: 803
+Connection: close
+SOAPAction: "ReleaseFiles"
+
+<?xml version="1.0" encoding="UTF-8"?>
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:srm2="http://srm.lbl.gov/StorageResourceManager"><SOAP-ENV:Body SOAP-ENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"><srm2:srmReleaseFiles><srmReleaseFilesRequest><requestToken>242cae83-877c-48a9-aa9e-9253853f6f9b</requestToken><arrayOfSURLs><urlArray>srm://cmsse02.na.infn.it:8446/srm/managerv2?SFN=/dpm/na.infn.it/home/cms/store/user/oiorio/2012/Fall12/MergedApr2013/SbarChannel_part_3Merged.root</urlArray></arrayOfSURLs></srmReleaseFilesRequest></srm2:srmReleaseFiles></SOAP-ENV:Body></SOAP-ENV:Envelope>POST /srm/managerv2 HTTP/1.1
+Host: cmsse02.na.infn.it:8446
+User-Agent: gSOAP/2.7
+Content-Type: text/xml; charset=utf-8
+Content-Length: 803
+Connection: close
+SOAPAction: "ReleaseFiles"
+
+<?xml version="1.0" encoding="UTF-8"?>
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:srm2="http://srm.lbl.gov/StorageResourceManager"><SOAP-ENV:Body SOAP-ENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"><srm2:srmReleaseFiles><srmReleaseFilesRequest><requestToken>db609ce1-e59e-423f-b7af-c03e943bfa40</requestToken><arrayOfSURLs><urlArray>srm://cmsse02.na.infn.it:8446/srm/managerv2?SFN=/dpm/na.infn.it/home/cms/store/user/oiorio/2012/Fall12/MergedApr2013/SbarChannel_part_4Merged.root</urlArray></arrayOfSURLs></srmReleaseFilesRequest></srm2:srmReleaseFiles></SOAP-ENV:Body></SOAP-ENV:Envelope>POST /srm/managerv2 HTTP/1.1
+Host: cmsse02.na.infn.it:8446
+User-Agent: gSOAP/2.7
+Content-Type: text/xml; charset=utf-8
+Content-Length: 803
+Connection: close
+SOAPAction: "ReleaseFiles"
+
+<?xml version="1.0" encoding="UTF-8"?>
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:srm2="http://srm.lbl.gov/StorageResourceManager"><SOAP-ENV:Body SOAP-ENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"><srm2:srmReleaseFiles><srmReleaseFilesRequest><requestToken>7eec6fae-8ab7-4fbe-9bfd-d48a73283d9f</requestToken><arrayOfSURLs><urlArray>srm://cmsse02.na.infn.it:8446/srm/managerv2?SFN=/dpm/na.infn.it/home/cms/store/user/oiorio/2012/Fall12/MergedApr2013/SbarChannel_part_5Merged.root</urlArray></arrayOfSURLs></srmReleaseFilesRequest></srm2:srmReleaseFiles></SOAP-ENV:Body></SOAP-ENV:Envelope>POST /srm/managerv2 HTTP/1.1
+Host: cmsse02.na.infn.it:8446
+User-Agent: gSOAP/2.7
+Content-Type: text/xml; charset=utf-8
+Content-Length: 744
+Connection: close
+SOAPAction: "Ls"
+
+<?xml version="1.0" encoding="UTF-8"?>
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:srm2="http://srm.lbl.gov/StorageResourceManager"><SOAP-ENV:Body SOAP-ENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"><srm2:srmLs><srmLsRequest><arrayOfSURLs><urlArray>srm://cmsse02.na.infn.it:8446/srm/managerv2?SFN=/dpm/na.infn.it/home/cms/store/user/oiorio/2012/Fall12/MergedTreesMVAID2013</urlArray></arrayOfSURLs><fullDetailedList>true</fullDetailedList><numOfLevels>1</numOfLevels></srmLsRequest></srm2:srmLs></SOAP-ENV:Body></SOAP-ENV:Envelope>POST /srm/managerv2 HTTP/1.1
+Host: cmsse02.na.infn.it:8446
+User-Agent: gSOAP/2.7
+Content-Type: text/xml; charset=utf-8
+Content-Length: 724
+Connection: close
+SOAPAction: "Ls"
+
+<?xml version="1.0" encoding="UTF-8"?>
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:srm2="http://srm.lbl.gov/StorageResourceManager"><SOAP-ENV:Body SOAP-ENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"><srm2:srmLs><srmLsRequest><arrayOfSURLs><urlArray>srm://cmsse02.na.infn.it:8446/srm/managerv2?SFN=/dpm/na.infn.it/home/cms/store/user/oiorio/2012/Fall12/</urlArray></arrayOfSURLs><fullDetailedList>true</fullDetailedList><numOfLevels>1</numOfLevels></srmLsRequest></srm2:srmLs></SOAP-ENV:Body></SOAP-ENV:Envelope>POST /srm/managerv2 HTTP/1.1
+Host: cmsse02.na.infn.it:8446
+User-Agent: gSOAP/2.7
+Content-Type: text/xml; charset=utf-8
+Content-Length: 724
+Connection: close
+SOAPAction: "Ls"
+
+<?xml version="1.0" encoding="UTF-8"?>
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:srm2="http://srm.lbl.gov/StorageResourceManager"><SOAP-ENV:Body SOAP-ENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"><srm2:srmLs><srmLsRequest><arrayOfSURLs><urlArray>srm://cmsse02.na.infn.it:8446/srm/managerv2?SFN=/dpm/na.infn.it/home/cms/store/user/oiorio/2012/Fall12/</urlArray></arrayOfSURLs><fullDetailedList>true</fullDetailedList><numOfLevels>1</numOfLevels></srmLsRequest></srm2:srmLs></SOAP-ENV:Body></SOAP-ENV:Envelope>POST /srm/managerv2 HTTP/1.1
+Host: cmsse02.na.infn.it:8446
+User-Agent: gSOAP/2.7
+Content-Type: text/xml; charset=utf-8
+Content-Length: 742
+Connection: close
+SOAPAction: "Ls"
+
+<?xml version="1.0" encoding="UTF-8"?>
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:srm2="http://srm.lbl.gov/StorageResourceManager"><SOAP-ENV:Body SOAP-ENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"><srm2:srmLs><srmLsRequest><arrayOfSURLs><urlArray>srm://cmsse02.na.infn.it:8446/srm/managerv2?SFN=/dpm/na.infn.it/home/cms/store/user/oiorio/2012/Fall12/MergedTreesAug2013</urlArray></arrayOfSURLs><fullDetailedList>true</fullDetailedList><numOfLevels>1</numOfLevels></srmLsRequest></srm2:srmLs></SOAP-ENV:Body></SOAP-ENV:Envelope>POST /srm/managerv2 HTTP/1.1
+Host: cmsse02.na.infn.it:8446
+User-Agent: gSOAP/2.7
+Content-Type: text/xml; charset=utf-8
+Content-Length: 724
+Connection: close
+SOAPAction: "Ls"
+
+<?xml version="1.0" encoding="UTF-8"?>
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:srm2="http://srm.lbl.gov/StorageResourceManager"><SOAP-ENV:Body SOAP-ENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"><srm2:srmLs><srmLsRequest><arrayOfSURLs><urlArray>srm://cmsse02.na.infn.it:8446/srm/managerv2?SFN=/dpm/na.infn.it/home/cms/store/user/oiorio/2012/Fall12/</urlArray></arrayOfSURLs><fullDetailedList>true</fullDetailedList><numOfLevels>1</numOfLevels></srmLsRequest></srm2:srmLs></SOAP-ENV:Body></SOAP-ENV:Envelope>POST /srm/managerv2 HTTP/1.1
+Host: cmsse02.na.infn.it:8446
+User-Agent: gSOAP/2.7
+Content-Type: text/xml; charset=utf-8
+Content-Length: 724
+Connection: close
+SOAPAction: "Ls"
+
+<?xml version="1.0" encoding="UTF-8"?>
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:srm2="http://srm.lbl.gov/StorageResourceManager"><SOAP-ENV:Body SOAP-ENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"><srm2:srmLs><srmLsRequest><arrayOfSURLs><urlArray>srm://cmsse02.na.infn.it:8446/srm/managerv2?SFN=/dpm/na.infn.it/home/cms/store/user/oiorio/2012/Fall12/</urlArray></arrayOfSURLs><fullDetailedList>true</fullDetailedList><numOfLevels>1</numOfLevels></srmLsRequest></srm2:srmLs></SOAP-ENV:Body></SOAP-ENV:Envelope>POST /srm/managerv2 HTTP/1.1
+Host: cmsse02.na.infn.it:8446
+User-Agent: gSOAP/2.7
+Content-Type: text/xml; charset=utf-8
+Content-Length: 742
+Connection: close
+SOAPAction: "Ls"
+
+<?xml version="1.0" encoding="UTF-8"?>
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:srm2="http://srm.lbl.gov/StorageResourceManager"><SOAP-ENV:Body SOAP-ENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"><srm2:srmLs><srmLsRequest><arrayOfSURLs><urlArray>srm://cmsse02.na.infn.it:8446/srm/managerv2?SFN=/dpm/na.infn.it/home/cms/store/user/oiorio/2012/Fall12/MergedTreesAug2013</urlArray></arrayOfSURLs><fullDetailedList>true</fullDetailedList><numOfLevels>1</numOfLevels></srmLsRequest></srm2:srmLs></SOAP-ENV:Body></SOAP-ENV:Envelope>POST /srm/managerv2 HTTP/1.1
+Host: cmsse02.na.infn.it:8446
+User-Agent: gSOAP/2.7
+Content-Type: text/xml; charset=utf-8
+Content-Length: 744
+Connection: close
+SOAPAction: "Ls"
+
+<?xml version="1.0" encoding="UTF-8"?>
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:srm2="http://srm.lbl.gov/StorageResourceManager"><SOAP-ENV:Body SOAP-ENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"><srm2:srmLs><srmLsRequest><arrayOfSURLs><urlArray>srm://cmsse02.na.infn.it:8446/srm/managerv2?SFN=/dpm/na.infn.it/home/cms/store/user/oiorio/2012/Fall12/MergedTreesMVAID2013</urlArray></arrayOfSURLs><fullDetailedList>true</fullDetailedList><numOfLevels>1</numOfLevels></srmLsRequest></srm2:srmLs></SOAP-ENV:Body></SOAP-ENV:Envelope>POST /srm/managerv2 HTTP/1.1
+Host: cmsse02.na.infn.it:8446
+User-Agent: gSOAP/2.7
+Content-Type: text/xml; charset=utf-8
+Content-Length: 744
+Connection: close
+SOAPAction: "Ls"
+
+<?xml version="1.0" encoding="UTF-8"?>
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:srm2="http://srm.lbl.gov/StorageResourceManager"><SOAP-ENV:Body SOAP-ENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"><srm2:srmLs><srmLsRequest><arrayOfSURLs><urlArray>srm://cmsse02.na.infn.it:8446/srm/managerv2?SFN=/dpm/na.infn.it/home/cms/store/user/oiorio/2012/Fall12/MergedTreesMVAID2013</urlArray></arrayOfSURLs><fullDetailedList>true</fullDetailedList><numOfLevels>1</numOfLevels></srmLsRequest></srm2:srmLs></SOAP-ENV:Body></SOAP-ENV:Envelope>POST /srm/managerv2 HTTP/1.1
+Host: cmsse02.na.infn.it:8446
+User-Agent: gSOAP/2.7
+Content-Type: text/xml; charset=utf-8
+Content-Length: 746
+Connection: close
+SOAPAction: "Ls"
+
+<?xml version="1.0" encoding="UTF-8"?>
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:srm2="http://srm.lbl.gov/StorageResourceManager"><SOAP-ENV:Body SOAP-ENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"><srm2:srmLs><srmLsRequest><arrayOfSURLs><urlArray>srm://cmsse02.na.infn.it:8446/srm/managerv2?SFN=/dpm/na.infn.it/home/cms//store/user/oiorio/2012/Fall12/MergedTreesMVAID2013/</urlArray></arrayOfSURLs><fullDetailedList>true</fullDetailedList><numOfLevels>1</numOfLevels></srmLsRequest></srm2:srmLs></SOAP-ENV:Body></SOAP-ENV:Envelope>

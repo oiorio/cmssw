@@ -1,0 +1,7 @@
+----- Begin Fatal Exception 15-Aug-2013 09:53:55 CEST-----------------------
+An exception of category 'ConfigFileReadError' occurred while
+   [0] Processing the python configuration file named SChannel_part_1_cfg.py
+Exception Message:
+python encountered the error: <type 'exceptions.IOError'>
+[Errno 2] No such file or directory: 'SChannel_part_1_cfg.py'
+----- End Fatal Exception -------------------------------------------------

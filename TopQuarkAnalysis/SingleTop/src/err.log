@@ -1,0 +1,82 @@
+Reading cached build data
+tmp/slc5_amd64_gcc462/MakeData/DirCache.mk:467: No such file exists: src/TopQuarkAnalysis/SingleTop/bin/fitsPlots1DKarlsruhe.cpp. Please fix src/TopQuarkAnalysis/SingleTop/bin/BuildFile.
+tmp/slc5_amd64_gcc462/MakeData/DirCache.mk:489: No such file exists: src/TopQuarkAnalysis/SingleTop/bin/fitsPlotsTestMC.cpp. Please fix src/TopQuarkAnalysis/SingleTop/bin/BuildFile.
+tmp/slc5_amd64_gcc462/MakeData/DirCache.mk:511: No such file exists: src/TopQuarkAnalysis/SingleTop/bin/plots1DValidation.cpp. Please fix src/TopQuarkAnalysis/SingleTop/bin/BuildFile.
+tmp/slc5_amd64_gcc462/MakeData/DirCache.mk:533: No such file exists: src/TopQuarkAnalysis/SingleTop/bin/fitsPlotsPDFs1D.cpp. Please fix src/TopQuarkAnalysis/SingleTop/bin/BuildFile.
+tmp/slc5_amd64_gcc462/MakeData/DirCache.mk:555: No such file exists: src/TopQuarkAnalysis/SingleTop/bin/Plotter.cpp. Please fix src/TopQuarkAnalysis/SingleTop/bin/BuildFile.
+tmp/slc5_amd64_gcc462/MakeData/DirCache.mk:566: No such file exists: src/TopQuarkAnalysis/SingleTop/bin/2DLikelihoodTreeMaker.cpp. Please fix src/TopQuarkAnalysis/SingleTop/bin/BuildFile.
+tmp/slc5_amd64_gcc462/MakeData/DirCache.mk:588: No such file exists: src/TopQuarkAnalysis/SingleTop/bin/Subtractor.cpp. Please fix src/TopQuarkAnalysis/SingleTop/bin/BuildFile.
+tmp/slc5_amd64_gcc462/MakeData/DirCache.mk:599: No such file exists: src/TopQuarkAnalysis/SingleTop/bin/fitsPlots2DSFLikelihoodSummerDataDriven.cpp. Please fix src/TopQuarkAnalysis/SingleTop/bin/BuildFile.
+>> Local Products Rules ..... started
+>> Local Products Rules ..... done
+>> Creating project symlinks
+>> Compiling edm plugin /afs/cern.ch/work/o/oiorio/CMSSW_5_3_8_patch3/src/TopQuarkAnalysis/SingleTop/src/SingleTopSystematicsTreesDumper.cc 
+In file included from /afs/cern.ch/work/o/oiorio/CMSSW_5_3_8_patch3/src/TopQuarkAnalysis/SingleTop/src/SingleTopSystematicsTreesDumper.cc:17:0:
+/afs/cern.ch/work/o/oiorio/CMSSW_5_3_8_patch3/src/TopQuarkAnalysis/SingleTop/interface/SingleTopSystematicsTreesDumper.h: In constructor 'SingleTopSystematicsTreesDumper::BTagWeight::BTagWeight()':
+/afs/cern.ch/work/o/oiorio/CMSSW_5_3_8_patch3/src/TopQuarkAnalysis/SingleTop/interface/SingleTopSystematicsTreesDumper.h:815:13: warning: 'SingleTopSystematicsTreesDumper::BTagWeight::minTags' will be initialized after [-Wreorder]
+/afs/cern.ch/work/o/oiorio/CMSSW_5_3_8_patch3/src/TopQuarkAnalysis/SingleTop/interface/SingleTopSystematicsTreesDumper.h:814:13: warning:   'int SingleTopSystematicsTreesDumper::BTagWeight::maxTags' [-Wreorder]
+/afs/cern.ch/work/o/oiorio/CMSSW_5_3_8_patch3/src/TopQuarkAnalysis/SingleTop/interface/SingleTopSystematicsTreesDumper.h:802:9: warning:   when initialized here [-Wreorder]
+/afs/cern.ch/work/o/oiorio/CMSSW_5_3_8_patch3/src/TopQuarkAnalysis/SingleTop/src/SingleTopSystematicsTreesDumper.cc: In constructor 'SingleTopSystematicsTreesDumper::SingleTopSystematicsTreesDumper(const edm::ParameterSet&)':
+/afs/cern.ch/work/o/oiorio/CMSSW_5_3_8_patch3/src/TopQuarkAnalysis/SingleTop/src/SingleTopSystematicsTreesDumper.cc:1137:11: warning: unused variable 'doGaussianResol' [-Wunused-variable]
+/afs/cern.ch/work/o/oiorio/CMSSW_5_3_8_patch3/src/TopQuarkAnalysis/SingleTop/src/SingleTopSystematicsTreesDumper.cc: In member function 'virtual void SingleTopSystematicsTreesDumper::analyze(const edm::Event&, const edm::EventSetup&)':
+/afs/cern.ch/work/o/oiorio/CMSSW_5_3_8_patch3/src/TopQuarkAnalysis/SingleTop/src/SingleTopSystematicsTreesDumper.cc:2063:14: warning: variable 'QCDCondition' set but not used [-Wunused-but-set-variable]
+/afs/cern.ch/work/o/oiorio/CMSSW_5_3_8_patch3/src/TopQuarkAnalysis/SingleTop/src/SingleTopSystematicsTreesDumper.cc:2067:31: warning: unused variable 'beamspot' [-Wunused-variable]
+/afs/cern.ch/work/o/oiorio/CMSSW_5_3_8_patch3/src/TopQuarkAnalysis/SingleTop/src/SingleTopSystematicsTreesDumper.cc:2068:30: warning: unused variable 'isid' [-Wunused-variable]
+/afs/cern.ch/work/o/oiorio/CMSSW_5_3_8_patch3/src/TopQuarkAnalysis/SingleTop/src/SingleTopSystematicsTreesDumper.cc:1989:18: warning: unused variable 'passesOneLepton' [-Wunused-variable]
+/afs/cern.ch/work/o/oiorio/CMSSW_5_3_8_patch3/src/TopQuarkAnalysis/SingleTop/src/SingleTopSystematicsTreesDumper.cc:2528:32: warning: variable 'csvtSF' set but not used [-Wunused-but-set-variable]
+/afs/cern.ch/work/o/oiorio/CMSSW_5_3_8_patch3/src/TopQuarkAnalysis/SingleTop/src/SingleTopSystematicsTreesDumper.cc:2532:32: warning: variable 'csvmSF' set but not used [-Wunused-but-set-variable]
+/afs/cern.ch/work/o/oiorio/CMSSW_5_3_8_patch3/src/TopQuarkAnalysis/SingleTop/src/SingleTopSystematicsTreesDumper.cc:2264:23: warning: unused variable 'rndm' [-Wunused-variable]
+/afs/cern.ch/work/o/oiorio/CMSSW_5_3_8_patch3/src/TopQuarkAnalysis/SingleTop/src/SingleTopSystematicsTreesDumper.cc:2352:21: warning: unused variable 'pos' [-Wunused-variable]
+/afs/cern.ch/work/o/oiorio/CMSSW_5_3_8_patch3/src/TopQuarkAnalysis/SingleTop/src/SingleTopSystematicsTreesDumper.cc:2757:12: warning: unused variable 'rndm' [-Wunused-variable]
+/afs/cern.ch/work/o/oiorio/CMSSW_5_3_8_patch3/src/TopQuarkAnalysis/SingleTop/src/SingleTopSystematicsTreesDumper.cc:3188:28: warning: unused variable 'pt' [-Wunused-variable]
+/afs/cern.ch/work/o/oiorio/CMSSW_5_3_8_patch3/src/TopQuarkAnalysis/SingleTop/src/SingleTopSystematicsTreesDumper.cc:3607:34: warning: variable 'mctop' set but not used [-Wunused-but-set-variable]
+/afs/cern.ch/work/o/oiorio/CMSSW_5_3_8_patch3/src/TopQuarkAnalysis/SingleTop/src/SingleTopSystematicsTreesDumper.cc:3277:19: warning: unused variable 'fCosThetaB2LJ' [-Wunused-variable]
+/afs/cern.ch/work/o/oiorio/CMSSW_5_3_8_patch3/src/TopQuarkAnalysis/SingleTop/src/SingleTopSystematicsTreesDumper.cc:2137:14: warning: unused variable 'hasTurnOnWeight' [-Wunused-variable]
+/afs/cern.ch/work/o/oiorio/CMSSW_5_3_8_patch3/src/TopQuarkAnalysis/SingleTop/src/SingleTopSystematicsTreesDumper.cc:1422:12: warning: variable 'turnOnWeightValueNoSyst' set but not used [-Wunused-but-set-variable]
+/afs/cern.ch/work/o/oiorio/CMSSW_5_3_8_patch3/src/TopQuarkAnalysis/SingleTop/src/SingleTopSystematicsTreesDumper.cc:1453:12: warning: unused variable 'MTWValueQCD' [-Wunused-variable]
+/afs/cern.ch/work/o/oiorio/CMSSW_5_3_8_patch3/src/TopQuarkAnalysis/SingleTop/src/SingleTopSystematicsTreesDumper.cc:1454:12: warning: unused variable 'RelIsoQCDCut' [-Wunused-variable]
+/afs/cern.ch/work/o/oiorio/CMSSW_5_3_8_patch3/src/TopQuarkAnalysis/SingleTop/src/SingleTopSystematicsTreesDumper.cc:1458:12: warning: unused variable 'myWeight' [-Wunused-variable]
+/afs/cern.ch/work/o/oiorio/CMSSW_5_3_8_patch3/src/TopQuarkAnalysis/SingleTop/src/SingleTopSystematicsTreesDumper.cc:1465:10: warning: unused variable 'didJetLoop' [-Wunused-variable]
+/afs/cern.ch/work/o/oiorio/CMSSW_5_3_8_patch3/src/TopQuarkAnalysis/SingleTop/src/SingleTopSystematicsTreesDumper.cc:1477:9: warning: unused variable 'secondBTagTreePositionNoSyst' [-Wunused-variable]
+/afs/cern.ch/work/o/oiorio/CMSSW_5_3_8_patch3/src/TopQuarkAnalysis/SingleTop/src/SingleTopSystematicsTreesDumper.cc: In member function 'math::XYZTLorentzVector SingleTopSystematicsTreesDumper::NuMomentum(float, float, float, float, float, float, float)':
+/afs/cern.ch/work/o/oiorio/CMSSW_5_3_8_patch3/src/TopQuarkAnalysis/SingleTop/src/SingleTopSystematicsTreesDumper.cc:3751:9: warning: variable 'nNuSol' set but not used [-Wunused-but-set-variable]
+/afs/cern.ch/work/o/oiorio/CMSSW_5_3_8_patch3/src/TopQuarkAnalysis/SingleTop/src/SingleTopSystematicsTreesDumper.cc: In constructor 'SingleTopSystematicsTreesDumper::SingleTopSystematicsTreesDumper(const edm::ParameterSet&)':
+/afs/cern.ch/work/o/oiorio/CMSSW_5_3_8_patch3/src/TopQuarkAnalysis/SingleTop/src/SingleTopSystematicsTreesDumper.cc:49:1: note: variable tracking size limit exceeded with -fvar-tracking-assignments, retrying without
+>> Building edm plugin tmp/slc5_amd64_gcc462/src/TopQuarkAnalysis/SingleTop/src/TopQuarkAnalysisSingleTop/libTopQuarkAnalysisSingleTop.so
+Leaving library rule at TopQuarkAnalysis/SingleTop
+@@@@ Running edmWriteConfigs for TopQuarkAnalysisSingleTop
+--- Registered EDM Plugin: TopQuarkAnalysisSingleTop
+gmake[1]: Entering directory `/afs/cern.ch/work/o/oiorio/CMSSW_5_3_8_patch3'
+tmp/slc5_amd64_gcc462/MakeData/DirCache.mk:467: No such file exists: src/TopQuarkAnalysis/SingleTop/bin/fitsPlots1DKarlsruhe.cpp. Please fix src/TopQuarkAnalysis/SingleTop/bin/BuildFile.
+tmp/slc5_amd64_gcc462/MakeData/DirCache.mk:489: No such file exists: src/TopQuarkAnalysis/SingleTop/bin/fitsPlotsTestMC.cpp. Please fix src/TopQuarkAnalysis/SingleTop/bin/BuildFile.
+tmp/slc5_amd64_gcc462/MakeData/DirCache.mk:511: No such file exists: src/TopQuarkAnalysis/SingleTop/bin/plots1DValidation.cpp. Please fix src/TopQuarkAnalysis/SingleTop/bin/BuildFile.
+tmp/slc5_amd64_gcc462/MakeData/DirCache.mk:533: No such file exists: src/TopQuarkAnalysis/SingleTop/bin/fitsPlotsPDFs1D.cpp. Please fix src/TopQuarkAnalysis/SingleTop/bin/BuildFile.
+tmp/slc5_amd64_gcc462/MakeData/DirCache.mk:555: No such file exists: src/TopQuarkAnalysis/SingleTop/bin/Plotter.cpp. Please fix src/TopQuarkAnalysis/SingleTop/bin/BuildFile.
+tmp/slc5_amd64_gcc462/MakeData/DirCache.mk:566: No such file exists: src/TopQuarkAnalysis/SingleTop/bin/2DLikelihoodTreeMaker.cpp. Please fix src/TopQuarkAnalysis/SingleTop/bin/BuildFile.
+tmp/slc5_amd64_gcc462/MakeData/DirCache.mk:588: No such file exists: src/TopQuarkAnalysis/SingleTop/bin/Subtractor.cpp. Please fix src/TopQuarkAnalysis/SingleTop/bin/BuildFile.
+tmp/slc5_amd64_gcc462/MakeData/DirCache.mk:599: No such file exists: src/TopQuarkAnalysis/SingleTop/bin/fitsPlots2DSFLikelihoodSummerDataDriven.cpp. Please fix src/TopQuarkAnalysis/SingleTop/bin/BuildFile.
+>> Local Products Rules ..... started
+>> Local Products Rules ..... done
+>> Creating project symlinks
+@@@@ Refreshing Plugins:edmPluginRefresh
+>> Done python_symlink
+>> Compiling python modules src/CMGTools/External/python
+>> Compiling python modules cfipython/slc5_amd64_gcc462
+>> Compiling python modules src/Configuration/GenProduction/python
+>> Compiling python modules python
+>> Compiling python modules src/EGamma/EGammaAnalysisTools/python
+>> Compiling python modules src/DPGAnalysis/SiStripTools/python
+>> Compiling python modules src/DPGAnalysis/Skims/python
+>> Compiling python modules src/FWCore/GuiBrowsers/python
+>> Compiling python modules src/PhysicsTools/PatAlgos/python
+>> Compiling python modules src/PhysicsTools/PatUtils/python
+>> Compiling python modules src/RecoLuminosity/LumiDB/python
+>> Compiling python modules src/RecoLocalTracker/SubCollectionProducers/python
+>> Compiling python modules src/RecoMET/METAnalyzers/python
+>> Compiling python modules src/RecoMET/METFilters/python
+>> Compiling python modules src/RecoMET/METProducers/python
+>> Compiling python modules src/RecoParticleFlow/PFProducer/python
+>> Compiling python modules src/TopQuarkAnalysis/SingleTop/python
+>> Pluging of all type refreshed.
+>> All python modules compiled
+gmake[1]: Leaving directory `/afs/cern.ch/work/o/oiorio/CMSSW_5_3_8_patch3'

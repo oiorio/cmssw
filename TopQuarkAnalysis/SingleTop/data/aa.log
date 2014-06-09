@@ -1,0 +1,7 @@
+----- Begin Fatal Exception 21-Jun-2013 21:46:46 CEST-----------------------
+An exception of category 'ConfigFileReadError' occurred while
+   [0] Processing the python configuration file named SingleTopMC_TChannel_cfg.py
+Exception Message:
+python encountered the error: <type 'exceptions.IOError'>
+[Errno 2] No such file or directory: 'SingleTopMC_TChannel_cfg.py'
+----- End Fatal Exception -------------------------------------------------

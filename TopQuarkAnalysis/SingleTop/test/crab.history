@@ -1,0 +1,16 @@
+130426_122025: /afs/cern.ch/cms/ccs/wm/scripts/Crab/CRAB_2_8_6/python/crab.py -create -cfg TChannel_crab.cfg
+130426_123319: /afs/cern.ch/cms/ccs/wm/scripts/Crab/CRAB_2_8_6/python/crab.py -create -cfg TChannel_crab.cfg
+130426_123546: /afs/cern.ch/cms/ccs/wm/scripts/Crab/CRAB_2_8_6/python/crab.py -submit -c _TChannel_skim_test
+130426_123603: /afs/cern.ch/cms/ccs/wm/scripts/Crab/CRAB_2_8_6/python/crab.py -submit -c _TChannel_skim_test
+130426_134159: /afs/cern.ch/cms/ccs/wm/scripts/Crab/CRAB_2_8_6/python/crab.py -submit -c _TChannel_skim_test
+130426_134207: /afs/cern.ch/cms/ccs/wm/scripts/Crab/CRAB_2_8_6/python/crab.py -status v -c _TChannel_skim_test
+130426_134220: /afs/cern.ch/cms/ccs/wm/scripts/Crab/CRAB_2_8_6/python/crab.py -get 1 -c _TChannel_skim_test/
+130426_215907: /afs/cern.ch/cms/ccs/wm/scripts/Crab/CRAB_2_8_6/python/crab.py -create -cfg TChannel_crab.cfg
+130426_220004: /afs/cern.ch/cms/ccs/wm/scripts/Crab/CRAB_2_8_6/python/crab.py -submit -c _TChannel_skim_test/
+130426_222113: /afs/cern.ch/cms/ccs/wm/scripts/Crab/CRAB_2_8_6/python/crab.py -status v -c _TChannel_skim_test/
+130426_222301: /afs/cern.ch/cms/ccs/wm/scripts/Crab/CRAB_2_8_6/python/crab.py -status v -c _TChannel_skim_test/
+130426_223321: /afs/cern.ch/cms/ccs/wm/scripts/Crab/CRAB_2_8_6/python/crab.py -status v -c _TChannel_skim_test/
+130426_223433: /afs/cern.ch/cms/ccs/wm/scripts/Crab/CRAB_2_8_6/python/crab.py -status v -c _TChannel_skim_test/
+130426_230046: /afs/cern.ch/cms/ccs/wm/scripts/Crab/CRAB_2_8_6/python/crab.py -status v -c _TChannel_skim_test/
+130426_230110: /afs/cern.ch/cms/ccs/wm/scripts/Crab/CRAB_2_8_6/python/crab.py -get 1 -c _TChannel_skim_test/
+130618_072520: /afs/cern.ch/cms/ccs/wm/scripts/Crab/CRAB_2_8_6/python/crab.py -status v -c _TChannel_skim_test/
