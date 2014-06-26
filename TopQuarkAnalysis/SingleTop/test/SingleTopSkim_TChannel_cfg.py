@@ -419,8 +419,8 @@ import HLTrigger.HLTfilters.triggerResultsFilter_cfi as triggerFilter
 
 process.HLTFilterMu2012  = triggerFilter.triggerResultsFilter.clone(
     hltResults = cms.InputTag( "TriggerResults","","HLT" ),
-#    triggerConditions = ["HLT_*"],#All trigger paths are included in the skim
-    triggerConditions = ["HLT_IsoMu24_eta2p1_v*"],
+    triggerConditions = ["HLT_*"],#All trigger paths are included in the skim
+#    triggerConditions = ["HLT_IsoMu24_eta2p1_v*"],
 #    triggerConditions = ["HLT_Ele27_WP80_v*"],
     l1tResults = '',
     throw = False
