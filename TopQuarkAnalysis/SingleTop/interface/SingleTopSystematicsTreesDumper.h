@@ -159,7 +159,8 @@ private:
   double MisTagSFErrNewUp(double pt, double eta, string algo);
   double MisTagSFErrNewDown(double pt, double eta, string algo);
   double EFFMapNew(double btag, string algo);
-
+  
+  double topPtReweighting(string channel, double pt);
   void fillMCTruth(const Event &iEvent);
   void resetWeightsDoubles();
   
@@ -548,7 +549,7 @@ private:
     edm::FileInPath fip;
     JetCorrectionUncertainty *jecUnc;
     double JES_SW, JES_b_cut, JES_b_overCut;
-
+double jetsBTagNoSyst[10],jetsBTag[10], ljetsBTag[10] ;
 
 
     //4-momenta vectors definition
@@ -560,10 +561,13 @@ private:
     math::PtEtaPhiELorentzVector leptons[3],
          qcdLeptons[3],
          jets[10],
-         jetsNoSyst[10],
+         jetsNoSyst[10],         
+         ljets[30],
          bjets[10],
          antibjets[10];
     int flavours[10];
+    int bjets_flavours[10];
+    int lflavours[10];
 
     float pdf_weights[52];
   float  pdf_weights_mstw, pdf_weights_nnpdf21, pdf_weights_gjr_ff, pdf_weights_gjr_fv, pdf_weights_gjr_fdis, pdf_weights_alekhin ;
@@ -657,11 +661,12 @@ float    MCTopsPtVec[2],
     TH2D histoSFs;
 
     math::PtEtaPhiELorentzVector leptonPFour;
-
+math::PtEtaPhiELorentzVector top;
     //Definition of trees
 
     map<string, TTree *> trees2J[6];
     map<string, TTree *> trees3J[6];
+    map<string, TTree *> trees4J[6];
     map<string, TTree *> treesNJets;
     TTree * treesMCTruth;
   
@@ -684,7 +689,7 @@ float    MCTopsPtVec[2],
     size_t bScanSteps;
 
 
-  bool doBScan_, doQCD_, doPDF_, takeBTagSFFromDB_,addPDFToNJets, doMCTruth_, doFullMCTruth_;
+  bool doBScan_, doQCD_, doPDF_, takeBTagSFFromDB_, addPDFToNJets, doMCTruth_, doFullMCTruth_, doTopPtReweighting_, doTopBestMass_, doAsymmetricPtCut_;
     //To be changed in 1 tree, now we keep
     //because we have no time to change and debug
     map<string, TTree *> treesScan[10];
@@ -700,7 +705,8 @@ float    MCTopsPtVec[2],
     //Variables to use as trees references
 
     //Variables to use as trees references
-  double etaTree, etaTree2, cosTree, cosBLTree, topMassTree, totalWeightTree, weightTree, mtwMassTree, lowBTagTree, highBTagTree, maxPtTree, minPtTree, topMassLowBTagTree, topMassBestTopTree, topMassMeas, bWeightTree, PUWeightTree, limuWeightTree, miscWeightTree, lepEff, lepEffB,lepSF,lepSFB,lepSFC , lepSFD, topMtwTree, HT ,
+    double etaTree, etaTree2, cosTree, cosBLTree, topMassTree, top1MassTree, top2MassTree, totalWeightTree, weightTree, mtwMassTree, lowBTagTree, highBTagTree, mediumBTagTree,mediumlowBTagTree ,maxPtTree, minPtTree,maxLoosePtTree, topMassLowBTagTree, topMassBestTopTree, topMassMeas, bWeightTree, PUWeightTree, limuWeightTree, miscWeightTree, lepEff, lepEffB,lepSF,lepSFB,lepSFC , lepSFD, 
+         topMtwTree, HT , H ,
     lepSFIDUp,
     lepSFIDDown,
     lepSFIsoUp,
@@ -738,18 +744,25 @@ float    MCTopsPtVec[2],
            bWeightTreeBTagDown,
            bWeightTreeMisTagDown,
            PUWeightTreePUUp,
-      PUWeightTreePUDown;
+           PUWeightTreePUDown;
   
+  double topPtReweight, topPtReweightMCTruth,topPtReweightNorm, topPtReweightMCTruthNorm;
+  double topPtReweightUp, topPtReweightMCTruthUp,topPtReweightNormUp, topPtReweightMCTruthNormUp;
+  double topPtReweightDown, topPtReweightMCTruthDown,topPtReweightNormDown, topPtReweightMCTruthNormDown;
 
-   int nJ, nJNoPU, nJCentral, nJCentralNoPU, nJForward, nJForwardNoPU, nTCHPT, nCSVT, nCSVM;
+   int nJ, nJNoPU, nJCentral, nJCentralNoPU, nJForward, nJForwardNoPU, nTCHPT, nCSVT, nCSVM, nJLoose,nJLooseCentral , nJLooseForward, nJLooseMBTag;
+
+
+
     double w1TCHPT, w2TCHPT, w1CSVT, w2CSVT, w1CSVM, w2CSVM;
 
-  int runTree, eventTree, lumiTree, chargeTree, electronID, bJetFlavourTree, fJetFlavourTree, eventFlavourTree, puZero, firstJetFlavourTree, secondJetFlavourTree, thirdJetFlavourTree, isQCDTree;
+  int runTree, eventTree, lumiTree, chargeTree, electronID,bJet1Flavour,bJet2Flavour ,looseJetFlavourTree ,bJetFlavourTree, fJetFlavourTree, eventFlavourTree, puZero, firstJetFlavourTree, secondJetFlavourTree, thirdJetFlavourTree,fourthJetFlavourTree, isQCDTree;
 
-  double lepPt, lepEta, lepPhi, lepRelIso, lepDeltaCorrectedRelIso, lepRhoCorrectedRelIso, fJetPhi, fJetPt, fJetEta, fJetE, bJetPt, bJetEta, bJetPhi, bJetE, metPt, metPhi, topPt, topPhi, topEta, topE, totalEnergy, totalMomentum, fJetBTag, bJetBTag, vtxZ, fJetPUID, fJetPUWP, bJetPUID, bJetPUWP, firstJetPt, firstJetEta, firstJetPhi, firstJetE, secondJetPt, secondJetEta, secondJetPhi, secondJetE, thirdJetPt, thirdJetEta, thirdJetPhi, thirdJetE,fJetBeta,fJetDZ,fJetRMS,bJetBeta,bJetDZ,bJetRMS, leptonMVAID,leptonNHits;
+  double lepPt, lepEta, lepPhi, lepRelIso, lepDeltaCorrectedRelIso, lepRhoCorrectedRelIso, fJetPhi, fJetPt, fJetEta, fJetE,fJetBTag, bJetPt, bJetEta, bJetPhi, bJetE, bJetBTag, metPt, metPhi, topPt, topPhi, topEta, topE, top1Pt, top1Phi, top1Eta, top1E, top2Pt, top2Phi, top2Eta, top2E, totalEnergy, totalMomentum,  vtxZ, fJetPUID, fJetPUWP;
+double bJetPUID, bJetPUWP, firstJetPt, firstJetEta, firstJetPhi, firstJetE,firstJetBTag, secondJetPt, secondJetEta, secondJetPhi, secondJetE, secondJetBTag, thirdJetPt, thirdJetEta, thirdJetPhi, thirdJetE, thirdJetBTag, fourthJetPt, fourthJetEta, fourthJetPhi, fourthJetE, fourthJetBTag, fJetBeta, fJetDZ, fJetRMS, bJetBeta, bJetDZ, bJetRMS; 
+double leptonMVAID,leptonNHits ,looseJetPt, looseJetEta, looseJetPhi, looseJetE, looseJetBTag, Mlb1Tree, Mlb2Tree, Mb1b2Tree, pTb1b2Tree, bJet1Pt, bJet1Eta, bJet1Phi, bJet1E, bJet1BTag, bJet2Pt, bJet2Eta, bJet2Phi, bJet2E, bJet2BTag;
 
-
-    //Not used anymore:
+ //Not used anymore:
     double loosePtCut, resolScale ;
     bool doPU_, doResol_ ;
 
