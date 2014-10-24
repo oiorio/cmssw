@@ -156,7 +156,7 @@ void SingleTopJetsProducer::produce(edm::Event & iEvent, const edm::EventSetup &
 
     int wpchs =0; 
     
-    int idflagchs = (*puChargedJetIdFlag)[ (vjets->refAt(i))];
+    //    int idflagchs = (*puChargedJetIdFlag)[ (vjets->refAt(i))];
     if( PileupJetIdentifier::passJetId( idflag, PileupJetIdentifier::kLoose ) ) {
 	  wpchs =1;
 	}

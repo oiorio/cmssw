@@ -32,13 +32,11 @@ process.load ("RecoBTag.PerformanceDB.BTagPerformanceDB1107")
 process.maxEvents = cms.untracked.PSet( input = cms.untracked.int32(-1) )
 #process.maxEvents = cms.untracked.PSet( input = cms.untracked.int32(3000))
 
-IOdir = "." 
-
 process.source = cms.Source ("PoolSource",
                              fileNames = cms.untracked.vstring (
 
-#'file:./singleTopEdmNtuple_TChannel.root',
-'file:'+IOdir+'/TChannelMerged.root',
+'file:./singleTopEdmNtuple_TChannel.root',
+#'file:/tmp/mmerola/TChannelMerged.root',
 
 ),
 duplicateCheckMode = cms.untracked.string('noDuplicateCheck'),
@@ -50,12 +48,12 @@ duplicateCheckMode = cms.untracked.string('noDuplicateCheck'),
 
 #from TChannel import *
 #process.source.fileNames = TChannel_ntuple
-process.source.fileNames = cms.untracked.vstring("file:"+IOdir+"/TChannelMerged.root")
+#process.source.fileNames = cms.untracked.vstring("file:/tmp/mmerola/TChannelMerged.root")
 
-
+#PileUpSync  
 
 #Output
-process.TFileService = cms.Service("TFileService", fileName = cms.string(IOdir+"/TChannel_part_1.root"))
+process.TFileService = cms.Service("TFileService", fileName = cms.string("/tmp/mmerola/TChannel.root"))
 #process.TFileService = cms.Service("TFileService", fileName = cms.string("/tmp/mmerola/edmntuple_TTBar.root"))
 #process.TFileService = cms.Service("TFileService", fileName = cms.string("testNoPU.root"))
 
@@ -120,11 +118,6 @@ if channel_instruction == "allmc":
     #    process.TreesMu.doResol = cms.untracked.bool(True)
     #    process.TreesEle.doResol = cms.untracked.bool(True)
     #    process.TreesEle.doTurnOn = cms.untracked.bool(True) 
-#    process.TreesMu.doPDF = cms.untracked.bool(False) 
-#    process.TreesEle.doPDF = cms.untracked.bool(False) 
-#    process.TreesEle.doMCTruth = cms.untracked.bool(False) 
-#    process.TreesMu.doMCTruth = cms.untracked.bool(False) 
-    process.TreesEle.doMCTruth = cms.untracked.bool(False) 
     process.PathSysMu = cms.Path(
     process.HLTFilterMu2012 *
     process.TreesMu
@@ -198,4 +191,3 @@ if channel_instruction == "eleqcd":
     process.HLTFilterEleQCD *
     process.TreesEle
     )
-process.source.fileNames = cms.untracked.vstring('file:./singleTopEdmNtuple_TChannel.root',)

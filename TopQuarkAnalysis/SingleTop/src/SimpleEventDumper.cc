@@ -540,8 +540,8 @@ SimpleEventDumper::analyze(const edm::Event& iEvent, const edm::EventSetup& iSet
   double met_pat_y = 0.;
   double met_patL5_x = 0.;
   double met_patL5_y = 0.;
-  double metL5 = 0.;
-  double phiL5 = 0.;
+  //  double metL5 = 0.;
+  //  double phiL5 = 0.;
   try {
     iEvent.getByLabel(patmetSource_, patmets);
     if (patmets->size()>=1){
@@ -576,8 +576,8 @@ SimpleEventDumper::analyze(const edm::Event& iEvent, const edm::EventSetup& iSet
     return;
   }
 
-  double met_calo_x = 0.;
-  double met_calo_y = 0.;
+  //  double met_calo_x = 0.;
+  //  double met_calo_y = 0.;
   try {
     iEvent.getByLabel(calometSource_, calomets);
     if (calomets->size()>=1){
@@ -586,8 +586,8 @@ SimpleEventDumper::analyze(const edm::Event& iEvent, const edm::EventSetup& iSet
       double sumet = (*calomets)[0].sumEt();
       double metsig = (*calomets)[0].mEtSig();
       cout << "calo met = " << met << ", phi = " << phi << ", SumEt = " << sumet << ", MET significance = " << metsig << endl;
-      met_calo_x = (*calomets)[0].px();
-      met_calo_y = (*calomets)[0].py();
+      //      met_calo_x = (*calomets)[0].px();
+      //      met_calo_y = (*calomets)[0].py();
       //      cout << "met_x = " << met_calo_x << ", met_y = " << met_calo_y << endl;
     }
   } catch (std::exception & err) {
@@ -860,7 +860,7 @@ double SimpleEventDumper::GetDeltaR(double eta1, double eta2, double phi1, doubl
 double SimpleEventDumper::METfit(double fitterPrintLevel, int ysol)
 {
 
-  Double_t Pxnu = 0.0;
+  //  Double_t Pxnu = 0.0;
   TMinuit* minu = new TMinuit(5);
 
   if (ysol == 1) minu->SetFCN(NeutrinoFit::delta1fcn); 
@@ -935,7 +935,7 @@ double SimpleEventDumper::METfit(double fitterPrintLevel, int ysol)
     std::cerr << "Error with parameter." << std::endl;
   
 
-  Pxnu  = px_fit;
+  //  Pxnu  = px_fit;
   
     if (fitterPrintLevel > 0)
     {

@@ -5,17 +5,25 @@ TreesEle = cms.EDAnalyzer('SingleTopSystematicsTreesDumper',
 #systematics = cms.untracked.vstring("BTagUp","BTagDown","MisTagUp","MisTagDown","JESUp","JESDown","UnclusteredMETUp","UnclusteredMETDown","PUUp","PUDown"),
 #systematics = cms.untracked.vstring("JESUp","JESDown","UnclusteredMETUp","UnclusteredMETDown","JERUp","JERDown"),
 #systematics = cms.untracked.vstring("JESUp","JESDown","JERUp","JERDown"),
+
 systematics = cms.untracked.vstring("JESUp","JESDown","UnclusteredMETUp","UnclusteredMETDown","JERUp","JERDown"),
+#systematics = cms.untracked.vstring("JESUp","JESDown","JERUp","JERDown"),
+
 #systematics = cms.untracked.vstring("UnclusteredMETUp","UnclusteredMETDown"),
 #systematics = cms.untracked.vstring(""),
 #rateSystematics = cms.untracked.vstring("WLightRateUp",                                        "WLightRateDown",                                        "TTBarRateUp",                                        "Ttbarratedown ",                                        "WHFRateUp",                                        "WHFRateDown"),
 doPU = cms.untracked.bool(True),
 doMCTruth = cms.untracked.bool(True),
-doFullMCTruth = cms.untracked.bool(False),
-#doResol  = cms.untracked.bool(False),
+doFullMCTruth = cms.untracked.bool(True),
+doResol  = cms.untracked.bool(False),
 
-algo  = cms.untracked.string("TCHPT"),
-doResol  = cms.untracked.bool(True),
+doTopPtReweighting  = cms.untracked.bool(True),
+doTopBestMass = cms.untracked.bool(True),
+doAsymmetricPtCut = cms.untracked.bool(False),  # DISCUSS
+
+algo  = cms.untracked.string("CSVT"),
+#algo  = cms.untracked.string("TCHPT"),
+
 takeBTagSFFromDB = cms.untracked.bool(False),
 #dataPUFile = cms.untracked.string("pileUpDistr.root"),
 #mcPUFile = cms.untracked.string("pileupdistr_TChannel.root"),
@@ -70,8 +78,8 @@ leptonsDZ = cms.InputTag("nTupleTightMuons","tightMuonsPVDz"),
 #leptonsID = cms.InputTag("nTupleElectrons","tightElectronsSimpleEleId70cIso"),  
 leptonsID = cms.InputTag("nTupleElectrons","tightElectronsPassesTightID"),  
 leptonsMVAID = cms.InputTag("nTupleElectrons","tightElectronsMvaTrigV0"),  
-#leptonsNHits = cms.InputTag("nTupleElectrons","tightElectronsMissingHits"),
-leptonsNHits = cms.InputTag("nTupleElectrons","tightElectronsPassesTightID"),  
+leptonsNHits = cms.InputTag("nTupleElectrons","tightElectronsMissingHits"),
+#leptonsNHits = cms.InputTag("nTupleElectrons","tightElectronsPassesTightID"),  
 
 #qcdLeptonsEta = cms.InputTag("nTupleQCDElectrons","QCDElectronsPFEta"),  
 #qcdLeptonsPt = cms.InputTag("nTupleQCDElectrons","QCDElectronsPFPt"),  
@@ -89,7 +97,7 @@ qcdLeptonsDZ = cms.InputTag("nTupleQCDMuons","QCDMuonsPVDz"),
 
 #qcdLeptonsID = cms.InputTag("nTupleQCDElectrons","QCDElectronsSimpleEleId70cIso"),
 qcdLeptonsID = cms.InputTag("nTupleQCDElectrons","QCDElectronsPassesTightID"),  
-
+qcdLeptonsMVAID = cms.InputTag("nTupleQCDElectrons","QCDElectronsMvaTrigV0"),  
 
 #looseElectronsDeltaCorrectedRelIso = cms.InputTag("nTupleVetoElectrons","vetoElectronsPFDeltaCorrectedRelIso"),  
 #looseElectronsRhoCorrectedRelIso = cms.InputTag("nTupleVetoElectrons","vetoElectronsPFRhoCorrectedRelIso"),  
@@ -296,7 +304,8 @@ leptonsDB = cms.InputTag("nTupleMuons","tightMuonsPVDxy"),
 leptonsDZ = cms.InputTag("nTupleMuons","tightMuonsPVDz"),  
 #leptonsDB = cms.InputTag("nTupleMuons","tightMuonsAbsoluteDB"),  
 
-leptonsMVAID = cms.InputTag("nTupleElectrons","tightElectronsMvaTrigV0"),  
+#leptonsMVAID = cms.InputTag("nTupleElectrons","tightElectronsMvaTrigV0"),  
+qcdLeptonsMVAID = cms.InputTag("nTupleQCDElectrons","QCDElectronsMvaTrigV0"),
 
 qcdLeptonsEta = cms.InputTag("nTupleQCDMuons","QCDMuonsEta"),  
 qcdLeptonsPt = cms.InputTag("nTupleQCDMuons","QCDMuonsPt"),  

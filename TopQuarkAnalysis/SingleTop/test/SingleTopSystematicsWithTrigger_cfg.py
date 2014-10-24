@@ -30,13 +30,13 @@ process.load ("RecoBTag.PerformanceDB.BTagPerformanceDB1107")
 
 
 process.maxEvents = cms.untracked.PSet( input = cms.untracked.int32(-1) )
-# Process.maxEvents = cms.untracked.PSet( input = cms.untracked.int32(20000))
+#process.maxEvents = cms.untracked.PSet( input = cms.untracked.int32(3000))
 
 process.source = cms.Source ("PoolSource",
                              fileNames = cms.untracked.vstring (
 
-#'file:/tmp/oiorio/edmntuple_tchannel_big.root',
-'file:/tmp/oiorio/TChannelMerged.root',
+#'file:./singleTopEdmNtuple_TChannel.root',
+'file:/tmp/mmerola/TChannelMerged.root',
 
 ),
 duplicateCheckMode = cms.untracked.string('noDuplicateCheck'),
@@ -48,13 +48,13 @@ duplicateCheckMode = cms.untracked.string('noDuplicateCheck'),
 
 #from TChannel import *
 #process.source.fileNames = TChannel_ntuple
-process.source.fileNames = cms.untracked.vstring("file:/tmp/oiorio/TChannelMerged.root")
+process.source.fileNames = cms.untracked.vstring("file:/tmp/mmerola/TChannelMerged.root")
 
-#PileUpSync
+#PileUpSync  
 
 #Output
-process.TFileService = cms.Service("TFileService", fileName = cms.string("/tmp/oiorio/TChannel.root"))
-#process.TFileService = cms.Service("TFileService", fileName = cms.string("/tmp/oiorio/edmntuple_TTBar.root"))
+process.TFileService = cms.Service("TFileService", fileName = cms.string("/tmp/mmerola/TChannel.root"))
+#process.TFileService = cms.Service("TFileService", fileName = cms.string("/tmp/mmerola/edmntuple_TTBar.root"))
 #process.TFileService = cms.Service("TFileService", fileName = cms.string("testNoPU.root"))
 
 #process.load("SingleTopAnalyzers_cfi")
@@ -69,16 +69,18 @@ from SingleTopPSetsFall_cfi import *
 process.TreesEle.dataPUFile = cms.untracked.string("pileUpDistr.root")
 process.TreesMu.dataPUFile = cms.untracked.string("pileUpDistr.root")
 
+
+# THESE ARE DEFINED IN THE ROOTPLIZER
+#process.TreesEle.doTopPtReweighting = cms.untracked.bool(True)
+#process.TreesMu.doTopPtReweighting = cms.untracked.bool(True)
+
+#process.TreesEle.doTopBestMass = cms.untracked.bool(True)
+#process.TreesMu.doTopBestMass = cms.untracked.bool(True)
+
+#process.TreesEle.doAsymmetricPtCut = cms.untracked.bool(True)
+#process.TreesMu.doAsymmetricPtCut = cms.untracked.bool(True)
+
 #process.TreesEle.doTurnOn = cms.untracked.bool(False)
-
-process.TreesEle.channelInfo = TChannelEle
-process.TreesMu.channelInfo = TChannelMu
-
-
-#process.PlotsEle.channelInfo = TChannelEle
-#process.PlotsMu.channelInfo = TChannelMu
-#process.TreesMu.systematics = cms.untracked.vstring();
-
 
 #doPU = cms.untracked.bool(False)
 
@@ -90,6 +92,11 @@ process.TreesMu.channelInfo = TChannelMu
 
 #process.TreesMu.doPU = cms.untracked.bool(False)
 #process.TreesEle.doPU = cms.untracked.bool(False)
+
+
+#CHANNEL BY CHANNEL INFO TAKEN FROM PSETS 
+process.TreesEle.channelInfo = TChannelEle
+process.TreesMu.channelInfo = TChannelMu
 
 
 channel_instruction = "channel_instruction" #SWITCH_INSTRUCTION
@@ -108,8 +115,8 @@ process.HLTFilterMuOrEleMC.isMC = MC_instruction
 #)
 
 if channel_instruction == "allmc":
-    process.TreesMu.doResol = cms.untracked.bool(True)
-    process.TreesEle.doResol = cms.untracked.bool(True)
+    #    process.TreesMu.doResol = cms.untracked.bool(True)
+    #    process.TreesEle.doResol = cms.untracked.bool(True)
     #    process.TreesEle.doTurnOn = cms.untracked.bool(True) 
     process.PathSysMu = cms.Path(
     process.HLTFilterMu2012 *
@@ -138,7 +145,8 @@ if channel_instruction == "all":
 if channel_instruction == "mu":
     process.TreesMu.doPU = cms.untracked.bool(False) 
     process.TreesMu.doResol = cms.untracked.bool(False) 
-    process.TreesMu.doMCTruth = cms.untracked.bool(False) 
+    process.TreesMu.doMCTruth = cms.untracked.bool(False)
+    process.TreesMu.doPDF = cms.untracked.bool(False) 
     process.PathSysMu = cms.Path(
     #    process.PlotsMu +
     #    process.PlotsEle +
@@ -151,6 +159,7 @@ if channel_instruction == "ele":
     process.TreesEle.doPU = cms.untracked.bool(False) 
     process.TreesEle.doResol = cms.untracked.bool(False) 
     process.TreesEle.doMCTruth = cms.untracked.bool(False) 
+    process.TreesEle.doPDF = cms.untracked.bool(False)
     process.PathSysMu = cms.Path(
     #    process.PlotsMu +
     #    process.PlotsEle +

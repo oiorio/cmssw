@@ -195,7 +195,7 @@ private:
     leptonsDeltaCorrectedRelIso_,
     leptonsRhoCorrectedRelIso_,
     
-    
+    qcdLeptonsMVAID_,
     qcdLeptonsPt_,
     qcdLeptonsPhi_,
     qcdLeptonsEta_,
@@ -375,7 +375,8 @@ private:
     leptonsDZ,
     vertexZ,
 
-    qcdLeptonsPt,
+qcdLeptonsMVAID,    
+qcdLeptonsPt,
     qcdLeptonsPhi,
     qcdLeptonsEta,
     qcdLeptonsEnergy,
@@ -563,7 +564,7 @@ double jetsBTagNoSyst[10],jetsBTag[10], ljetsBTag[10] ;
          jets[10],
          jetsNoSyst[10],         
          ljets[30],
-         bjets[10],
+         bjets[10],bJetDecay,bJetRecoil,
          antibjets[10];
     int flavours[10];
     int bjets_flavours[10];
@@ -668,9 +669,11 @@ math::PtEtaPhiELorentzVector top;
     map<string, TTree *> trees3J[6];
     map<string, TTree *> trees4J[6];
     map<string, TTree *> treesNJets;
-    TTree * treesMCTruth;
+//    TTree * treesMCTruth;
+map<string, TTree *> treesMCTruth;
   
   bool doJetTrees_, isSingleTopCompHEP_;
+
 
 
     enum Bin
@@ -705,7 +708,7 @@ math::PtEtaPhiELorentzVector top;
     //Variables to use as trees references
 
     //Variables to use as trees references
-    double etaTree, etaTree2, cosTree, cosBLTree, topMassTree, top1MassTree, top2MassTree, totalWeightTree, weightTree, mtwMassTree, lowBTagTree, highBTagTree, mediumBTagTree,mediumlowBTagTree ,maxPtTree, minPtTree,maxLoosePtTree, topMassLowBTagTree, topMassBestTopTree, topMassMeas, bWeightTree, PUWeightTree, limuWeightTree, miscWeightTree, lepEff, lepEffB,lepSF,lepSFB,lepSFC , lepSFD, 
+    double etaTree, etaTree2, cosTree, cosBLTree, cos1Tree, cos1BLTree, cos2Tree, cos2BLTree, topMassTree, top1MassTree, top2MassTree, totalWeightTree, weightTree, mtwMassTree, lowBTagTree, highBTagTree, mediumBTagTree,mediumlowBTagTree ,maxPtTree, minPtTree,maxLoosePtTree, topMassLowBTagTree, topMassBestTopTree, topMassMeas, bWeightTree, PUWeightTree, limuWeightTree, miscWeightTree, lepEff, lepEffB,lepSF,lepSFB,lepSFC , lepSFD, 
          topMtwTree, HT , H ,
     lepSFIDUp,
     lepSFIDDown,
@@ -758,9 +761,11 @@ math::PtEtaPhiELorentzVector top;
 
   int runTree, eventTree, lumiTree, chargeTree, electronID,bJet1Flavour,bJet2Flavour ,looseJetFlavourTree ,bJetFlavourTree, fJetFlavourTree, eventFlavourTree, puZero, firstJetFlavourTree, secondJetFlavourTree, thirdJetFlavourTree,fourthJetFlavourTree, isQCDTree;
 
-  double lepPt, lepEta, lepPhi, lepRelIso, lepDeltaCorrectedRelIso, lepRhoCorrectedRelIso, fJetPhi, fJetPt, fJetEta, fJetE,fJetBTag, bJetPt, bJetEta, bJetPhi, bJetE, bJetBTag, metPt, metPhi, topPt, topPhi, topEta, topE, top1Pt, top1Phi, top1Eta, top1E, top2Pt, top2Phi, top2Eta, top2E, totalEnergy, totalMomentum,  vtxZ, fJetPUID, fJetPUWP;
+  double lepPt, lepEta,lepE, lepPhi, lepRelIso, lepDeltaCorrectedRelIso, lepRhoCorrectedRelIso, fJetPhi, fJetPt, fJetEta, fJetE,fJetBTag, bJetPt, bJetEta, bJetPhi, bJetE, bJetBTag, metPt, metPhi, topPt, topPhi, topEta, topE, top1Pt, top1Phi, top1Eta, top1E, top2Pt, top2Phi, top2Eta, top2E, totalEnergy, totalMomentum,  vtxZ, fJetPUID, fJetPUWP;
 double bJetPUID, bJetPUWP, firstJetPt, firstJetEta, firstJetPhi, firstJetE,firstJetBTag, secondJetPt, secondJetEta, secondJetPhi, secondJetE, secondJetBTag, thirdJetPt, thirdJetEta, thirdJetPhi, thirdJetE, thirdJetBTag, fourthJetPt, fourthJetEta, fourthJetPhi, fourthJetE, fourthJetBTag, fJetBeta, fJetDZ, fJetRMS, bJetBeta, bJetDZ, bJetRMS; 
 double leptonMVAID,leptonNHits ,looseJetPt, looseJetEta, looseJetPhi, looseJetE, looseJetBTag, Mlb1Tree, Mlb2Tree, Mb1b2Tree, pTb1b2Tree, bJet1Pt, bJet1Eta, bJet1Phi, bJet1E, bJet1BTag, bJet2Pt, bJet2Eta, bJet2Phi, bJet2E, bJet2BTag;
+double bJetDecayPt, bJetDecayEta, bJetDecayPhi, bJetDecayE, bJetDecayFlavour,bJetDecayBTag;
+double bJetRecoilPt, bJetRecoilEta, bJetRecoilPhi, bJetRecoilE, bJetRecoilFlavour,bJetRecoilBTag;
 
  //Not used anymore:
     double loosePtCut, resolScale ;
@@ -807,52 +812,56 @@ double leptonMVAID,leptonNHits ,looseJetPt, looseJetEta, looseJetPhi, looseJetE,
     double TCHEL_LAntiMisTagUp,  TCHEL_BAntiBTagUp, TCHEL_CAntiBTagUp, TCHEL_LAntiMisTagDown, TCHEL_BAntiBTagDown, TCHEL_CAntiBTagDown;
     double TCHEL_C,  TCHEL_B, TCHEL_L;
     double TCHEL_CAnti,  TCHEL_BAnti, TCHEL_LAnti;
-
+    
     double facBTagErr;
     bool useMVAID_, useCutBasedID_;
+
     class BTagWeight
     {
     public:
-        struct JetInfo
-        {
-            JetInfo(float mceff, float datasf) : eff(mceff), sf(datasf) {}
-            float eff;
-            float sf;
-        };
-        BTagWeight():
-            minTags(0), maxTags(0)
-        {
-            ;
-        }
-        BTagWeight(int jmin, int jmax) :
-            maxTags(jmax), minTags(jmin) {}
-
+      
+    BTagWeight():
+      minTags(0), maxTags(0)
+	{
+	  ;
+	}
+      struct JetInfo
+      {
+      JetInfo(float mceff, float datasf) : eff(mceff), sf(datasf) {}
+	float eff;
+	float sf;
+      };
+      
+    BTagWeight(int jmin, int jmax) :
+      minTags(jmin),maxTags(jmax) {}
+      
       bool filter(int t);
       float weight(vector<JetInfo> jets, int tags);
       float weightWithVeto(vector<JetInfo> jetsTags, int tags, vector<JetInfo> jetsVetoes, int vetoes);
+      
     private:
-        int maxTags;
-        int minTags;
-
-
+      int minTags;
+      int maxTags;
+      
+      
     };
-
+    
     vector<BTagWeight::JetInfo> jsfshpt, jsfshel,
-           jsfshpt_b_tag_up, jsfshel_b_tag_up,
-           jsfshpt_mis_tag_up, jsfshel_mis_tag_up,
-           jsfshpt_b_tag_down, jsfshel_b_tag_down,
-           jsfshpt_mis_tag_down, jsfshel_mis_tag_down,
-           jsfshptNoSyst, jsfshelNoSyst; // bjs,cjs,ljs;
-
-
+      jsfshpt_b_tag_up, jsfshel_b_tag_up,
+      jsfshpt_mis_tag_up, jsfshel_mis_tag_up,
+      jsfshpt_b_tag_down, jsfshel_b_tag_down,
+      jsfshpt_mis_tag_down, jsfshel_mis_tag_down,
+      jsfshptNoSyst, jsfshelNoSyst; // bjs,cjs,ljs;
+    
+    
     vector<BTagWeight::JetInfo> jsfscsvt, jsfscsvm,
-           jsfscsvt_b_tag_up, jsfscsvm_b_tag_up,
-           jsfscsvt_mis_tag_up, jsfscsvm_mis_tag_up,
-           jsfscsvt_b_tag_down, jsfscsvm_b_tag_down,
-           jsfscsvt_mis_tag_down, jsfscsvm_mis_tag_down,
-           jsfscsvtNoSyst, jsfscsvmNoSyst; // bjs,cjs,ljs;
-
-
+      jsfscsvt_b_tag_up, jsfscsvm_b_tag_up,
+      jsfscsvt_mis_tag_up, jsfscsvm_mis_tag_up,
+      jsfscsvt_b_tag_down, jsfscsvm_b_tag_down,
+      jsfscsvt_mis_tag_down, jsfscsvm_mis_tag_down,
+      jsfscsvtNoSyst, jsfscsvmNoSyst; // bjs,cjs,ljs;
+    
+    
 
     BTagWeight b_tchpt_0_tags,
                b_tchpt_1_tag,

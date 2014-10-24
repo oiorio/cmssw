@@ -10,8 +10,14 @@ fileName = "SingleTopSystematicsWithTrigger_cfg.py"
 #fileName = "SingleTopSystematics_split_cfg.py"
 #fileName = "SingleTopNEvents_cfg.py"
 
+nSimultaneous = 1
+
 #Channels to include
 channels = [
+
+#"DataReRecoA",
+
+    
 #"TChannel_MassDown_part_1","TChannel_MassDown_part_2","TChannel_MassDown_part_3","TChannel_MassDown_part_4","TChannel_MassDown_part_5",
 #"TChannel_MassUp_part_1","TChannel_MassUp_part_2","TChannel_MassUp_part_3","TChannel_MassUp_part_4","TChannel_MassUp_part_5",
 #"TbarChannel_MassDown_part_1","TbarChannel_MassDown_part_2","TbarChannel_MassDown_part_3","TbarChannel_MassDown_part_4","TbarChannel_MassDown_part_5",
@@ -54,40 +60,89 @@ channels = [
 #"QCD_Pt_30to80_EMEnriched","QCD_Pt_30to80_BCtoE","QCD_Pt_80to170_BCtoE",
 #"TbarChannel",
 
+
 #"TChannel_part_1","TChannel_part_2","TChannel_part_3","TChannel_part_4","TChannel_part_5",
 #"TbarChannel_part_1","TbarChannel_part_2","TbarChannel_part_3","TbarChannel_part_4","TbarChannel_part_5",
-#"TWChannel", "TbarWChannel",
+#"TWChannel_part_1","TWChannel_part_2",
+#"TbarWChannel_part_1","TbarWChannel_part_2",
 
-#"SChannel_part_1", "SChannel_part_2", "SChannel_part_3", "SChannel_part_4", "SChannel_part_5",
+"SChannel_part_1", #"SChannel_part_2", "SChannel_part_3", "SChannel_part_4", "SChannel_part_5",
 #"SbarChannel_part_1", "SbarChannel_part_2", "SbarChannel_part_3", "SbarChannel_part_4", "SbarChannel_part_5",
 
 #"ZZ_part_1", "ZZ_part_2", "ZZ_part_3", "ZZ_part_4", "ZZ_part_5",
 #"WZ_part_1", "WZ_part_2", "WZ_part_3", "WZ_part_4", "WZ_part_5",
 #"WW_part_1", "WW_part_2", "WW_part_3", "WW_part_4", "WW_part_5",
 
-#"QCDMuBig",#"TChannel_part_1","TChannel_part_2","TChannel_part_3","TChannel_part_4","TChannel_part_5",
-#"TbarChannel_part_1","TbarChannel_part_2","TbarChannel_part_3","TbarChannel_part_4","TbarChannel_part_5",
-#"TChannel",
-#"ZJets",
-#"ZJets_part_1", "ZJets_part_2", "ZJets_part_3", "ZJets_part_4", "ZJets_part_5","ZJets_part_6","ZJets_part_7","ZJets_part_8","ZJets_part_9","ZJets_part_10",
+#"QCDMuBig_part_1","QCDMuBig_part_2","QCDMuBig_part_3","QCDMuBig_part_4","QCDMuBig_part_5",
 
-#"QCDMuBig_part_1","QCDMuBig_part_2","QCDMuBig_part_3","QCDMuBig_part_4","QCDMuBig_part_5",#"QCDMuBig_part_6",
+
+#"ZJets_part_1", "ZJets_part_2", "ZJets_part_3", "ZJets_part_4", "ZJets_part_5",
+#"W1Jet_part_1","W1Jet_part_2","W1Jet_part_3","W1Jet_part_4","W1Jet_part_5","W1Jet_part_6","W1Jet_part_7","W1Jet_part_8","W1Jet_part_9","W1Jet_part_10",
+#"W2Jets_part_1","W2Jets_part_2","W2Jets_part_3","W2Jets_part_4",
+#"W2Jets_part_5","W2Jets_part_6","W2Jets_part_7","W2Jets_part_8","W2Jets_part_9","W2Jets_part_10",
+#"W3Jets_part_1","W3Jets_part_2","W3Jets_part_3","W3Jets_part_4","W3Jets_part_5","W3Jets_part_6","W3Jets_part_7","W3Jets_part_8","W3Jets_part_9","W3Jets_part_10",
+#"W4Jets_part_1","W4Jets_part_2","W4Jets_part_3","W4Jets_part_4","W4Jets_part_5","W4Jets_part_6","W4Jets_part_7","W4Jets_part_8","W4Jets_part_9","W4Jets_part_10",
+
+
+
+
+#"W2Jets_part_11","W2Jets_part_12","W2Jets_part_13","W2Jets_part_14","W2Jets_part_15","W2Jets_part_16","W2Jets_part_17","W2Jets_part_18","W2Jets_part_19","W2Jets_part_20",
+#"W2Jets_part_21","W2Jets_part_22","W2Jets_part_23","W2Jets_part_24","W2Jets_part_25",
+
+
+#"W3Jets_part_11","W3Jets_part_12","W3Jets_part_13","W3Jets_part_14","W3Jets_part_15","W3Jets_part_16","W3Jets_part_17","W3Jets_part_18","W3Jets_part_19","W3Jets_part_20",
+#"W3Jets_part_21","W3Jets_part_22",
+
+
+#"W4Jets_part_11","W4Jets_part_12","W4Jets_part_13","W4Jets_part_14","W4Jets_part_15","W4Jets_part_16","W4Jets_part_17","W4Jets_part_18","W4Jets_part_19","W4Jets_part_20",
+#"W4Jets_part_21","W4Jets_part_22","W4Jets_part_23","W4Jets_part_24","W4Jets_part_25",
+
+#"TTBarSemiLep_part_1", "TTBarSemiLep_part_2","TTBarSemiLep_part_3","TTBarSemiLep_part_4", "TTBarSemiLep_part_5", "TTBarSemiLep_part_6", "TTBarSemiLep_part_7", "TTBarSemiLep_part_8", "TTBarSemiLep_part_9","TTBarSemiLep_part_10","TTBarSemiLep_part_11","TTBarSemiLep_part_12", "TTBarSemiLep_part_13","TTBarSemiLep_part_14", "TTBarSemiLep_part_15", "TTBarSemiLep_part_16", "TTBarSemiLep_part_17", "TTBarSemiLep_part_18", "TTBarSemiLep_part_19","TTBarSemiLep_part_20","TTBarSemiLep_part_21","TTBarSemiLep_part_22","TTBarSemiLep_part_23","TTBarSemiLep_part_24","TTBarSemiLep_part_25",
+
+#"TTBarFullLep_part_1", "TTBarFullLep_part_2","TTBarFullLep_part_3","TTBarFullLep_part_4", "TTBarFullLep_part_5", "TTBarFullLep_part_6", "TTBarFullLep_part_7", "TTBarFullLep_part_8", "TTBarFullLep_part_9","TTBarFullLep_part_10",
+#"TTBarFullLep_part_11","TTBarFullLep_part_12","TTBarFullLep_part_13","TTBarFullLep_part_14", "TTBarFullLep_part_15", "TTBarFullLep_part_16", "TTBarFullLep_part_17", "TTBarFullLep_part_18", "TTBarFullLep_part_19","TTBarFullLep_part_20","TTBarFullLep_part_21","TTBarFullLep_part_22","TTBarFullLep_part_23","TTBarFullLep_part_24","TTBarFullLep_part_25",
+
+#"TTBarFullLep_part_16","TTBarFullLep_part_25",
+
 #"WJetsBig_part_1","WJetsBig_part_2","WJetsBig_part_3","WJetsBig_part_4","WJetsBig_part_5","WJetsBig_part_6","WJetsBig_part_7","WJetsBig_part_8","WJetsBig_part_9","WJetsBig_part_10",
 #"WJetsBig_part_11","WJetsBig_part_12","WJetsBig_part_13","WJetsBig_part_14","WJetsBig_part_15","WJetsBig_part_16","WJetsBig_part_17","WJetsBig_part_18","WJetsBig_part_19","WJetsBig_part_20",
 #"WJetsBig_part_21","WJetsBig_part_22",
 #"WJets_part_1","WJets_part_2","WJets_part_3","WJets_part_4","WJets_part_5","WJets_part_6","WJets_part_7","WJets_part_8","WJets_part_9","WJets_part_10","WJets_part_11",
-#"Mu_A13Jul_part_1","Mu_A13Jul_part_2","Mu_A13Jul_part_3","Mu_A13Jul_part_4","Mu_A13Jul_part_5","Mu_A13Jul_part_6","Mu_A13Jul_part_7","Mu_A13Jul_part_8","Mu_A13Jul_part_9","Mu_A13Jul_part_10","Mu_A13Jul_part_11","Mu_A13Jul_part_12","Mu_A13Jul_part_13","Mu_A13Jul_part_14","Mu_A13Jul_part_15","Mu_A13Jul_part_16","Mu_A13Jul_part_17","Mu_A13Jul_part_18","Mu_A13Jul_part_19","Mu_A13Jul_part_20","Mu_A13Jul_part_21","Mu_A13Jul_part_22",
 
-#"Mu_B13Jul_part_1","Mu_B13Jul_part_2","Mu_B13Jul_part_3","Mu_B13Jul_part_4","Mu_B13Jul_part_5","Mu_B13Jul_part_6","Mu_B13Jul_part_7","Mu_B13Jul_part_8","Mu_B13Jul_part_9","Mu_B13Jul_part_10","Mu_B13Jul_part_11","Mu_B13Jul_part_12","Mu_B13Jul_part_13","Mu_B13Jul_part_14","Mu_B13Jul_part_15","Mu_B13Jul_part_16","Mu_B13Jul_part_17","Mu_B13Jul_part_18","Mu_B13Jul_part_19","Mu_B13Jul_part_20","Mu_B13Jul_part_21","Mu_B13Jul_part_22",
+
+
+
+#"Mu_A_22Jan_part_1","Mu_A_22Jan_part_2","Mu_A_22Jan_part_3","Mu_A_22Jan_part_4","Mu_A_22Jan_part_5",
+#"Mu_A_22Jan_part_6","Mu_A_22Jan_part_7","Mu_A_22Jan_part_8","Mu_A_22Jan_part_9","Mu_A_22Jan_part_10",
+#"Mu_B1_22Jan_part_1","Mu_B1_22Jan_part_2","Mu_B1_22Jan_part_3","Mu_B1_22Jan_part_4","Mu_B1_22Jan_part_5",
+#"Mu_B2_22Jan_part_1","Mu_B2_22Jan_part_2","Mu_B2_22Jan_part_3","Mu_B2_22Jan_part_4","Mu_B2_22Jan_part_5",
+#"Mu_B3_22Jan_part_1","Mu_B3_22Jan_part_2","Mu_B3_22Jan_part_3","Mu_B3_22Jan_part_4","Mu_B3_22Jan_part_5",
+#"Mu_B4_22Jan_part_1","Mu_B4_22Jan_part_2","Mu_B4_22Jan_part_3","Mu_B4_22Jan_part_4","Mu_B4_22Jan_part_5",
+
+
+#"Mu_C1_22Jan_part_1","Mu_C1_22Jan_part_2","Mu_C1_22Jan_part_3","Mu_C1_22Jan_part_4","Mu_C1_22Jan_part_5",
+#"Mu_C2_22Jan_part_1","Mu_C2_22Jan_part_2","Mu_C2_22Jan_part_3","Mu_C2_22Jan_part_4","Mu_C2_22Jan_part_5",
+#"Mu_C3_22Jan_part_1","Mu_C3_22Jan_part_2","Mu_C3_22Jan_part_3","Mu_C3_22Jan_part_4","Mu_C3_22Jan_part_5",
+#"Mu_C4_22Jan_part_1","Mu_C4_22Jan_part_2","Mu_C4_22Jan_part_3","Mu_C4_22Jan_part_4","Mu_C4_22Jan_part_5",
+#"Mu_C5_22Jan_part_1","Mu_C5_22Jan_part_2","Mu_C5_22Jan_part_3","Mu_C5_22Jan_part_4","Mu_C5_22Jan_part_5",
+#"Mu_C6_22Jan_part_1","Mu_C6_22Jan_part_2","Mu_C6_22Jan_part_3","Mu_C6_22Jan_part_4","Mu_C6_22Jan_part_5",
+
+#"Mu_D1_22Jan_part_1","Mu_D1_22Jan_part_2","Mu_D1_22Jan_part_3","Mu_D1_22Jan_part_4","Mu_D1_22Jan_part_5","Mu_D1_22Jan_part_6",
+#"Mu_D2_22Jan_part_1","Mu_D2_22Jan_part_2","Mu_D2_22Jan_part_3","Mu_D2_22Jan_part_4","Mu_D2_22Jan_part_5","Mu_D2_22Jan_part_6",
+#"Mu_D3_22Jan_part_1","Mu_D3_22Jan_part_2","Mu_D3_22Jan_part_3","Mu_D3_22Jan_part_4","Mu_D3_22Jan_part_5","Mu_D3_22Jan_part_6",
+#"Mu_D4_22Jan_part_1","Mu_D4_22Jan_part_2","Mu_D4_22Jan_part_3","Mu_D4_22Jan_part_4","Mu_D4_22Jan_part_5","Mu_D4_22Jan_part_6",
+#"Mu_D5_22Jan_part_1","Mu_D5_22Jan_part_2","Mu_D5_22Jan_part_3","Mu_D5_22Jan_part_4","Mu_D5_22Jan_part_5","Mu_D5_22Jan_part_6",
+#"Mu_D6_22Jan_part_1","Mu_D6_22Jan_part_2","Mu_D6_22Jan_part_3","Mu_D6_22Jan_part_4","Mu_D6_22Jan_part_5","Mu_D6_22Jan_part_6",
+
 
 #"Mu_C2_part_1","Mu_C2_part_2","Mu_C2_part_3","Mu_C2_part_4","Mu_C2_part_5","Mu_C2_part_6","Mu_C2_part_7","Mu_C2_part_8","Mu_C2_part_9","Mu_C2_part_10","Mu_C2_part_11","Mu_C2_part_12","Mu_C2_part_13","Mu_C2_part_14","Mu_C2_part_15","Mu_C2_part_16","Mu_C2_part_17","Mu_C2_part_18","Mu_C2_part_19","Mu_C2_part_20","Mu_C2_part_21","Mu_C2_part_22",
 
-#"Mu_C1_part_1","Mu_C1_part_2","Mu_C1_part_3","Mu_C1_part_4","Mu_C1_part_5","Mu_C1_part_6","Mu_C1_part_7","Mu_C1_part_8"
+
 
 
 #"Mu_A06Aug_part_1","Mu_A06Aug_part_2","Mu_A06Aug_part_3",
-#"Ele_A06Aug_part_1","Ele_A06Aug_part_2","Ele_A06Aug_part_3",
 
+#"Ele_A06Aug_part_1","Ele_A06Aug_part_2","Ele_A06Aug_part_3",
 #"Ele_B13Jul_part_1","Ele_B13Jul_part_2","Ele_B13Jul_part_3","Ele_B13Jul_part_4","Ele_B13Jul_part_5","Ele_B13Jul_part_6","Ele_B13Jul_part_7","Ele_B13Jul_part_8","Ele_B13Jul_part_9","Ele_B13Jul_part_10","Ele_B13Jul_part_11","Ele_B13Jul_part_12","Ele_B13Jul_part_13","Ele_B13Jul_part_14","Ele_B13Jul_part_15","Ele_B13Jul_part_16","Ele_B13Jul_part_17","Ele_B13Jul_part_18","Ele_B13Jul_part_19","Ele_B13Jul_part_20","Ele_B13Jul_part_21","Ele_B13Jul_part_22",    
 
 #"Ele_A13Jul_part_1","Ele_A13Jul_part_2","Ele_A13Jul_part_3","Ele_A13Jul_part_4","Ele_A13Jul_part_5","Ele_A13Jul_part_6","Ele_A13Jul_part_7","Ele_A13Jul_part_8",
@@ -118,8 +173,8 @@ channels = [
 #"TbarChannel_Q2Up_part_1","TbarChannel_Q2Up_part_2","TbarChannel_Q2Up_part_3","TbarChannel_Q2Up_part_4","TbarChannel_Q2Up_part_5",
 #"TbarChannel_Q2Down_part_1","TbarChannel_Q2Down_part_2","TbarChannel_Q2Down_part_3","TbarChannel_Q2Down_part_4","TbarChannel_Q2Down_part_5",
 ##"TbarWChannel", "TWChannel",
-"TTBar_Q2Up",
-"TTBar_Q2Down",
+#"TTBar_Q2Up",
+#"TTBar_Q2Down",
 #"TTBar_Q2Up_part_1","TTBar_Q2Up_part_2","TTBar_Q2Up_part_3","TTBar_Q2Up_part_4","TTBar_Q2Up_part_5",
 #"TTBar_Q2Down_part_1","TTBar_Q2Down_part_2","TTBar_Q2Down_part_3","TTBar_Q2Down_part_4","TTBar_Q2Down_part_5",
 #"TbarChannel_Q2Up", "TbarChannel_Q2Down",
@@ -145,7 +200,7 @@ channels = [
  ]
 
 #Path to take data merged files
-dataPath = "file:/tmp/oiorio/"
+dataPath = "file:/tmp/mmerola/"
 
 #Choose if you want to run or just prepare the configuration files
 mode = ""
@@ -185,14 +240,26 @@ def changeChannel(fileName,channelOld,channelNew,switch,isMC):
         channelToReplace = "QCDMu"
     if "WJets" in channelNew and not ("Q2" in channelNew) and not ("Matching" in channelNew):# == "DataMu" or channelNew == "DataMuQCD":
         channelToReplace = "WJets"
+    if "W1Jet" in channelNew and not ("Q2" in channelNew) and not ("Matching" in channelNew):# == "DataMu" or channelNew == "DataMuQCD":
+        channelToReplace = "W1Jet"
+    if "W2Jets" in channelNew and not ("Q2" in channelNew) and not ("Matching" in channelNew):# == "DataMu" or channelNew == "DataMuQCD":
+        channelToReplace = "W2Jets"
+    if "W3Jets" in channelNew and not ("Q2" in channelNew) and not ("Matching" in channelNew):# == "DataMu" or channelNew == "DataMuQCD":
+        channelToReplace = "W3Jets"
+    if "W4Jets" in channelNew and not ("Q2" in channelNew) and not ("Matching" in channelNew):# == "DataMu" or channelNew == "DataMuQCD":
+        channelToReplace = "W4Jets"
     if "ZJets" in channelNew:#=="DataMu" or channelNew == "DataEle" or channelNew == "DataMuQCD" or channelNew =="DataEleQCD":
         channelToReplace = "ZJets"
-    if "TTBar" in channelNew and not ("Q2" in channelNew) and not ("Matching" in channelNew) and not ("Mass" in channelNew):# == "DataMu" or channelNew == "DataMuQCD":
-        channelToReplace = "TTBar"
+#    if "TTBar" in channelNew and not ("Q2" in channelNew) and not ("Matching" in channelNew) and not ("Mass" in channelNew):# == "DataMu" or channelNew == "DataMuQCD":
+#        channelToReplace = "TTBar"
     if "TChannel" in channelNew and not ("Q2" in channelNew) and not ("Matching" in channelNew) and not ("Mass" in channelNew):# == "DataMu" or channelNew == "DataMuQCD":
         channelToReplace = "TChannel"
     if "TbarChannel" in channelNew and not ("Q2" in channelNew) and not ("Matching" in channelNew) and not ("Mass" in channelNew):# == "DataMu" or channelNew == "DataMuQCD"::# == "DataMu" or channelNew == "DataMuQCD":
         channelToReplace = "TbarChannel"
+    if "TWChannel" in channelNew and not ("Q2" in channelNew) and not ("Matching" in channelNew) and not ("Mass" in channelNew):# == "DataMu" or channelNew == "DataMuQCD":
+        channelToReplace = "TWChannel"
+    if "TbarWChannel" in channelNew and not ("Q2" in channelNew) and not ("Matching" in channelNew) and not ("Mass" in channelNew):# == "DataMu" or channelNew == "DataMuQCD"::# == "DataMu" or channelNew == "DataMuQCD":
+        channelToReplace = "TbarWChannel"        
     if "SChannel" in channelNew:#=="DataMu" or channelNew == "DataEle" or channelNew == "DataMuQCD" or channelNew =="DataEleQCD":
         channelToReplace = "SChannel"
     if "SbarChannel" in channelNew:#=="DataMu" or channelNew == "DataEle" or channelNew == "DataMuQCD" or channelNew =="DataEleQCD":
@@ -288,6 +355,31 @@ def changeChannel(fileName,channelOld,channelNew,switch,isMC):
         inputs = inputs.replace(channelToReplace,"WJets")
         inputs = inputs +")"
         o.write(inputs)
+    if "W1Jet" in channelNew and not ("Q2" in channelNew) and not ("Matching" in channelNew):# == "DataMu" or channelNew == "DataMuQCD":
+        inputs = "process.source.fileNames = cms.untracked.vstring("
+        inputs = inputs +"'"+dataPath+channel+"Merged.root',"
+        inputs = inputs.replace(channelToReplace,"W1Jet")
+        inputs = inputs +")"
+        o.write(inputs)
+    if "W2Jets" in channelNew and not ("Q2" in channelNew) and not ("Matching" in channelNew):# == "DataMu" or channelNew == "DataMuQCD":
+        inputs = "process.source.fileNames = cms.untracked.vstring("
+        inputs = inputs +"'"+dataPath+channel+"Merged.root',"
+        inputs = inputs.replace(channelToReplace,"W2Jets")
+        inputs = inputs +")"
+        o.write(inputs)
+    if "W3Jets" in channelNew and not ("Q2" in channelNew) and not ("Matching" in channelNew):# == "DataMu" or channelNew == "DataMuQCD":
+        inputs = "process.source.fileNames = cms.untracked.vstring("
+        inputs = inputs +"'"+dataPath+channel+"Merged.root',"
+        inputs = inputs.replace(channelToReplace,"W3Jets")
+        inputs = inputs +")"
+        o.write(inputs)
+    if "W4Jets" in channelNew and not ("Q2" in channelNew) and not ("Matching" in channelNew):# == "DataMu" or channelNew == "DataMuQCD":
+        inputs = "process.source.fileNames = cms.untracked.vstring("
+        inputs = inputs +"'"+dataPath+channel+"Merged.root',"
+        inputs = inputs.replace(channelToReplace,"W4Jets")
+        inputs = inputs +")"
+        o.write(inputs)
+        
     if "WJets_Q2Down" in channelNew:
         inputs = "process.source.fileNames = cms.untracked.vstring("
         inputs = inputs +"'"+dataPath+channel+"Merged.root',"
@@ -348,6 +440,18 @@ def changeChannel(fileName,channelOld,channelNew,switch,isMC):
         inputs = inputs.replace(channelToReplace,"TbarChannel")
         inputs = inputs +")"
         o.write(inputs)
+    if "TWChannel" in channelNew and not ("Q2" in channelNew) and not ("Matching" in channelNew) and not ("Mass" in channelNew):# == "DataMu" or channelNew == "DataMuQCD":
+        inputs = "process.source.fileNames = cms.untracked.vstring("
+        inputs = inputs +"'"+dataPath+channel+"Merged.root',"
+        inputs = inputs.replace(channelToReplace,"TWChannel")
+        inputs = inputs +")"
+        o.write(inputs)
+    if "TbarWChannel" in channelNew and not ("Q2" in channelNew) and not ("Matching" in channelNew) and not ("Mass" in channelNew):# == "DataMu" or channelNew == "DataMuQCD":
+        inputs = "process.source.fileNames = cms.untracked.vstring("
+        inputs = inputs +"'"+dataPath+channel+"Merged.root',"
+        inputs = inputs.replace(channelToReplace,"TbarWChannel")
+        inputs = inputs +")"
+        o.write(inputs)        
     if "SChannel" in channelNew:# == "DataMu" or channelNew == "DataMuQCD":
         inputs = "process.source.fileNames = cms.untracked.vstring("
         inputs = inputs +"'"+dataPath+channel+"Merged.root',"
@@ -414,12 +518,24 @@ def changeChannel(fileName,channelOld,channelNew,switch,isMC):
         inputs = inputs.replace(channelToReplace,"ZJets")
         inputs = inputs +")"
         o.write(inputs)
-    if "TTBar" in channelNew and not ("Q2" in channelNew) and not ("Matching" in channelNew) and not ("Mass" in channelNew):# == "DataMu" or channelNew == "DataMuQCD"::# == "DataMu" or channelNew == "DataMuQCD":
+    if "TTBarFullLep" in channelNew and not ("Q2" in channelNew) and not ("Matching" in channelNew):# == "DataMu" or channelNew == "DataMuQCD":
         inputs = "process.source.fileNames = cms.untracked.vstring("
         inputs = inputs +"'"+dataPath+channel+"Merged.root',"
-        inputs = inputs.replace(channelToReplace,"TTBar")
+        inputs = inputs.replace(channelToReplace,"TTBarFullLep")
         inputs = inputs +")"
         o.write(inputs)
+    if "TTBarSemiLep" in channelNew and not ("Q2" in channelNew) and not ("Matching" in channelNew):# == "DataMu" or channelNew == "DataMuQCD":
+        inputs = "process.source.fileNames = cms.untracked.vstring("
+        inputs = inputs +"'"+dataPath+channel+"Merged.root',"
+        inputs = inputs.replace(channelToReplace,"TTBarSemiLep")
+        inputs = inputs +")"
+        o.write(inputs)
+#    if "TTBar" in channelNew and not ("Q2" in channelNew) and not ("Matching" in channelNew) and not ("Mass" in channelNew):# == "DataMu" or channelNew == "DataMuQCD"::# == "DataMu" or channelNew == "DataMuQCD":
+#        inputs = "process.source.fileNames = cms.untracked.vstring("
+#        inputs = inputs +"'"+dataPath+channel+"Merged.root',"
+#        inputs = inputs.replace(channelToReplace,"TTBar")
+#        inputs = inputs +")"
+#        o.write(inputs)
     if "WW" in channelNew:# == "DataMu" or channelNew == "DataMuQCD":
         inputs = "process.source.fileNames = cms.untracked.vstring("
         inputs = inputs +"'"+dataPath+channel+"Merged.root',"
@@ -505,6 +621,7 @@ def changeChannel(fileName,channelOld,channelNew,switch,isMC):
 
 #Channel in the original file
 startChannel = "TChannel"#channels[0]
+nstart = 0;
 
 f= open(fileName)
 
@@ -530,19 +647,21 @@ for channel in channels:
     channelOld = startChannel
     
     cfg_file = changeChannel(tmpName,channelOld,channel,channel_instruction,isMC)
-    command = 'nohup cmsRun ./' + channel+'_cfg.py > /tmp/oiorio/'+channel+'.log &'
+    command = 'nohup cmsRun ./' + channel+'_cfg.py > /tmp/mmerola/'+channel+'.log &'
     
     print command
 
+    nstart = nstart +1
     if mode == "cmsRun":
-        os.system(command ) 
-#    os.system("bg") 
-#    os.system('rm '+channel+'_cfg.py' ) 
+        if nstart % nSimultaneous ==0 :
+            command = 'nohup cmsRun ./' + channel+'_cfg.py > /tmp/mmerola/'+channel+'.log '
+        else:
+            command = 'nohup cmsRun ./' + channel+'_cfg.py > /tmp/mmerola/'+channel+'.log &'
+            
+        os.system(command)
+                                                        
 
-os.system('rm '+tmpName) 
-#changeChannel(f,aChannel,startChannel)
-
-#os.system(command)
+#os.system('rm '+tmpName) 
 
 
 

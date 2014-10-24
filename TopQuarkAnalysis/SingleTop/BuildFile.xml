@@ -26,6 +26,3 @@
 <flags   EDM_PLUGIN="1"/>
 <flags   CXXFLAGS="-g"/>
 <flags   GENREFLEX_ARGS="--"/>
-<export>
-  <lib   name="1"/>
-</export>

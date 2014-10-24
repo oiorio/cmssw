@@ -41,7 +41,7 @@ void SingleTopPileUpProducer::produce(edm::Event & iEvent, const edm::EventSetup
   
   std::vector<PileupSummaryInfo>::const_iterator PVI;
   
-  int n0 = -1, nm1=-1, np1=1, nT;
+  int n0 = -1, nm1=-1, np1=1, nT=-1;  // changed inizialitazion of nT
   for(PVI = PupInfo->begin(); PVI != PupInfo->end(); ++PVI) {
     
     int BX = PVI->getBunchCrossing();

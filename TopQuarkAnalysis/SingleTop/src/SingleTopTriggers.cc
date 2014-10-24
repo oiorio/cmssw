@@ -44,16 +44,16 @@ SingleTopTriggers::~SingleTopTriggers()
 bool SingleTopTriggers::filter( edm::Event& iEvent,const  edm::EventSetup& c)
 {
   
-  int ievt = iEvent.id().event();
+  //  int ievt = iEvent.id().event();
   int irun = iEvent.id().run();
-  int ils = iEvent.luminosityBlock();
-  int bx = iEvent.bunchCrossing();
+  //  int ils = iEvent.luminosityBlock();
+  //  int bx = iEvent.bunchCrossing();
   
   //
   // trigger type
   //
-  int trigger_type=-1;
-  if (iEvent.isRealData())  trigger_type = iEvent.experimentType();
+  //  int trigger_type=-1;
+  //  if (iEvent.isRealData())  trigger_type = iEvent.experimentType();
   
   
   //hlt info
@@ -67,8 +67,8 @@ bool SingleTopTriggers::filter( edm::Event& iEvent,const  edm::EventSetup& c)
   iEvent.getByLabel(hlTriggerResults_,HLTR);
 
   
-  bool eleNonIso = false;
-  bool muonNonIso = false;
+  //  bool eleNonIso = false;
+  //  bool muonNonIso = false;
 
   if(HLTR.isValid() == false) {
     std::cout<< " HLTInspect Error - Could not access Results with name "<<hlTriggerResults_<<std::endl;
@@ -89,7 +89,7 @@ bool SingleTopTriggers::filter( edm::Event& iEvent,const  edm::EventSetup& c)
       string tmptrig2="";      
       TriggerResults tr;
       tr = *HLTR;
-      bool passesTrigger = false;
+      //      bool passesTrigger = false;
       bool tmppass=false;
       //      Std::cout << "List of triggers: \n";
       for (unsigned int i=0;i<HLTR->size();++i){

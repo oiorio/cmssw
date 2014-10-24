@@ -93,7 +93,7 @@ SingleTopSystematicsTreesDumper::SingleTopSystematicsTreesDumper(const edm::Para
     qcdLeptonsEta_ =  iConfig.getParameter< edm::InputTag >("qcdLeptonsEta");
     qcdLeptonsEnergy_ =  iConfig.getParameter< edm::InputTag >("qcdLeptonsEnergy");
     qcdLeptonsCharge_ =  iConfig.getParameter< edm::InputTag >("qcdLeptonsCharge");
-    
+    qcdLeptonsMVAID_ =  iConfig.getParameter< edm::InputTag >("qcdLeptonsMVAID");
     qcdLeptonsDeltaCorrectedRelIso_ =  iConfig.getParameter< edm::InputTag >("qcdLeptonsDeltaCorrectedRelIso");
     qcdLeptonsRhoCorrectedRelIso_ =  iConfig.getParameter< edm::InputTag >("qcdLeptonsRhoCorrectedRelIso");
 
@@ -177,8 +177,8 @@ SingleTopSystematicsTreesDumper::SingleTopSystematicsTreesDumper(const edm::Para
     doPDF_  =  iConfig.getUntrackedParameter< bool >("doPDF", true);
     doBTagSF_  =  iConfig.getUntrackedParameter< bool >("doBTagSF", true);
 
-    useMVAID_  =  iConfig.getUntrackedParameter< bool >("useMVAID", false);
-    useCutBasedID_  =  iConfig.getUntrackedParameter< bool >("useCutBasedID", true);
+    useMVAID_  =  iConfig.getUntrackedParameter< bool >("useMVAID", true);
+    useCutBasedID_  =  iConfig.getUntrackedParameter< bool >("useCutBasedID", false);
     
     //    cout << " mva id " << useMVAID_ << " cutbased " << useCutBasedID_ << endl;
 
@@ -186,6 +186,8 @@ SingleTopSystematicsTreesDumper::SingleTopSystematicsTreesDumper(const edm::Para
       cout << " can't use cutBasedID and MVAID together! Choose one!"<<endl;
     }
     
+
+
     //Q2 part
     x1_ = iConfig.getParameter<edm::InputTag>("x1") ;
     x2_ = iConfig.getParameter<edm::InputTag>("x2") ;
@@ -221,12 +223,13 @@ SingleTopSystematicsTreesDumper::SingleTopSystematicsTreesDumper(const edm::Para
     doJetTrees_ = iConfig.getUntrackedParameter< bool >("doJetTrees", true);
 
     algo_ = iConfig.getUntrackedParameter< std::string >("algo", "CSVT");
+//    algo_ = iConfig.getUntrackedParameter< std::string >("algo", "TCHPT");
     doLooseBJetVeto_ = iConfig.getUntrackedParameter< bool >("doLooseBJetVeto", false);
 
     //MC Truth part
     doMCTruth_ = iConfig.getUntrackedParameter< bool >("doMCTruth", true);
     doFullMCTruth_ = iConfig.getUntrackedParameter< bool >("doFullMCTruth", true); //use to fill trees MC truth for given control sample
-    
+
     //Quarks/leptons
     MCQuarksEta_ =  iConfig.getParameter< edm::InputTag >("MCQuarksEta");
     MCQuarksPt_ =  iConfig.getParameter< edm::InputTag >("MCQuarksPt");
@@ -338,11 +341,14 @@ SingleTopSystematicsTreesDumper::SingleTopSystematicsTreesDumper(const edm::Para
     TFileDirectory SingleTopSystematics = fs->mkdir( "systematics_histograms" );
     TFileDirectory SingleTopTrees = fs->mkdir( "systematics_trees" );
     
+
     for (size_t i = 0; i < all_syst.size(); ++i)
       {
 	string syst = all_syst[i];
+	//string treenameMCTruth = (channel + "_MCTruth_" + syst);
+	//treesMCTruth = new TTree(treenameMCTruth.c_str(), treenameMCTruth.c_str());
 	string treenameMCTruth = (channel + "_MCTruth_" + syst);
-	treesMCTruth = new TTree(treenameMCTruth.c_str(), treenameMCTruth.c_str());
+	treesMCTruth[syst] = new TTree(treenameMCTruth.c_str(), treenameMCTruth.c_str());
 	
         if (doJetTrees_)//doingNJet trees
 	  {
@@ -383,6 +389,7 @@ SingleTopSystematicsTreesDumper::SingleTopSystematicsTreesDumper(const edm::Para
             treesNJets[syst]->Branch("PUWeight", &PUWeightTree);
             treesNJets[syst]->Branch("leptonPt", &lepPt);
             treesNJets[syst]->Branch("leptonEta", &lepEta);
+            treesNJets[syst]->Branch("leptonE", &lepE);
             treesNJets[syst]->Branch("leptonPhi", &lepPhi);
             treesNJets[syst]->Branch("leptonDeltaCorrectedRelIso", &lepDeltaCorrectedRelIso);
             treesNJets[syst]->Branch("leptonRhoCorrectedRelIso", &lepRhoCorrectedRelIso);
@@ -397,6 +404,7 @@ SingleTopSystematicsTreesDumper::SingleTopSystematicsTreesDumper(const edm::Para
             treesNJets[syst]->Branch("metPt", &metPt);
             treesNJets[syst]->Branch("metPhi", &metPhi);
             treesNJets[syst]->Branch("HT", &HT);
+            treesNJets[syst]->Branch("H", &H);
             treesNJets[syst]->Branch("firstJetPt", &firstJetPt);
             treesNJets[syst]->Branch("firstJetEta", &firstJetEta);
             treesNJets[syst]->Branch("firstJetPhi", &firstJetPhi);
@@ -484,6 +492,12 @@ SingleTopSystematicsTreesDumper::SingleTopSystematicsTreesDumper(const edm::Para
             trees2J[bj][syst]->Branch("eta", &etaTree);
             trees2J[bj][syst]->Branch("costhetalj", &cosTree);
             trees2J[bj][syst]->Branch("costhetalbl", &cosBLTree);
+
+            trees2J[bj][syst]->Branch("costhetalj1", &cos1Tree);
+            trees2J[bj][syst]->Branch("costhetalbl1", &cos1BLTree);
+
+            trees2J[bj][syst]->Branch("costhetalj2", &cos2Tree);
+            trees2J[bj][syst]->Branch("costhetalbl2", &cos2BLTree);
 	    
 	    //  trees2J[bj][syst]->Branch("costhetalj_best", &cosTree_best);
 	    //   trees2J[bj][syst]->Branch("costhetalbl_best", &cosBLTree_best);
@@ -522,11 +536,17 @@ SingleTopSystematicsTreesDumper::SingleTopSystematicsTreesDumper(const edm::Para
 	    if(doTopPtReweighting_){
 	      trees2J[bj][syst]->Branch("topPtReweightMCTruth", &topPtReweightMCTruth);
 	      trees2J[bj][syst]->Branch("topPtReweight", &topPtReweight);
+          trees2J[bj][syst]->Branch("topPtReweightMCTruthUp", &topPtReweightMCTruthUp);
+	      trees2J[bj][syst]->Branch("topPtReweightUp", &topPtReweightUp);
+		  trees2J[bj][syst]->Branch("topPtReweightMCTruthDown", &topPtReweightMCTruthDown);
+	      trees2J[bj][syst]->Branch("topPtReweightDown", &topPtReweightDown);
+
 	    }
             //other observables
             trees2J[bj][syst]->Branch("leptonPt", &lepPt);
             trees2J[bj][syst]->Branch("leptonEta", &lepEta);
             trees2J[bj][syst]->Branch("leptonPhi", &lepPhi);
+            trees2J[bj][syst]->Branch("leptonE", &lepE);
             trees2J[bj][syst]->Branch("leptonDeltaCorrectedRelIso", &lepDeltaCorrectedRelIso);
             trees2J[bj][syst]->Branch("leptonRhoCorrectedRelIso", &lepRhoCorrectedRelIso);
 	    
@@ -534,7 +554,7 @@ SingleTopSystematicsTreesDumper::SingleTopSystematicsTreesDumper(const edm::Para
             trees2J[bj][syst]->Branch("leptonSFB", &lepSFB);
             trees2J[bj][syst]->Branch("leptonSFC", &lepSFC);
             trees2J[bj][syst]->Branch("leptonSFD", &lepSFD);
-	    //
+	    
             trees2J[bj][syst]->Branch("leptonSFIDUp", &lepSFIDUp);
             trees2J[bj][syst]->Branch("leptonSFIDUpB", &lepSFIDUpB);
             trees2J[bj][syst]->Branch("leptonSFIDUpC", &lepSFIDUpC);
@@ -544,7 +564,7 @@ SingleTopSystematicsTreesDumper::SingleTopSystematicsTreesDumper(const edm::Para
             trees2J[bj][syst]->Branch("leptonSFIDDownB", &lepSFIDDownB);
             trees2J[bj][syst]->Branch("leptonSFIDDownC", &lepSFIDDownC);
             trees2J[bj][syst]->Branch("leptonSFIDDownD", &lepSFIDDownD);
-	    //
+	    
 	    trees2J[bj][syst]->Branch("leptonSFIsoUp", &lepSFIsoUp);
             trees2J[bj][syst]->Branch("leptonSFIsoUpB", &lepSFIsoUpB);
             trees2J[bj][syst]->Branch("leptonSFIsoUpC", &lepSFIsoUpC);
@@ -554,7 +574,7 @@ SingleTopSystematicsTreesDumper::SingleTopSystematicsTreesDumper(const edm::Para
             trees2J[bj][syst]->Branch("leptonSFIsoDownB", &lepSFIsoDownB);
             trees2J[bj][syst]->Branch("leptonSFIsoDownC", &lepSFIsoDownC);
             trees2J[bj][syst]->Branch("leptonSFIsoDownD", &lepSFIsoDownD);
-	    //
+	    
             trees2J[bj][syst]->Branch("leptonSFTrigUp", &lepSFTrigUp);
             trees2J[bj][syst]->Branch("leptonSFTrigUpB", &lepSFTrigUpB);
             trees2J[bj][syst]->Branch("leptonSFTrigUpC", &lepSFTrigUpC);
@@ -564,7 +584,7 @@ SingleTopSystematicsTreesDumper::SingleTopSystematicsTreesDumper(const edm::Para
             trees2J[bj][syst]->Branch("leptonSFTrigDownB", &lepSFTrigDownB);
             trees2J[bj][syst]->Branch("leptonSFTrigDownC", &lepSFTrigDownC);
             trees2J[bj][syst]->Branch("leptonSFTrigDownD", &lepSFTrigDownD);
-	    //
+	    
 	    
             trees2J[bj][syst]->Branch("fJetPt", &fJetPt);
             trees2J[bj][syst]->Branch("fJetE", &fJetE);
@@ -630,6 +650,20 @@ SingleTopSystematicsTreesDumper::SingleTopSystematicsTreesDumper(const edm::Para
             trees2J[bj][syst]->Branch("bJet2Btag", &bJet2BTag);
 	    trees2J[bj][syst]->Branch("bJet2Flavour",&bJet2Flavour);
 	    
+	    trees2J[bj][syst]->Branch("bJetDecayPt",&bJetPt);
+	    trees2J[bj][syst]->Branch("bJetDecayE",&bJetDecayE);
+	    trees2J[bj][syst]->Branch("bJetDecayEta",&bJetDecayEta);
+	    trees2J[bj][syst]->Branch("bJetDecayPhi",&bJetDecayPhi);
+	    trees2J[bj][syst]->Branch("bJetDecayBtag", &bJetDecayBTag);
+	    trees2J[bj][syst]->Branch("bJetDecayFlavour",&bJetDecayFlavour);
+	    
+	    trees2J[bj][syst]->Branch("bJetRecoilPt",&bJetRecoilPt);
+	    trees2J[bj][syst]->Branch("bJetRecoilE",&bJetRecoilE);
+	    trees2J[bj][syst]->Branch("bJetRecoilEta",&bJetRecoilEta);
+	    trees2J[bj][syst]->Branch("bJetRecoilPhi",&bJetRecoilPhi);
+	    trees2J[bj][syst]->Branch("bJetRecoilBtag", &bJetRecoilBTag);
+	    trees2J[bj][syst]->Branch("bJetRecoilFlavour",&bJetRecoilFlavour);
+	    
 	    trees2J[bj][syst]->Branch("nJLoose",&nJLoose);
 	    //	    trees2J[bj][syst]->Branch("nJ",&nJ);
 	    trees2J[bj][syst]->Branch("nJLooseCentral",&nJLooseCentral);
@@ -680,7 +714,7 @@ SingleTopSystematicsTreesDumper::SingleTopSystematicsTreesDumper(const edm::Para
             trees2J[bj][syst]->Branch("lowBTag", &lowBTagTree);
             trees2J[bj][syst]->Branch("highBTag", &highBTagTree);
 	    
-	    if(doMCTruth_ && bj == 1 && syst == "noSyst" ){
+	    if(doMCTruth_ && (bj == 1 || bj == 2) && syst == "noSyst" ){
 	      
 	      for (int p = 1; p <= 2; ++p)
 		{
@@ -810,6 +844,13 @@ SingleTopSystematicsTreesDumper::SingleTopSystematicsTreesDumper(const edm::Para
             trees3J[bj][syst]->Branch("eta", &etaTree);
             trees3J[bj][syst]->Branch("costhetalj", &cosTree);
             trees3J[bj][syst]->Branch("costhetalbl", &cosBLTree);
+
+            trees3J[bj][syst]->Branch("costhetalj1", &cos1Tree);
+            trees3J[bj][syst]->Branch("costhetalbl1", &cos1BLTree);
+
+            trees3J[bj][syst]->Branch("costhetalj2", &cos2Tree);
+            trees3J[bj][syst]->Branch("costhetalbl2", &cos2BLTree);
+
             trees3J[bj][syst]->Branch("topMass", &topMassTree);
             trees3J[bj][syst]->Branch("top1Mass", &top1MassTree);
             trees3J[bj][syst]->Branch("top2Mass", &top2MassTree);
@@ -840,7 +881,7 @@ SingleTopSystematicsTreesDumper::SingleTopSystematicsTreesDumper(const edm::Para
             trees3J[bj][syst]->Branch("leptonPt", &lepPt);
             trees3J[bj][syst]->Branch("leptonEta", &lepEta);
             trees3J[bj][syst]->Branch("leptonPhi", &lepPhi);
-	    
+            trees3J[bj][syst]->Branch("leptonE", &lepE);
             trees3J[bj][syst]->Branch("leptonDeltaCorrectedRelIso", &lepDeltaCorrectedRelIso);
             trees3J[bj][syst]->Branch("leptonRhoCorrectedRelIso", &lepRhoCorrectedRelIso);
 	    
@@ -887,9 +928,10 @@ SingleTopSystematicsTreesDumper::SingleTopSystematicsTreesDumper(const edm::Para
 	    trees3J[bj][syst]->Branch("bJet2E",&bJet2E);
 	    trees3J[bj][syst]->Branch("bJet2Eta",&bJet2Eta);
 	    trees3J[bj][syst]->Branch("bJet2Phi",&bJet2Phi);
-            trees3J[bj][syst]->Branch("bJet2Btag", &bJet2BTag);
+        trees3J[bj][syst]->Branch("bJet2Btag", &bJet2BTag);
 	    trees3J[bj][syst]->Branch("bJet2Flavour",&bJet2Flavour);
 	    
+		
 	    // trees3J[bj][syst]->Branch("bestJetFlavour", &bestJetFlavourTree);
 	    //  trees3J[bj][syst]->Branch("bJetIsbest", &bJetIsbest);
 	    
@@ -921,6 +963,20 @@ SingleTopSystematicsTreesDumper::SingleTopSystematicsTreesDumper(const edm::Para
             trees3J[bj][syst]->Branch("looseJetE", &looseJetE);
             trees3J[bj][syst]->Branch("looseJetBtag", &looseJetBTag);
             trees3J[bj][syst]->Branch("looseJetFlavour", &looseJetFlavourTree);
+
+	    trees3J[bj][syst]->Branch("bJetDecayPt",&bJetPt);
+	    trees3J[bj][syst]->Branch("bJetDecayE",&bJetDecayE);
+	    trees3J[bj][syst]->Branch("bJetDecayEta",&bJetDecayEta);
+	    trees3J[bj][syst]->Branch("bJetDecayPhi",&bJetDecayPhi);
+	    trees3J[bj][syst]->Branch("bJetDecayBtag", &bJetDecayBTag);
+	    trees3J[bj][syst]->Branch("bJetDecayFlavour",&bJetDecayFlavour);
+	    
+	    trees3J[bj][syst]->Branch("bJetRecoilPt",&bJetRecoilPt);
+	    trees3J[bj][syst]->Branch("bJetRecoilE",&bJetRecoilE);
+	    trees3J[bj][syst]->Branch("bJetRecoilEta",&bJetRecoilEta);
+	    trees3J[bj][syst]->Branch("bJetRecoilPhi",&bJetRecoilPhi);
+	    trees3J[bj][syst]->Branch("bJetRecoilBtag", &bJetRecoilBTag);
+	    trees3J[bj][syst]->Branch("bJetRecoilFlavour",&bJetRecoilFlavour);
 	    
             trees3J[bj][syst]->Branch("nJLoose",&nJLoose);
 	    //	    trees3J[bj][syst]->Branch("nJ",&nJ);
@@ -984,6 +1040,11 @@ SingleTopSystematicsTreesDumper::SingleTopSystematicsTreesDumper(const edm::Para
 	    if(doTopPtReweighting_){
 	      trees3J[bj][syst]->Branch("topPtReweightMCTruth", &topPtReweightMCTruth);
 	      trees3J[bj][syst]->Branch("topPtReweight", &topPtReweight);
+		  trees3J[bj][syst]->Branch("topPtReweightMCTruthUp", &topPtReweightMCTruthUp);
+	      trees3J[bj][syst]->Branch("topPtReweightUp", &topPtReweightUp);
+		  trees3J[bj][syst]->Branch("topPtReweightMCTruthDown", &topPtReweightMCTruthDown);
+	      trees3J[bj][syst]->Branch("topPtReweightDown", &topPtReweightDown);
+
 	    }
             for (int p = 1; p <= 52; ++p)
 	      {
@@ -1011,6 +1072,13 @@ SingleTopSystematicsTreesDumper::SingleTopSystematicsTreesDumper(const edm::Para
             trees4J[bj][syst]->Branch("eta", &etaTree);
             trees4J[bj][syst]->Branch("costhetalj", &cosTree);
             trees4J[bj][syst]->Branch("costhetalbl", &cosBLTree);
+
+            trees4J[bj][syst]->Branch("costhetalj1", &cos1Tree);
+            trees4J[bj][syst]->Branch("costhetalbl1", &cos1BLTree);
+
+            trees4J[bj][syst]->Branch("costhetalj2", &cos2Tree);
+            trees4J[bj][syst]->Branch("costhetalbl2", &cos2BLTree);
+
             trees4J[bj][syst]->Branch("topMass", &topMassTree);
             trees4J[bj][syst]->Branch("top1Mass", &top1MassTree);
             trees4J[bj][syst]->Branch("top2Mass", &top2MassTree);
@@ -1041,7 +1109,7 @@ SingleTopSystematicsTreesDumper::SingleTopSystematicsTreesDumper(const edm::Para
             trees4J[bj][syst]->Branch("leptonPt", &lepPt);
             trees4J[bj][syst]->Branch("leptonEta", &lepEta);
             trees4J[bj][syst]->Branch("leptonPhi", &lepPhi);
-	    
+            trees4J[bj][syst]->Branch("leptonE", &lepE);
             trees4J[bj][syst]->Branch("leptonDeltaCorrectedRelIso", &lepDeltaCorrectedRelIso);
             trees4J[bj][syst]->Branch("leptonRhoCorrectedRelIso", &lepRhoCorrectedRelIso);
 	    
@@ -1091,6 +1159,7 @@ SingleTopSystematicsTreesDumper::SingleTopSystematicsTreesDumper(const edm::Para
             trees4J[bj][syst]->Branch("bJet2Btag", &bJet2BTag);
 	    trees4J[bj][syst]->Branch("bJet2Flavour",&bJet2Flavour);
 	    
+        
 	    // trees4J[bj][syst]->Branch("bestJetFlavour", &bestJetFlavourTree);
 	    //  trees4J[bj][syst]->Branch("bJetIsbest", &bJetIsbest);
 	    
@@ -1122,6 +1191,22 @@ SingleTopSystematicsTreesDumper::SingleTopSystematicsTreesDumper(const edm::Para
             trees4J[bj][syst]->Branch("fourthJetE", &fourthJetE);
             trees4J[bj][syst]->Branch("fourthJetBtag", &fourthJetBTag);
             trees4J[bj][syst]->Branch("fourthJetFlavour", &fourthJetFlavourTree);
+
+	    trees4J[bj][syst]->Branch("bJetDecayPt",&bJetPt);
+	    trees4J[bj][syst]->Branch("bJetDecayE",&bJetDecayE);
+	    trees4J[bj][syst]->Branch("bJetDecayEta",&bJetDecayEta);
+	    trees4J[bj][syst]->Branch("bJetDecayPhi",&bJetDecayPhi);
+	    trees4J[bj][syst]->Branch("bJetDecayBtag", &bJetDecayBTag);
+	    trees4J[bj][syst]->Branch("bJetDecayFlavour",&bJetDecayFlavour);
+	    
+	    trees4J[bj][syst]->Branch("bJetRecoilPt",&bJetRecoilPt);
+	    trees4J[bj][syst]->Branch("bJetRecoilE",&bJetRecoilE);
+	    trees4J[bj][syst]->Branch("bJetRecoilEta",&bJetRecoilEta);
+	    trees4J[bj][syst]->Branch("bJetRecoilPhi",&bJetRecoilPhi);
+	    trees4J[bj][syst]->Branch("bJetRecoilBtag", &bJetRecoilBTag);
+	    trees4J[bj][syst]->Branch("bJetRecoilFlavour",&bJetRecoilFlavour);
+
+
 	    
 	    trees4J[bj][syst]->Branch("looseJetPt", &looseJetPt);
             trees4J[bj][syst]->Branch("looseJetEta", &looseJetEta);
@@ -1192,6 +1277,11 @@ SingleTopSystematicsTreesDumper::SingleTopSystematicsTreesDumper(const edm::Para
 	    if(doTopPtReweighting_){
 	      trees4J[bj][syst]->Branch("topPtReweightMCTruth", &topPtReweightMCTruth);
 	      trees4J[bj][syst]->Branch("topPtReweight", &topPtReweight);
+		  trees4J[bj][syst]->Branch("topPtReweightMCTruthUp", &topPtReweightMCTruthUp);
+	      trees4J[bj][syst]->Branch("topPtReweightUp", &topPtReweightUp);
+		  trees4J[bj][syst]->Branch("topPtReweightMCTruthDown", &topPtReweightMCTruthDown);
+	      trees4J[bj][syst]->Branch("topPtReweightDown", &topPtReweightDown);
+
 	    }
             for (int p = 1; p <= 52; ++p)
 	      {
@@ -1216,10 +1306,15 @@ SingleTopSystematicsTreesDumper::SingleTopSystematicsTreesDumper(const edm::Para
 	  //	  string treenameMCTruth = (channel + "_MCTruth_" + syst);
 	  //	  treesMCTruth = new TTree(treenameMCTruth.c_str(), treenameMCTruth.c_str());
 	  if(doTopPtReweighting_){
-	    treesMCTruth->Branch("topPtReweightMCTruth", &topPtReweightMCTruth);
-	    treesMCTruth->Branch("topPtReweight", &topPtReweight);
+	    treesMCTruth[syst]->Branch("topPtReweightMCTruth", &topPtReweightMCTruth);
+	    treesMCTruth[syst]->Branch("topPtReweight", &topPtReweight);
+		treesMCTruth[syst]->Branch("topPtReweightMCTruthUp", &topPtReweightMCTruthUp);
+	    treesMCTruth[syst]->Branch("topPtReweightUp", &topPtReweightUp);
+		treesMCTruth[syst]->Branch("topPtReweightMCTruthDown", &topPtReweightMCTruthDown);
+	    treesMCTruth[syst]->Branch("topPtReweightDown", &topPtReweightDown);
+
 	  }
-	  cout<<"here after"<<treesMCTruth->GetName()<<endl; 
+	  //	  cout<<"here after"<<treesMCTruth[syst]->GetName()<<endl; 
 	  
 	  for (int p = 1; p <= 2; ++p)
 	    {
@@ -1229,60 +1324,60 @@ SingleTopSystematicsTreesDumper::SingleTopSystematicsTreesDumper(const edm::Para
 	      num = "_"+num+"_";
 	      
 	      
-	      treesMCTruth->Branch("runid", &runTree);
-	      treesMCTruth->Branch("lumiid", &lumiTree);
-	      treesMCTruth->Branch("eventid", &eventTree);
+	      treesMCTruth[syst]->Branch("runid", &runTree);
+	      treesMCTruth[syst]->Branch("lumiid", &lumiTree);
+	      treesMCTruth[syst]->Branch("eventid", &eventTree);
 	      
-	      treesMCTruth->Branch("nMCTruthLeptons", &nMCTruthLeptons);
+	      treesMCTruth[syst]->Branch("nMCTruthLeptons", &nMCTruthLeptons);
 	      
-	      treesMCTruth->Branch("MCTop"+num+"Pt", &MCTopsPtVec[p-1]);
-	      treesMCTruth->Branch("MCTop"+num+"Phi", &MCTopsPhiVec[p-1]);
-	      treesMCTruth->Branch("MCTop"+num+"Eta", &MCTopsEtaVec[p-1]);
-	      treesMCTruth->Branch("MCTop"+num+"E", &MCTopsEnergyVec[p-1]);
-	      treesMCTruth->Branch("MCTop"+num+"PdgId", &MCTopsPdgIdVec[p-1]);
-	      treesMCTruth->Branch("MCTop"+num+"MotherId", &MCTopsMotherIdVec[p-1]);
+	      treesMCTruth[syst]->Branch("MCTop"+num+"Pt", &MCTopsPtVec[p-1]);
+	      treesMCTruth[syst]->Branch("MCTop"+num+"Phi", &MCTopsPhiVec[p-1]);
+	      treesMCTruth[syst]->Branch("MCTop"+num+"Eta", &MCTopsEtaVec[p-1]);
+	      treesMCTruth[syst]->Branch("MCTop"+num+"E", &MCTopsEnergyVec[p-1]);
+	      treesMCTruth[syst]->Branch("MCTop"+num+"PdgId", &MCTopsPdgIdVec[p-1]);
+	      treesMCTruth[syst]->Branch("MCTop"+num+"MotherId", &MCTopsMotherIdVec[p-1]);
 	      
-	      treesMCTruth->Branch("MCTopLepton"+num+"Pt", &MCTopLeptonsPtVec[p-1]);
-	      treesMCTruth->Branch("MCTopLepton"+num+"Phi", &MCTopLeptonsPhiVec[p-1]);
-	      treesMCTruth->Branch("MCTopLepton"+num+"Eta", &MCTopLeptonsEtaVec[p-1]);
-	      treesMCTruth->Branch("MCTopLepton"+num+"E", &MCTopLeptonsEnergyVec[p-1]);
-	      treesMCTruth->Branch("MCTopLepton"+num+"PdgId", &MCTopLeptonsPdgIdVec[p-1]);
-	      treesMCTruth->Branch("MCTopLepton"+num+"MotherId", &MCTopLeptonsMotherIdVec[p-1]);
+	      treesMCTruth[syst]->Branch("MCTopLepton"+num+"Pt", &MCTopLeptonsPtVec[p-1]);
+	      treesMCTruth[syst]->Branch("MCTopLepton"+num+"Phi", &MCTopLeptonsPhiVec[p-1]);
+	      treesMCTruth[syst]->Branch("MCTopLepton"+num+"Eta", &MCTopLeptonsEtaVec[p-1]);
+	      treesMCTruth[syst]->Branch("MCTopLepton"+num+"E", &MCTopLeptonsEnergyVec[p-1]);
+	      treesMCTruth[syst]->Branch("MCTopLepton"+num+"PdgId", &MCTopLeptonsPdgIdVec[p-1]);
+	      treesMCTruth[syst]->Branch("MCTopLepton"+num+"MotherId", &MCTopLeptonsMotherIdVec[p-1]);
 	      
-	      treesMCTruth->Branch("MCTopNeutrino"+num+"Pt", &MCTopNeutrinosPtVec[p-1]);
-	      treesMCTruth->Branch("MCTopNeutrino"+num+"Phi", &MCTopNeutrinosPhiVec[p-1]);
-	      treesMCTruth->Branch("MCTopNeutrino"+num+"Eta", &MCTopNeutrinosEtaVec[p-1]);
-	      treesMCTruth->Branch("MCTopNeutrino"+num+"E", &MCTopNeutrinosEnergyVec[p-1]);
-	      treesMCTruth->Branch("MCTopNeutrino"+num+"PdgId", &MCTopNeutrinosPdgIdVec[p-1]);
-	      treesMCTruth->Branch("MCTopNeutrino"+num+"MotherId", &MCTopNeutrinosMotherIdVec[p-1]);
+	      treesMCTruth[syst]->Branch("MCTopNeutrino"+num+"Pt", &MCTopNeutrinosPtVec[p-1]);
+	      treesMCTruth[syst]->Branch("MCTopNeutrino"+num+"Phi", &MCTopNeutrinosPhiVec[p-1]);
+	      treesMCTruth[syst]->Branch("MCTopNeutrino"+num+"Eta", &MCTopNeutrinosEtaVec[p-1]);
+	      treesMCTruth[syst]->Branch("MCTopNeutrino"+num+"E", &MCTopNeutrinosEnergyVec[p-1]);
+	      treesMCTruth[syst]->Branch("MCTopNeutrino"+num+"PdgId", &MCTopNeutrinosPdgIdVec[p-1]);
+	      treesMCTruth[syst]->Branch("MCTopNeutrino"+num+"MotherId", &MCTopNeutrinosMotherIdVec[p-1]);
 	      
-	      treesMCTruth->Branch("MCTopQuark"+num+"Pt", &MCTopQuarksPtVec[p-1]);
-	      treesMCTruth->Branch("MCTopQuark"+num+"Phi", &MCTopQuarksPhiVec[p-1]);
-	      treesMCTruth->Branch("MCTopQuark"+num+"Eta", &MCTopQuarksEtaVec[p-1]);
-	      treesMCTruth->Branch("MCTopQuark"+num+"E", &MCTopQuarksEnergyVec[p-1]);
-	      treesMCTruth->Branch("MCTopQuark"+num+"PdgId", &MCTopQuarksPdgIdVec[p-1]);
-	      treesMCTruth->Branch("MCTopQuark"+num+"MotherId", &MCTopQuarksMotherIdVec[p-1]);
+	      treesMCTruth[syst]->Branch("MCTopQuark"+num+"Pt", &MCTopQuarksPtVec[p-1]);
+	      treesMCTruth[syst]->Branch("MCTopQuark"+num+"Phi", &MCTopQuarksPhiVec[p-1]);
+	      treesMCTruth[syst]->Branch("MCTopQuark"+num+"Eta", &MCTopQuarksEtaVec[p-1]);
+	      treesMCTruth[syst]->Branch("MCTopQuark"+num+"E", &MCTopQuarksEnergyVec[p-1]);
+	      treesMCTruth[syst]->Branch("MCTopQuark"+num+"PdgId", &MCTopQuarksPdgIdVec[p-1]);
+	      treesMCTruth[syst]->Branch("MCTopQuark"+num+"MotherId", &MCTopQuarksMotherIdVec[p-1]);
 	      
-	      treesMCTruth->Branch("MCTopQuarkBar"+num+"Pt", &MCTopQuarkBarsPtVec[p-1]);
-	      treesMCTruth->Branch("MCTopQuarkBar"+num+"Phi", &MCTopQuarkBarsPhiVec[p-1]);
-	      treesMCTruth->Branch("MCTopQuarkBar"+num+"Eta", &MCTopQuarkBarsEtaVec[p-1]);
-	      treesMCTruth->Branch("MCTopQuarkBar"+num+"E", &MCTopQuarkBarsEnergyVec[p-1]);
-	      treesMCTruth->Branch("MCTopQuarkBar"+num+"PdgId", &MCTopQuarkBarsPdgIdVec[p-1]);
-	      treesMCTruth->Branch("MCTopQuarkBar"+num+"MotherId", &MCTopQuarkBarsMotherIdVec[p-1]);
+	      treesMCTruth[syst]->Branch("MCTopQuarkBar"+num+"Pt", &MCTopQuarkBarsPtVec[p-1]);
+	      treesMCTruth[syst]->Branch("MCTopQuarkBar"+num+"Phi", &MCTopQuarkBarsPhiVec[p-1]);
+	      treesMCTruth[syst]->Branch("MCTopQuarkBar"+num+"Eta", &MCTopQuarkBarsEtaVec[p-1]);
+	      treesMCTruth[syst]->Branch("MCTopQuarkBar"+num+"E", &MCTopQuarkBarsEnergyVec[p-1]);
+	      treesMCTruth[syst]->Branch("MCTopQuarkBar"+num+"PdgId", &MCTopQuarkBarsPdgIdVec[p-1]);
+	      treesMCTruth[syst]->Branch("MCTopQuarkBar"+num+"MotherId", &MCTopQuarkBarsMotherIdVec[p-1]);
 	      
-	      treesMCTruth->Branch("MCTopBQuark"+num+"Pt", &MCTopBQuarksPtVec[p-1]);
-	      treesMCTruth->Branch("MCTopBQuark"+num+"Phi", &MCTopBQuarksPhiVec[p-1]);
-	      treesMCTruth->Branch("MCTopBQuark"+num+"Eta", &MCTopBQuarksEtaVec[p-1]);
-	      treesMCTruth->Branch("MCTopBQuark"+num+"E", &MCTopBQuarksEnergyVec[p-1]);
-	      treesMCTruth->Branch("MCTopBQuark"+num+"PdgId", &MCTopBQuarksPdgIdVec[p-1]);
-	      treesMCTruth->Branch("MCTopBQuark"+num+"MotherId", &MCTopBQuarksMotherIdVec[p-1]);
+	      treesMCTruth[syst]->Branch("MCTopBQuark"+num+"Pt", &MCTopBQuarksPtVec[p-1]);
+	      treesMCTruth[syst]->Branch("MCTopBQuark"+num+"Phi", &MCTopBQuarksPhiVec[p-1]);
+	      treesMCTruth[syst]->Branch("MCTopBQuark"+num+"Eta", &MCTopBQuarksEtaVec[p-1]);
+	      treesMCTruth[syst]->Branch("MCTopBQuark"+num+"E", &MCTopBQuarksEnergyVec[p-1]);
+	      treesMCTruth[syst]->Branch("MCTopBQuark"+num+"PdgId", &MCTopBQuarksPdgIdVec[p-1]);
+	      treesMCTruth[syst]->Branch("MCTopBQuark"+num+"MotherId", &MCTopBQuarksMotherIdVec[p-1]);
 	      
-	      treesMCTruth->Branch("MCTopW"+num+"Pt", &MCTopWsPtVec[p-1]);
-	      treesMCTruth->Branch("MCTopW"+num+"Phi", &MCTopWsPhiVec[p-1]);
-	      treesMCTruth->Branch("MCTopW"+num+"Eta", &MCTopWsEtaVec[p-1]);
-	      treesMCTruth->Branch("MCTopW"+num+"E", &MCTopWsEnergyVec[p-1]);
-	      treesMCTruth->Branch("MCTopW"+num+"PdgId", &MCTopWsPdgIdVec[p-1]);
-	      treesMCTruth->Branch("MCTopW"+num+"DauOneId", &MCTopWsDauOneIdVec[p-1]);
+	      treesMCTruth[syst]->Branch("MCTopW"+num+"Pt", &MCTopWsPtVec[p-1]);
+	      treesMCTruth[syst]->Branch("MCTopW"+num+"Phi", &MCTopWsPhiVec[p-1]);
+	      treesMCTruth[syst]->Branch("MCTopW"+num+"Eta", &MCTopWsEtaVec[p-1]);
+	      treesMCTruth[syst]->Branch("MCTopW"+num+"E", &MCTopWsEnergyVec[p-1]);
+	      treesMCTruth[syst]->Branch("MCTopW"+num+"PdgId", &MCTopWsPdgIdVec[p-1]);
+	      treesMCTruth[syst]->Branch("MCTopW"+num+"DauOneId", &MCTopWsDauOneIdVec[p-1]);
 	      
 	    }
 	  for (int p = 1; p <= 12; ++p)
@@ -1292,12 +1387,12 @@ SingleTopSystematicsTreesDumper::SingleTopSystematicsTreesDumper(const edm::Para
 	      TString num( w_n.str() );
 	      num = "_"+num+"_";
 	      
-	      treesMCTruth->Branch("MCQuark"+num+"Pt", &MCQuarksPtVec[p-1]);
-	      treesMCTruth->Branch("MCQuark"+num+"Phi", &MCQuarksPhiVec[p-1]);
-	      treesMCTruth->Branch("MCQuark"+num+"Eta", &MCQuarksEtaVec[p-1]);
-	      treesMCTruth->Branch("MCQuark"+num+"E", &MCQuarksEnergyVec[p-1]);
-	      treesMCTruth->Branch("MCQuark"+num+"PdgId", &MCQuarksPdgIdVec[p-1]);
-	      treesMCTruth->Branch("MCQuark"+num+"MotherId", &MCQuarksMotherIdVec[p-1]);
+	      treesMCTruth[syst]->Branch("MCQuark"+num+"Pt", &MCQuarksPtVec[p-1]);
+	      treesMCTruth[syst]->Branch("MCQuark"+num+"Phi", &MCQuarksPhiVec[p-1]);
+	      treesMCTruth[syst]->Branch("MCQuark"+num+"Eta", &MCQuarksEtaVec[p-1]);
+	      treesMCTruth[syst]->Branch("MCQuark"+num+"E", &MCQuarksEnergyVec[p-1]);
+	      treesMCTruth[syst]->Branch("MCQuark"+num+"PdgId", &MCQuarksPdgIdVec[p-1]);
+	      treesMCTruth[syst]->Branch("MCQuark"+num+"MotherId", &MCQuarksMotherIdVec[p-1]);
 	    }
 	  
 	  for (int p = 1; p <= 4; ++p)
@@ -1307,26 +1402,26 @@ SingleTopSystematicsTreesDumper::SingleTopSystematicsTreesDumper(const edm::Para
 	      TString num( w_n.str() );
 	      num = "_"+num+"_";
 	      
-	      treesMCTruth->Branch("MCBQuark"+num+"Pt", &MCBQuarksPtVec[p-1]);
-	      treesMCTruth->Branch("MCBQuark"+num+"Phi", &MCBQuarksPhiVec[p-1]);
-	      treesMCTruth->Branch("MCBQuark"+num+"Eta", &MCBQuarksEtaVec[p-1]);
-	      treesMCTruth->Branch("MCBQuark"+num+"E", &MCBQuarksEnergyVec[p-1]);
-	      treesMCTruth->Branch("MCBQuark"+num+"PdgId", &MCBQuarksPdgIdVec[p-1]);
-	      treesMCTruth->Branch("MCBQuark"+num+"MotherId", &MCBQuarksMotherIdVec[p-1]);
+	      treesMCTruth[syst]->Branch("MCBQuark"+num+"Pt", &MCBQuarksPtVec[p-1]);
+	      treesMCTruth[syst]->Branch("MCBQuark"+num+"Phi", &MCBQuarksPhiVec[p-1]);
+	      treesMCTruth[syst]->Branch("MCBQuark"+num+"Eta", &MCBQuarksEtaVec[p-1]);
+	      treesMCTruth[syst]->Branch("MCBQuark"+num+"E", &MCBQuarksEnergyVec[p-1]);
+	      treesMCTruth[syst]->Branch("MCBQuark"+num+"PdgId", &MCBQuarksPdgIdVec[p-1]);
+	      treesMCTruth[syst]->Branch("MCBQuark"+num+"MotherId", &MCBQuarksMotherIdVec[p-1]);
 	      
-	      treesMCTruth->Branch("MCLepton"+num+"Pt", &MCLeptonsPtVec[p-1]);
-	      treesMCTruth->Branch("MCLepton"+num+"Phi", &MCLeptonsPhiVec[p-1]);
-	      treesMCTruth->Branch("MCLepton"+num+"Eta", &MCLeptonsEtaVec[p-1]);
-	      treesMCTruth->Branch("MCLepton"+num+"E", &MCLeptonsEnergyVec[p-1]);
-	      treesMCTruth->Branch("MCLepton"+num+"PdgId", &MCLeptonsPdgIdVec[p-1]);
-	      treesMCTruth->Branch("MCLepton"+num+"MotherId", &MCLeptonsMotherIdVec[p-1]);
+	      treesMCTruth[syst]->Branch("MCLepton"+num+"Pt", &MCLeptonsPtVec[p-1]);
+	      treesMCTruth[syst]->Branch("MCLepton"+num+"Phi", &MCLeptonsPhiVec[p-1]);
+	      treesMCTruth[syst]->Branch("MCLepton"+num+"Eta", &MCLeptonsEtaVec[p-1]);
+	      treesMCTruth[syst]->Branch("MCLepton"+num+"E", &MCLeptonsEnergyVec[p-1]);
+	      treesMCTruth[syst]->Branch("MCLepton"+num+"PdgId", &MCLeptonsPdgIdVec[p-1]);
+	      treesMCTruth[syst]->Branch("MCLepton"+num+"MotherId", &MCLeptonsMotherIdVec[p-1]);
 	      
-	      treesMCTruth->Branch("MCNeutrino"+num+"Pt", &MCNeutrinosPtVec[p-1]);
-	      treesMCTruth->Branch("MCNeutrino"+num+"Phi", &MCNeutrinosPhiVec[p-1]);
-	      treesMCTruth->Branch("MCNeutrino"+num+"Eta", &MCNeutrinosEtaVec[p-1]);
-	      treesMCTruth->Branch("MCNeutrino"+num+"E", &MCNeutrinosEnergyVec[p-1]);
-	      treesMCTruth->Branch("MCNeutrino"+num+"PdgId", &MCNeutrinosPdgIdVec[p-1]);
-	      treesMCTruth->Branch("MCNeutrino"+num+"MotherId", &MCNeutrinosMotherIdVec[p-1]);
+	      treesMCTruth[syst]->Branch("MCNeutrino"+num+"Pt", &MCNeutrinosPtVec[p-1]);
+	      treesMCTruth[syst]->Branch("MCNeutrino"+num+"Phi", &MCNeutrinosPhiVec[p-1]);
+	      treesMCTruth[syst]->Branch("MCNeutrino"+num+"Eta", &MCNeutrinosEtaVec[p-1]);
+	      treesMCTruth[syst]->Branch("MCNeutrino"+num+"E", &MCNeutrinosEnergyVec[p-1]);
+	      treesMCTruth[syst]->Branch("MCNeutrino"+num+"PdgId", &MCNeutrinosPdgIdVec[p-1]);
+	      treesMCTruth[syst]->Branch("MCNeutrino"+num+"MotherId", &MCNeutrinosMotherIdVec[p-1]);
 	    }
 	}
 	
@@ -1367,11 +1462,9 @@ SingleTopSystematicsTreesDumper::SingleTopSystematicsTreesDumper(const edm::Para
     leptonRelIsoQCDCutUpper = 0.9, leptonRelIsoQCDCutLower = 0.2;
 
     //   LHAPDF::initPDFSet(1, "cteq66.LHgrid");
-   
     LHAPDF::initPDFSet(1, "CT10.LHgrid");
     LHAPDF::initPDFSet(2, "MSTW2008nlo68cl.LHgrid");
     //    LHAPDF::initPDFSet(3, "CT10.LHgrid");
-
 
     //  //cout<< "I work for now but I do nothing. But again, if you gotta do nothing, you better do it right. To prove my good will I will provide you with somse numbers later."<<endl;
     isFirstEvent = true;
@@ -1381,6 +1474,10 @@ SingleTopSystematicsTreesDumper::SingleTopSystematicsTreesDumper(const edm::Para
 //This is the function that is called event by event
 void SingleTopSystematicsTreesDumper::analyze(const Event &iEvent, const EventSetup &iSetup)
 {
+  int  idele=0;
+  int  mvaele=0;
+
+  //cout<<"MVAID " <<  useMVAID_ <<" CUT BASEID"<< useCutBasedID_ <<  " doMCTruth" << doMCTruth_ << "algo " <<algo_ <<endl;
 
     initBranchVars();
     //cout <<" test 0 "<<endl;
@@ -1441,8 +1538,8 @@ void SingleTopSystematicsTreesDumper::analyze(const Event &iEvent, const EventSe
     //    metPx = METPt->at(0) * cos(METPhi->at(0));
     //metPy = METPt->at(0) * sin(METPhi->at(0));
 
-    float metPtNom =0;
-    float metPhiNom =0;
+    //    float metPtNom =0;
+    //    float metPhiNom =0;
     
     float metPxTmp = metPx;
     float metPyTmp = metPy;
@@ -1464,29 +1561,29 @@ void SingleTopSystematicsTreesDumper::analyze(const Event &iEvent, const EventSe
     int nJetsLooseForward = 0;
     int nJetsLooseMBTag= 0;
    
-    size_t nLooseBJets = 0;
+    //    size_t nLooseBJets = 0;
 
 
     double WeightLumi = finalLumi * crossSection / originalEvents;
     double Weight = 1;
     double MTWValue = 0;
-    double MTWValueQCD = 0;
-    double RelIsoQCDCut = 0.1;
+    //    double MTWValueQCD = 0;
+    //    double RelIsoQCDCut = 0.1;
 
     
-    float ptCutLoose = 10;
+    float ptCutLoose = 20;
     float ptCutTight = 40;
     float ptCut = 40; // if doAsymmetricPtCut,then it's 30
     if(doAsymmetricPtCut_) ptCut = 30;
 
-    double myWeight = 1.;
+    //    double myWeight = 1.;
 
     bool didLeptonLoop = false;
     bool passesLeptonStep = false;
     bool isQCD = false;
 
 
-    bool didJetLoop = false;
+    //    bool didJetLoop = false;
 
     if (channel == "Data")WeightLumi = 1;
 
@@ -1497,10 +1594,10 @@ void SingleTopSystematicsTreesDumper::analyze(const Event &iEvent, const EventSe
     double thirdPt = -1;
     double fourthPt = -1;
  
-    int lowBTagTreePositionNoSyst = -1;
-    int highBTagTreePositionNoSyst = -1; // this vars don't set to -1 for each syst , so it keep the no syst information if we need them for other syst. 
-    int maxPtTreePositionNoSyst = -1;   // we don't need them since we have no especial syst which is not in the list , when we want we should add same for medium and mediumlow.
-    int minPtTreePositionNoSyst = -1;
+    //    int lowBTagTreePositionNoSyst = -1;
+    //    int highBTagTreePositionNoSyst = -1; // this vars don't set to -1 for each syst , so it keep the no syst information if we need them for other syst. 
+    //    int maxPtTreePositionNoSyst = -1;   // we don't need them since we have no especial syst which is not in the list , when we want we should add same for medium and mediumlow.
+    //    int minPtTreePositionNoSyst = -1;
 
     for (size_t s = 0; s < systematics.size(); ++s)
     {
@@ -1524,7 +1621,7 @@ void SingleTopSystematicsTreesDumper::analyze(const Event &iEvent, const EventSe
         nJetsLooseMBTag =0;
         Weight = WeightLumi;
 
-	HT = 0;
+	HT = 0; H= 0;
 	
         bool is_btag_relevant = ((syst_name == "noSyst" || syst_name == "BTagUp" || syst_name == "BTagDown"
                                   || syst_name == "MisTagUp" || syst_name == "MisTagDown"
@@ -1532,10 +1629,13 @@ void SingleTopSystematicsTreesDumper::analyze(const Event &iEvent, const EventSe
                                   || syst_name == "JERUp" || syst_name == "JERDown"
                                  ) && channel != "Data"
                                 );
-	
+
+//cout<<"TREEMCTRUE "<<"doMCTruth_  "<<doMCTruth_ <<"  doFullMCTruth_  "<< doFullMCTruth_<<endl;
 	if( syst == "noSyst" && doMCTruth_ && doFullMCTruth_){	
+
 	  fillMCTruth(iEvent);
-	  treesMCTruth->Fill();
+	  //treesMCTruth->Fill();         cout<<" treesMCTruthEntries()      "<<treesMCTruth->GetEntries()<<endl;
+	  treesMCTruth[syst]->Fill();      //   cout<<" treesMCTruthEntries()      "<<treesMCTruth[syst]->GetEntries()<<endl;
 	}
 
 
@@ -1581,7 +1681,7 @@ void SingleTopSystematicsTreesDumper::analyze(const Event &iEvent, const EventSe
         mediumlowBTagTree = -9999;
         int maxPtTreePosition = -1;
         maxPtTree = -99999;
-        int minPtTreePosition = -1;
+	//        int minPtTreePosition = -1;
         minPtTree = 99999;
         int maxLoosePtTreePosition = -1;
         maxLoosePtTree = -99999;
@@ -1597,7 +1697,7 @@ void SingleTopSystematicsTreesDumper::analyze(const Event &iEvent, const EventSe
         float eta;
         float ptCorr;
         int flavour;
-        double unc = 0;
+	//        double unc = 0;
 
 
         /////////
@@ -1606,7 +1706,7 @@ void SingleTopSystematicsTreesDumper::analyze(const Event &iEvent, const EventSe
         /////////
 	
 	//Lepton loop
-	//cout << " getting leptons, syst "<<syst<<endl;
+	//	cout << " getting leptons, syst "<<syst<<endl;
 	if (!didLeptonLoop)
 	  {
             for (size_t i = 0; i < leptonsDeltaCorrectedRelIso->size(); ++i)
@@ -1618,10 +1718,10 @@ void SingleTopSystematicsTreesDumper::analyze(const Event &iEvent, const EventSe
 		    if (leptonRelIsoDeltaCorr > RelIsoCut)continue;
 		  }
 		if (leptonsFlavour_ == "electron") {
-                    iEvent.getByLabel(leptonsRhoCorrectedRelIso_, leptonsRhoCorrectedRelIso);
-		    leptonRelIsoRhoCorr = leptonsRhoCorrectedRelIso->at(i);
+//                    iEvent.getByLabel(leptonsRhoCorrectedRelIso_, leptonsRhoCorrectedRelIso); 
+		    leptonRelIsoRhoCorr = leptonsRhoCorrectedRelIso->at(i);//cout << " inside lepton loop: lepton n "<< i +1 << " reliso " <<  leptonsRhoCorrectedRelIso->at(i) <<endl;
 		    if (leptonRelIsoRhoCorr > RelIsoCut)continue;
-		    //cout << " inside lepton loop: lepton n "<< i +1 << " reliso " <<  leptonsRhoCorrectedRelIso->at(i) <<" nLeptons before: "<<nLeptons<<endl;                 
+		    //		    cout << " inside lepton loop: lepton n "<< i +1 << " reliso " <<  leptonsRhoCorrectedRelIso->at(i) <<" nLeptons before: "<<nLeptons<<endl;                 
 		}
 		float leptonPt = 0.;
 		iEvent.getByLabel(leptonsPt_, leptonsPt);
@@ -1630,9 +1730,9 @@ void SingleTopSystematicsTreesDumper::analyze(const Event &iEvent, const EventSe
                 //Apply isolation cut
                 if (!gotLeptons) {
 		  if (leptonsFlavour_ == "muon") {
-		      iEvent.getByLabel(leptonsRhoCorrectedRelIso_, leptonsRhoCorrectedRelIso);
+		     // iEvent.getByLabel(leptonsRhoCorrectedRelIso_, leptonsRhoCorrectedRelIso);   it's repeat 
 		      lepRhoCorrectedRelIso = leptonsRhoCorrectedRelIso->at(i);
-                    }
+                    } //why? just to keep rho corr for muon ? 
 		  iEvent.getByLabel(leptonsEta_, leptonsEta);
 		  iEvent.getByLabel(leptonsPhi_, leptonsPhi);
 		  iEvent.getByLabel(leptonsEnergy_, leptonsEnergy);
@@ -1643,28 +1743,31 @@ void SingleTopSystematicsTreesDumper::analyze(const Event &iEvent, const EventSe
                 }
                 //if electron apply ID cuts
                 if (leptonsFlavour_ == "electron"  ) {
-                    if (leptonsID->size() == 0)cout << "warning requiring ele id of collection which has no entries! Check the leptonsFlavour parameter " << endl;
-		    float leptonRelIsoRhoCorr = leptonsRhoCorrectedRelIso->at(i);
-                    lepRhoCorrectedRelIso = leptonRelIsoRhoCorr;
-		    iEvent.getByLabel(leptonsMVAID_, leptonsMVAID);
-                    iEvent.getByLabel(leptonsNHits_, leptonsNHits);
-		    float leptonID = leptonsID->at(i);
-		    leptonMVAIDTemp = leptonsMVAID->at(i);
-		    leptonNHitsTemp = leptonsNHits->at(i);
-		    electronID = leptonID;
-		    if(useCutBasedID_>0){
-		      if(!(leptonID>0.0))continue; 
-		    }
-		    if(useMVAID_>0){
-		      if(!(leptonMVAIDTemp>0.90))continue; 
-		      if(!(leptonNHitsTemp<=0.00001))continue; 
-		    }
-                }
+		  if (leptonsID->size() == 0)cout << "warning requiring ele id of collection which has no entries! Check the leptonsFlavour parameter " << endl;
+		  //		  float leptonRelIsoRhoCorr = leptonsRhoCorrectedRelIso->at(i);
+		  //		  float leptonRelIsoDeltaCorr = leptonsDeltaCorrectedRelIso->at(i);
+		  //lepRhoCorrectedRelIso = leptonRelIsoRhoCorr; // repeat at 1742
+		  iEvent.getByLabel(leptonsMVAID_, leptonsMVAID);
+		  iEvent.getByLabel(leptonsNHits_, leptonsNHits);
+		  float leptonID = leptonsID->at(i);
+		  leptonMVAIDTemp = leptonsMVAID->at(i);
+		  leptonNHitsTemp = leptonsNHits->at(i);
+		  electronID = leptonID;
+		  //		  cout<< "lepton properties: leptonID: " << leptonID<<"leptonNHitsTemp  " << leptonNHitsTemp << " leptonMVAIDTemp " <<leptonMVAIDTemp <<endl;
+		  if(leptonID>0)++idele; if(leptonMVAIDTemp>0.9 && leptonNHitsTemp<=0.00001)++mvaele; //cout<<"mvaele:  "<<mvaele<< " idele"<<idele<<endl;
+		  if(useCutBasedID_>0){
+		    if(!(leptonID>0.0))continue; 
+		  }
+		  if(useMVAID_>0){
+		    if(!(leptonMVAIDTemp>0.90))continue; 
+		    if(!(leptonNHitsTemp<=0.00001))continue; 
+		  }
+                } ///if elecron
                 if (leptonsFlavour_ == "muon"  )
-                {
+		  {
                     iEvent.getByLabel(leptonsDZ_, leptonsDZ);
                     if ( leptonsDZ->at(i) > 0.5) continue;
-                }
+		  }
                 float leptonDB = leptonsDB->at(i);
                 if ( fabs(leptonDB) > 0.02) continue;
 		
@@ -1679,12 +1782,14 @@ void SingleTopSystematicsTreesDumper::analyze(const Event &iEvent, const EventSe
                 ++nLeptons;
 		leptons[nLeptons - 1] = math::PtEtaPhiELorentzVector(leptonPt, leptonEta, leptonPhi, leptonE);
 		if (nLeptons >= 3) break;
-		//cout<< " lepton number " << nLeptons << " pt "<< leptonPt << " eta " << fabs(leptonEta)<< endl;
-            }
+//		cout<< " lepton number " << nLeptons << " pt "<< leptonPt << " eta " << fabs(leptonEta)<< endl;
+            }//loop on leptons line 1678 "leptonsDeltaCorrectedRelIso->size("
             bool passesLeptons = (nLeptons == 1);
-            bool passesOneLepton = (nLeptons == 1);
-            if (passesLeptons) {
-	      if (passesLeptons && syst == "noSyst")++passingLepton;
+	    //            bool passesOneLepton = (nLeptons == 1);
+          if (passesLeptons) {
+                //cout<< " nlepton==1,  pt "<< leptonPt << " eta " << fabs(leptonEta)<< "leptonID: " << leptonID<<"leptonNHits  " << leptonNHits << " leptonMVAID " <<leptonMVAID <<endl;
+	      
+if (passesLeptons && syst == "noSyst")++passingLepton;
 	      iEvent.getByLabel(looseMuonsDeltaCorrectedRelIso_, looseMuonsDeltaCorrectedRelIso);
 	      if (passesLeptons && syst == "noSyst" && looseMuonsDeltaCorrectedRelIso->size() == 1)++passingMuonVeto;
 	      iEvent.getByLabel(looseElectronsDeltaCorrectedRelIso_, looseElectronsDeltaCorrectedRelIso);
@@ -1692,27 +1797,35 @@ void SingleTopSystematicsTreesDumper::analyze(const Event &iEvent, const EventSe
 	      passesLeptons = passesLeptons && passesLooseLeptons;
             }
             if (passesLeptons && syst == "noSyst")++passingLeptonVeto;
-	    isQCD = (!passesLeptons);
+	      isQCD = (!passesLeptons);
             
-	    //Loop for the qcd leptons
-	  //  cout << " getting qcd leptons, syst "<<syst<<endl;
+	      //Loop for the qcd leptons
+	      //	      cout << " getting qcd leptons, syst "<<syst<<endl;
             if (doQCD_ && isQCD)
             {
                 iEvent.getByLabel(qcdLeptonsDeltaCorrectedRelIso_, qcdLeptonsDeltaCorrectedRelIso);
 		iEvent.getByLabel(qcdLeptonsRhoCorrectedRelIso_, qcdLeptonsRhoCorrectedRelIso);
-		//		cout << "qcd lep size" <<qcdLeptonsDeltaCorrectedRelIso->size()<<endl;
+		//		cout << "qcd lep size " <<qcdLeptonsDeltaCorrectedRelIso->size()<<endl;
                 for (size_t i = 0; i < qcdLeptonsDeltaCorrectedRelIso->size(); ++i)
                 {
-		  float leptonPt = 0.;
+		  float leptonPt = 0.; float qcdleptonMVAIDTemp = -1.1;
 		  iEvent.getByLabel(qcdLeptonsPt_, qcdLeptonsPt);
+		  iEvent.getByLabel(qcdLeptonsMVAID_, qcdLeptonsMVAID);
 		  leptonPt = qcdLeptonsPt->at(i);
+		  if (leptonsFlavour_ == "electron")
+		    qcdleptonMVAIDTemp = qcdLeptonsMVAID->at(i);
+		  else if (leptonsFlavour_ == "muon"){
+		    //		    qcdleptonMVAIDTemp = qcdLeptonsMVAID->at(0);
+		  }
 		  if ( leptonPt < 26.) continue;
-		  float leptonRelIso = qcdLeptonsDeltaCorrectedRelIso->at(i);
-		  //		    cout << "qcd lep " << i << "rel iso "<<leptonRelIso<<endl;
-		  float leptonQCDRelIso = leptonRelIso;
+		  float leptonQCDRelIso = qcdLeptonsDeltaCorrectedRelIso->at(i);
+		  //float leptonRelIso = qcdLeptonsDeltaCorrectedRelIso->at(i);
+		  //		  cout << "qcd lep " << i << "rel iso "<<leptonQCDRelIso<<endl;
+		  //float leptonQCDRelIso = leptonRelIso;
 		  //Use an anti-isolation requirement
 		  
-		  lepDeltaCorrectedRelIso = leptonRelIso;
+		  //		  lepDeltaCorrectedRelIso = leptonRelIso;
+		  lepDeltaCorrectedRelIso = leptonQCDRelIso;
 		  lepRhoCorrectedRelIso = qcdLeptonsRhoCorrectedRelIso->at(i) ;
 		  
 		  if (leptonsFlavour_ == "muon")
@@ -1728,54 +1841,65 @@ void SingleTopSystematicsTreesDumper::analyze(const Event &iEvent, const EventSe
 			  iEvent.getByLabel(qcdLeptonsCharge_, qcdLeptonsCharge);
 			  iEvent.getByLabel(qcdLeptonsID_, qcdLeptonsID);
 			  iEvent.getByLabel(qcdLeptonsDB_, qcdLeptonsDB);
+
 			  gotQCDLeptons = true;
 
                         }
-                    }
+                    }// muon
 		  if (leptonsFlavour_ == "electron"  )
                     {
 		      bool QCDCondition = false;
 		      iEvent.getByLabel(qcdLeptonsID_, qcdLeptonsID);
 		      iEvent.getByLabel(qcdLeptonsDB_, qcdLeptonsDB);
+
 		      float leptonID = qcdLeptonsID->at(i);
 		      float beamspot  = fabs(qcdLeptonsDB->at(i));
-		      bool isid = (leptonID ==  1 || leptonID == 3 || leptonID == 5 || leptonID == 7);
-		      QCDCondition = (!(lepRhoCorrectedRelIso < 0.1) );
+
+	          bool isid = (leptonID ==  1 || leptonID == 3 || leptonID == 5 || leptonID == 7);
+         //Legenda for eleId : 0 fail, 1 ID only, 2 iso Only, 3 ID iso only, 4 conv rej, 5 conv rej and ID, 6 conv rej and iso, 7 all
+             if(useCutBasedID_ ) QCDCondition = (!(lepRhoCorrectedRelIso < 0.1) && !(beamspot < 0.02))  || (!(lepRhoCorrectedRelIso < 0.1) && !isid) || (!isid && !(beamspot < 0.02));
+             if(useMVAID_)        QCDCondition = (!(lepRhoCorrectedRelIso < 0.1)|| !(qcdleptonMVAIDTemp>0.9));
 		      electronID = leptonID;
+
+
+              if (!QCDCondition) continue;
 		      if (!gotQCDLeptons)
 			{
 			  iEvent.getByLabel(qcdLeptonsEta_, qcdLeptonsEta);
 			  iEvent.getByLabel(qcdLeptonsPhi_, qcdLeptonsPhi);
 			  iEvent.getByLabel(qcdLeptonsEnergy_, qcdLeptonsEnergy);
 			  iEvent.getByLabel(qcdLeptonsCharge_, qcdLeptonsCharge);
+
 			  gotQCDLeptons = true;
                         }
-                    }
+                    }// electron
 		  
-		  lepRelIso = leptonRelIso;
-		  
+		  //lepRelIso = leptonRelIso; // for both ele and muon Delta corrected rel iso is used for qcd 
+          leptonMVAID = qcdleptonMVAIDTemp;
 		  float qcdLeptonPt = qcdLeptonsPt->at(i);
 		  float qcdLeptonPhi = qcdLeptonsPhi->at(i);
 		  float qcdLeptonEta = qcdLeptonsEta->at(i);
 		  float qcdLeptonE = qcdLeptonsEnergy->at(i);
+
 		  //Create the lepton
 		  ++nQCDLeptons;
 		  qcdLeptons[nQCDLeptons - 1] = math::PtEtaPhiELorentzVector(qcdLeptonPt, qcdLeptonEta, qcdLeptonPhi, qcdLeptonE);
 		  if (nQCDLeptons == 3) break;
-		}
-            }
+//		  if (nQCDLeptons == 3) break;
+		} //loop on QCDleptons
+            } //end if doqcd isQCD 
             didLeptonLoop = true;
 	    isQCD = (nQCDLeptons == 1 && !passesLeptons);
 	    passesLeptonStep = (passesLeptons || isQCD);
-	    //	    cout << " nqcd lep "<<nQCDLeptons<< " passes leptons? " <<passesLeptons<<endl;
-	}
+	    //	    	    cout << " nqcd lep "<<nQCDLeptons<< " passes leptons? " <<passesLeptons<<" passesLeptonStep? " <<passesLeptonStep <<" nLeptons  "<< nLeptons<<endl;
+	} //  end didLeptonLoop
         if (!passesLeptonStep)continue;
 	if (!gotPV)
         {   iEvent.getByLabel(vertexZ_, vertexZ);  npv = vertexZ->size();
         }
 	
 	//Getting the MET:
-//	cout << " getting mets, syst "<<syst<<endl;
+	//	cout << " getting mets, syst "<<syst<<endl;
 
 	getMET(iEvent,syst);
 	metPhi = METPhi->at(0);
@@ -1790,7 +1914,7 @@ void SingleTopSystematicsTreesDumper::analyze(const Event &iEvent, const EventSe
         ntchpt_tags = 0;        ncsvl_tags = 0;        ncsvt_tags = 0;        ncsvm_tags = 0;        ntight_tags = 0;
 	jsfshpt.clear();        jsfscsvt.clear();        jsfscsvm.clear();
 	bWeightTree = 1;        bWeightTreeBTagUp = 1;        bWeightTreeMisTagUp = 1;        bWeightTreeBTagDown = 1;        bWeightTreeMisTagDown = 1;
-	//cout << " getting jets, syst "<<syst<<endl;
+	//	cout << " getting jets, syst "<<syst<<endl;
         if (!gotJets)
 	  {
 	    iEvent.getByLabel(jetsBTagAlgo_, jetsBTagAlgo);
@@ -1823,8 +1947,7 @@ void SingleTopSystematicsTreesDumper::analyze(const Event &iEvent, const EventSe
 		  ptCorr = offlineJESJERApplicationPt(ptUncorr,energyUncorr,eta,syst);
 		  energyCorr = offlineJESJERApplicationE(ptUncorr,energyUncorr,eta,syst);
 		  HT+= (math::PtEtaPhiELorentzVector(ptCorr, jetsEta->at(i), jetsPhi->at(i), energyCorr)).Et();
-		  
-		  
+  		  H+= energyCorr;	  
 		  //b tag thresholds
 		  double valueTCHPT = jetsBTagAlgo->at(i);
 		  double valueCSV = jetsAntiBTagAlgo->at(i);
@@ -1863,7 +1986,7 @@ void SingleTopSystematicsTreesDumper::analyze(const Event &iEvent, const EventSe
 			++nJetsNoSyst;
 			jetsNoSyst[nJets - 1] = jets[nJets - 1];
 			jetsBTagNoSyst[nJets - 1] = jetsBTag[nJets - 1];
-			//		  cout <<" jet no syst "<< nJets-1<<" pt "  <<jetsNoSyst[nJets-1].pt()<<endl;
+			//			cout <<" jet no syst "<< nJets-1<<" pt "  <<jetsNoSyst[nJets-1].pt()<<endl;
 		      }
 		  }
 		  
@@ -1888,15 +2011,15 @@ void SingleTopSystematicsTreesDumper::analyze(const Event &iEvent, const EventSe
 		  if (!passesPtCut) continue;
 		  
 		  //max pt position:
-		  int pos = nJets - 1;
-		  //	    cout << " pos " << pos << " j pt " << ptCorr << endl;
+		  //		  int pos = nJets - 1;
+		  //		  cout << " j pt " << ptCorr << endl;
 		  if (ptCorr > maxPtTree){
 		    maxPtTreePosition = nJets - 1;
 		    maxPtTree = ptCorr;
 		    firstJetFlavourTree = flavour; }
 		  //min pt position:
 		  if (ptCorr < minPtTree) {
-		    minPtTreePosition = nJets - 1;
+		    //		    minPtTreePosition = nJets - 1;
 		    minPtTree = ptCorr;  }
 		  
 		  //Apply different SFs if it is b,c or light jet
@@ -1904,9 +2027,9 @@ void SingleTopSystematicsTreesDumper::analyze(const Event &iEvent, const EventSe
 		  
 		  if (passesCSVT)++ncsvt_tags; if (passesCSVM)++ncsvm_tags; if (passesTCHPT)++ntchpt_tags;
 		  
-		  bool passesAlgo = passesCSVT;
+		  //		  bool passesAlgo = passesCSVT;
 		  if(passesCSVM) ++ncsvl_tags;
-		  if (algo_ == "TCHPT" ) passesAlgo = passesTCHPT;
+		  //		  if (algo_ == "TCHPT" ) passesAlgo = passesTCHPT;
 		  
 		  //Condition to find the highest/lowest b-tag
 		  //according to algo 1 (tchp)
@@ -1953,7 +2076,7 @@ void SingleTopSystematicsTreesDumper::analyze(const Event &iEvent, const EventSe
 		  
                   if ( (valueChosenAlgo == lowBTagTree) && (valueChosenAlgo == highBTagTree) && (nJets == 2 ) )
 		    {
-			highBTagTreePosition = nJets - 2;
+			highBTagTreePosition = nJets - 2; //two jets with same value
 		    }
                   if ( (valueChosenAlgo == lowBTagTree) && (valueChosenAlgo == highBTagTree) && (valueChosenAlgo == mediumBTagTree) && (nJets == 3 ) )
 		    {
@@ -1990,7 +2113,7 @@ void SingleTopSystematicsTreesDumper::analyze(const Event &iEvent, const EventSe
 		  
 
 		  if (nJets >= 10 )break;
-	  } // cout<<"JetBtag ordering Done "<<endl;
+	  }  //cout<<"JetBtag ordering Done "<<endl;
         
 	
 	
@@ -2034,7 +2157,7 @@ void SingleTopSystematicsTreesDumper::analyze(const Event &iEvent, const EventSe
             leptonPFour = qcdLeptons[0];
             chargeTree = qcdLeptonsCharge->at(0) ;
         }
-        else {
+        else {  
             leptonPFour = leptons[0];
             chargeTree = leptonsCharge->at(0) ;
         }
@@ -2079,7 +2202,7 @@ void SingleTopSystematicsTreesDumper::analyze(const Event &iEvent, const EventSe
 	if(secondPt < ptCutTight)  nJets = nJetsTight;  //this works for asymmetric cut, make njets=1 or 0 , in these case, trees are not saved at the end
 	
 	
-	//cout<<"nJetsLoose"<<nJetsLoose <<endl; 
+	//	cout<<"nJetsLoose"<<nJetsLoose <<endl; 
 	if(nJetsLoose > 0){
 	  looseJetPt = ljets[maxLoosePtTreePosition].pt();
 	  looseJetE = ljets[maxLoosePtTreePosition].energy();
@@ -2136,7 +2259,7 @@ void SingleTopSystematicsTreesDumper::analyze(const Event &iEvent, const EventSe
 	
 	
     
-	//cout<<" first sec third fourth " << endl;
+	//	cout<<" first sec third fourth " << endl;
 	if(doJetTrees_)isQCDTree= isQCD;
         if (doJetTrees_ && !isQCD)
 	  {
@@ -2183,6 +2306,7 @@ void SingleTopSystematicsTreesDumper::analyze(const Event &iEvent, const EventSe
 		  double xpdf1 = LHAPDF::xfx(1, x1, scalePDF, id1);
 		  double xpdf2 = LHAPDF::xfx(1, x2, scalePDF, id2);
 		  double w0 = xpdf1 * xpdf2;
+    
 		  for (int p = 1; p <= 52; ++p)
 		    {
 		      LHAPDF::usePDFMember(1, p);
@@ -2205,6 +2329,7 @@ void SingleTopSystematicsTreesDumper::analyze(const Event &iEvent, const EventSe
 	    lepPt = qcdLeptons[0].pt();
 	    lepEta = qcdLeptons[0].eta();
 	    lepPhi = qcdLeptons[0].phi();
+            lepE = qcdLeptons[0].energy();
 	    nJ = nJets;
 	    treesNJets[syst]->Fill();
 	  }
@@ -2296,12 +2421,11 @@ void SingleTopSystematicsTreesDumper::analyze(const Event &iEvent, const EventSe
 		    id2 = *id2h;
 		    
 		    //Q2 = x1 * x2 * 7000*7000;	
-		    //		  cout << "before first member"<<endl;
 		    LHAPDF::usePDFMember(1, 0);
 		    double xpdf1 = LHAPDF::xfx(1, x1, scalePDF, id1);
 		    double xpdf2 = LHAPDF::xfx(1, x2, scalePDF, id2);
 		    double w0 = xpdf1 * xpdf2;
-		    //		  cout << "scale " << scalePDF<< " x1 "<< x1 <<" x2 "<< x2 <<endl;	
+		    //		    cout << "scale " << scalePDF<< " x1 "<< x1 <<" x2 "<< x2 <<endl;	
 		    
 		    //		  cout << "before error loop"<<endl;
 		    for (int p = 1; p <= 52; ++p)
@@ -2344,6 +2468,9 @@ void SingleTopSystematicsTreesDumper::analyze(const Event &iEvent, const EventSe
 	    math::PtEtaPhiELorentzVector top1;
 	    math::PtEtaPhiELorentzVector top2;
 	    float fCosThetaLJ= 99999;
+	    float fCosThetaLJ1 = 99999;
+	    float fCosThetaLJ2 = 99999;
+	    
 	    float topmass_h,topmass_m ;
             if(!doTopBestMass_) {
 	      //	      cout<<"!doTopBestMass_ "<<!doTopBestMass_ <<endl;
@@ -2356,11 +2483,46 @@ void SingleTopSystematicsTreesDumper::analyze(const Event &iEvent, const EventSe
 	    
             if(doTopBestMass_) {           
 	      if(B == 1 || B==4){  //cout<<"!doTopBestMass_B1 "<<!doTopBestMass_ <<endl;
-		top = top4Momentum(leptonPFour, jets[highBTagTreePosition], metPx, metPy);
-		top1 = top;
-		top2 = top;
+		
+		if (nJets== 2 ){
+		  math::PtEtaPhiELorentzVector top_h = top4Momentum(leptonPFour, jets[highBTagTreePosition], metPx, metPy);
+		  math::PtEtaPhiELorentzVector top_l = top4Momentum(leptonPFour, jets[lowBTagTreePosition], metPx, metPy);		
+		  top1 = top_h; 
+		  top2 = top_l; 
+		  topmass_h = top_h.mass(); 
+		  topmass_m = top_l.mass();
+		  bJetDecay= (fabs(topmass_h -172.5) < fabs(topmass_m-172.5))?jets[highBTagTreePosition]:jets[lowBTagTreePosition];
+ 		  bJetDecayFlavour = (fabs(topmass_h -172.5) < fabs(topmass_m-172.5))?flavours[highBTagTreePosition]:flavours[lowBTagTreePosition];
+ 		  bJetDecayBTag = (fabs(topmass_h -172.5) < fabs(topmass_m-172.5))?jetsBTag[highBTagTreePosition]:jetsBTag[lowBTagTreePosition];
+		  bJetRecoil= (fabs(topmass_h -172.5) < fabs(topmass_m-172.5))?jets[lowBTagTreePosition]:jets[highBTagTreePosition];
+		  bJetRecoilFlavour = (fabs(topmass_h -172.5) < fabs(topmass_m-172.5))?flavours[lowBTagTreePosition]:flavours[highBTagTreePosition];
+		  bJetRecoilBTag = (fabs(topmass_h -172.5) < fabs(topmass_m-172.5))?jetsBTag[lowBTagTreePosition]:jetsBTag[highBTagTreePosition];
+		}
+		if (nJets== 3|| nJets==4 ){
+		  math::PtEtaPhiELorentzVector top_h = top4Momentum(leptonPFour, jets[highBTagTreePosition], metPx, metPy);
+		  math::PtEtaPhiELorentzVector top_m = top4Momentum(leptonPFour, jets[mediumBTagTreePosition], metPx, metPy);		
+		  top1 = top_h;
+		  top2 = top_m;
+		  topmass_h = top_h.mass(); 
+		  topmass_m = top_m.mass();
+		  bJetDecay= (fabs(topmass_h -172.5) < fabs(topmass_m-172.5))?jets[highBTagTreePosition]:jets[mediumBTagTreePosition];
+ 		  bJetDecayFlavour = (fabs(topmass_h -172.5) < fabs(topmass_m-172.5))?flavours[highBTagTreePosition]:flavours[mediumBTagTreePosition];
+ 		  bJetDecayBTag = (fabs(topmass_h -172.5) < fabs(topmass_m-172.5))?jetsBTag[highBTagTreePosition]:jetsBTag[mediumBTagTreePosition];
+		  bJetRecoil= (fabs(topmass_h -172.5) < fabs(topmass_m-172.5))?jets[mediumBTagTreePosition]:jets[highBTagTreePosition];
+		  bJetRecoilFlavour = (fabs(topmass_h -172.5) < fabs(topmass_m-172.5))?flavours[mediumBTagTreePosition]:flavours[highBTagTreePosition];
+		  bJetRecoilBTag = (fabs(topmass_h -172.5) < fabs(topmass_m-172.5))?jetsBTag[mediumBTagTreePosition]:jetsBTag[highBTagTreePosition];
+		}
+		top = top1;  // only 1 bjet
+		
 		fCosThetaLJ =  cosThetaLJ(leptonPFour, jets[lowBTagTreePosition], top);
 		cosBLTree =  cosTheta_eta_bl(leptonPFour, jets[lowBTagTreePosition], top);
+		
+		fCosThetaLJ1 = cosThetaLJ(leptonPFour, jets[lowBTagTreePosition], top1);
+		cos1BLTree =   cosTheta_eta_bl(leptonPFour, jets[lowBTagTreePosition], top1);
+		
+		fCosThetaLJ2 = cosThetaLJ(leptonPFour, jets[lowBTagTreePosition], top2);
+		cos2BLTree =   cosTheta_eta_bl(leptonPFour, jets[lowBTagTreePosition], top2);
+		
 		//		cout<<"fCosThetaLJ" <<fCosThetaLJ<<"topmass" << top.mass()<<endl;
 		//   cout<<"jets[lowBTagTreePosition].Pt()"<< jets[lowBTagTreePosition].Pt()<<endl;
 	      }
@@ -2374,6 +2536,12 @@ void SingleTopSystematicsTreesDumper::analyze(const Event &iEvent, const EventSe
 		  top = (fabs(topmass_h -172.5) < fabs(topmass_m-172.5))? top_h: top_m;
 		  top1 = top_h;
 		  top2 = top_m;
+		  bJetDecay= (fabs(topmass_h -172.5) < fabs(topmass_m-172.5))?jets[highBTagTreePosition]:jets[lowBTagTreePosition];
+ 		  bJetDecayFlavour = (fabs(topmass_h -172.5) < fabs(topmass_m-172.5))?flavours[highBTagTreePosition]:flavours[lowBTagTreePosition];
+ 		  bJetDecayBTag = (fabs(topmass_h -172.5) < fabs(topmass_m-172.5))?jetsBTag[highBTagTreePosition]:jetsBTag[lowBTagTreePosition];
+		  bJetRecoil= (fabs(topmass_h -172.5) < fabs(topmass_m-172.5))?jets[lowBTagTreePosition]:jets[highBTagTreePosition];
+		  bJetRecoilFlavour = (fabs(topmass_h -172.5) < fabs(topmass_m-172.5))?flavours[lowBTagTreePosition]:flavours[highBTagTreePosition];
+		  bJetRecoilBTag = (fabs(topmass_h -172.5) < fabs(topmass_m-172.5))?jetsBTag[lowBTagTreePosition]:jetsBTag[highBTagTreePosition];
 
 		  //  cout<<"top_h, top_m, top"<< topmass_h<<topmass_m<<top.mass()<<endl;
 		  if(fabs(topmass_h -172.5) < fabs(topmass_m-172.5)){
@@ -2384,6 +2552,15 @@ void SingleTopSystematicsTreesDumper::analyze(const Event &iEvent, const EventSe
 		    cosBLTree =  cosTheta_eta_bl(leptonPFour, jets[highBTagTreePosition], top);}
 		  //  cout<<"fCosThetaLJ" <<fCosThetaLJ<<"topmass_h" <<topmass_h <<endl;
 		  //  cout<<"jets[lowBTagTreePosition].Pt()"<< jets[lowBTagTreePosition].Pt()<<endl;
+
+		  fCosThetaLJ1 =  cosThetaLJ(leptonPFour, jets[lowBTagTreePosition], top1);
+		  cos1BLTree =  cosTheta_eta_bl(leptonPFour, jets[lowBTagTreePosition], top1);
+	  
+		  //fCosThetaLJ2 =  cosThetaLJ(leptonPFour, jets[lowBTagTreePosition], top2);
+		  //cos2BLTree =  cosTheta_eta_bl(leptonPFour, jets[lowBTagTreePosition], top2);
+          fCosThetaLJ2 =  cosThetaLJ(leptonPFour, jets[highBTagTreePosition], top2);
+		  cos2BLTree =  cosTheta_eta_bl(leptonPFour, jets[highBTagTreePosition], top2);
+		
 		}
 		else if( (nJets==3 || nJets==4)  ){ //cout<<"nJets==4 ,3"<<endl;
 		  math::PtEtaPhiELorentzVector top_h = top4Momentum(leptonPFour, jets[highBTagTreePosition], metPx, metPy);
@@ -2393,8 +2570,15 @@ void SingleTopSystematicsTreesDumper::analyze(const Event &iEvent, const EventSe
 		  top = (fabs(topmass_h -172.5) < fabs(topmass_m-172.5))? top_h: top_m;
 		  top1 = top_h;
 		  top2 = top_m;
-		  fCosThetaLJ =  cosThetaLJ(leptonPFour, jets[lowBTagTreePosition], top);
+		  fCosThetaLJ =  cosThetaLJ(leptonPFour, jets[lowBTagTreePosition], top); //low BTag is not contrbiute in top 
 		  cosBLTree =  cosTheta_eta_bl(leptonPFour, jets[lowBTagTreePosition], top);
+		
+		  fCosThetaLJ1 =  cosThetaLJ(leptonPFour, jets[lowBTagTreePosition], top1);
+		  cos1BLTree =  cosTheta_eta_bl(leptonPFour, jets[lowBTagTreePosition], top1);
+		  
+		  fCosThetaLJ2 =  cosThetaLJ(leptonPFour, jets[lowBTagTreePosition], top2);
+		  cos2BLTree =  cosTheta_eta_bl(leptonPFour, jets[lowBTagTreePosition], top2);
+		  
 		  //  cout<<"fCosThetaLJ" <<fCosThetaLJ <<"topmass_h" <<topmass_h <<endl;
 		  //  cout<<"jets[lowBTagTreePosition].Pt()"<< jets[lowBTagTreePosition].Pt()<<endl;
 		}
@@ -2403,18 +2587,34 @@ void SingleTopSystematicsTreesDumper::analyze(const Event &iEvent, const EventSe
 		if (nJets == 2){
 		  math::PtEtaPhiELorentzVector top_h = top4Momentum(leptonPFour, jets[highBTagTreePosition], metPx, metPy);
 		  math::PtEtaPhiELorentzVector top_m = top4Momentum(leptonPFour, jets[lowBTagTreePosition], metPx, metPy);
-                  topmass_h = top_h.mass();
-                  topmass_m = top_m.mass();
-                  top = (fabs(topmass_h -172.5) < fabs(topmass_m-172.5))? top_h: top_m;
+		  topmass_h = top_h.mass();
+		  topmass_m = top_m.mass();
+		  top = (fabs(topmass_h -172.5) < fabs(topmass_m-172.5))? top_h: top_m;
 		  top1 = top_h;
 		  top2 = top_m;
-
+ 		  bJetDecay= (fabs(topmass_h -172.5) < fabs(topmass_m-172.5))?jets[highBTagTreePosition]:jets[lowBTagTreePosition];
+ 		  bJetDecayFlavour = (fabs(topmass_h -172.5) < fabs(topmass_m-172.5))?flavours[highBTagTreePosition]:flavours[lowBTagTreePosition];
+ 		  bJetDecayBTag = (fabs(topmass_h -172.5) < fabs(topmass_m-172.5))?jetsBTag[highBTagTreePosition]:jetsBTag[lowBTagTreePosition];
+		  bJetRecoil= (fabs(topmass_h -172.5) < fabs(topmass_m-172.5))?jets[lowBTagTreePosition]:jets[highBTagTreePosition];
+		  bJetRecoilFlavour = (fabs(topmass_h -172.5) < fabs(topmass_m-172.5))?flavours[lowBTagTreePosition]:flavours[highBTagTreePosition];
+		  bJetRecoilBTag = (fabs(topmass_h -172.5) < fabs(topmass_m-172.5))?jetsBTag[lowBTagTreePosition]:jetsBTag[highBTagTreePosition];
+		  
                   if(fabs(topmass_h -172.5) < fabs(topmass_m-172.5)){
                     fCosThetaLJ =  cosThetaLJ(leptonPFour, jets[lowBTagTreePosition], top);
                     cosBLTree =  cosTheta_eta_bl(leptonPFour, jets[lowBTagTreePosition], top);}
                   else {
                     fCosThetaLJ =  cosThetaLJ(leptonPFour, jets[highBTagTreePosition], top);
                     cosBLTree =  cosTheta_eta_bl(leptonPFour, jets[highBTagTreePosition], top);}
+		  
+		  fCosThetaLJ1 =  cosThetaLJ(leptonPFour, jets[lowBTagTreePosition], top1);
+		  cos1BLTree =  cosTheta_eta_bl(leptonPFour, jets[lowBTagTreePosition], top1);
+		  
+		  //fCosThetaLJ2 =  cosThetaLJ(leptonPFour, jets[lowBTagTreePosition], top2);
+		  //cos2BLTree =  cosTheta_eta_bl(leptonPFour, jets[lowBTagTreePosition], top2);
+		  fCosThetaLJ2 =  cosThetaLJ(leptonPFour, jets[highBTagTreePosition], top2);
+		  cos2BLTree =  cosTheta_eta_bl(leptonPFour, jets[highBTagTreePosition], top2);
+		  
+		  
 		}
 		else if (nJets==3 || nJets==4){  //cout<<"nJets==4 ,3"<<endl;
 		  math::PtEtaPhiELorentzVector top_h = top4Momentum(leptonPFour, jets[highBTagTreePosition], metPx, metPy);
@@ -2424,11 +2624,17 @@ void SingleTopSystematicsTreesDumper::analyze(const Event &iEvent, const EventSe
 		  top = (fabs(topmass_h -172.5) < fabs(topmass_m-172.5))? top_h: top_m;
 		  top1 = top_h;
 		  top2 = top_m;
-
+		  
 		  fCosThetaLJ =  cosThetaLJ(leptonPFour, jets[lowBTagTreePosition], top);
 		  cosBLTree =  cosTheta_eta_bl(leptonPFour, jets[lowBTagTreePosition], top);
 		  //  cout<<"fCosThetaLJ" <<fCosThetaLJ <<"topmass_h" <<topmass_h <<endl;
 		  //  cout<<"jets[lowBTagTreePosition].Pt()"<< jets[lowBTagTreePosition].Pt()<<endl;
+		  fCosThetaLJ1 =  cosThetaLJ(leptonPFour, jets[lowBTagTreePosition], top1);
+		  cos1BLTree =  cosTheta_eta_bl(leptonPFour, jets[lowBTagTreePosition], top1);
+		  
+		  fCosThetaLJ2 =  cosThetaLJ(leptonPFour, jets[lowBTagTreePosition], top2);
+		  cos2BLTree =  cosTheta_eta_bl(leptonPFour, jets[lowBTagTreePosition], top2);
+		  
 		}
 	      }
 	    }
@@ -2454,12 +2660,15 @@ void SingleTopSystematicsTreesDumper::analyze(const Event &iEvent, const EventSe
 	      bJet1Eta     = bjets[0].eta();
 	      bJet1Phi     = bjets[0].phi();
 	      bJet1Flavour = bjets_flavours[0];
+          bJet1BTag    = jetsBTag[highBTagTreePosition];
 	      
 	      bJet2Pt      = bjets[1].pt();
 	      bJet2E       = bjets[1].energy();
 	      bJet2Eta     = bjets[1].eta();
 	      bJet2Phi     = bjets[1].phi();
 	      bJet2Flavour = bjets_flavours[1];
+          if(nJets== 2)                   bJet2BTag    = jetsBTag[lowBTagTreePosition];
+          else if(nJets== 3 ||nJets== 4 ) bJet2BTag    = jetsBTag[mediumBTagTreePosition];
 	     }
 	    else{
 	      Mlb1 = (leptonPFour+bjets[1]).mass();
@@ -2469,12 +2678,17 @@ void SingleTopSystematicsTreesDumper::analyze(const Event &iEvent, const EventSe
 	      bJet1Eta     = bjets[1].eta();
 	      bJet1Phi     = bjets[1].phi();
 	      bJet1Flavour = bjets_flavours[1];
+          if(nJets== 2)                   bJet1BTag    = jetsBTag[lowBTagTreePosition];
+          else if(nJets== 3 ||nJets== 4 ) bJet1BTag    = jetsBTag[mediumBTagTreePosition];
+
 	      
 	      bJet2Pt      = bjets[0].pt();
 	      bJet2E       = bjets[0].energy();
 	      bJet2Eta     = bjets[0].eta();
 	      bJet2Phi     = bjets[0].phi();
 	      bJet2Flavour = bjets_flavours[0];
+          bJet2BTag    = jetsBTag[highBTagTreePosition];
+
 	    }
 	    Mb1b2  = (bjets[0] + bjets[1]).mass();
 	    pTb1b2 = (bjets[0] + bjets[1]).pt();
@@ -2483,12 +2697,24 @@ void SingleTopSystematicsTreesDumper::analyze(const Event &iEvent, const EventSe
 	    pTb1b2Tree = pTb1b2;
 	    Mlb1Tree = Mlb1;
 	    Mlb2Tree = Mlb2;
-	    
+		
+        bJetDecayPt   = bJetDecay.pt();
+		bJetDecayE   = bJetDecay.energy();
+		bJetDecayPhi   = bJetDecay.phi();
+		bJetDecayEta  = bJetDecay.eta();
+
+		bJetRecoilPt   = bJetRecoil.pt();
+   		bJetRecoilE   = bJetRecoil.energy();
+   		bJetRecoilPhi   = bJetRecoil.phi();
+   		bJetRecoilEta   = bJetRecoil.eta();
+
             etaTree = fabs(jets[lowBTagTreePosition].eta());
             cosTree = fCosThetaLJ;
+            cos1Tree = fCosThetaLJ1;
+            cos2Tree = fCosThetaLJ2;
 	    
 	    topMassTree = top.mass();
-            top1MassTree = top1.mass();        
+        top1MassTree = top1.mass();        
 	    top2MassTree = top2.mass();
 
 	    
@@ -2498,7 +2724,7 @@ void SingleTopSystematicsTreesDumper::analyze(const Event &iEvent, const EventSe
             lepPt = leptonPFour.pt();
             lepEta = leptonPFour.eta();
             lepPhi = leptonPFour.phi();
-	    
+            lepE = leptonPFour.energy();
 	    if (leptonsFlavour_ == "muon" )muonHLTSF(leptons[0].eta(),leptons[0].pt());
 	    if (leptonsFlavour_ == "electron" )electronHLTSF(leptons[0].eta(),leptons[0].pt());
 	    
@@ -2517,6 +2743,8 @@ void SingleTopSystematicsTreesDumper::analyze(const Event &iEvent, const EventSe
             etaTree = fabs(jets[lowBTagTreePosition].eta());
             etaTree2 = fabs(jets[highBTagTreePosition].eta());
             cosTree = fCosThetaLJ;
+            cos1Tree = fCosThetaLJ1;
+            cos2Tree = fCosThetaLJ2;
 	    
             topEta = top.eta();
             topPhi = top.phi();
@@ -2535,10 +2763,11 @@ void SingleTopSystematicsTreesDumper::analyze(const Event &iEvent, const EventSe
 	    
 	    //	    cout << "test before mcTruth"<<endl;
 	    
-	    if(B==1 && nJets ==2 && syst == "noSyst" && doMCTruth_ && ! doFullMCTruth_){ 
+	    if((B==1 || B==2) && nJets ==2 && syst == "noSyst" && doMCTruth_ && ! doFullMCTruth_){ 
 	      fillMCTruth(iEvent);
+	      treesMCTruth[syst]->Fill();  	 //     cout<<" treesMCTruthEntries() 1 or 2 bjets      "<<treesMCTruth[syst]->GetEntries()<<endl;       
 	    }
-	    
+
 	    if (nJets == 2)
 	      {
 		//		cout << " B is "<< B<< " syst is "<<syst_name <<endl;
@@ -2647,7 +2876,6 @@ math::PtEtaPhiELorentzVector SingleTopSystematicsTreesDumper::top4Momentum(float
 //More detailed inline description: work in progress!
 math::XYZTLorentzVector SingleTopSystematicsTreesDumper::NuMomentum(float leptonPx, float leptonPy, float leptonPz, float leptonPt, float leptonE, float metPx, float metPy )
 {
-
     double  mW = 80.399;
 
     math::XYZTLorentzVector result;
@@ -2660,7 +2888,7 @@ math::XYZTLorentzVector SingleTopSystematicsTreesDumper::NuMomentum(float lepton
     double a2 = TMath::Power(a, 2);
     double b  = (TMath::Power(leptonE, 2.) * (MisET2) - TMath::Power(mu, 2.)) / (TMath::Power(leptonE, 2) - TMath::Power(leptonPz, 2));
     double pz1(0), pz2(0), pznu(0);
-    int nNuSol(0);
+    //    int nNuSol(0);
 
     math::XYZTLorentzVector p4nu_rec;
     math::XYZTLorentzVector p4W_rec;
@@ -2682,7 +2910,7 @@ math::XYZTLorentzVector SingleTopSystematicsTreesDumper::NuMomentum(float lepton
         double root = sqrt(a2 - b);
         pz1 = a + root;
         pz2 = a - root;
-        nNuSol = 2;
+	//        nNuSol = 2;
 
         //    if(usePzPlusSolutions_)pznu = pz1;
         //    if(usePzMinusSolutions_)pznu = pz2;
@@ -3118,14 +3346,14 @@ void SingleTopSystematicsTreesDumper::fillMCTruth(const Event &iEvent ){
            topPtReweightUp = topPtReweight*topPtReweight ;
            topPtReweightDown = 1.;
 	       topPtReweightMCTruth = sqrt(topPtReweightMCTruth); 
-           topPtReweightMCTruth = topPtReweightMCTruth*topPtReweightMCTruth ; 
+           topPtReweightMCTruthUp = topPtReweightMCTruth*topPtReweightMCTruth ; 
            topPtReweightMCTruthDown = 1.;
            }else{
             topPtReweight =1.;
            topPtReweightUp = 1.;
            topPtReweightDown = 1.;
 	       topPtReweightMCTruth = 1.;
-           topPtReweightMCTruth = 1.; 
+           topPtReweightMCTruthUp = 1.; 
            topPtReweightMCTruthDown = 1.;
            }
 
@@ -3240,10 +3468,10 @@ void SingleTopSystematicsTreesDumper::setBTagWeights(double pt, double eta, int 
 
   double hptSFErrUp = 0;
   double hptSFErrDown = 0;
-  double csvtSFErrUp = 0;
-  double csvtSFErrDown = 0;
-  double csvmSFErrUp = 0;
-  double csvmSFErrDown = 0;
+  // double csvtSFErrUp = 0;
+  //  double csvtSFErrDown = 0;
+  //  double csvmSFErrUp = 0;
+  //  double csvmSFErrDown = 0;
   
   if (abs(flavour) == 4)
     {
@@ -4188,7 +4416,7 @@ void SingleTopSystematicsTreesDumper::electronHLTSF(float etaEle, float ptEle){/
   sfTrig=1;sfTrigup=1;sfTrigdown=1;  
   
   //  cout << " cutbased "<< useCutBasedID_<< " mnva "<< useMVAID_<<endl; 
-  if(useMVAID_>0){
+  if(useMVAID_>0){ // id and iso together
     if(fabs(eta)<0.8){
       if(pt>30 && pt <40 ){sfID=0.939;	sfIDdown=sfID-0.003;sfIDup=sfID+0.003;
       }
@@ -4274,9 +4502,9 @@ void SingleTopSystematicsTreesDumper::electronHLTSF(float etaEle, float ptEle){/
     }	
   }
   //  cout << " after cutbased, eta "<<eta << " pt "<<pt<<" sfID after "<< sfID <<endl; 
-  
+  //they are for MVAID
   if(fabs(eta)<0.8){
-    if(pt>30 && pt <40 ){sfTrig=0.987;      sfTrigdown=sfTrig-0.003;sfTrigup=sfTrig+0.003;
+    if(pt>30 && pt <40 ){sfTrig=0.987;      sfTrigdown=sfTrig-0.017;sfTrigup=sfTrig+0.012;//sfTrigdown=sfTrig-0.003;sfTrigup=sfTrig+0.003;
     }
     if(pt>40 && pt <50 ){sfTrig=0.997;      sfTrigdown=sfTrig-0.001;sfTrigup=sfTrig+0.001;
     }
@@ -4333,26 +4561,26 @@ double SingleTopSystematicsTreesDumper::topPtReweighting(string chanrew, double 
 void SingleTopSystematicsTreesDumper::resetWeightsDoubles()
 {
 
-cout<<"inresetWeight"<<endl;
+  //cout<<"inresetWeight"<<endl;
   double baseWeight=0.0,baseWeightMCTruth=0.0;
   double baseWeightUp=0.0,baseWeightMCTruthUp=0.0;
  // double baseWeightDown=0.0,baseWeightMCTruthDown=0.0; Down is actually 1 , then no change
+  long int ngood=0,ngoodmctruth=0; //double topPtReweight2=0;
+  //  cout<<"inresetWeight"<<endl;
+ /* int nentriestot = treesMCTruth->GetEntries();     cout<<"nentriestot  "<<nentriestot<<endl;
 
-  cout<<"inresetWeight"<<endl;
-  int nentriestot = treesMCTruth->GetEntries();     cout<<"nentriestot  "<<nentriestot<<endl;
-  long int ngood=0,ngoodmctruth=0;
-  for (int i =0; i< nentriestot;++i){
-    treesMCTruth->GetEntry(i); 
+  for (int i =0; i< nentriestot;++i){     
+    treesMCTruth->GetEntry(i);  cout<<"i: "<<i<<" topPtReweight IN treesMCTruth"<<topPtReweight<<endl;
     if(topPtReweight<1.5){++ngood;
       baseWeight+=topPtReweight;
-      baseWeightUp+=(topPtReweight*topPtReweight); 
+      baseWeightUp+=topPtReweightUp; 
       }
     if(topPtReweightMCTruth<1.5){++ngoodmctruth;
       baseWeightMCTruth+=topPtReweightMCTruth;
-      baseWeightMCTruthUp+=(topPtReweightMCTruth*topPtReweightMCTruth);
+      baseWeightMCTruthUp+=topPtReweightMCTruthUp;
     }
   }
-
+cout<<"baseWeightUp  1 : "<<baseWeightUp<< "   baseWeightMCTruthUp 1  :  "<<baseWeightMCTruthUp<<endl;
   if(ngood ==0){baseWeight=1.0;}
   else {baseWeight=baseWeight/(double)ngood;
         baseWeightUp=baseWeightUp/(double)ngood;
@@ -4362,7 +4590,8 @@ cout<<"inresetWeight"<<endl;
   if(ngoodmctruth==0){baseWeightMCTruth=1.0;}
   else {baseWeightMCTruth=baseWeightMCTruth/(double)ngoodmctruth;
         baseWeightMCTruthUp=baseWeightMCTruthUp/(double)ngoodmctruth;
-  }
+  }*/
+
 
 
   for (int bj = 0; bj <= 5; ++bj)  {
@@ -4377,15 +4606,42 @@ cout<<"inresetWeight"<<endl;
       trees3J[bj][syst]->Branch("topPtReweightNormUp", &topPtReweightNormUp);
       trees3J[bj][syst]->Branch("topPtReweightMCTruthNormDown", &topPtReweightMCTruthNormDown);
       trees3J[bj][syst]->Branch("topPtReweightNormDown", &topPtReweightNormDown);
+
       
-      for (int i =0; i< nentries;++i){
-	trees3J[bj][syst]->GetEntry(i);
+
+
+  baseWeight=0.0,baseWeightMCTruth=0.0;
+  baseWeightUp=0.0,baseWeightMCTruthUp=0.0;
+  ngood=0,ngoodmctruth=0; 
+  for (int i =0; i< nentries;++i){     
+    trees3J[bj][syst]->GetEntry(i);  //cout<<"i: "<<i<<" topPtReweight IN treesMCTruth"<<topPtReweight<<endl;
+    if(topPtReweight<1.5){++ngood;
+      baseWeight+=topPtReweight;
+      baseWeightUp+=topPtReweightUp; 
+      }
+    if(topPtReweightMCTruth<1.5){++ngoodmctruth;
+      baseWeightMCTruth+=topPtReweightMCTruth;
+      baseWeightMCTruthUp+=topPtReweightMCTruthUp;
+    }
+  }
+  //cout<<"baseWeightUp  1 : "<<baseWeightUp<< "   baseWeightMCTruthUp 1  :  "<<baseWeightMCTruthUp<<endl;
+  if(ngood ==0){baseWeight=1.0;}
+  else {baseWeight=baseWeight/(double)ngood;
+        baseWeightUp=baseWeightUp/(double)ngood;
+        }
+  
+  if(ngoodmctruth==0){baseWeightMCTruth=1.0;}
+  else {baseWeightMCTruth=baseWeightMCTruth/(double)ngoodmctruth;
+        baseWeightMCTruthUp=baseWeightMCTruthUp/(double)ngoodmctruth;
+       }
+for (int i =0; i<nentries;++i){
+  trees3J[bj][syst]->GetEntry(i);//cout<<"i: "<<i<<" topPtReweight IN trees3J[bj][syst] "<<topPtReweight<<"  topPtReweightUp "<< topPtReweightUp<<endl;
 	topPtReweightNorm = topPtReweight/baseWeight;
-	topPtReweightNormUp = topPtReweightUp/baseWeightUp;
-	topPtReweightNormDown = topPtReweightDown;
+	topPtReweightNormUp = topPtReweightUp/baseWeightUp; //cout<<" trees3J[bj][syst]->GetName()   "<< trees3J[bj][syst]->GetName()<<" topPtReweightNorm:  "<<topPtReweightNorm<<" topPtReweightNormUp:  "<<topPtReweightNormUp<<endl;
+	topPtReweightNormDown = 1.;
 	topPtReweightMCTruthNorm = topPtReweightMCTruth/baseWeightMCTruth;
 	topPtReweightMCTruthNormUp = topPtReweightMCTruthUp/baseWeightMCTruthUp;
-	topPtReweightMCTruthNormDown = topPtReweightMCTruthDown;
+	topPtReweightMCTruthNormDown = 1.;//topPtReweightMCTruthDown;
 	//cout <<  " test 3J " << bj<<" T, syst"<< syst  << "evt # "<<i << "ptrew" << topPtReweight<<" ptrew Norm"<< topPtReweightNorm<<endl;
 	trees3J[bj][syst]->GetBranch("topPtReweightMCTruthNorm")->Fill();
 	trees3J[bj][syst]->GetBranch("topPtReweightNorm")->Fill();
@@ -4403,9 +4659,32 @@ cout<<"inresetWeight"<<endl;
       trees2J[bj][syst]->Branch("topPtReweightNormUp", &topPtReweightNormUp);
       trees2J[bj][syst]->Branch("topPtReweightMCTruthNormDown", &topPtReweightMCTruthNormDown);
       trees2J[bj][syst]->Branch("topPtReweightNormDown", &topPtReweightNormDown);
-      
+      baseWeight=0.0,baseWeightMCTruth=0.0;
+  baseWeightUp=0.0,baseWeightMCTruthUp=0.0;
+  ngood=0,ngoodmctruth=0; 
+  for (int i =0; i< nentries;++i){     
+    trees2J[bj][syst]->GetEntry(i);  
+    if(topPtReweight<1.5){++ngood;
+      baseWeight+=topPtReweight;
+      baseWeightUp+=topPtReweightUp; 
+      }
+    if(topPtReweightMCTruth<1.5){++ngoodmctruth;
+      baseWeightMCTruth+=topPtReweightMCTruth;
+      baseWeightMCTruthUp+=topPtReweightMCTruthUp;
+    }
+  }
+  //cout<<"baseWeightUp  1 : "<<baseWeightUp<< "   baseWeightMCTruthUp 1  :  "<<baseWeightMCTruthUp<<endl;
+  if(ngood ==0){baseWeight=1.0;}
+  else {baseWeight=baseWeight/(double)ngood;
+        baseWeightUp=baseWeightUp/(double)ngood;
+        }
+  
+  if(ngoodmctruth==0){baseWeightMCTruth=1.0;}
+  else {baseWeightMCTruth=baseWeightMCTruth/(double)ngoodmctruth;
+        baseWeightMCTruthUp=baseWeightMCTruthUp/(double)ngoodmctruth;
+       }
       for (int i =0; i< nentries;++i){
-	trees2J[bj][syst]->GetEntry(i);
+	trees2J[bj][syst]->GetEntry(i); //cout<<"i: "<<i<<" topPtReweight IN trees3J[bj][syst] "<<topPtReweight<<"  topPtReweightUp "<< topPtReweightUp<<endl;
 	topPtReweightNorm = topPtReweight/baseWeight;
     topPtReweightNormUp = topPtReweightUp/baseWeightUp;
 	topPtReweightNormDown = topPtReweightDown;
@@ -4430,9 +4709,33 @@ cout<<"inresetWeight"<<endl;
       trees4J[bj][syst]->Branch("topPtReweightNormUp", &topPtReweightNormUp);
       trees4J[bj][syst]->Branch("topPtReweightMCTruthNormDown", &topPtReweightMCTruthNormDown);
       trees4J[bj][syst]->Branch("topPtReweightNormDown", &topPtReweightNormDown);
-      
+  baseWeight=0.0,baseWeightMCTruth=0.0;
+  baseWeightUp=0.0,baseWeightMCTruthUp=0.0;
+  ngood=0,ngoodmctruth=0; 
+  for (int i =0; i< nentries;++i){     
+    trees4J[bj][syst]->GetEntry(i);  
+    if(topPtReweight<1.5){++ngood;
+      baseWeight+=topPtReweight;
+      baseWeightUp+=topPtReweightUp; 
+      }
+    if(topPtReweightMCTruth<1.5){++ngoodmctruth;
+      baseWeightMCTruth+=topPtReweightMCTruth;
+      baseWeightMCTruthUp+=topPtReweightMCTruthUp;
+    }
+  }
+  //cout<<"baseWeightUp  1 : "<<baseWeightUp<< "   baseWeightMCTruthUp 1  :  "<<baseWeightMCTruthUp<<endl;
+  if(ngood ==0){baseWeight=1.0;}
+  else {baseWeight=baseWeight/(double)ngood;
+        baseWeightUp=baseWeightUp/(double)ngood;
+        }
+  
+  if(ngoodmctruth==0){baseWeightMCTruth=1.0;}
+  else {baseWeightMCTruth=baseWeightMCTruth/(double)ngoodmctruth;
+        baseWeightMCTruthUp=baseWeightMCTruthUp/(double)ngoodmctruth;
+       }
+
       for (int i =0; i< nentries;++i){
-	trees2J[bj][syst]->GetEntry(i);
+	trees4J[bj][syst]->GetEntry(i);
 	topPtReweightNorm = topPtReweight/baseWeight;
     topPtReweightNormUp = topPtReweightUp/baseWeightUp;
 	topPtReweightNormDown = topPtReweightDown;
@@ -4477,12 +4780,12 @@ void SingleTopSystematicsTreesDumper::initBranchVars()
     npv = INT_NAN;    ntchpt_tags = INT_NAN;    ncsvt_tags = INT_NAN;    ncsvm_tags = INT_NAN;
     fJetFlavourTree = INT_NAN;    bJetFlavourTree = INT_NAN;    eventFlavourTree = INT_NAN;    nVertices = INT_NAN;
     npv = INT_NAN;    firstJetFlavourTree = INT_NAN;    secondJetFlavourTree = INT_NAN;    thirdJetFlavourTree = INT_NAN;
-      fourthJetFlavourTree = INT_NAN;
+      fourthJetFlavourTree = INT_NAN;looseJetFlavourTree = INT_NAN;
    
     //doubles
     weightTree = DOUBLE_NAN;    w1TCHPT = DOUBLE_NAN;    w2TCHPT = DOUBLE_NAN;    
     w1CSVT = DOUBLE_NAN;    w2CSVT = DOUBLE_NAN;    w1CSVM = DOUBLE_NAN;    w2CSVM = DOUBLE_NAN;  
-    PUWeightTree = DOUBLE_NAN;    lepPt = DOUBLE_NAN;    lepEta = DOUBLE_NAN;    lepPhi = DOUBLE_NAN;    lepDeltaCorrectedRelIso = DOUBLE_NAN;
+    PUWeightTree = DOUBLE_NAN;    lepPt = DOUBLE_NAN;    lepEta = DOUBLE_NAN; lepE = DOUBLE_NAN;   lepPhi = DOUBLE_NAN;    lepDeltaCorrectedRelIso = DOUBLE_NAN;
     lepRhoCorrectedRelIso = DOUBLE_NAN;          lepDeltaCorrectedRelIso = DOUBLE_NAN;
     bJetPt = DOUBLE_NAN;    fJetPt = DOUBLE_NAN;    bJetEta = DOUBLE_NAN;    fJetEta = DOUBLE_NAN;    fJetPUID = DOUBLE_NAN;
     fJetPUWP = DOUBLE_NAN;
@@ -4502,7 +4805,8 @@ void SingleTopSystematicsTreesDumper::initBranchVars()
     topMassTree = DOUBLE_NAN;    topMtwTree = DOUBLE_NAN;    topPt = DOUBLE_NAN;    topPhi = DOUBLE_NAN;    topEta = DOUBLE_NAN;    topE = DOUBLE_NAN;
     top1MassTree = DOUBLE_NAN;   top1Pt = DOUBLE_NAN;    top1Phi = DOUBLE_NAN;    top1Eta = DOUBLE_NAN;    top1E = DOUBLE_NAN;
     top2MassTree = DOUBLE_NAN;   top2Pt = DOUBLE_NAN;    top2Phi = DOUBLE_NAN;    top2Eta = DOUBLE_NAN;    top2E = DOUBLE_NAN;
-    electronID = DOUBLE_NAN;
+   cos1Tree = DOUBLE_NAN;    cos1BLTree = DOUBLE_NAN; cos2Tree = DOUBLE_NAN;    cos2BLTree = DOUBLE_NAN;
+    electronID = DOUBLE_NAN; leptonMVAID = DOUBLE_NAN ;
     totalEnergy = DOUBLE_NAN;    totalMomentum = DOUBLE_NAN;    lowBTagTree = DOUBLE_NAN;    highBTagTree = DOUBLE_NAN;   mediumBTagTree = DOUBLE_NAN; mediumlowBTagTree = DOUBLE_NAN;
     pdf_weights_mstw =FLOAT_NAN;    pdf_weights_nnpdf21=FLOAT_NAN;    pdf_weights_gjr_ff=FLOAT_NAN;    pdf_weights_gjr_fv=FLOAT_NAN;    pdf_weights_gjr_fdis=FLOAT_NAN;    pdf_weights_alekhin=FLOAT_NAN;
     Mlb1Tree= DOUBLE_NAN;         Mlb2Tree= DOUBLE_NAN;            Mb1b2Tree= DOUBLE_NAN;         pTb1b2Tree= DOUBLE_NAN;
@@ -4520,6 +4824,9 @@ void SingleTopSystematicsTreesDumper::initBranchVars()
     bJet2Eta = DOUBLE_NAN;
     bJet2Phi = DOUBLE_NAN;
     bJet2E = DOUBLE_NAN;
+bJetRecoilPt = DOUBLE_NAN; bJetRecoilEta = DOUBLE_NAN; bJetRecoilPhi = DOUBLE_NAN; bJetRecoilE = DOUBLE_NAN; bJetRecoilFlavour = DOUBLE_NAN;bJetRecoilBTag = DOUBLE_NAN;
+bJetDecayPt = DOUBLE_NAN; bJetDecayEta = DOUBLE_NAN; bJetDecayPhi = DOUBLE_NAN; bJetDecayE = DOUBLE_NAN; bJetDecayFlavour = DOUBLE_NAN;bJetDecayBTag = DOUBLE_NAN;  
+
     //66 lines
 
    // topMassTree_best = DOUBLE_NAN;
@@ -4536,8 +4843,8 @@ void SingleTopSystematicsTreesDumper::initBranchVars()
 //EndJob 
 void SingleTopSystematicsTreesDumper::endJob()
 {
-  cout << endl << passingLepton << " | " << passingMuonVeto << " | " << passingLeptonVeto << " | "  << passingJets << " | " << passingMET << " | " << passingBJets << endl << endl;
-
+  cout << endl << passingLepton << " | " << passingMuonVeto << " | " << passingLeptonVeto << " | "  << passingJets << " | " << passingMET << " | " << passingBJets<< endl;
+cout<<"leptonsFlavour_    :"<<leptonsFlavour_<<endl;
 cout<<"if(doTopPtReweighting_ && channel != Data)" << doTopPtReweighting_  << " & " << channel <<endl;
    if(doTopPtReweighting_ && channel != "Data") resetWeightsDoubles();
 

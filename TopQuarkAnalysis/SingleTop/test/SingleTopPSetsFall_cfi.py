@@ -32,7 +32,7 @@ PileUpSeasonFall = "Fall12"
 
 TChannelMu = cms.PSet(
 #    crossSection = cms.untracked.double(41.92*wToLNuBranchingRatio),
-    crossSection = cms.untracked.double(17.496),
+    crossSection = cms.untracked.double(18.2736),
     channel = cms.untracked.string("TChannel"),
     originalEvents = cms.untracked.double(3915598),
     finalLumi = lumiMu,
@@ -47,7 +47,7 @@ TChannelMu = cms.PSet(
     
 TChannelEle = cms.PSet(
 #    crossSection = cms.untracked.double(41.92*wToLNuBranchingRatio),
-    crossSection = cms.untracked.double(17.496),
+    crossSection = cms.untracked.double(18.2736),
     channel = cms.untracked.string("TChannel"),
     originalEvents = cms.untracked.double(3915598),
     RelIsoCut = cms.untracked.double(relIsoCutElectrons),
@@ -167,7 +167,7 @@ SChannelEle = cms.PSet(
 SbarChannelMu = cms.PSet(
             crossSection = cms.untracked.double(0.57024),
             channel = cms.untracked.string("SbarChannel"),
-            originalEvents = cms.untracked.double(1999667),
+            originalEvents = cms.untracked.double(1984430),
             finalLumi = lumiMu,Season = cms.untracked.string(PileUpSeasonFall),
             MTWCut = cms.untracked.double(40.0),#Default 50.0 GeV
             RelIsoCut = cms.untracked.double(relIsoCutMuons),
@@ -180,7 +180,7 @@ SbarChannelEle = cms.PSet(
             RelIsoCut = cms.untracked.double(relIsoCutElectrons),
             channel = cms.untracked.string("SbarChannel"),
             finalLumi = lumiEle,Season = cms.untracked.string(PileUpSeasonFall),
-            originalEvents = cms.untracked.double(1999667),
+            originalEvents = cms.untracked.double(1984430),
             mcPUFile = cms.untracked.string("pileupdistr_SChannel.root"),
             puHistoName = cms.untracked.string("pileUpDumper/PileUpSChannel"),
             )
@@ -190,7 +190,7 @@ ZJetsMu = cms.PSet(
     crossSection = cms.untracked.double(3503.71),
     channel = cms.untracked.string("ZJets"),
     finalLumi = lumiMu,Season = cms.untracked.string(PileUpSeasonFall),
-    originalEvents = cms.untracked.double(22421305),
+    originalEvents = cms.untracked.double(30394503),
 #    originalEvents = cms.untracked.double(25490579),
     MTWCut = cms.untracked.double(40.0),#Default 50.0 GeV
     RelIsoCut = cms.untracked.double(relIsoCutMuons),
@@ -205,8 +205,8 @@ ZJetsEle = cms.PSet(
     channel = cms.untracked.string("ZJets"),
     RelIsoCut = cms.untracked.double(relIsoCutElectrons),
     finalLumi = lumiEle,Season = cms.untracked.string(PileUpSeasonFall),
-#    originalEvents = cms.untracked.double(25490579),
-    originalEvents = cms.untracked.double(22421305),#3 6 277 961
+    originalEvents = cms.untracked.double(30394503),
+#    originalEvents = cms.untracked.double(22421305),#3 6 277 961
     mcPUFile = cms.untracked.string("pileupdistr_ZJets.root"),
     puHistoName = cms.untracked.string("pileUpDumper/PileUpZJets"),
     PUFileNew = cms.untracked.string(PileUpNewTTBar),
@@ -252,7 +252,7 @@ W1JetMu = cms.PSet(
     channel = cms.untracked.string("WJets"),
     finalLumi = lumiMu,Season = cms.untracked.string(PileUpSeasonFall),
 #    originalEvents = cms.untracked.double(18393090),
-    originalEvents = cms.untracked.double(23141598),#originalEvents = cms.untracked.double(18393090),
+    originalEvents = cms.untracked.double(29704800),#originalEvents = cms.untracked.double(18393090),
     MTWCut = cms.untracked.double(40.0),#Default 50.0 GeV
         RelIsoCut = cms.untracked.double(relIsoCutMuons),
 
@@ -264,7 +264,8 @@ W1JetEle = cms.PSet(
     RelIsoCut = cms.untracked.double(relIsoCutElectrons),
     channel = cms.untracked.string("WJets"),
     finalLumi = lumiEle,Season = cms.untracked.string(PileUpSeasonFall),
-    originalEvents = cms.untracked.double(23141598),#originalEvents = cms.untracked.double(18393090),#originalEvents = cms.untracked.double(18393090),
+    originalEvents = cms.untracked.double(29704800),
+    #originalEvents = cms.untracked.double(18393090),
     mcPUFile = cms.untracked.string("pileupdistr_WJets.root"),
     puHistoName = cms.untracked.string("pileUpDumper/PileUpWJets"),
     )
@@ -274,7 +275,7 @@ W2JetsMu = cms.PSet(
     channel = cms.untracked.string("WJets"),
     finalLumi = lumiMu,Season = cms.untracked.string(PileUpSeasonFall),
 #    originalEvents = cms.untracked.double(18393090),
-    originalEvents = cms.untracked.double(34044921),#originalEvents = cms.untracked.double(18393090),
+    originalEvents = cms.untracked.double(30693853),
     MTWCut = cms.untracked.double(40.0),#Default 50.0 GeV
         RelIsoCut = cms.untracked.double(relIsoCutMuons),
 
@@ -286,7 +287,8 @@ W2JetsEle = cms.PSet(
     RelIsoCut = cms.untracked.double(relIsoCutElectrons),
     channel = cms.untracked.string("WJets"),
     finalLumi = lumiEle,Season = cms.untracked.string(PileUpSeasonFall),
-    originalEvents = cms.untracked.double(34044921),#originalEvents = cms.untracked.double(18393090),#originalEvents = cms.untracked.double(18393090),
+    originalEvents = cms.untracked.double(30693853),
+    #originalEvents = cms.untracked.double(18393090),
     mcPUFile = cms.untracked.string("pileupdistr_WJets.root"),
     puHistoName = cms.untracked.string("pileUpDumper/PileUpWJets"),
     )
@@ -296,7 +298,7 @@ W3JetsMu = cms.PSet(
     channel = cms.untracked.string("WJets"),
     finalLumi = lumiMu,Season = cms.untracked.string(PileUpSeasonFall),
 #    originalEvents = cms.untracked.double(18393090),
-    originalEvents = cms.untracked.double(15539503),#originalEvents = cms.untracked.double(18393090),
+    originalEvents = cms.untracked.double(15241144),
     MTWCut = cms.untracked.double(40.0),#Default 50.0 GeV
         RelIsoCut = cms.untracked.double(relIsoCutMuons),
 
@@ -308,7 +310,8 @@ W3JetsEle = cms.PSet(
     RelIsoCut = cms.untracked.double(relIsoCutElectrons),
     channel = cms.untracked.string("WJets"),
     finalLumi = lumiEle,Season = cms.untracked.string(PileUpSeasonFall),
-    originalEvents = cms.untracked.double(15539503),#originalEvents = cms.untracked.double(18393090),#originalEvents = cms.untracked.double(18393090),
+    originalEvents = cms.untracked.double(15241144),
+    #originalEvents = cms.untracked.double(18393090),
     mcPUFile = cms.untracked.string("pileupdistr_WJets.root"),
     puHistoName = cms.untracked.string("pileUpDumper/PileUpWJets"),
     )
@@ -331,7 +334,8 @@ W4JetsEle = cms.PSet(
     RelIsoCut = cms.untracked.double(relIsoCutElectrons),
     channel = cms.untracked.string("WJets"),
     finalLumi = lumiEle,Season = cms.untracked.string(PileUpSeasonFall),
-    originalEvents = cms.untracked.double(13382803),#originalEvents = cms.untracked.double(18393090),#originalEvents = cms.untracked.double(18393090),
+    originalEvents = cms.untracked.double(13382803),
+    #originalEvents = cms.untracked.double(18393090),
     mcPUFile = cms.untracked.string("pileupdistr_WJets.root"),
     puHistoName = cms.untracked.string("pileUpDumper/PileUpWJets"),
     )
@@ -342,7 +346,7 @@ WJetsSherpaMu = cms.PSet(
     channel = cms.untracked.string("WJets"),
     finalLumi = lumiMu,Season = cms.untracked.string(PileUpSeasonFall),
 #    originalEvents = cms.untracked.double(18393090),
-    originalEvents = cms.untracked.double(97884800),#originalEvents = cms.untracked.double(18393090),
+    originalEvents = cms.untracked.double(97884800),
     MTWCut = cms.untracked.double(40.0),#Default 50.0 GeV
         RelIsoCut = cms.untracked.double(relIsoCutMuons),
 
@@ -367,8 +371,8 @@ WWMu = cms.PSet(
     crossSection = cms.untracked.double(57.1097),
     channel = cms.untracked.string("WW"),
     finalLumi = lumiMu,Season = cms.untracked.string(PileUpSeasonFall),
-#    originalEvents = cms.untracked.double(10000431),
-    originalEvents = cms.untracked.double(9856392),
+    originalEvents = cms.untracked.double(10000431),
+#    originalEvents = cms.untracked.double(9856392),
     MTWCut = cms.untracked.double(40.0),#Default 50.0 GeV
     RelIsoCut = cms.untracked.double(relIsoCutMuons),
     mcPUFile = cms.untracked.string("pileupdistr_WW.root"),
@@ -393,8 +397,8 @@ ZZMu = cms.PSet(
     crossSection = cms.untracked.double(8.25561),
     channel = cms.untracked.string("ZZ"),
     finalLumi = lumiMu,Season = cms.untracked.string(PileUpSeasonFall),
-#    originalEvents = cms.untracked.double(9799908),
-   originalEvents = cms.untracked.double(8921708),
+    originalEvents = cms.untracked.double(9799908),
+ #   originalEvents = cms.untracked.double(8921708),
     MTWCut = cms.untracked.double(40.0),#Default 50.0 GeV
     RelIsoCut = cms.untracked.double(relIsoCutMuons),
     mcPUFile = cms.untracked.string("pileupdistr_ZZ.root"),
@@ -406,8 +410,8 @@ ZZEle = cms.PSet(
 RelIsoCut = cms.untracked.double(relIsoCutElectrons),
     channel = cms.untracked.string("ZZ"),
     finalLumi = lumiEle,Season = cms.untracked.string(PileUpSeasonFall),
-#    originalEvents = cms.untracked.double(9799908),
-   originalEvents = cms.untracked.double(8921708),
+    originalEvents = cms.untracked.double(9799908),
+ #   originalEvents = cms.untracked.double(8921708),
     MTWCut = cms.untracked.double(50.0),#Default 50.0 GeV
     mcPUFile = cms.untracked.string("pileupdistr_ZZ.root"),
     puHistoName = cms.untracked.string("pileUpDumper/PileUpZZ"),
@@ -417,8 +421,8 @@ WZMu = cms.PSet(
     crossSection = cms.untracked.double(32.3161),
     channel = cms.untracked.string("WZ"),
     finalLumi = lumiMu,Season = cms.untracked.string(PileUpSeasonFall),
-#     originalEvents = cms.untracked.double(10000283),
-    originalEvents = cms.untracked.double(9426496),
+    originalEvents = cms.untracked.double(10000283),
+#    originalEvents = cms.untracked.double(9426496),
     MTWCut = cms.untracked.double(40.0),#Default 50.0 GeV
     RelIsoCut = cms.untracked.double(relIsoCutMuons),
     mcPUFile = cms.untracked.string("pileupdistr_WZ.root"),
@@ -429,28 +433,30 @@ WZEle = cms.PSet(
 RelIsoCut = cms.untracked.double(relIsoCutElectrons),
     channel = cms.untracked.string("WZ"),
     finalLumi = lumiEle,Season = cms.untracked.string(PileUpSeasonFall),
-    originalEvents = cms.untracked.double(9426496),
-#    originalEvents = cms.untracked.double(10000283),
+#    originalEvents = cms.untracked.double(9426496),
+    originalEvents = cms.untracked.double(10000283),
     MTWCut = cms.untracked.double(50.0),#Default 50.0 GeV
     mcPUFile = cms.untracked.string("pileupdistr_WZ.root"),
     puHistoName = cms.untracked.string("pileUpDumper/PileUpWZ"),
     )
 
 TTBarFullLepEle = cms.PSet(
-    crossSection = cms.untracked.double(26.034048),
+    #
+    crossSection = cms.untracked.double(25.8),
     RelIsoCut = cms.untracked.double(relIsoCutElectrons),
     channel = cms.untracked.string("TTBar"),
     finalLumi = lumiEle,Season = cms.untracked.string(PileUpSeasonFall),
-    originalEvents = cms.untracked.double(4246444),#1089625
+    originalEvents = cms.untracked.double(12011428),#1089625
     mcPUFile = cms.untracked.string("pileupdistr_TTBar.root"),
     puHistoName = cms.untracked.string("pileUpDumper/PileUpTTBar"),
     PUFileNew = cms.untracked.string(PileUpNewTTBar),
     )
 
 TTBarFullLepMu = cms.PSet(
-    crossSection = cms.untracked.double(26.034048),
+    #    crossSection = cms.untracked.double(26.5484304),
+    crossSection = cms.untracked.double(25.8),
     channel = cms.untracked.string("TTBar"),
-    originalEvents = cms.untracked.double(4246444),#1089625
+    originalEvents = cms.untracked.double(12011428),#1089625
     finalLumi = lumiMu,Season = cms.untracked.string(PileUpSeasonFall),
     MTWCut = cms.untracked.double(40.0),#Default 50.0 GeV
     RelIsoCut = cms.untracked.double(relIsoCutMuons),
@@ -460,9 +466,9 @@ TTBarFullLepMu = cms.PSet(
     )
 
 TTBarSemiLepEle = cms.PSet(
-    crossSection = cms.untracked.double(108.635904),
+    crossSection = cms.untracked.double(107.7),
     channel = cms.untracked.string("TTBar"),
-    originalEvents = cms.untracked.double(11229902),
+    originalEvents = cms.untracked.double(24963676),
     RelIsoCut = cms.untracked.double(relIsoCutElectrons),
     MTWCut = cms.untracked.double(50.0),#Default 50.0 GeV
     finalLumi = lumiEle,Season = cms.untracked.string(PileUpSeasonFall),
@@ -473,9 +479,10 @@ TTBarSemiLepEle = cms.PSet(
 
 
 TTBarSemiLepMu = cms.PSet(
-    crossSection = cms.untracked.double(108.635904),
+    #    crossSection = cms.untracked.double(110.7823392),
+    crossSection = cms.untracked.double(107.7),
     channel = cms.untracked.string("TTBar"),
-    originalEvents = cms.untracked.double(11229902),
+    originalEvents = cms.untracked.double(24963676),
     finalLumi = lumiMu,Season = cms.untracked.string(PileUpSeasonFall),
     MTWCut = cms.untracked.double(40.0),#Default 50.0 GeV
     RelIsoCut = cms.untracked.double(relIsoCutMuons),
@@ -1247,7 +1254,7 @@ RelIsoCut = cms.untracked.double(relIsoCutElectrons),
 
 #.108/110=0,981818182
 TTBar_Q2DownMu = cms.PSet(
-    crossSection = cms.untracked.double(248.),
+    crossSection = cms.untracked.double(245.8),
     channel = cms.untracked.string("TTBar_Q2Down"),
 #   originalEvents = cms.untracked.double(5387181),
     originalEvents = cms.untracked.double(5289232),
@@ -1259,7 +1266,7 @@ TTBar_Q2DownMu = cms.PSet(
     )
 
 TTBar_Q2DownEle = cms.PSet(
-    crossSection = cms.untracked.double(248.),
+    crossSection = cms.untracked.double(245.8),
 RelIsoCut = cms.untracked.double(relIsoCutElectrons),
     channel = cms.untracked.string("TTBar_Q2Down"),
     finalLumi = lumiEle,Season = cms.untracked.string(PileUpSeasonFall),
@@ -1272,7 +1279,7 @@ RelIsoCut = cms.untracked.double(relIsoCutElectrons),
 
 
 TTBar_Q2UpMu = cms.PSet(
-    crossSection = cms.untracked.double(248.),
+    crossSection = cms.untracked.double(245.8),
     channel = cms.untracked.string("TTBar_Q2Up"),
     originalEvents = cms.untracked.double(5009488),#3701947),#1089625
     finalLumi = lumiMu,Season = cms.untracked.string(PileUpSeasonFall),
@@ -1283,7 +1290,7 @@ TTBar_Q2UpMu = cms.PSet(
     )
 
 TTBar_Q2UpEle = cms.PSet(
-    crossSection = cms.untracked.double(248.),
+    crossSection = cms.untracked.double(245.8),
 RelIsoCut = cms.untracked.double(relIsoCutElectrons),
     channel = cms.untracked.string("TTBar_Q2Up"),
     finalLumi = lumiEle,Season = cms.untracked.string(PileUpSeasonFall),
@@ -1295,7 +1302,7 @@ RelIsoCut = cms.untracked.double(relIsoCutElectrons),
 
 
 TTBar_MatchingDownMu = cms.PSet(
-    crossSection = cms.untracked.double(248.),
+    crossSection = cms.untracked.double(245.8),
     channel = cms.untracked.string("TTBar_MatchingDown"),
     originalEvents = cms.untracked.double(5476728),#3701947),#1089625
     finalLumi = lumiMu,Season = cms.untracked.string(PileUpSeasonFall),
@@ -1306,7 +1313,7 @@ TTBar_MatchingDownMu = cms.PSet(
     )
 
 TTBar_MatchingDownEle = cms.PSet(
-    crossSection = cms.untracked.double(248.),
+    crossSection = cms.untracked.double(245.8),
 RelIsoCut = cms.untracked.double(relIsoCutElectrons),
     channel = cms.untracked.string("TTBar_MatchingDown"),
     finalLumi = lumiEle,Season = cms.untracked.string(PileUpSeasonFall),
@@ -1318,7 +1325,7 @@ RelIsoCut = cms.untracked.double(relIsoCutElectrons),
 
 #107/119=0,899159664
 TTBar_MatchingUpMu = cms.PSet(
-    crossSection = cms.untracked.double(248.),
+    crossSection = cms.untracked.double(245.8),
     channel = cms.untracked.string("TTBar_MatchingUp"),
 #    originalEvents = cms.untracked.double(5415010),#3701947),#1089625
     originalEvents = cms.untracked.double(4868959),#3701947),#1089625
@@ -1330,7 +1337,7 @@ TTBar_MatchingUpMu = cms.PSet(
     )
 
 TTBar_MatchingUpEle = cms.PSet(
-    crossSection = cms.untracked.double(248.),
+    crossSection = cms.untracked.double(245.8),
 RelIsoCut = cms.untracked.double(relIsoCutElectrons),
     channel = cms.untracked.string("TTBar_MatchingUp"),
     finalLumi = lumiEle,Season = cms.untracked.string(PileUpSeasonFall),

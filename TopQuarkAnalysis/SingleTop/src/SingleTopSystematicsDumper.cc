@@ -187,8 +187,8 @@ void SingleTopSystematicsDumper::analyze(const Event& iEvent, const EventSetup& 
   
   double WeightLumi = finalLumi*crossSection/originalEvents;
   double BTagWeight = 1;
-  double BTagWeightWSample = 1;
-  double BTagWeightTTSample = 1;
+  //  double BTagWeightWSample = 1;
+  //  double BTagWeightTTSample = 1;
   double Weight = 1;
   double MTWValue =0;
   
@@ -200,8 +200,8 @@ void SingleTopSystematicsDumper::analyze(const Event& iEvent, const EventSetup& 
     
     Weight = WeightLumi;
     BTagWeight = 1;
-    BTagWeightWSample = 1;
-    BTagWeightTTSample = 1;
+    //    BTagWeightWSample = 1;
+    //    BTagWeightTTSample = 1;
     
     //Setup for systematics
 
@@ -367,7 +367,7 @@ void SingleTopSystematicsDumper::analyze(const Event& iEvent, const EventSetup& 
       float leptonPt = sqrt(leptonPx*leptonPx + leptonPy*leptonPy);
       
       float leptonP = sqrt( (leptonPt*leptonPt) + (leptonPz*leptonPz));
-      float leptonE = leptonsEnergy->at(i);
+      //      float leptonE = leptonsEnergy->at(i);
       leptons.push_back(math::XYZTLorentzVector(leptonPx,leptonPy,leptonsPz->at(i),leptonP));
     }
     
@@ -513,7 +513,7 @@ std::vector<math::XYZTLorentzVector> SingleTopSystematicsDumper::NuMomentum(floa
   double a2 = TMath::Power(a,2);
   double b  = (TMath::Power(leptonE,2.)*(MisET2) - TMath::Power(mu,2.))/(TMath::Power(leptonE,2) - TMath::Power(leptonPz,2));
   double pz1(0),pz2(0),pznu(0);
-  int nNuSol(0);
+  //  int nNuSol(0);
 
   math::XYZTLorentzVector p4nu_rec;
   math::XYZTLorentzVector p4W_rec;
@@ -534,7 +534,7 @@ std::vector<math::XYZTLorentzVector> SingleTopSystematicsDumper::NuMomentum(floa
     double root = sqrt(a2-b);
     pz1 = a + root;
     pz2 = a - root;
-    nNuSol = 2;     
+    //    nNuSol = 2;     
     
     //    if(usePzPlusSolutions_)pznu = pz1;    
     //    if(usePzMinusSolutions_)pznu = pz2;

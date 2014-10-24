@@ -393,7 +393,7 @@ void SingleTopPseudoAnalysisProducer::produce(edm::Event & iEvent, const edm::Ev
     int id =0;
     cout << " assjet "<< i << " pt "<< pseudojets.at(i).pt()<<endl;
     
-    int qid =0;
+    //    int qid =0;
     for (size_t j = 0; j < quarks.size();++j){
       double deltar=deltaR(pseudojets.at(i),quarks.at(j));
       if(deltar< minDeltaR ){
@@ -401,9 +401,9 @@ void SingleTopPseudoAnalysisProducer::produce(edm::Event & iEvent, const edm::Ev
 	minDeltaR = deltar;
       }
       //      cout << " is there LHEMC "<< LHEMCQuarksPdgId<< endl;
-      qid = 0;
-      if(!matchWithLHE_){ qid = MCQuarksPdgId->at(j);}
-      else{ qid = LHEMCQuarksPdgId->at(j);}
+      //      qid = 0;
+      //      if(!matchWithLHE_){ qid = MCQuarksPdgId->at(j);}
+      //     else{ qid = LHEMCQuarksPdgId->at(j);}
       //cout << " quark " <<  qid
       //	   << " q eta " << quarks.at(j).eta()<< " phi "<< quarks.at(j).phi() 
       //	   << " j eta " << pseudojets.at(i).eta()<< " phi "<< pseudojets.at(i).phi()
@@ -734,8 +734,9 @@ math::XYZTLorentzVector SingleTopPseudoAnalysisProducer::NuMomentum(float lepton
     double a2 = TMath::Power(a, 2);
     double b  = (TMath::Power(leptonE, 2.) * (MisET2) - TMath::Power(mu, 2.)) / (TMath::Power(leptonE, 2) - TMath::Power(leptonPz, 2));
     double pz1(0), pz2(0), pznu(0);
-    int nNuSol(0);
+    //    int nNuSol(0);
 
+    
     math::XYZTLorentzVector p4nu_rec;
     math::XYZTLorentzVector p4W_rec;
     math::XYZTLorentzVector p4b_rec;
@@ -756,7 +757,7 @@ math::XYZTLorentzVector SingleTopPseudoAnalysisProducer::NuMomentum(float lepton
         double root = sqrt(a2 - b);
         pz1 = a + root;
         pz2 = a - root;
-        nNuSol = 2;
+	//	nNuSol = 2;
 
         //    if(usePzPlusSolutions_)pznu = pz1;
         //    if(usePzMinusSolutions_)pznu = pz2;

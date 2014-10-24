@@ -175,7 +175,7 @@ SingleTopRecoFilter::filter(edm::Event &iEvent, const edm::EventSetup &iSetup)
     nJets = goodJets.size();
 
     LogDebug("muon") << "nMuons=" << nMuons;
-    LogDebug("electron") << "nElectrons=" << nMuons;
+    LogDebug("electron") << "nElectrons=" << nElectrons;
 
     bool passesMuons = false;
     bool passesJets = false;

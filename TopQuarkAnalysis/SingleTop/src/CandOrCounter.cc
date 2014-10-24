@@ -34,7 +34,7 @@ bool CandOrCounter::filter(edm::Event & iEvent, const edm::EventSetup & iSetup){
   //  iEvent.getByLabel(veto1_,veto1);
   // iEvent.getByLabel(veto2_,veto2);
   
-  int non_overlapping=0;  
+  //  int non_overlapping=0;  
 
   /*  for(size_t j = 0; j<veto1->size();++j){
     

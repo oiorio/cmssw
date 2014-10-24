@@ -41,8 +41,6 @@
 #include "FWCore/ParameterSet/interface/ParameterSetDescription.h"
 
 
-#include "SimDataFormats/GeneratorProducts/interface/LHEEventProduct.h"
-
 #include "FWCore/Framework/interface/Selector.h"
 
 
@@ -66,13 +64,8 @@ SingleTopMCProducer::SingleTopMCProducer(const edm::ParameterSet& iConfig)
 
   isSingleTopTChan_ =  iConfig.getUntrackedParameter<bool>("isSingleTopTChan",true);  
   isSingleTopCompHEP_ =  iConfig.getUntrackedParameter<bool>("isSingleTopCompHEP",false);  
-
-  
-  isHerwigHad_ =  iConfig.getUntrackedParameter<bool>("isHerwigHad",false);  
-  lookAtLHE_ =  iConfig.getUntrackedParameter<bool>("useLHEs",true);  
   
   genParticlesSrc_ = iConfig.getParameter<edm::InputTag>( "genParticlesSource" );
-  lhes_ = iConfig.getParameter<edm::InputTag>( "lhes" );
   //GenJets for matching
   //  genJetsSrc_ = iConfig.getParameter<edm::InputTag>( "genJetsSource" );
 
@@ -252,45 +245,6 @@ SingleTopMCProducer::SingleTopMCProducer(const edm::ParameterSet& iConfig)
 
 
 
-
-
-  produces< float >("LHEWeightSign").setBranchAlias("LHEWeightSign");
-
-  produces<std::vector< float> >("MCLHEleptonsPt").setBranchAlias("MCLHEleptonsPt");
-  produces<std::vector< float> >("MCLHEleptonsEta").setBranchAlias("MCLHEleptonsEta");
-  produces<std::vector< float> >("MCLHEleptonsPhi").setBranchAlias("MCLHEleptonsPhi");
-  produces<std::vector< float> >("MCLHEleptonsMass").setBranchAlias("MCLHEleptonsMass");
-  produces<std::vector< float> >("MCLHEleptonsE").setBranchAlias("MCLHEleptonsE");
-  produces<std::vector< int> >("MCLHEleptonsID").setBranchAlias("MCLHEleptonsID");
-
-  produces<std::vector< float> >("MCLHEneutrinosPt").setBranchAlias("MCLHEneutrinosPt");
-  produces<std::vector< float> >("MCLHEneutrinosEta").setBranchAlias("MCLHEneutrinosEta");
-  produces<std::vector< float> >("MCLHEneutrinosPhi").setBranchAlias("MCLHEneutrinosPhi");
-  produces<std::vector< float> >("MCLHEneutrinosMass").setBranchAlias("MCLHEneutrinosMass");
-  produces<std::vector< float> >("MCLHEneutrinosE").setBranchAlias("MCLHEneutrinosE");
-  produces<std::vector< int> >("MCLHEneutrinosID").setBranchAlias("MCLHEneutrinosID");
-
-  produces<std::vector< float> >("MCLHEquarksPt").setBranchAlias("MCLHEquarksPt");
-  produces<std::vector< float> >("MCLHEquarksEta").setBranchAlias("MCLHEquarksEta");
-  produces<std::vector< float> >("MCLHEquarksPhi").setBranchAlias("MCLHEquarksPhi");
-  produces<std::vector< float> >("MCLHEquarksMass").setBranchAlias("MCLHEquarksMass");
-  produces<std::vector< float> >("MCLHEquarksE").setBranchAlias("MCLHEquarksE");
-  produces<std::vector< int> >("MCLHEquarksID").setBranchAlias("MCLHEquarksID");
-
-  produces<std::vector< float> >("MCLHEtopsPt").setBranchAlias("MCLHEtopsPt");
-  produces<std::vector< float> >("MCLHEtopsEta").setBranchAlias("MCLHEtopsEta");
-  produces<std::vector< float> >("MCLHEtopsPhi").setBranchAlias("MCLHEtopsPhi");
-  produces<std::vector< float> >("MCLHEtopsMass").setBranchAlias("MCLHEtopsMass");
-  produces<std::vector< float> >("MCLHEtopsE").setBranchAlias("MCLHEtopsE");
-  produces<std::vector< int> >("MCLHEtopsID").setBranchAlias("MCLHEtopsID");
-
-  produces<std::vector< float> >("MCLHEwsPt").setBranchAlias("MCLHEwsPt");
-  produces<std::vector< float> >("MCLHEwsEta").setBranchAlias("MCLHEwsEta");
-  produces<std::vector< float> >("MCLHEwsPhi").setBranchAlias("MCLHEwsPhi");
-  produces<std::vector< float> >("MCLHEwsMass").setBranchAlias("MCLHEwsMass");
-  produces<std::vector< float> >("MCLHEwsE").setBranchAlias("MCLHEwsE");
-  produces<std::vector< int> >("MCLHEwsID").setBranchAlias("MCLHEwsID");
-
   //  produces<std::vector<reco::GenParticle> >("MCstops").setBranchAlias("MCstops");
 //  produces<std::vector<reco::GenParticle> >("MCgluinos").setBranchAlias("MCgluinos");
 
@@ -310,16 +264,12 @@ void SingleTopMCProducer::produce(edm::Event & iEvent, const edm::EventSetup & i
 
 edm::Handle<std::vector<reco::GenParticle> > genParticles;
 iEvent.getByLabel(genParticlesSrc_, genParticles);
- 
-edm::Handle<LHEEventProduct > lhes;
-iEvent.getByLabel(lhes_, lhes);
 
 
 #if DEBUG
   std::cout << "producer 2" << std::endl;
 #endif
 
-  std::auto_ptr< float > LHEWeightSign (new float);
   std::auto_ptr< std::vector< reco::GenParticle > > MCtops( new std::vector<reco::GenParticle> );
 
   std::auto_ptr< std::vector< int > > MCtopsMotherID( new std::vector<int> );
@@ -335,7 +285,7 @@ iEvent.getByLabel(lhes_, lhes);
   std::auto_ptr< std::vector< float > > MCtopsVertexY( new std::vector<float> );
   std::auto_ptr< std::vector< float > > MCtopsVertexZ( new std::vector<float> );
 
-  
+
   std::auto_ptr< std::vector< reco::GenParticle > > MCleptons( new std::vector<reco::GenParticle> );
 
   std::auto_ptr< std::vector< int > > MCleptonsMotherID( new std::vector<int> );
@@ -350,7 +300,6 @@ iEvent.getByLabel(lhes_, lhes);
   std::auto_ptr< std::vector< float > > MCleptonsVertexX( new std::vector<float> );
   std::auto_ptr< std::vector< float > > MCleptonsVertexY( new std::vector<float> );
   std::auto_ptr< std::vector< float > > MCleptonsVertexZ( new std::vector<float> );
-
 
   std::auto_ptr< std::vector< reco::GenParticle > > MCquarks( new std::vector<reco::GenParticle> );
 
@@ -535,44 +484,6 @@ iEvent.getByLabel(lhes_, lhes);
 
 
 
-  std::auto_ptr< std::vector< float > > MCLHEleptonsPt( new std::vector<float> );
-  std::auto_ptr< std::vector< float > > MCLHEleptonsEta( new std::vector<float> );
-  std::auto_ptr< std::vector< float > > MCLHEleptonsPhi( new std::vector<float> );
-  std::auto_ptr< std::vector< float > > MCLHEleptonsMass( new std::vector<float> );
-  std::auto_ptr< std::vector< float > > MCLHEleptonsE( new std::vector<float> );
-  std::auto_ptr< std::vector< int > > MCLHEleptonsID( new std::vector<int> );
-
-  std::auto_ptr< std::vector< float > > MCLHEtopsPt( new std::vector<float> );
-  std::auto_ptr< std::vector< float > > MCLHEtopsEta( new std::vector<float> );
-  std::auto_ptr< std::vector< float > > MCLHEtopsPhi( new std::vector<float> );
-  std::auto_ptr< std::vector< float > > MCLHEtopsMass( new std::vector<float> );
-  std::auto_ptr< std::vector< float > > MCLHEtopsE( new std::vector<float> );
-  std::auto_ptr< std::vector< int > > MCLHEtopsID( new std::vector<int> );
-
-  std::auto_ptr< std::vector< float > > MCLHEquarksPt( new std::vector<float> );
-  std::auto_ptr< std::vector< float > > MCLHEquarksEta( new std::vector<float> );
-  std::auto_ptr< std::vector< float > > MCLHEquarksPhi( new std::vector<float> );
-  std::auto_ptr< std::vector< float > > MCLHEquarksMass( new std::vector<float> );
-  std::auto_ptr< std::vector< float > > MCLHEquarksE( new std::vector<float> );
-  std::auto_ptr< std::vector< int > > MCLHEquarksID( new std::vector<int> );
-
-  std::auto_ptr< std::vector< float > > MCLHEwsPt( new std::vector<float> );
-  std::auto_ptr< std::vector< float > > MCLHEwsEta( new std::vector<float> );
-  std::auto_ptr< std::vector< float > > MCLHEwsPhi( new std::vector<float> );
-  std::auto_ptr< std::vector< float > > MCLHEwsMass( new std::vector<float> );
-  std::auto_ptr< std::vector< float > > MCLHEwsE( new std::vector<float> );
-  std::auto_ptr< std::vector< int > > MCLHEwsID( new std::vector<int> );
-
-  std::auto_ptr< std::vector< float > > MCLHEneutrinosPt( new std::vector<float> );
-  std::auto_ptr< std::vector< float > > MCLHEneutrinosEta( new std::vector<float> );
-  std::auto_ptr< std::vector< float > > MCLHEneutrinosPhi( new std::vector<float> );
-  std::auto_ptr< std::vector< float > > MCLHEneutrinosMass( new std::vector<float> );
-  std::auto_ptr< std::vector< float > > MCLHEneutrinosE( new std::vector<float> );
-  std::auto_ptr< std::vector< int > > MCLHEneutrinosID( new std::vector<int> );
-
-
-
-
 
   int nDau =0;
   int dauOneId=-9999, dauTwoId =-9999, dauThreeId=-9999,dauFourId=-9999 ;
@@ -583,135 +494,17 @@ iEvent.getByLabel(lhes_, lhes);
   using namespace edm;
   using namespace reco;
   
-  bool isNewPhysics_= false;
+  //  bool isNewPhysics_= false;
   
-  const Candidate *top_=NULL, *stop_=NULL, * lepton_=NULL, *quark_=NULL, *bquark_=NULL,*bquarkHiggs_=NULL, *gluino_=NULL, *neutrino_=NULL;
-  const Candidate *W_=NULL, *quarkBar_=NULL,  *higgs_=NULL; 
 
-  if(lookAtLHE_){
-    size_t nup=lhes->hepeup().NUP;
-    float weightsign = lhes->hepeup().XWGTUP;
-    *LHEWeightSign = weightsign/fabs(weightsign);
-    cout << " nup " << nup<< " weight "<< weightsign <<" weightsign"<< *LHEWeightSign << endl;
-    for( size_t i=0;i<nup;++i){
-      cout << " particle number " << i << endl;
-      int id = lhes->hepeup().IDUP[i];
-      float px = lhes->hepeup().PUP[i][0];
-      float py = lhes->hepeup().PUP[i][1];
-      float pz = lhes->hepeup().PUP[i][2];
-      float energy = lhes->hepeup().PUP[i][3];
-      float mass = lhes->hepeup().PUP[i][4];
-      math::XYZTLorentzVector vec = math::XYZTLorentzVector(px, py, pz, energy);
-      float pt = vec.pt();
-      float phi = vec.phi();
-      float eta = vec.eta();
-      if(abs (id) == 11 || abs (id) == 13 || abs(id) == 15){
-	MCLHEleptonsID->push_back(id);  	
-	MCLHEleptonsPt->push_back(pt);  	
-	MCLHEleptonsMass->push_back(mass);  	
-	MCLHEleptonsPhi->push_back(phi);  	
-	MCLHEleptonsEta->push_back(eta);  	
-	MCLHEleptonsE->push_back(energy);  	
-      }
-      if(abs (id) == 12 || abs (id) == 14 || abs(id) == 16){
-	MCLHEneutrinosID->push_back(id);  	
-	MCLHEneutrinosPt->push_back(pt);  	
-	MCLHEneutrinosPhi->push_back(phi);  	
-	MCLHEneutrinosMass->push_back(mass);  	
-	MCLHEneutrinosEta->push_back(eta);  	
-	MCLHEneutrinosE->push_back(energy);  	
-      }
-      if(abs (id) == 6 ){
-	MCLHEtopsID->push_back(id);  	
-	MCLHEtopsPt->push_back(pt);  	
-	MCLHEtopsPhi->push_back(phi);  	
-	MCLHEtopsMass->push_back(mass);  	
-	MCLHEtopsEta->push_back(eta);  	
-	MCLHEtopsE->push_back(energy);  	
-      }
-      if(abs (id) == 24 ){
-	MCLHEwsID->push_back(id);  	
-	MCLHEwsPt->push_back(pt);  	
-	MCLHEwsPhi->push_back(phi);  	
-	MCLHEwsMass->push_back(mass);  	
-	MCLHEwsEta->push_back(eta);  	
-	MCLHEwsE->push_back(energy);  	
-      }
-      if(abs (id) < 6 && abs(id)>0 ){
-	MCLHEquarksID->push_back(id);  	
-	MCLHEquarksPt->push_back(pt);  	
-	MCLHEquarksPhi->push_back(phi);  	
-	MCLHEquarksMass->push_back(mass);  	
-	MCLHEquarksEta->push_back(eta);  	
-	MCLHEquarksE->push_back(energy);  	
-      }
-
-
-      
-    }
-  }
   for (reco::GenParticleCollection::const_iterator t = genParticles->begin (); t != genParticles->end (); ++t)
     {
-
-	
       if(verbosity_>4) cout<<t->p4()<<" "<<t->pdgId()<<" "<<t->status()<<endl;
-      if(isHerwigHad_){
-	if (t->status () == 2 && t->mother()) {
-	  if( abs(t->mother()->pdgId()==24) && t->mother()->status()==2){
-	    if (abs (t->pdgId ()) == 11 || abs (t->pdgId ()) == 13 || abs (t->pdgId ()) == 15){
-	      //	      cout << " I am lepton ! "<<endl;
-	      MCleptons->push_back ( (*t));
-	      if(t->mother()) MCleptonsMotherID->push_back( t->mother()->pdgId());
-	      if(t->mother() && t->mother()->mother())MCleptonsGrannyID->push_back(t->mother()->mother()->pdgId());
-	      MCleptonsVertexX->push_back(t->vertex().x());
-	      MCleptonsVertexY->push_back(t->vertex().y());
-	      MCleptonsVertexZ->push_back(t->vertex().z());
-	      nDau =0;
-	      dauOneId=-9999, dauTwoId =-9999, dauThreeId=-9999,dauFourId=-9999 ;
-	      for (reco::GenParticle::const_iterator td = t->begin (); td != t->end (); ++td){
-		nDau++;
-		if(nDau==1) dauOneId = td->pdgId();
-		if(nDau==2) dauTwoId = td->pdgId();
-		if(nDau==3) dauThreeId = td->pdgId();
-		if(nDau==4) dauFourId = td->pdgId();
-	      }
-	      MCleptonsNDau->push_back(nDau);
-	      MCleptonsDauOneID->push_back(dauOneId);
-	      MCleptonsDauTwoID->push_back(dauTwoId);
-	      MCleptonsDauThreeID->push_back(dauThreeId);
-	      MCleptonsDauFourID->push_back(dauFourId);
-	    }
-	    
-	    if (abs (t->pdgId ()) == 12 || abs (t->pdgId ()) == 14 || abs (t->pdgId ()) == 16){
-	      MCneutrinos->push_back( (*t));
-	      if(t->mother()) MCneutrinosMotherID->push_back( t->mother()->pdgId());
-	      if(t->mother() && t->mother()->mother())MCneutrinosGrannyID->push_back(t->mother()->mother()->pdgId());
-	      MCneutrinosVertexX->push_back(t->vertex().x());
-	      MCneutrinosVertexY->push_back(t->vertex().y());
-	      MCneutrinosVertexZ->push_back(t->vertex().z());
-	      nDau =0;
-	      dauOneId=-9999, dauTwoId =-9999, dauThreeId=-9999,dauFourId=-9999 ;
-	      for (reco::GenParticle::const_iterator td = t->begin (); td != t->end (); ++td){
-		nDau++;
-		if(nDau==1) dauOneId = td->pdgId();
-		if(nDau==2) dauTwoId = td->pdgId();
-		if(nDau==3) dauThreeId = td->pdgId();
-		if(nDau==4) dauFourId = td->pdgId();
-	      }
-	      MCneutrinosNDau->push_back(nDau);
-	      MCneutrinosDauOneID->push_back(dauOneId);
-	      MCneutrinosDauTwoID->push_back(dauTwoId);
-	      MCneutrinosDauThreeID->push_back(dauThreeId);
-	      MCneutrinosDauFourID->push_back(dauFourId);
-	    }
-	  }
-	}
-      }
       if (t->status () == 3)
 	{
 	  if (t->pdgId () > 100000)
 	    {
-	      isNewPhysics_ = true;
+	      //	      isNewPhysics_ = true;
 	    }
 	  
 	  if(isSingleTopCompHEP_){
@@ -776,7 +569,7 @@ iEvent.getByLabel(lhes_, lhes);
 	    }
 	  
 	    if (abs (t->pdgId ()) == 12 || abs (t->pdgId ()) == 14 || abs (t->pdgId ()) == 16){
-	      MCneutrinos->push_back( (*t));
+MCneutrinos->push_back( (*t));
 	      if(t->mother()) MCneutrinosMotherID->push_back( t->mother()->pdgId());
 	      if(t->mother() && t->mother()->mother())MCneutrinosGrannyID->push_back(t->mother()->mother()->pdgId());
 	      MCneutrinosVertexX->push_back(t->vertex().x());
@@ -920,7 +713,6 @@ iEvent.getByLabel(lhes_, lhes);
 	    //CompHEP End
 	  }
 	  else {
-	    cout << " particle id "<< t->pdgId() << " status "<< t-> status()<<endl;
 	    if ((abs (t->pdgId ()) == 11 || abs (t->pdgId ()) == 13 || abs (t->pdgId ()) == 15) &&
 		((abs (t->mother ()->pdgId ()) > 22 && abs (t->mother ()->pdgId ()) < 40) || (abs (t->mother ()->pdgId ()) > 999999 && abs (t->mother ()->pdgId ()) < 2999999)))
 	      {	
@@ -1034,7 +826,7 @@ iEvent.getByLabel(lhes_, lhes);
 	    if (abs (t->pdgId ()) == 25)
 	      {
 		std::cout << "************************ Found a Higgs particle ******************************" << std::endl;
-		higgs_ = (&(*t));
+		//		higgs_ = (&(*t));
 		reco::GenParticle::const_iterator td = t->begin ();
 		MCHiggs->push_back(*t);
 		if(t->mother()) MCHiggsMotherID->push_back( t->mother()->pdgId());
@@ -1060,7 +852,7 @@ iEvent.getByLabel(lhes_, lhes);
 		for (; td != t->end (); ++td)
 		  {
 		    if (abs (td->pdgId ()) == 5){   
-		      bquarkHiggs_  = &(*td);
+		      //		      bquarkHiggs_  = &(*td);
 		      MCHiggsBQuark->push_back( *(dynamic_cast< const reco::GenParticle *> (&(*td))) );
 		      if(td->mother()) MCHiggsBQuarkMotherID->push_back( td->mother()->pdgId());
 		      if(td->mother() && td->mother()->mother())MCHiggsBQuarkGrannyID->push_back(td->mother()->mother()->pdgId());
@@ -1087,7 +879,7 @@ iEvent.getByLabel(lhes_, lhes);
 
 
 	   
-	  
+
 	  if (abs (t->pdgId ()) == 6)
 	    {
 	      bool isLeptonic_ = false;
@@ -1099,7 +891,7 @@ iEvent.getByLabel(lhes_, lhes);
 	      //TRootMCParticle lepton_;
 	      //TRootMCParticle neutrino_;
 	      
-	      top_ = (&(*t));
+	      //	      top_ = (&(*t));
 	      reco::GenParticle::const_iterator td = t->begin ();
 	      MCtops->push_back(*t);
 	      if(t->mother()) MCtopsMotherID->push_back( t->mother()->pdgId());
@@ -1125,7 +917,7 @@ iEvent.getByLabel(lhes_, lhes);
 		{
 		  if (abs (td->pdgId ()) == 24)
 		    {
-		      W_  = (&(*td));
+		      //		      W_  = (&(*td));
 		      MCtopsW->push_back( *(dynamic_cast< const reco::GenParticle *> (&(*td))) );
 		      if(td->mother()) MCtopsWMotherID->push_back( td->mother()->pdgId());
 		      if(td->mother() && td->mother()->mother())MCtopsWGrannyID->push_back(td->mother()->mother()->pdgId());
@@ -1154,7 +946,7 @@ iEvent.getByLabel(lhes_, lhes);
 			{
 			  if (Wd->pdgId () > 0 && Wd->pdgId () < 6)
 			    {
-			      quark_  = &(*Wd);
+			      //			      quark_  = &(*Wd);
 			      MCtopsQuark->push_back( *(dynamic_cast< const reco::GenParticle *> (&(*Wd))) );
 			      
 			      if(Wd->mother()) MCtopsQuarkMotherID->push_back( Wd->mother()->pdgId());
@@ -1181,7 +973,7 @@ iEvent.getByLabel(lhes_, lhes);
 			    }
 			  if (Wd->pdgId () < 0 && Wd->pdgId () > -6)
 			    {
-			      quarkBar_  = &(*Wd);
+			      //			      quarkBar_  = &(*Wd);
 			      MCtopsQuarkBar->push_back( *(dynamic_cast< const reco::GenParticle *> (&(*Wd))) );
 			      
 			      if(Wd->mother()) MCtopsQuarkBarMotherID->push_back( Wd->mother()->pdgId());
@@ -1206,7 +998,7 @@ iEvent.getByLabel(lhes_, lhes);
 			    }
 			  if (abs (Wd->pdgId ()) == 11 || abs (Wd->pdgId ()) == 13 || abs (Wd->pdgId ()) == 15)
 			    {
-			      lepton_  = &(*Wd);
+			      //			      lepton_  = &(*Wd);
 			      MCtopsLepton->push_back( *(dynamic_cast< const reco::GenParticle *> (&(*Wd))) );
 
 			      if(Wd->mother()) MCtopsLeptonMotherID->push_back( Wd->mother()->pdgId());
@@ -1232,7 +1024,7 @@ iEvent.getByLabel(lhes_, lhes);
 			    }
 			  if (abs (Wd->pdgId ()) == 12 || abs (Wd->pdgId ()) == 14 || abs (Wd->pdgId ()) == 16)
 			    {
-			      neutrino_  = &(*Wd);
+			      //			      neutrino_  = &(*Wd);
 			      MCtopsNeutrino->push_back( *(dynamic_cast< const reco::GenParticle *> (&(*Wd))) );
 
 			      if(Wd->mother()) MCtopsNeutrinoMotherID->push_back( Wd->mother()->pdgId());
@@ -1258,7 +1050,7 @@ iEvent.getByLabel(lhes_, lhes);
 			    }
 			}
 		    }
-		  else if (abs (td->pdgId ()) == 5){   bquark_  = &(*td);
+		  else if (abs (td->pdgId ()) == 5){  // bquark_  = &(*td);
 		    MCtopsBQuark->push_back( *(dynamic_cast< const reco::GenParticle *> (&(*td))) );
 		    if(td->mother()) MCtopsBQuarkMotherID->push_back( td->mother()->pdgId());
 		    if(td->mother() && td->mother()->mother())MCtopsBQuarkGrannyID->push_back(td->mother()->mother()->pdgId());
@@ -1487,44 +1279,6 @@ iEvent.getByLabel(lhes_, lhes);
   iEvent.put(MCHiggsBQuarkDauTwoID,"MCHiggsBQuarkDauTwoID");
   iEvent.put(MCHiggsBQuarkDauThreeID,"MCHiggsBQuarkDauThreeID");
   iEvent.put(MCHiggsBQuarkDauFourID,"MCHiggsBQuarkDauFourID");
-
-  //Event weight
-  iEvent.put(LHEWeightSign,"LHEWeightSign");
-
-  iEvent.put(MCLHEleptonsPt,"MCLHEleptonsPt");
-  iEvent.put(MCLHEleptonsEta,"MCLHEleptonsEta");
-  iEvent.put(MCLHEleptonsPhi,"MCLHEleptonsPhi");
-  iEvent.put(MCLHEleptonsMass,"MCLHEleptonsMass");
-  iEvent.put(MCLHEleptonsE,"MCLHEleptonsE");
-  iEvent.put(MCLHEleptonsID,"MCLHEleptonsID");
-
-  iEvent.put(MCLHEneutrinosPt,"MCLHEneutrinosPt");
-  iEvent.put(MCLHEneutrinosEta,"MCLHEneutrinosEta");
-  iEvent.put(MCLHEneutrinosPhi,"MCLHEneutrinosPhi");
-  iEvent.put(MCLHEneutrinosMass,"MCLHEneutrinosMass");
-  iEvent.put(MCLHEneutrinosE,"MCLHEneutrinosE");
-  iEvent.put(MCLHEneutrinosID,"MCLHEneutrinosID");
-
-  iEvent.put(MCLHEtopsPt,"MCLHEtopsPt");
-  iEvent.put(MCLHEtopsEta,"MCLHEtopsEta");
-  iEvent.put(MCLHEtopsPhi,"MCLHEtopsPhi");
-  iEvent.put(MCLHEtopsMass,"MCLHEtopsMass");
-  iEvent.put(MCLHEtopsE,"MCLHEtopsE");
-  iEvent.put(MCLHEtopsID,"MCLHEtopsID");
-
-  iEvent.put(MCLHEquarksPt,"MCLHEquarksPt");
-  iEvent.put(MCLHEquarksEta,"MCLHEquarksEta");
-  iEvent.put(MCLHEquarksPhi,"MCLHEquarksPhi");
-  iEvent.put(MCLHEquarksMass,"MCLHEquarksMass");
-  iEvent.put(MCLHEquarksE,"MCLHEquarksE");
-  iEvent.put(MCLHEquarksID,"MCLHEquarksID");
-  
-  iEvent.put(MCLHEwsPt,"MCLHEwsPt");
-  iEvent.put(MCLHEwsEta,"MCLHEwsEta");
-  iEvent.put(MCLHEwsPhi,"MCLHEwsPhi");
-  iEvent.put(MCLHEwsMass,"MCLHEwsMass");
-  iEvent.put(MCLHEwsE,"MCLHEwsE");
-  iEvent.put(MCLHEwsID,"MCLHEwsID");
 
   //
 }

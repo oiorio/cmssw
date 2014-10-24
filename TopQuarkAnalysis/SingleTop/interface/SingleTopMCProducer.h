@@ -68,12 +68,12 @@
     private:
 
     //InputTags
-    edm::InputTag genParticlesSrc_,genJetsSrc_,lhes_; 
+    edm::InputTag genParticlesSrc_,genJetsSrc_; 
 
     //cuts for genJets Matching
     double genJetsDeltarMatching_;
 
-    bool isSingleTopTChan_, isSingleTopCompHEP_,isHerwigHad_,lookAtLHE_;
+    bool isSingleTopTChan_, isSingleTopCompHEP_;
   };
 
 
